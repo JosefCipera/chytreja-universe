@@ -1,0 +1,50 @@
+# === SYSTEM / EDITORS ===
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.log
+
+# === NODE / DEPENDENCIES ===
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# === BUILD / DEPLOY ===
+dist/
+build/
+.vercel/
+.cache/
+.tmp/
+.env
+.env.local
+.env.*.local
+
+# === PWA / SERVICE WORKERS ===
+sw.*
+service-worker.*
+*.webmanifest
+manifest.json
+
+# === LOCAL DEV / TEST ===
+*.bak
+*.tmp
+*.old
+*.swp
+*.swo
+*.map
+*.lock
+
+# === OUTPUTS / GENERATED ===
+/public/assets/docs/test.pdf
+/public/assets/docs/test.md
+/public/assets/sounds/*.mp3
+/public/assets/models/*.json
+/public/assets/temp/
+/public/assets/cache/
+
+# === OS SYSTEM FILES ===
+ehthumbs.db
+Desktop.ini
+Icon?

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="cs">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Model Dlouhověkost (standalone)</title>
+
+    <!-- Vis Network -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vis-network@9.1.9/dist/vis-network.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/vis-network@9.1.9/dist/vis-network.min.js"></script>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+    <!-- CSS je ve /src -->
+    <link rel="stylesheet" href="/src/css/universe.css" />
+</head>
+
+<body>
+    <div id="network"></div>
+
+    <div id="sidePanel">
+        <div class="panel-header">
+            <h2 id="nodeTitle">Uzlový název</h2>
+            <button class="panel-close" id="closePanel">✖</button>
+        </div>
+        <div class="panel-content">
+            <p class="definition" id="nodeDef"></p>
+            <hr>
+            <h3>📄 Dokumenty</h3>
+            <ul id="nodeDocs"></ul>
+            <hr>
+            <h3>🎬 Média</h3>
+            <ul id="nodeMedia"></ul>
+            <hr>
+            <h3>✅ Úlohy</h3>
+            <ul id="nodeTasks"></ul>
+        </div>
+    </div>
+
+    <!-- Přímé spuštění initu jako modul -->
+    <script type="module">
+        import { renderUniverse } from "/src/js/universe-core.js";
+        import { setupUI } from "/src/js/universe-ui.js";
+        import { aiSpeak } from "/src/js/universe-voice.js";
+
+        const MODEL_URL = "/public/assets/models/dlouhovekost.json";
+
+        fetch(MODEL_URL)
+            .then(r => r.json())
+            .then(data => {
+                renderUniverse(data);
+                setupUI(aiSpeak);
+            })
+            .catch(err => console.error("❌ Nelze načíst model:", err));
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="cs">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chytré Já – Model Dlouhověkosti</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vis-network@9.1.9/dist/vis-network.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/vis-network@9.1.9/dist/vis-network.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <link rel="stylesheet" href="./assets/css/universe.css">
+
+</head>
+
+<body>
+    <div id="network"></div>
+
+    <div id="sidePanel">
+        <div class="panel-header">
+            <h2 id="nodeTitle">Uzlový název</h2>
+            <button class="panel-close" id="closePanel">✖</button>
+        </div>
+        <div class="panel-content">
+            <p class="definition" id="nodeDef"></p>
+
+            <hr>
+            <h3>📄 Dokumenty</h3>
+            <ul id="nodeDocs"></ul>
+
+            <hr>
+            <h3>🎬 Média</h3>
+            <ul id="nodeMedia"></ul>
+
+            <hr>
+            <h3>✅ Úlohy</h3>
+            <ul id="nodeTasks"></ul>
+        </div>
+    </div>
+
+    <script type="module" src="./assets/js/universe-init.js"></script>
+
+    <div id="docOverlay">
+        <div id="docViewer">
+            <button id="closeDoc">✖</button>
+            <iframe id="docFrame" src=""></iframe>
+        </div>
+    </div>
+
+</body>
+
+</html>
