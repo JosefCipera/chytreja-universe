@@ -1,5 +1,5 @@
 // === UNIVERSE-CORE.JS ===
-// Stabilní verze s podporou podsítí, panelu, hlasu a nově PDF/MD viewerů
+// Stabilní verze s podporou podsítí, panelu, hlasu a PDF/MD viewerů
 
 const el = {
   network: document.getElementById("network"),
@@ -23,12 +23,23 @@ export function renderUniverse(DATA, subset = null) {
   const seen = new Set();
   const source = subset || DATA;
 
-  // 🔹 Vytvoř uzly
+  // 🧼 znič předchozí síť, ať se korektně překreslí
+  if (network && typeof network.destroy === "function") {
+    network.destroy();
+  }
+
+  // 🧠 dynamický hlavní uzel (podpora pro dlouhověkost i TOC)
+  const preferredRoot =
+    source.find(n => n.id === "dlouhovekost") ||
+    source.find(n => n.id === "toc") ||
+    source[0];
+  const mainId = preferredRoot?.id;
+
+  // 🔹 Vytvoř uzly + hrany
   source.forEach(it => {
-    const isMain = it.id === "dlouhovekost";
+    const isMain = it.id === mainId;
     nodes.push(makeNode(it, isMain));
 
-    // 🔹 Vazby (jednostranné)
     (it.related || []).forEach(r => {
       const key = [it.id, r].sort().join("::");
       if (!seen.has(key)) {
@@ -38,9 +49,11 @@ export function renderUniverse(DATA, subset = null) {
     });
   });
 
+  // 🔸 DataSety
   const nodesDS = new vis.DataSet(nodes);
   const edgesDS = new vis.DataSet(edges);
 
+  // ⚙️ Nastavení vzhledu a fyziky
   const options = {
     nodes: { shadow: true },
     edges: {
@@ -59,9 +72,13 @@ export function renderUniverse(DATA, subset = null) {
     interaction: { hover: false }
   };
 
+  // 🌌 Vykreslení nové sítě
   network = new vis.Network(el.network, { nodes: nodesDS, edges: edgesDS }, options);
 
-  // 🖱️ Klik – otevře panel
+  // ✨ Vycentrování s animací
+  setTimeout(() => network.fit({ animation: true }), 300);
+
+  // 🖱️ Klik – otevře panel nebo návrat
   let clickTimer = null;
   network.on("click", params => {
     if (!params.nodes.length) {
@@ -95,18 +112,29 @@ export function renderUniverse(DATA, subset = null) {
   el.close.onclick = () => closePanel();
 }
 
+
 // === Pomocné funkce ===
 
 function makeNode(it, isMain) {
+  const baseColor =
+    (typeof it.color === "string"
+      ? it.color
+      : (it.color && it.color.background)) || "#1e293b";
+
+  const borderColor =
+    (typeof it.color === "object" && it.color && it.color.border)
+      ? it.color.border
+      : baseColor;
+
   return {
     id: it.id,
     label: it.label,
     color: {
-      background: it.color || "#1e293b",
-      border: it.color || "#64748b",
+      background: baseColor,
+      border: borderColor,
       highlight: {
-        background: it.color ? lighten(it.color, 0.25) : "#334155",
-        border: it.color || "#64748b"
+        background: lighten(baseColor, 0.25),
+        border: borderColor
       }
     },
     shape: "dot",
@@ -142,6 +170,7 @@ function findNodeById(DATA, id) {
   return null;
 }
 
+// === Podsíť ===
 function openSubUniverse(DATA, centerNode) {
   let subNodes = [];
   const subEdges = [];
@@ -149,12 +178,21 @@ function openSubUniverse(DATA, centerNode) {
 
   if (centerNode.subnodes && centerNode.subnodes.length > 0) {
     subNodes = [centerNode, ...centerNode.subnodes];
+
     centerNode.subnodes.forEach(sub => {
       const keyParent = [centerNode.id, sub.id].sort().join("::");
       if (!seen.has(keyParent)) {
         seen.add(keyParent);
         subEdges.push(makeEdge(centerNode.id, sub.id));
       }
+
+      (sub.related || []).forEach(r => {
+        const keySub = [sub.id, r].sort().join("::");
+        if (!seen.has(keySub)) {
+          seen.add(keySub);
+          subEdges.push(makeEdge(sub.id, r));
+        }
+      });
     });
   } else if (centerNode.related && centerNode.related.length > 0) {
     const relatedIds = new Set([centerNode.id, ...centerNode.related]);
@@ -167,7 +205,7 @@ function openSubUniverse(DATA, centerNode) {
       }
     });
   } else {
-    aiSpeak(`Uzel ${centerNode.label} nemá žádné poduzly.`);
+    // aiSpeak(`Uzel ${centerNode.label} nemá žádné poduzly.`);
     return;
   }
 
@@ -180,7 +218,16 @@ function openSubUniverse(DATA, centerNode) {
     el.network.classList.add("fade-blur-in");
     isSubUniverse = true;
     currentCenter = centerNode.id;
-    aiSpeak(`Vstupuji do podvesmíru ${centerNode.label}.`);
+
+    const nodes = network.body.data.nodes;
+    const center = nodes.get(centerNode.id);
+    if (center) {
+      center.size = 38; // 💫 větší uzel
+      center.font = { color: "#fff", size: 19 };
+      nodes.update(center);
+    }
+
+    // aiSpeak(`Vstupuji do podvesmíru ${centerNode.label}.`);
     setTimeout(() => el.network.classList.remove("fade-blur-in"), 900);
   }, 900);
 }
@@ -192,7 +239,7 @@ function smoothReturnToUniverse(DATA) {
     renderUniverse(DATA);
     el.network.classList.remove("fade-blur-out");
     el.network.classList.add("fade-blur-in");
-    aiSpeak("Vracíme se zpět do hlavního vesmíru.");
+    //aiSpeak("Vracíme se zpět do hlavního vesmíru.");
     setTimeout(() => el.network.classList.remove("fade-blur-in"), 900);
   }, 900);
 }
@@ -202,7 +249,7 @@ function closePanel() {
 }
 
 function playWhoosh() {
-  const audio = new Audio("./assets/sounds/whoosh.mp3");
+  const audio = new Audio("./assets/media/whoosh.mp3");
   audio.volume = 0.25;
   audio.play().catch(() => { });
 }
@@ -220,10 +267,9 @@ function showPanel(node) {
   el.media.innerHTML = "";
   el.tasks.innerHTML = "";
 
-  // 📘 Články (PDF / MD / externí) — plně funkční varianta
+  // 📘 Dokumenty
   (node.articles || []).forEach(a => {
     const li = document.createElement("li");
-
     const aEl = document.createElement("a");
     aEl.className = "doc-link";
     aEl.href = "#";
@@ -234,8 +280,7 @@ function showPanel(node) {
     const icon = isPdf ? "📘" : isMd ? "📄" : "🔗";
 
     aEl.textContent = `${icon} ${a.title}`;
-
-    aEl.addEventListener("click", (e) => {
+    aEl.addEventListener("click", e => {
       e.preventDefault();
       if (isPdf) openPdfViewer(a.url);
       else if (isMd) openMdViewer(a.url);
@@ -243,34 +288,43 @@ function showPanel(node) {
     });
 
     li.appendChild(aEl);
-
     if (a.summary) {
       const p = document.createElement("p");
       p.className = "article-summary";
       p.textContent = a.summary;
       li.appendChild(p);
     }
-
     el.docs.appendChild(li);
   });
 
-  // 🎬 Média
+  // 🎬 Média (zjednodušená stabilní verze)
   (node.media || []).forEach(m => {
     const li = document.createElement("li");
     const url = m.url || "";
+    const title = m.title || "Médium";
+
     if (/youtube\.com\/embed/.test(url)) {
-      li.innerHTML = `🎥 ${m.title}<br><div class="media-glass"><iframe width="100%" height="230" src="${url}" frameborder="0" allowfullscreen></iframe></div>`;
-    } else if (/(\.mp4|\.webm)$/i.test(url)) {
-      li.innerHTML = `🎥 ${m.title}<br><div class="media-glass"><video controls playsinline preload="metadata"><source src="${url}" type="video/mp4"></video></div>`;
+      li.innerHTML = `
+      🎥 ${title}<br>
+      <div class="media-glass">
+        <iframe width="100%" height="230" src="${url}" frameborder="0" allowfullscreen></iframe>
+      </div>`;
     } else if (/\.mp3$/i.test(url)) {
-      li.innerHTML = `🎧 ${m.title}<br><div class="media-glass"><audio controls><source src="${url}" type="audio/mpeg"></audio></div>`;
-    } else if (/(\.jpg|\.jpeg|\.png|\.webp)$/i.test(url)) {
-      li.innerHTML = `🖼️ ${m.title}<br><div class="media-glass"><img src="${url}" alt="${m.title}"></div>`;
+      li.innerHTML = `
+      🎧 ${title}<br>
+      <div class="media-glass">
+        <audio controls style="width:100%;">
+          <source src="${url}" type="audio/mpeg">
+        </audio>
+      </div>`;
     } else {
-      li.textContent = m.title;
+      li.innerHTML = `🔗 <a href="${url}" target="_blank">${title}</a>`;
     }
+
     el.media.appendChild(li);
   });
+
+
 
   // ✅ Úlohy
   (node.tasks || []).forEach(t => {
@@ -282,9 +336,8 @@ function showPanel(node) {
   });
 
   el.side.classList.add("visible");
-  aiSpeak(`Otevírám uzel ${node.label}.`);
+  // aiSpeak(`Otevírám uzel ${node.label}.`);
 }
-
 
 // === HLAS ===
 function aiSpeak(text) {
@@ -298,6 +351,7 @@ function aiSpeak(text) {
 }
 
 function lighten(hex, percent) {
+  if (typeof hex !== "string") return "#64748b";
   const num = parseInt(hex.replace("#", ""), 16);
   const amt = Math.round(2.55 * percent * 100);
   const R = (num >> 16) + amt;
@@ -311,14 +365,11 @@ function lighten(hex, percent) {
   ).toString(16).slice(1);
 }
 
-// === JEDNODUCHÝ VIEWER PRO PDF A MARKDOWN ===
-
-// Otevření PDF v prohlížeči (nová karta)
+// === VIEWERY ===
 function openPdfViewer(url) {
   window.open(url, "_blank");
 }
 
-// Otevření Markdownu – vykreslíme ho přímo v nové stránce
 function openMdViewer(url) {
   fetch(url)
     .then(r => r.text())
@@ -329,23 +380,63 @@ function openMdViewer(url) {
           <meta charset="UTF-8">
           <title>Dokument</title>
           <style>
-            body {
-              background: #0f172a;
-              color: #e2e8f0;
-              font-family: Inter, sans-serif;
-              line-height: 1.6;
-              padding: 2rem;
-              max-width: 800px;
-              margin: auto;
-            }
-            h1, h2, h3 { color: #93c5fd; }
-            a { color: #60a5fa; text-decoration: none; }
-            a:hover { text-decoration: underline; }
-            pre { background: #1e293b; padding: 10px; border-radius: 8px; overflow-x: auto; }
-            code { color: #facc15; }
-          </style>
+  body {
+    background: #0f172a;
+    color: #cbd5e1; /* jemnější světle šedá */
+    font-family: 'Inter', 'Segoe UI', sans-serif;
+    line-height: 1.7;
+    padding: 2rem;
+    max-width: 840px;
+    margin: auto;
+    font-size: 1.05rem;
+  }
+  h1, h2, h3 {
+    color: #93c5fd;
+    letter-spacing: 0.02em;
+  }
+  a {
+    color: #7dd3fc;
+    text-decoration: none;
+  }
+  a:hover {
+    text-decoration: underline;
+  }
+  pre {
+    background: #1e293b;
+    padding: 10px 14px;
+    border-radius: 10px;
+    overflow-x: auto;
+  }
+  code {
+    color: #facc15;
+    font-weight: 500;
+  }
+  blockquote {
+    border-left: 3px solid #60a5fa;
+    margin: 1.2em 0;
+    padding-left: 1em;
+    color: #a5b4fc;
+    font-style: italic;
+  }
+  hr {
+    border: none;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    margin: 2rem 0;
+  }
+</style>
+
         </head>
         <body>
+        <body>
+  <div style="text-align:right; margin-bottom:1rem;">
+    <button onclick="window.close()" 
+      style="background:#1e293b;color:#93c5fd;
+             border:none;border-radius:6px;padding:6px 12px;
+             cursor:pointer;">✖ Zavřít</button>
+  </div>
+  ${convertMarkdownToHtml(md)}
+</body>
+
           ${convertMarkdownToHtml(md)}
         </body>
         </html>`;
@@ -356,7 +447,6 @@ function openMdViewer(url) {
     .catch(err => console.error("❌ Nelze načíst MD:", err));
 }
 
-// Základní převod Markdown → HTML (jednoduchý parser)
 function convertMarkdownToHtml(md) {
   return md
     .replace(/^### (.*$)/gim, "<h3>$1</h3>")
@@ -365,9 +455,9 @@ function convertMarkdownToHtml(md) {
     .replace(/\*\*(.*?)\*\*/gim, "<b>$1</b>")
     .replace(/\*(.*?)\*/gim, "<i>$1</i>")
     .replace(/\[(.*?)\]\((.*?)\)/gim, "<a href='$2' target='_blank'>$1</a>")
+    .replace(/^---$/gim, "<hr>")
     .replace(/\n$/gim, "<br>");
 }
-
 
 function closeViewers() {
   document.querySelectorAll(".md-viewer, .pdf-viewer").forEach(v => v.remove());

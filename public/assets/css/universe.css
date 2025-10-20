@@ -22,9 +22,20 @@ body {
 }
 
 /* 🌌 Síť vesmíru */
+/* Síť je plátno, musí mít plnou výšku, nad ničím prázdným */
 #network {
-    flex: 1;
-    height: 100%;
+    position: fixed;
+    top: 56px;
+    /* pokud máš nahoře přepínač; uprav podle reál. výšky */
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+/* Kontejner, který nic nezobrazuje, nesmí překrývat síť */
+#graphContainer {
+    display: none;
+    /* nebo height:0; */
 }
 
 /* 📋 Panel napravo */
@@ -377,4 +388,92 @@ video {
     margin: 4px 0 12px 4px;
     line-height: 1.4;
     opacity: 0.9;
+}
+
+.app-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.6rem 1rem;
+    background: #0f172a;
+    color: white;
+}
+
+.model-selector {
+    background: #1e293b;
+    color: white;
+    border: 1px solid #334155;
+    border-radius: 8px;
+    padding: 0.3rem 0.6rem;
+    font-size: 0.9rem;
+}
+
+/*
+#graphContainer {
+    width: 100%;
+    height: calc(100vh - 70px);
+    overflow: hidden;
+}
+*/
+.article-view {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: white;
+    padding: 1rem;
+    overflow-y: auto;
+    z-index: 10;
+}
+
+.article-view.active {
+    display: block;
+}
+
+/* Hlavička aplikace (přepínač modelů) */
+.app-header {
+    display: flex;
+    justify-content: space-between;
+    /* 🔸 rozloží "Chytré Já" vlevo a výběr vpravo */
+    align-items: center;
+    padding: 0.6rem 1rem;
+    background: #0f172a;
+    color: #f1f5f9;
+    border-bottom: 1px solid #1e293b;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 9999;
+    /* 🔥 nad všemi plátny */
+}
+
+/* Select box */
+.model-selector {
+    background: #1e293b;
+    color: #f1f5f9;
+    border: 1px solid #334155;
+    border-radius: 6px;
+    padding: 0.3rem 0.6rem;
+    font-size: 0.9rem;
+}
+
+/* Síť posuneme pod hlavičku */
+#network {
+    position: fixed;
+    top: 56px;
+    /* odpovídá výšce headeru */
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+/* Na mobilu se zarovná pod sebe */
+@media (max-width: 600px) {
+    .app-header {
+        flex-direction: column;
+        gap: 0.4rem;
+    }
 }
