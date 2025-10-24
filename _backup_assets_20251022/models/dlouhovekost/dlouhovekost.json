@@ -27,7 +27,7 @@
         "articles": [
             {
                 "title": "Zdraví jako zrcadlo tvých návyků",
-                "url": "../public/assets/docs/dlouhovekost/zdravi/zaklady-zdravi.md",
+                "url": "./assets/docs/dlouhovekost/zdravi/zaklady-zdravi.md",
                 "summary": "Zdraví není dar, ale důsledek. Sleduj biomarkery, spánek, tlak a VO₂max – každý ukazuje, jak tělo zvládá zátěž."
             }
         ]
@@ -41,7 +41,7 @@
         "articles": [
             {
                 "title": "Centenarian Decathlon: připrav se na stovku",
-                "url": "../public/assets/docs/dlouhovekost/telo/centenarian-decathlon.md",
+                "url": "./assets/docs/dlouhovekost/telo/centenarian-decathlon.md",
                 "summary": "Peter Attia učí, že tělo je třeba trénovat pro soběstačnost – ne pro výkon, ale pro život. Cvič tak, abys mohl žít aktivně i v 90."
             }
         ]
@@ -55,7 +55,7 @@
         "articles": [
             {
                 "title": "Jak trénovat mentální odolnost",
-                "url": "../public/assets/docs/dlouhovekost/mysl/odolnost.md",
+                "url": "./assets/docs/dlouhovekost/mysl/odolnost.md",
                 "summary": "Odolnost a klid jsou dovednosti – trénuj je jako svaly. Dýchej, piš vděčnost, buď přítomen. Každý den o 1 % lepší."
             }
         ]
@@ -69,7 +69,7 @@
         "articles": [
             {
                 "title": "Jak jíst pro dlouhověkost",
-                "url": "../public/assets/docs/dlouhovekost/vyziva/principy-vyzivy.md",
+                "url": "./assets/docs/dlouhovekost/vyziva/principy-vyzivy.md",
                 "summary": "Jez pro sílu a regeneraci – ne pro uspokojení. Kvalita bílkovin, kontrola cukru, pravidelné půsty a klid při jídle jsou klíčové."
             }
         ]

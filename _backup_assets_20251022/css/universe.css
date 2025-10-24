@@ -1,0 +1,479 @@
+/* === UNIVERSE.CSS – FINÁLNÍ DESKTOP + MOBILE VERZE === */
+
+/* 🪐 Základní layout */
+html,
+body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background: radial-gradient(circle at center, #0f172a 0%, #020617 100%);
+    color: #e2e8f0;
+    font-family: "Inter", sans-serif;
+}
+
+/* ⚙️ Rozvržení: vesmír vlevo, panel vpravo */
+body {
+    display: flex;
+    flex-direction: row;
+    width: 100vw;
+    height: 100vh;
+}
+
+/* 🌌 Síť vesmíru */
+/* Síť je plátno, musí mít plnou výšku, nad ničím prázdným */
+#network {
+    position: fixed;
+    top: 56px;
+    /* pokud máš nahoře přepínač; uprav podle reál. výšky */
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+/* Kontejner, který nic nezobrazuje, nesmí překrývat síť */
+#graphContainer {
+    display: none;
+    /* nebo height:0; */
+}
+
+/* 📋 Panel napravo */
+#sidePanel {
+    position: absolute;
+    top: 2%;
+    right: 0;
+    bottom: 2%;
+    width: 18%;
+    background: rgba(15, 23, 42, 0.78);
+    backdrop-filter: blur(18px) brightness(1.25);
+    border-radius: 18px 18px 0 0;
+    /* zaoblené horní rohy */
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 0 28px rgba(0, 0, 0, 0.55);
+    transform: translateY(110%);
+    opacity: 0;
+    transition: transform 0.4s cubic-bezier(.19, 1, .22, 1), opacity 0.4s ease;
+    display: flex;
+    flex-direction: column;
+    z-index: 9999;
+    overflow-y: auto;
+}
+
+/* Aktivní (otevřený) stav panelu */
+#sidePanel.visible {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+/* === PANEL OBSAH === */
+.panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 22px 12px;
+    background: rgba(30, 41, 59, 0.85);
+    border-bottom: 1px solid #334155;
+    border-top-left-radius: 18px;
+    border-top-right-radius: 18px;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.panel-header h2 {
+    margin: 0;
+    font-size: 1.6rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #fff;
+    text-shadow: 0 0 8px rgba(147, 197, 253, .3);
+}
+
+.fa-heart-pulse {
+    animation: beat 2s infinite ease-in-out;
+    transform-origin: center;
+}
+
+@keyframes beat {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.18);
+    }
+}
+
+.panel-close {
+    background: none;
+    border: none;
+    color: #f87171;
+    font-size: 1.4em;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.panel-close:hover {
+    transform: scale(1.1);
+}
+
+.panel-content {
+    padding: 20px 24px 60px;
+    font-size: 0.95rem;
+    line-height: 1.55;
+}
+
+/* 📘 Definice – těsněji pod nadpisem */
+.definition {
+    color: #cbd5e1;
+    margin: 2px 0 18px 0;
+    /* blíž k nadpisu */
+    font-size: 1rem;
+}
+
+hr {
+    border: none;
+    border-top: 1px solid #334155;
+    margin: 20px 0;
+}
+
+h3 {
+    color: #f1f5f9;
+    font-size: 1.1rem;
+    margin: 0 0 8px 0;
+    font-weight: 600;
+}
+
+ul {
+    padding-left: 20px;
+    margin: 6px 0;
+}
+
+li {
+    margin: 6px 0;
+}
+
+.doc-link {
+    color: #93c5fd;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.doc-link:hover {
+    text-decoration: underline;
+    color: #bfdbfe;
+}
+
+/* === MÉDIA === */
+.media-glass {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 8px;
+    border-radius: 12px;
+    margin: 6px 0;
+    text-align: center;
+}
+
+audio,
+video {
+    width: 100%;
+    border-radius: 10px;
+    outline: none;
+}
+
+.media-glass img {
+    max-width: 100%;
+    max-height: 240px;
+    border-radius: 10px;
+    object-fit: contain;
+}
+
+a,
+button,
+audio,
+video {
+    cursor: pointer;
+}
+
+/* === ANIMACE === */
+.fade-blur-out {
+    opacity: 0;
+    filter: blur(14px) brightness(0.6);
+    transform: scale(0.98);
+    transition: opacity 0.9s ease, filter 0.9s ease, transform 0.9s ease;
+}
+
+.fade-blur-in {
+    opacity: 1;
+    filter: blur(0px) brightness(1);
+    transform: scale(1);
+    transition: opacity 0.9s ease, filter 0.9s ease, transform 0.9s ease;
+}
+
+.fa-heartbeat {
+    animation: pulse 1.6s ease-in-out infinite;
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+        text-shadow: 0 0 6px #f87171;
+    }
+
+    50% {
+        transform: scale(1.15);
+        text-shadow: 0 0 14px #f87171;
+    }
+}
+
+/* 📱 Mobilní režim – overlay panel */
+@media (max-width: 900px) {
+    #sidePanel {
+        position: fixed;
+        top: 2%;
+        left: 3%;
+        right: 3%;
+        bottom: 2%;
+        width: auto;
+        background: rgba(15, 23, 42, 0.78);
+        backdrop-filter: blur(18px) brightness(1.25);
+        border-radius: 18px;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        box-shadow: 0 0 28px rgba(0, 0, 0, 0.55);
+        transform: translateY(110%);
+        opacity: 0;
+        transition: transform 0.4s cubic-bezier(.19, 1, .22, 1), opacity 0.4s ease;
+        display: flex;
+        flex-direction: column;
+        z-index: 9999;
+        overflow-y: auto;
+    }
+
+    #sidePanel.visible {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.article-summary {
+    color: #cbd5e1;
+    font-size: 0.9rem;
+    margin: 4px 0 12px 4px;
+    line-height: 1.4;
+    opacity: 0.9;
+}
+
+/* === Čtečka dokumentů / overlay === */
+#docOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(10, 15, 25, 0.85);
+    backdrop-filter: blur(12px);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+}
+
+#docOverlay.visible {
+    display: flex;
+}
+
+#docViewer {
+    position: relative;
+    width: 90%;
+    height: 90%;
+    background: rgba(15, 23, 42, 0.95);
+    border-radius: 16px;
+    box-shadow: 0 0 28px rgba(0, 0, 0, 0.6);
+    overflow: hidden;
+}
+
+#docFrame {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+#closeDoc {
+    position: absolute;
+    top: 10px;
+    right: 14px;
+    font-size: 1.4em;
+    color: #f87171;
+    background: none;
+    border: none;
+    cursor: pointer;
+    z-index: 10;
+    transition: transform 0.2s ease;
+}
+
+#closeDoc:hover {
+    transform: scale(1.2);
+}
+
+/* === Markdown viewer === */
+.md-viewer {
+    position: fixed;
+    top: 4%;
+    left: 8%;
+    right: 8%;
+    bottom: 6%;
+    background: rgba(15, 23, 42, 0.95);
+    color: #e2e8f0;
+    /* světle šedé písmo */
+    padding: 2rem;
+    overflow-y: auto;
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    z-index: 99999;
+}
+
+.md-viewer h1,
+.md-viewer h2,
+.md-viewer h3 {
+    color: #93c5fd;
+    /* světle modré nadpisy */
+}
+
+.md-viewer a {
+    color: #60a5fa;
+    text-decoration: none;
+}
+
+.md-viewer a:hover {
+    text-decoration: underline;
+}
+
+
+/* === PDF viewer === */
+.pdf-viewer {
+    position: fixed;
+    top: 4%;
+    left: 8%;
+    right: 8%;
+    bottom: 6%;
+    background: #111827;
+    /* tmavší rámeček okolo PDF */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    z-index: 99999;
+}
+
+.pdf-viewer iframe {
+    width: 90%;
+    height: 90%;
+    border: none;
+    background: #fff;
+    /* bílý podklad PDF uvnitř */
+    border-radius: 8px;
+}
+
+.article-summary {
+    color: #cbd5e1;
+    font-size: 0.9rem;
+    margin: 4px 0 12px 4px;
+    line-height: 1.4;
+    opacity: 0.9;
+}
+
+.app-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.6rem 1rem;
+    background: #0f172a;
+    color: white;
+}
+
+.model-selector {
+    background: #1e293b;
+    color: white;
+    border: 1px solid #334155;
+    border-radius: 8px;
+    padding: 0.3rem 0.6rem;
+    font-size: 0.9rem;
+}
+
+/*
+#graphContainer {
+    width: 100%;
+    height: calc(100vh - 70px);
+    overflow: hidden;
+}
+*/
+.article-view {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: white;
+    padding: 1rem;
+    overflow-y: auto;
+    z-index: 10;
+}
+
+.article-view.active {
+    display: block;
+}
+
+/* Hlavička aplikace (přepínač modelů) */
+.app-header {
+    display: flex;
+    justify-content: space-between;
+    /* 🔸 rozloží "Chytré Já" vlevo a výběr vpravo */
+    align-items: center;
+    padding: 0.6rem 1rem;
+    background: #0f172a;
+    color: #f1f5f9;
+    border-bottom: 1px solid #1e293b;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 9999;
+    /* 🔥 nad všemi plátny */
+}
+
+/* Select box */
+.model-selector {
+    background: #1e293b;
+    color: #f1f5f9;
+    border: 1px solid #334155;
+    border-radius: 6px;
+    padding: 0.3rem 0.6rem;
+    font-size: 0.9rem;
+}
+
+/* Síť posuneme pod hlavičku */
+#network {
+    position: fixed;
+    top: 56px;
+    /* odpovídá výšce headeru */
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+/* Na mobilu se zarovná pod sebe */
+@media (max-width: 600px) {
+    .app-header {
+        flex-direction: column;
+        gap: 0.4rem;
+    }
+}

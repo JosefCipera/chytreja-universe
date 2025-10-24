@@ -1,287 +1,188 @@
-/* === UNIVERSE.CSS – FINÁLNÍ DESKTOP + MOBILE VERZE === */
-
-/* 🪐 Základní layout */
+/* Základ */
 html,
 body {
-    width: 100%;
     height: 100%;
     margin: 0;
-    padding: 0;
-    overflow: hidden;
-    background: radial-gradient(circle at center, #0f172a 0%, #020617 100%);
+    background: #0b1220;
     color: #e2e8f0;
-    font-family: "Inter", sans-serif;
+    font-family: Inter, system-ui, Arial, sans-serif;
 }
 
-/* ⚙️ Rozvržení: vesmír vlevo, panel vpravo */
-body {
-    display: flex;
-    flex-direction: row;
-    width: 100vw;
-    height: 100vh;
-}
-
-/* 🌌 Síť vesmíru */
-/* Síť je plátno, musí mít plnou výšku, nad ničím prázdným */
 #network {
     position: fixed;
     top: 56px;
-    /* pokud máš nahoře přepínač; uprav podle reál. výšky */
     left: 0;
     right: 0;
     bottom: 0;
 }
 
-/* Kontejner, který nic nezobrazuje, nesmí překrývat síť */
-#graphContainer {
-    display: none;
-    /* nebo height:0; */
-}
-
-/* 📋 Panel napravo */
-#sidePanel {
-    position: absolute;
-    top: 2%;
+/* Horní lišta */
+.app-header {
+    position: fixed;
+    top: 0;
+    left: 0;
     right: 0;
-    bottom: 2%;
-    width: 18%;
-    background: rgba(15, 23, 42, 0.78);
-    backdrop-filter: blur(18px) brightness(1.25);
-    border-radius: 18px 18px 0 0;
-    /* zaoblené horní rohy */
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    box-shadow: 0 0 28px rgba(0, 0, 0, 0.55);
-    transform: translateY(110%);
-    opacity: 0;
-    transition: transform 0.4s cubic-bezier(.19, 1, .22, 1), opacity 0.4s ease;
+    height: 56px;
     display: flex;
-    flex-direction: column;
-    z-index: 9999;
-    overflow-y: auto;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 1rem;
+    background: #0f172a;
+    border-bottom: 1px solid #1e293b;
+    z-index: 1000;
 }
 
-/* Aktivní (otevřený) stav panelu */
+#appTitle {
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.model-selector {
+    background: #1e293b;
+    color: #f1f5f9;
+    border: 1px solid #334155;
+    border-radius: 6px;
+    padding: .35rem .6rem;
+}
+
+/* Panel */
+#sidePanel {
+    position: fixed;
+    top: 64px;
+    right: 16px;
+    bottom: 16px;
+    width: 360px;
+    max-width: 88vw;
+    background: rgba(15, 23, 42, .9);
+    border: 1px solid rgba(255, 255, 255, .08);
+    border-radius: 14px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, .4);
+    transform: translateY(110%);
+    transition: transform 0.4s ease, opacity 0.3s ease;
+    opacity: 0;
+    overflow: visible;
+    z-index: 999;
+}
+
 #sidePanel.visible {
     transform: translateY(0);
     opacity: 1;
 }
 
-/* === PANEL OBSAH === */
-.panel-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 16px 22px 12px;
-    background: rgba(30, 41, 59, 0.85);
-    border-bottom: 1px solid #334155;
+/* === 🧠 AI HELPER – integrace s horní částí panelu === */
+
+/* Panel helperu při aktivním chatu – přebírá místo hlavičky uzlu */
+#sidePanel.chat-active .panel-header {
+    opacity: 0;
+    pointer-events: none;
+}
+
+#sidePanel.chat-active .ai-helper {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    height: 100%;
     border-top-left-radius: 18px;
     border-top-right-radius: 18px;
+    transition: all 0.4s ease;
+}
+
+/* Zaoblení rohů hlaviček */
+.panel-header {
+    border-top-left-radius: 18px;
+    border-top-right-radius: 18px;
+}
+
+.aih-header {
+    border-top-left-radius: 18px;
+    border-top-right-radius: 18px;
+}
+
+/* Efekt při roztažení nahoru */
+.ai-helper.expanded {
+    box-shadow: 0 -6px 24px rgba(0, 0, 0, 0.6);
+    height: 100%;
+    background: rgba(15, 23, 42, 0.98);
+}
+
+/* Přechod mezi stavy */
+.ai-helper,
+.panel-header {
+    transition: all 0.35s ease;
+}
+
+.panel-header {
     position: sticky;
     top: 0;
-    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 16px;
+    background: rgba(30, 41, 59, .95);
+    border-bottom: 1px solid #334155;
 }
 
 .panel-header h2 {
     margin: 0;
-    font-size: 1.6rem;
-    font-weight: 600;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    color: #fff;
-    text-shadow: 0 0 8px rgba(147, 197, 253, .3);
-}
-
-.fa-heart-pulse {
-    animation: beat 2s infinite ease-in-out;
-    transform-origin: center;
-}
-
-@keyframes beat {
-
-    0%,
-    100% {
-        transform: scale(1);
-    }
-
-    50% {
-        transform: scale(1.18);
-    }
+    font-size: 1.1rem;
 }
 
 .panel-close {
     background: none;
     border: none;
     color: #f87171;
-    font-size: 1.4em;
+    font-size: 1.1rem;
     cursor: pointer;
-    transition: transform 0.2s ease;
-}
-
-.panel-close:hover {
-    transform: scale(1.1);
 }
 
 .panel-content {
-    padding: 20px 24px 60px;
-    font-size: 0.95rem;
+    padding: 14px 16px 24px;
     line-height: 1.55;
+    font-size: .98rem;
 }
 
-/* 📘 Definice – těsněji pod nadpisem */
 .definition {
     color: #cbd5e1;
-    margin: 2px 0 18px 0;
-    /* blíž k nadpisu */
-    font-size: 1rem;
-}
-
-hr {
-    border: none;
-    border-top: 1px solid #334155;
-    margin: 20px 0;
+    margin: .25rem 0 1rem;
 }
 
 h3 {
+    margin: 14px 0 8px;
     color: #f1f5f9;
-    font-size: 1.1rem;
-    margin: 0 0 8px 0;
-    font-weight: 600;
+    font-size: 1rem;
 }
 
 ul {
-    padding-left: 20px;
-    margin: 6px 0;
+    margin: 0 0 .5rem 1.1rem;
 }
 
 li {
-    margin: 6px 0;
+    margin: .35rem 0;
 }
 
 .doc-link {
-    color: #93c5fd;
+    color: #60a5fa;
     text-decoration: none;
-    font-weight: 500;
 }
 
 .doc-link:hover {
     text-decoration: underline;
-    color: #bfdbfe;
-}
-
-/* === MÉDIA === */
-.media-glass {
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    padding: 8px;
-    border-radius: 12px;
-    margin: 6px 0;
-    text-align: center;
-}
-
-audio,
-video {
-    width: 100%;
-    border-radius: 10px;
-    outline: none;
-}
-
-.media-glass img {
-    max-width: 100%;
-    max-height: 240px;
-    border-radius: 10px;
-    object-fit: contain;
-}
-
-a,
-button,
-audio,
-video {
-    cursor: pointer;
-}
-
-/* === ANIMACE === */
-.fade-blur-out {
-    opacity: 0;
-    filter: blur(14px) brightness(0.6);
-    transform: scale(0.98);
-    transition: opacity 0.9s ease, filter 0.9s ease, transform 0.9s ease;
-}
-
-.fade-blur-in {
-    opacity: 1;
-    filter: blur(0px) brightness(1);
-    transform: scale(1);
-    transition: opacity 0.9s ease, filter 0.9s ease, transform 0.9s ease;
-}
-
-.fa-heartbeat {
-    animation: pulse 1.6s ease-in-out infinite;
-}
-
-@keyframes pulse {
-
-    0%,
-    100% {
-        transform: scale(1);
-        text-shadow: 0 0 6px #f87171;
-    }
-
-    50% {
-        transform: scale(1.15);
-        text-shadow: 0 0 14px #f87171;
-    }
-}
-
-/* 📱 Mobilní režim – overlay panel */
-@media (max-width: 900px) {
-    #sidePanel {
-        position: fixed;
-        top: 2%;
-        left: 3%;
-        right: 3%;
-        bottom: 2%;
-        width: auto;
-        background: rgba(15, 23, 42, 0.78);
-        backdrop-filter: blur(18px) brightness(1.25);
-        border-radius: 18px;
-        border: 1px solid rgba(255, 255, 255, 0.08);
-        box-shadow: 0 0 28px rgba(0, 0, 0, 0.55);
-        transform: translateY(110%);
-        opacity: 0;
-        transition: transform 0.4s cubic-bezier(.19, 1, .22, 1), opacity 0.4s ease;
-        display: flex;
-        flex-direction: column;
-        z-index: 9999;
-        overflow-y: auto;
-    }
-
-    #sidePanel.visible {
-        transform: translateY(0);
-        opacity: 1;
-    }
 }
 
 .article-summary {
-    color: #cbd5e1;
-    font-size: 0.9rem;
-    margin: 4px 0 12px 4px;
-    line-height: 1.4;
-    opacity: 0.9;
+    color: #9fb3c8;
+    font-size: .88rem;
 }
 
-/* === Čtečka dokumentů / overlay === */
+/* Overlay (MD/PDF) */
 #docOverlay {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(10, 15, 25, 0.85);
-    backdrop-filter: blur(12px);
+    inset: 0;
     display: none;
     justify-content: center;
     align-items: center;
+    background: rgba(0, 0, 0, .55);
     z-index: 10000;
 }
 
@@ -291,189 +192,562 @@ video {
 
 #docViewer {
     position: relative;
-    width: 90%;
+    width: 92%;
     height: 90%;
-    background: rgba(15, 23, 42, 0.95);
-    border-radius: 16px;
-    box-shadow: 0 0 28px rgba(0, 0, 0, 0.6);
+    background: #0b1220;
+    border: 1px solid rgba(255, 255, 255, .06);
+    border-radius: 12px;
     overflow: hidden;
 }
 
 #docFrame {
     width: 100%;
     height: 100%;
-    border: none;
+    border: 0;
+    background: #0b1220;
 }
 
 #closeDoc {
     position: absolute;
-    top: 10px;
-    right: 14px;
-    font-size: 1.4em;
-    color: #f87171;
+    top: 8px;
+    right: 10px;
     background: none;
     border: none;
+    color: #f87171;
+    font-size: 1.2rem;
     cursor: pointer;
-    z-index: 10;
+}
+
+/* Mobil */
+@media (max-width: 900px) {
+    #sidePanel {
+        left: 12px;
+        right: 12px;
+        width: auto;
+    }
+}
+
+/* === Mini Helper – dolní pruh v panelu === */
+#miniHelper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 12px;
+    background: rgba(30, 41, 59, 0.9);
+    border-top: 1px solid #334155;
+    position: sticky;
+    bottom: 0;
+    z-index: 20;
+}
+
+#miniHelper input {
+    flex: 1;
+    background: rgba(15, 23, 42, 0.8);
+    border: 1px solid #475569;
+    border-radius: 8px;
+    color: #e2e8f0;
+    padding: 6px 10px;
+    font-size: 0.9rem;
+}
+
+#miniHelper button {
+    margin-left: 8px;
+    background: #2563eb;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 6px 10px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+#miniHelper button:hover {
+    background: #1d4ed8;
+}
+
+/* === Chat Helper – rozbalený === */
+#helperChat {
+    display: flex;
+    flex-direction: column;
+    background: rgba(15, 23, 42, 0.95);
+    border-top: 1px solid #334155;
+    padding: 12px;
+    height: 100%;
+    overflow-y: auto;
+    animation: expandUp 0.4s ease forwards;
+}
+
+#helperChat.hidden {
+    display: none;
+}
+
+#helperMessages {
+    flex: 1;
+    overflow-y: auto;
+    margin-bottom: 12px;
+}
+
+.helper-input {
+    display: flex;
+    gap: 8px;
+}
+
+.helper-input input {
+    flex: 1;
+    border-radius: 8px;
+    border: 1px solid #475569;
+    padding: 8px;
+    background: rgba(30, 41, 59, 0.9);
+    color: #e2e8f0;
+}
+
+.helper-input button {
+    border: none;
+    background: #2563eb;
+    color: white;
+    border-radius: 8px;
+    padding: 8px 12px;
+    cursor: pointer;
+}
+
+.helper-input button:hover {
+    background: #1d4ed8;
+}
+
+@keyframes expandUp {
+    from {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* === AI HELPER V PANELU === */
+#chatContainer {
+    width: 100%;
+    background: #1e293b;
+    border-top: 1px solid #334155;
+    display: flex;
+    flex-direction: column;
+    height: 280px;
+    border-radius: 12px 12px 0 0;
+    margin-top: auto;
+    overflow: hidden;
+}
+
+#chatHeader {
+    background: #2563eb;
+    color: white;
+    text-align: center;
+    padding: 8px;
+    font-weight: bold;
+    font-size: 1rem;
+    border-radius: 12px 12px 0 0;
+}
+
+#chatWindow {
+    flex: 1;
+    overflow-y: auto;
+    padding: 10px 14px;
+    background: #0f172a;
+}
+
+.message {
+    margin-bottom: 10px;
+    line-height: 1.4;
+}
+
+.user {
+    text-align: right;
+    color: #93c5fd;
+}
+
+.ai {
+    text-align: left;
+    color: #a5f3fc;
+}
+
+#chatInputBox {
+    display: flex;
+    padding: 10px;
+    border-top: 1px solid #334155;
+    background: #0f172a;
+}
+
+#userInput {
+    flex: 1;
+    background: #1e293b;
+    border: none;
+    color: #fff;
+    padding: 8px;
+    border-radius: 8px;
+}
+
+#sendBtn {
+    background: #2563eb;
+    border: none;
+    color: #fff;
+    padding: 8px 12px;
+    border-radius: 8px;
+    margin-left: 8px;
+    cursor: pointer;
+}
+
+#sendBtn:hover {
+    background: #1d4ed8;
+}
+
+/* === AI HELPER V PANELU === */
+#chatContainer {
+    width: 100%;
+    background: #1e293b;
+    border-top: 1px solid #334155;
+    border-radius: 14px 14px 0 0;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    transition: all 0.4s ease;
+    box-shadow: 0 -2px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* --- Tři režimy --- */
+#chatContainer.hidden {
+    display: none;
+}
+
+#chatContainer.mini {
+    height: 64px;
+    overflow: hidden;
+}
+
+#chatContainer.expanded {
+    height: 100%;
+}
+
+/* --- Header --- */
+#chatHeader {
+    background: #2563eb;
+    color: white;
+    font-weight: bold;
+    font-size: 1rem;
+    text-align: left;
+    padding: 10px 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #1d4ed8;
+}
+
+#chatHeader button {
+    background: none;
+    border: none;
+    color: #fca5a5;
+    font-size: 1.2rem;
+    cursor: pointer;
     transition: transform 0.2s ease;
 }
 
-#closeDoc:hover {
+#chatHeader button:hover {
     transform: scale(1.2);
 }
 
-/* === Markdown viewer === */
-.md-viewer {
-    position: fixed;
-    top: 4%;
-    left: 8%;
-    right: 8%;
-    bottom: 6%;
-    background: rgba(15, 23, 42, 0.95);
-    color: #e2e8f0;
-    /* světle šedé písmo */
-    padding: 2rem;
+/* --- Chat obsah --- */
+#chatWindow {
+    flex: 1;
     overflow-y: auto;
-    border-radius: 16px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    z-index: 99999;
+    padding: 14px;
+    background: #0f172a;
 }
 
-.md-viewer h1,
-.md-viewer h2,
-.md-viewer h3 {
+.message {
+    margin-bottom: 12px;
+    line-height: 1.45;
+}
+
+.message.user {
+    text-align: right;
     color: #93c5fd;
-    /* světle modré nadpisy */
 }
 
-.md-viewer a {
-    color: #60a5fa;
-    text-decoration: none;
+.message.ai {
+    text-align: left;
+    color: #a5f3fc;
 }
 
-.md-viewer a:hover {
-    text-decoration: underline;
-}
-
-
-/* === PDF viewer === */
-.pdf-viewer {
-    position: fixed;
-    top: 4%;
-    left: 8%;
-    right: 8%;
-    bottom: 6%;
-    background: #111827;
-    /* tmavší rámeček okolo PDF */
+/* --- Vstup --- */
+#chatInputBox {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 16px;
-    z-index: 99999;
+    padding: 10px;
+    background: #0f172a;
+    border-top: 1px solid #334155;
 }
 
-.pdf-viewer iframe {
-    width: 90%;
-    height: 90%;
+#userInput {
+    flex: 1;
+    background: #1e293b;
     border: none;
-    background: #fff;
-    /* bílý podklad PDF uvnitř */
+    color: white;
+    padding: 8px;
     border-radius: 8px;
 }
 
-.article-summary {
-    color: #cbd5e1;
-    font-size: 0.9rem;
-    margin: 4px 0 12px 4px;
-    line-height: 1.4;
-    opacity: 0.9;
-}
-
-.app-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0.6rem 1rem;
-    background: #0f172a;
+#sendBtn {
+    background: #2563eb;
+    border: none;
     color: white;
-}
-
-.model-selector {
-    background: #1e293b;
-    color: white;
-    border: 1px solid #334155;
+    padding: 8px 12px;
     border-radius: 8px;
-    padding: 0.3rem 0.6rem;
-    font-size: 0.9rem;
+    margin-left: 8px;
+    cursor: pointer;
+    transition: background 0.2s;
 }
 
-/*
-#graphContainer {
-    width: 100%;
-    height: calc(100vh - 70px);
-    overflow: hidden;
+#sendBtn:hover {
+    background: #1d4ed8;
 }
-*/
-.article-view {
-    display: none;
+
+/* --- Mobilní verze --- */
+@media (max-width: 900px) {
+    #chatContainer.mini {
+        height: 60px;
+    }
+
+    #chatContainer.expanded {
+        height: 100%;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 9999;
+        border-radius: 0;
+    }
+}
+
+/* === 🧠 AI HELPER – finální stabilní verze s mikrofonem === */
+.ai-helper {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: white;
-    padding: 1rem;
-    overflow-y: auto;
-    z-index: 10;
-}
-
-.article-view.active {
-    display: block;
-}
-
-/* Hlavička aplikace (přepínač modelů) */
-.app-header {
-    display: flex;
-    justify-content: space-between;
-    /* 🔸 rozloží "Chytré Já" vlevo a výběr vpravo */
-    align-items: center;
-    padding: 0.6rem 1rem;
-    background: #0f172a;
-    color: #f1f5f9;
-    border-bottom: 1px solid #1e293b;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 9999;
-    /* 🔥 nad všemi plátny */
-}
-
-/* Select box */
-.model-selector {
-    background: #1e293b;
-    color: #f1f5f9;
-    border: 1px solid #334155;
-    border-radius: 6px;
-    padding: 0.3rem 0.6rem;
-    font-size: 0.9rem;
-}
-
-/* Síť posuneme pod hlavičku */
-#network {
-    position: fixed;
-    top: 56px;
-    /* odpovídá výšce headeru */
-    left: 0;
-    right: 0;
     bottom: 0;
+    right: 0;
+    max-width: 380px;
+    width: 100%;
+    background: rgba(15, 23, 42, 0.96);
+    color: #e2e8f0;
+    font-family: "Inter", sans-serif;
+    border-top-left-radius: 16px;
+    box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.5);
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    border-left: 1px solid rgba(255, 255, 255, 0.08);
+    overflow: hidden;
+    transition: all 0.35s ease;
+    z-index: 10000;
 }
 
-/* Na mobilu se zarovná pod sebe */
-@media (max-width: 600px) {
-    .app-header {
-        flex-direction: column;
-        gap: 0.4rem;
+/* === Viditelnost === */
+.ai-helper.hidden {
+    transform: translateY(100%);
+    opacity: 0;
+    pointer-events: none;
+}
+
+.ai-helper.mini {
+    height: 80px;
+    cursor: text;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0.5rem 1rem;
+    box-sizing: border-box;
+}
+
+.ai-helper.expanded {
+    height: 60%;
+    cursor: default;
+}
+
+/* === Mini stav === */
+.ai-helper.mini .aih-header,
+.ai-helper.mini .aih-body {
+    display: none;
+}
+
+.ai-helper.mini .aih-mini {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.aih-mini-title {
+    font-weight: 600;
+    color: #93c5fd;
+    font-size: 1.05rem;
+}
+
+.aih-mini-input {
+    display: flex;
+    align-items: center;
+    background: #1e293b;
+    border-radius: 8px;
+    padding: 6px 10px;
+}
+
+.aih-mini-input input {
+    flex: 1;
+    background: transparent;
+    color: #fff;
+    border: none;
+    outline: none;
+    font-size: 0.9rem;
+}
+
+.aih-mini-mic {
+    color: #60a5fa;
+    font-size: 1.1rem;
+    margin-left: 6px;
+    cursor: pointer;
+    transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.aih-mini-mic:hover {
+    transform: scale(1.15);
+    color: #93c5fd;
+}
+
+/* === Rozbalený stav === */
+.aih-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #1e293b;
+    color: #93c5fd;
+    font-weight: 600;
+    padding: 0.6rem 1rem;
+    font-size: 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    user-select: none;
+}
+
+.aih-header button {
+    background: none;
+    border: none;
+    color: #f87171;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.aih-header button:hover {
+    transform: scale(1.15);
+}
+
+/* === Tělo helperu === */
+.aih-body {
+    display: none;
+    flex-direction: column;
+    height: calc(100% - 52px);
+}
+
+.ai-helper.expanded .aih-mini {
+    display: none;
+}
+
+.ai-helper.expanded .aih-body {
+    display: flex;
+}
+
+/* === Okno zpráv === */
+.aih-window {
+    flex: 1;
+    overflow-y: auto;
+    padding: 0.8rem 1rem;
+    font-size: 0.95rem;
+    scrollbar-width: thin;
+    scrollbar-color: #334155 transparent;
+}
+
+.aih-msg {
+    margin-bottom: 10px;
+    line-height: 1.45;
+}
+
+.aih-msg.user {
+    text-align: right;
+    color: #93c5fd;
+}
+
+.aih-msg.ai {
+    text-align: left;
+    color: #a5f3fc;
+}
+
+/* === Input box === */
+.aih-input {
+    display: flex;
+    padding: 0.6rem 0.8rem;
+    background: #0f172a;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+#aihInput {
+    flex: 1;
+    background: #1e293b;
+    color: #fff;
+    border: none;
+    padding: 0.55rem 0.7rem;
+    border-radius: 8px;
+    font-size: 0.95rem;
+}
+
+#aihInput:focus {
+    outline: 2px solid #2563eb;
+    outline-offset: 0;
+}
+
+#aihMic {
+    background: none;
+    border: none;
+    color: #60a5fa;
+    font-size: 1.2rem;
+    margin: 0 6px;
+    cursor: pointer;
+    transition: transform 0.2s ease, color 0.2s ease;
+}
+
+#aihMic:hover {
+    transform: scale(1.15);
+    color: #93c5fd;
+}
+
+#aihSend {
+    background: #2563eb;
+    color: white;
+    border: none;
+    padding: 0.55rem 0.85rem;
+    margin-left: 4px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+#aihSend:hover {
+    background: #1d4ed8;
+}
+
+/* === Responzivní úpravy === */
+@media (max-width: 900px) {
+    .ai-helper {
+        width: 100%;
+        max-width: none;
+        border-radius: 12px 12px 0 0;
+        left: 0;
+        right: 0;
+    }
+
+    .ai-helper.expanded {
+        height: 70%;
     }
 }

@@ -256,68 +256,83 @@ function playWhoosh() {
 
 // === PANEL ===
 function showPanel(node) {
-  const panel = document.getElementById("sidePanel");
-  const title = document.getElementById("nodeTitle");
-  const def = document.getElementById("nodeDef");
-  const docs = document.getElementById("nodeDocs");
-  const media = document.getElementById("nodeMedia");
-  const tasks = document.getElementById("nodeTasks");
+  let iconHTML = "";
+  if (node.icon) {
+    iconHTML = `<i class="${node.icon}" style="color:${node.color || '#fff'};text-shadow:0 0 4px ${node.color || '#fff'}, 0 0 8px ${node.color || '#fff'}55;margin-right:6px;"></i>`;
+  }
+  el.title.innerHTML = `${iconHTML}${node.label}`;
+  el.def.textContent = node.definition || "";
 
-  if (!panel) return;
+  el.docs.innerHTML = "";
+  el.media.innerHTML = "";
+  el.tasks.innerHTML = "";
 
-  // Naplnění obsahu uzlu
-  title.textContent = node.label || "—";
-  def.textContent = node.definition || "";
+  // 📘 Dokumenty
+  el.docs.innerHTML = "";
+  (node.articles || []).forEach(a => {
+    const li = document.createElement("li");
+    const aEl = document.createElement("a");
+    aEl.className = "doc-link";
+    aEl.href = "#";
 
-  // Vyčistit seznamy
-  [docs, media, tasks].forEach(el => el.innerHTML = "");
+    const url = (a.url || "").toLowerCase();
+    const isPdf = url.endsWith(".pdf");
+    const isMd = url.endsWith(".md");
+    const icon = isPdf ? "📘" : isMd ? "📄" : "🔗";
 
-  // 📄 Dokumenty
-  if (node.articles && node.articles.length > 0) {
-    node.articles.forEach(a => {
-      const li = document.createElement("li");
-      const link = document.createElement("a");
-      link.href = a.url;
-      link.textContent = a.title;
-      link.className = "doc-link";
-      link.target = "_blank";
-      li.appendChild(link);
-      docs.appendChild(li);
+    aEl.textContent = `${icon} ${a.title || url.split("/").pop()}`;
+    aEl.addEventListener("click", e => {
+      e.preventDefault();
+      if (isPdf) openPdfViewer(a.url);
+      else if (isMd) openMdViewer(a.url); // 🟢 pouze URL
+      else window.open(a.url, "_blank");
     });
-  }
 
-  // 🎬 Média (pokud existují)
-  if (node.media && node.media.length > 0) {
-    node.media.forEach(m => {
-      const li = document.createElement("li");
-      li.textContent = m.title || "—";
-      media.appendChild(li);
-    });
-  }
+    li.appendChild(aEl);
+    el.docs.appendChild(li);
+  });
 
-  // ✅ Úlohy (pokud existují)
-  if (node.tasks && node.tasks.length > 0) {
-    node.tasks.forEach(t => {
-      const li = document.createElement("li");
-      li.textContent = t;
-      tasks.appendChild(li);
-    });
-  }
+  // 🎬 Média (zjednodušená stabilní verze)
+  (node.media || []).forEach(m => {
+    const li = document.createElement("li");
+    const url = m.url || "";
+    const title = m.title || "Médium";
 
-  // 🔹 Otevřít panel
-  panel.classList.add("visible");
+    if (/youtube\.com\/embed/.test(url)) {
+      li.innerHTML = `
+      🎥 ${title}<br>
+      <div class="media-glass">
+        <iframe width="100%" height="230" src="${url}" frameborder="0" allowfullscreen></iframe>
+      </div>`;
+    } else if (/\.mp3$/i.test(url)) {
+      li.innerHTML = `
+      🎧 ${title}<br>
+      <div class="media-glass">
+        <audio controls style="width:100%;">
+          <source src="${url}" type="audio/mpeg">
+        </audio>
+      </div>`;
+    } else {
+      li.innerHTML = `🔗 <a href="${url}" target="_blank">${title}</a>`;
+    }
 
-  // Pokud helper existuje → zmenšíme ho na mini
-  const helper = document.getElementById("aiHelper");
-  if (helper) {
-    helper.classList.remove("expanded");
-    helper.classList.add("mini");
-  }
+    el.media.appendChild(li);
+  });
 
-  // Uložit aktuální uzel (např. pro budoucí interakce)
-  window.currentNode = node;
+
+
+  // ✅ Úlohy
+  (node.tasks || []).forEach(t => {
+    const li = document.createElement("li");
+    if (t.url)
+      li.innerHTML = `<a href="${t.url}" target="_blank" class="doc-link">${t.title}</a>`;
+    else li.textContent = t.title;
+    el.tasks.appendChild(li);
+  });
+
+  el.side.classList.add("visible");
+  // aiSpeak(`Otevírám uzel ${node.label}.`);
 }
-
 
 // === HLAS ===
 function aiSpeak(text) {
@@ -415,45 +430,4 @@ function convertMarkdownToHtml(md) {
 
 function closeViewers() {
   document.querySelectorAll(".md-viewer, .pdf-viewer").forEach(v => v.remove());
-}
-
-// === Mini-Helper logika ===
-const miniHelper = document.getElementById("miniHelper");
-const helperChat = document.getElementById("helperChat");
-const helperPrompt = document.getElementById("helperPrompt");
-const helperExpand = document.getElementById("helperExpand");
-const helperSend = document.getElementById("helperSend");
-const helperInput = document.getElementById("helperInput");
-const helperMessages = document.getElementById("helperMessages");
-
-if (miniHelper) {
-  const openHelper = () => {
-    miniHelper.style.display = "none";
-    helperChat.classList.remove("hidden");
-    helperInput.focus();
-  };
-  helperExpand.addEventListener("click", openHelper);
-  helperPrompt.addEventListener("focus", openHelper);
-}
-
-if (helperSend) {
-  helperSend.addEventListener("click", () => {
-    const msg = helperInput.value.trim();
-    if (!msg) return;
-    addHelperMessage("user", msg);
-    helperInput.value = "";
-
-    // 💬 Zatím jednoduchá odpověď (mock)
-    setTimeout(() => {
-      addHelperMessage("ai", `Chytré Já přemýšlí o: "${msg}"`);
-    }, 600);
-  });
-}
-
-function addHelperMessage(sender, text) {
-  const div = document.createElement("div");
-  div.className = `msg ${sender}`;
-  div.textContent = text;
-  helperMessages.appendChild(div);
-  helperMessages.scrollTop = helperMessages.scrollHeight;
 }

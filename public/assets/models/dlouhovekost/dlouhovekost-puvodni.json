@@ -1,0 +1,310 @@
+[
+    {
+        "id": "dlouhovekost",
+        "label": "Dlouhověkost",
+        "definition": "Dlouhověkost podle Petera Attii znamená žít déle s vitalitou, silou, stabilitou a smyslem. Opírá se o pět pilířů – tělo, výživu, prevenci, mysl a spánek.",
+        "color": "#2563eb",
+        "related": [
+            "telo",
+            "vyziva",
+            "prevence",
+            "mysl",
+            "spanek"
+        ],
+        "articles": [
+            {
+                "title": "Úvod do dlouhověkosti podle Petera Attii",
+                "url": "./assets/docs/dlouhovekost/telo/pohyb.md",
+                "summary": "Fyzická zdatnost je nejsilnějším faktorem dlouhověkosti. Čtyři pilíře: síla, výdrž, stabilita, VO₂max."
+            }
+        ],
+        "media": [
+            {
+                "title": "Peter Attia – co je opravdu důležité pro dlouhověkost",
+                "url": "https://www.youtube.com/embed/XdA7sH6eD9k"
+            }
+        ]
+    },
+    {
+        "id": "telo",
+        "label": "Tělo",
+        "definition": "Síla, stabilita, výdrž a VO₂max – čtyři pilíře fyzické dlouhověkosti.",
+        "color": "#f59e0b",
+        "related": [
+            "dlouhovekost",
+            "vyziva"
+        ],
+        "articles": [
+            {
+                "title": "Jak trénovat pro dlouhověkost – Centenarian Decathlon",
+                "url": "./assets/docs/telo/centenarian-decathlon.md",
+                "summary": "Peter Attia vysvětluje, jak se připravit na 'stoletý desetiboj' — trénink zaměřený na stabilitu, sílu, výdrž a funkční soběstačnost."
+            },
+            {
+                "title": "Síla jako obrana proti stárnutí",
+                "url": "./assets/docs/telo/sila-proti-starnuti.md",
+                "summary": "Peter Attia vysvětluje, proč je svalová síla nejdůležitější investicí do dlouhověkosti. Cvič pro soběstačnost, ne pro estetiku."
+            }
+        ],
+        "subnodes": [
+            {
+                "id": "sila",
+                "label": "Síla",
+                "definition": "Síla chrání tělo před stářím a ztrátou soběstačnosti.",
+                "color": "#fbbf24",
+                "related": [
+                    "telo",
+                    "stabilita"
+                ],
+                "articles": [
+                    {
+                        "title": "Jak síla chrání před stářím",
+                        "url": "./assets/docs/dlouhovekosttelo/sila.md",
+                        "summary": "Síla není jen o svalech, ale o schopnosti žít nezávisle. Cvič s činkami a vlastní vahou."
+                    }
+                ],
+                "media": [
+                    {
+                        "title": "Trénink síly po 40 (Attia vysvětluje)",
+                        "url": "https://www.youtube.com/embed/ZkYlVLB3R9g"
+                    }
+                ]
+            },
+            {
+                "id": "vytrvalost",
+                "label": "Výdrž (Zone 2)",
+                "definition": "Trénink v Zone 2 zlepšuje zdraví srdce a mitochondrií.",
+                "color": "#fbbf24",
+                "related": [
+                    "telo",
+                    "vo2max"
+                ],
+                "articles": [
+                    {
+                        "title": "Zone 2 – klíč k dlouhověkosti",
+                        "url": "./assets/docs/dlouhovekost/telo/zone2.md",
+                        "summary": "Nízkointenzivní trénink spalující tuky, který zlepšuje metabolismus i srdce."
+                    }
+                ],
+                "media": [
+                    {
+                        "title": "Zone 2 trénink – vědecky vysvětleno",
+                        "url": "https://www.youtube.com/embed/YVxlQGD7ytU"
+                    }
+                ]
+            },
+            {
+                "id": "vo2max",
+                "label": "VO₂max",
+                "definition": "Maximální využití kyslíku – nejlepší prediktor délky života.",
+                "color": "#fbbf24",
+                "related": [
+                    "telo",
+                    "vytrvalost"
+                ],
+                "articles": [
+                    {
+                        "title": "VO₂max a dlouhověkost",
+                        "url": "./assets/docs/dlouhovekost/telo/vo2max.md",
+                        "summary": "Zlepšení VO₂max významně prodlužuje život. Cvičení s vyšší intenzitou má zásadní efekt."
+                    }
+                ],
+                "media": [
+                    {
+                        "title": "Jak zlepšit VO₂max – Attia radí",
+                        "url": "https://www.youtube.com/embed/gpj9_Jh6AOo"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": "vyziva",
+        "label": "Výživa",
+        "definition": "Jídlo jako nástroj dlouhověkosti – bílkoviny, glukóza a půsty.",
+        "color": "#22c55e",
+        "related": [
+            "dlouhovekost",
+            "telo"
+        ],
+        "articles": [
+            {
+                "title": "Principy dlouhověké výživy",
+                "url": "./assets/docs/dlouhovekost/vyziva/principy-vyzivy.md",
+                "summary": "Jak jíst pro dlouhověkost – bílkoviny, glukóza, kvalita tuků, půsty."
+            }
+        ],
+        "subnodes": [
+            {
+                "id": "bilkoviny",
+                "label": "Bílkoviny",
+                "definition": "Klíč pro regeneraci, růst a prevenci sarkopenie.",
+                "color": "#4ade80",
+                "related": [
+                    "vyziva",
+                    "pust"
+                ]
+            },
+            {
+                "id": "cukr",
+                "label": "Glukóza",
+                "definition": "Kontrola hladiny cukru v krvi chrání cévy i mozek.",
+                "color": "#4ade80",
+                "related": [
+                    "vyziva",
+                    "pust"
+                ]
+            },
+            {
+                "id": "pust",
+                "label": "Půst",
+                "definition": "Metabolická flexibilita, autofagie a regenerace buněk.",
+                "color": "#4ade80",
+                "related": [
+                    "vyziva",
+                    "bilkoviny",
+                    "cukr"
+                ],
+                "articles": [
+                    {
+                        "title": "Půst jako lék",
+                        "url": "./assets/docs/dlouhovekost/vyziva/pust.md",
+                        "summary": "Jak půst podporuje regeneraci, metabolismus a prodlužuje život."
+                    }
+                ],
+                "media": [
+                    {
+                        "title": "Attia – smysl přerušovaného půstu",
+                        "url": "https://www.youtube.com/embed/7_qJ9d2Z7gE"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": "prevence",
+        "label": "Prevence",
+        "definition": "Zachyť nemoc, než vznikne. Moderní medicína dlouhověkosti.",
+        "color": "#06b6d4",
+        "related": [
+            "dlouhovekost",
+            "telo"
+        ],
+        "subnodes": [
+            {
+                "id": "srdce",
+                "label": "Srdce",
+                "definition": "Kalciové skóre, VO₂max a krevní tlak jako prediktory zdraví.",
+                "color": "#22d3ee",
+                "related": [
+                    "prevence",
+                    "rakovina"
+                ]
+            },
+            {
+                "id": "rakovina",
+                "label": "Rakovina",
+                "definition": "Screening, genetika a prevence podle rizika.",
+                "color": "#22d3ee",
+                "related": [
+                    "prevence",
+                    "srdce"
+                ],
+                "articles": [
+                    {
+                        "title": "Screening, který ti může zachránit život",
+                        "url": "./assets/docs/dlouhovekost/prevence/screening.md",
+                        "summary": "Prevence znamená zjistit, co by se mohlo rozbít – ne čekat, až se to rozbije."
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": "mysl",
+        "label": "Mysl",
+        "definition": "Psychická pohoda, vděčnost, vztahy a smysl života.",
+        "color": "#a855f7",
+        "related": [
+            "dlouhovekost",
+            "spanek"
+        ],
+        "subnodes": [
+            {
+                "id": "mindfulness",
+                "label": "Mindfulness",
+                "definition": "Schopnost být přítomen v okamžiku a zvládat stres.",
+                "color": "#c084fc",
+                "related": [
+                    "mysl",
+                    "vdecnost"
+                ]
+            },
+            {
+                "id": "vdecnost",
+                "label": "Vděčnost",
+                "definition": "Trénink mozku, který mění pohled na svět.",
+                "color": "#c084fc",
+                "related": [
+                    "mysl",
+                    "mindfulness"
+                ],
+                "articles": [
+                    {
+                        "title": "Jak trénovat psychickou odolnost",
+                        "url": "./assets/docs/dlouhovekost/mysl/odolnost.md",
+                        "summary": "Mindfulness, vděčnost, spánek a smysl – pilíře psychické dlouhověkosti."
+                    }
+                ],
+                "media": [
+                    {
+                        "title": "Jak vděčnost mění mozek",
+                        "url": "https://www.youtube.com/embed/waCNvZ1lxWw"
+                    },
+                    {
+                        "title": "Audio cvičení vděčnosti",
+                        "url": "./assets/media/vdecnost.mp3"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": "spanek",
+        "label": "Spánek",
+        "definition": "Regenerace těla i mysli. Nedostatek spánku zkracuje život.",
+        "color": "#0ea5e9",
+        "related": [
+            "dlouhovekost",
+            "mysl"
+        ],
+        "media": [
+            {
+                "title": "Matthew Walker – Why We Sleep",
+                "url": "https://www.youtube.com/embed/pwaWilO_Pig"
+            }
+        ],
+        "subnodes": [
+            {
+                "id": "hluboky",
+                "label": "Hluboký spánek",
+                "definition": "Nejvíce regenerační fáze – klíč pro mozek i imunitu.",
+                "color": "#38bdf8",
+                "related": [
+                    "spanek",
+                    "rem"
+                ]
+            },
+            {
+                "id": "rem",
+                "label": "REM spánek",
+                "definition": "Fáze snění, která pomáhá zpracovat emoce a paměť.",
+                "color": "#38bdf8",
+                "related": [
+                    "spanek",
+                    "hluboky"
+                ]
+            }
+        ]
+    }
+]

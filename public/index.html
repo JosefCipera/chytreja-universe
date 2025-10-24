@@ -2,63 +2,902 @@
 <html lang="cs">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Chytré Já – Model Dlouhověkosti</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chytré já - Vylepšená AI platforma</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/fuse.js/dist/fuse.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vis-network@9.1.9/dist/vis-network.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/vis-network@9.1.9/dist/vis-network.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+        html {
+            scroll-behavior: smooth;
+        }
 
-    <link rel="stylesheet" href="./assets/css/universe.css">
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6;
+        }
+
+        .hero-section {
+            background: linear-gradient(to bottom right, #e0f2fe, #bfdbfe);
+        }
+
+        .view-section {
+            display: none;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        .view-section.active {
+            display: block;
+        }
+
+        #media-modal.hidden {
+            display: none;
+        }
+
+        #media-modal.active {
+            display: flex;
+        }
+
+        .chat-box {
+            height: 60vh;
+            overflow-y: auto;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+
+        .chat-box::-webkit-scrollbar {
+            width: 0;
+            height: 0;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .info-page {
+            display: none;
+        }
+
+        .info-page.active {
+            display: block;
+        }
+
+        .legal-content h2,
+        .prose h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .legal-content h3,
+        .prose h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-top: 1.25rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .legal-content p,
+        .legal-content li,
+        .prose p {
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .legal-content ul {
+            list-style-type: disc;
+            padding-left: 2rem;
+        }
+
+        .prose h1 {
+            font-size: 2.25rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .h1-thin-style {
+            font-weight: 500;
+            font-size: 3.5rem;
+            line-height: 1.2;
+        }
+
+        .h2-thin-style {
+            font-weight: 500;
+            font-size: 2.25rem;
+            line-height: 1.2;
+        }
+
+        #dashboard-view.active {
+            animation: none;
+        }
+
+        /* Přidejte tento CSS klíčový snímek někam do vašeho <style> bloku v <head> 
+        @keyframes rotateUniverse {
+            from {
+                transform: scale(1.1) rotate(0deg);
+            }
+
+            to {
+                transform: scale(1.1) rotate(360deg);
+            }
+        }*/
+
+        .animate-universe-rotation {
+            animation: rotateUniverse 120s linear infinite;
+            /* 120s = 2 minuty pro celou otočku */
+        }
+    </style>
 
 </head>
 
-<body>
-    <!-- 🧭 Přepínač modelů -->
-    <div id="modelSwitcher" class="app-header">
-        <h1 id="appTitle">Chytré Já</h1>
-        <select id="modelSelector" class="model-selector">
-            <option value="dlouhovekost" selected>Dlouhověkost</option>
-            <option value="toc">TOC – Teorie omezení</option>
-        </select>
-    </div>
-    <main id="graphContainer"></main>
-    <div id="articleContainer" class="article-view"></div>
+<body class="antialiased min-h-screen flex flex-col">
 
-    <div id="network"></div>
+    <header class="bg-white shadow-md p-4 fixed w-full z-50">
+        <div class="container mx-auto flex justify-between items-center px-4 max-w-6xl">
+            <a href="#" onclick="showView('home'); window.scrollTo({ top: 0, behavior: 'smooth' });"
+                class="text-xl font-bold text-blue-600 flex items-center space-x-2">
+                <svg class="w-10 h-10" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M10 50H90" stroke="#2563EB" stroke-width="8" stroke-linecap="round" />
+                    <circle cx="20" cy="50" r="10" fill="#3B82F6" />
+                    <circle cx="80" cy="50" r="15" fill="#1D4ED8" />
+                </svg>
+                <span class="hidden sm:inline">Chytré já</span>
+            </a>
 
-    <div id="sidePanel">
-        <div class="panel-header">
-            <h2 id="nodeTitle">Uzlový název</h2>
-            <button class="panel-close" id="closePanel">✖</button>
+            <nav class="space-x-6 hidden md:flex items-center">
+                <button onclick="showView('library')" class="text-gray-600 hover:text-blue-600">FlowHub</button>
+                <a href="universe.html" class="text-gray-600 hover:text-blue-600">Universe Demo</a>
+                <!-- <a href="#special-assistants" class="text-gray-600 hover:text-blue-600">Asistenti</a> -->
+                <a href="#thematic-blocks" class="text-gray-600 hover:text-blue-600">Funkce</a>
+                <a href="#pricing" class="text-gray-600 hover:text-blue-600">Ceník</a>
+                <a href="#contact" class="text-gray-600 hover:text-blue-600">Kontakt</a>
+                <a href="#faq" class="text-gray-600 hover:text-blue-600">FAQ</a>
+                <span class="border-l border-gray-300 h-6"></span>
+                <a href="universe.html"
+                    class="text-gray-600 border border-gray-300 font-medium py-2 px-5 rounded-lg shadow-sm hover:border-blue-600 hover:text-blue-600 transition-colors">Přihlásit
+                    se</a>
+            </nav>
+
+            <div class="md:hidden">
+                <button id="menu-btn" class="text-gray-600 hover:text-blue-600 focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
         </div>
-        <div class="panel-content">
-            <p class="definition" id="nodeDef"></p>
 
-            <hr>
-            <h3>📄 Dokumenty</h3>
-            <ul id="nodeDocs"></ul>
+        <div id="mobile-menu" class="hidden md:hidden bg-white">
+            <nav class="px-2 pt-2 pb-4 space-y-1 sm:px-3 flex flex-col items-center">
+                <button onclick="showView('library');"
+                    class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50">FlowHub</button>
+                <a href="../index.html"
+                    class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50">Universe
+                    Demo</a>
+                <!-- <a href="#special-assistants"
+                    class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50">Asistenti</a> -->
+                <a href="#thematic-blocks"
+                    class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50">Funkce</a>
+                <a href="#pricing"
+                    class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50">Ceník</a>
+                <a href="#contact"
+                    class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50">Kontakt</a>
+                <a href="#faq"
+                    class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50">FAQ</a>
+                <a href="../index.html"
+                    class="mt-4 w-full text-gray-700 border border-gray-300 font-medium py-2 px-5 rounded-lg shadow-sm hover:bg-gray-100 transition-colors">Přihlásit
+                    se</a>
+            </nav>
+        </div>
+    </header>
 
-            <hr>
-            <h3>🎬 Média</h3>
-            <ul id="nodeMedia"></ul>
+    <main class="flex-grow pt-16">
+        <section id="home-view" class="view-section active">
+            <!-- <div class="hero-section text-center py-16 px-4 rounded-b-3xl">
+                <h1 class="h1-thin-style text-gray-900 mb-4 max-w-5xl mx-auto">Chytré já - AI asistent pro řízení firem
+                </h1>
+                <p class="text-lg md:text-xl text-gray-700 max-w-5xl mx-auto mb-8">Získejte okamžitý přístup ke
+                    znalostem a nástrojům našeho unikátního ekosystému.</p>
+            </div> -->
+            <div class="bg-gray-50">
+                <!-- <section id="special-assistants" class="py-12 px-4 -mt-10">
+                    <div class="container mx-auto max-w-6xl">
+                        <p class="text-center text-lg md:text-xl text-gray-700 max-w-2xl mx-auto mb-8">Chytré já je
+                            orchestrátor, který inteligentně propojuje schopnosti jednotlivých odborných AI asistentů a
+                            vytváří tak pro uživatele jedinečná řešení.</p>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                            <div
+                                class="bg-white p-8 rounded-2xl shadow-lg border-2 border-slate-300 transform hover:scale-105 transition-transform cursor-pointer">
+                                <div class="flex flex-col items-center text-center">
+                                    <img src="/images/strateg-192.png" alt="AI asistent Stratég"
+                                        class="w-32 h-32 rounded-xl mb-4 object-cover">
+                                    <h3 class="text-lg font-bold text-gray-900 mb-2">AI asistent Stratég</h3>
+                                    <p class="text-sm text-gray-600 mb-6">Naučí vás inovovat zastaralé byznys modely.
+                                    </p>
+                                    <div class="flex space-x-2"><button onclick="startAssistantChat('strateg')"
+                                            class="bg-blue-500 text-white font-medium py-1.5 px-4 text-sm rounded-lg shadow-sm hover:bg-blue-600 transition-colors">Spustit</button><button
+                                            onclick="showAssistantInfo('strateg')"
+                                            class="bg-white text-blue-500 font-medium py-1.5 px-4 text-sm rounded-lg shadow-sm border-2 border-blue-500 hover:bg-gray-100 transition-colors">Více</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div
+                                class="bg-white p-8 rounded-2xl shadow-lg border-2 border-slate-300 transform hover:scale-105 transition-transform cursor-pointer">
+                                <div class="flex flex-col items-center text-center"><img src="/images/finance-192.png"
+                                        alt="AI asistent Finance" class="w-32 h-32 rounded-xl mb-4 object-cover">
+                                    <h3 class="text-lg font-bold text-gray-900 mb-2">AI asistent Finance</h3>
+                                    <p class="text-sm text-gray-600 mb-6">Pomůže vám nalézt peníze tam, kde byste to
+                                        nečekali.</p>
+                                    <div class="flex space-x-2"><button onclick="startAssistantChat('finance')"
+                                            class="bg-blue-500 text-white font-medium py-1.5 px-4 text-sm rounded-lg shadow-sm hover:bg-blue-600 transition-colors">Spustit</button><button
+                                            onclick="showAssistantInfo('finance')"
+                                            class="bg-white text-blue-500 font-medium py-1.5 px-4 text-sm rounded-lg shadow-sm border-2 border-blue-500 hover:bg-gray-100 transition-colors">Více</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div
+                                class="bg-white p-8 rounded-2xl shadow-lg border-2 border-slate-300 transform hover:scale-105 transition-transform cursor-pointer">
+                                <div class="flex flex-col items-center text-center"><img src="/images/vyroba-192.png"
+                                        alt="AI asistent Výroba" class="w-32 h-32 rounded-xl mb-4 object-cover">
+                                    <h3 class="text-lg font-bold text-gray-900 mb-2">AI asistent Výroba</h3>
+                                    <p class="text-sm text-gray-600 mb-6">Zvýší vaši produktivitu a zlepší využití
+                                        kapacit.</p>
+                                    <div class="flex space-x-2"><button onclick="startAssistantChat('vyroba')"
+                                            class="bg-blue-500 text-white font-medium py-1.5 px-4 text-sm rounded-lg shadow-sm hover:bg-blue-600 transition-colors">Spustit</button><button
+                                            onclick="showAssistantInfo('vyroba')"
+                                            class="bg-white text-blue-500 font-medium py-1.5 px-4 text-sm rounded-lg shadow-sm border-2 border-blue-500 hover:bg-gray-100 transition-colors">Více</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div
+                                class="bg-white p-8 rounded-2xl shadow-lg border-2 border-slate-300 transform hover:scale-105 transition-transform cursor-pointer">
+                                <div class="flex flex-col items-center text-center"><img src="/images/kouc-192.png"
+                                        alt="AI asistent Marketing" class="w-32 h-32 rounded-xl mb-4 object-cover">
+                                    <h3 class="text-lg font-bold text-gray-900 mb-2">AI asistent Marketing</h3>
+                                    <p class="text-sm text-gray-600 mb-6">Naučí vás jak přimět trh, aby chtěl vaše
+                                        výrobky a služby.</p>
+                                    <div class="flex space-x-2"><button onclick="startAssistantChat('marketing')"
+                                            class="bg-blue-500 text-white font-medium py-1.5 px-4 text-sm rounded-lg shadow-sm hover:bg-blue-600 transition-colors">Spustit</button><button
+                                            onclick="showAssistantInfo('kouc')"
+                                            class="bg-white text-blue-500 font-medium py-1.5 px-4 text-sm rounded-lg shadow-sm border-2 border-blue-500 hover:bg-gray-100 transition-colors">Více</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section> -->
+                <style>
+                    /* Tento CSS klíčový snímek by měl být již ve vašem <head> */
+                    @keyframes rotateUniverse {
+                        from {
+                            transform: scale(1.1) rotate(0deg);
+                        }
 
-            <hr>
-            <h3>✅ Úlohy</h3>
-            <ul id="nodeTasks"></ul>
+                        to {
+                            transform: scale(1.1) rotate(360deg);
+                        }
+                    }
+
+                    .animate-universe-rotation {
+                        animation: rotateUniverse 120s linear infinite;
+                        /* 120s = 2 minuty pro celou otočku */
+                    }
+                </style>
+
+                <section id="vesmir-myslenek" class="relative py-20 md:py-32 bg-gray-900 text-white overflow-hidden">
+                    <div class="absolute inset-0 flex justify-center items-center">
+                        <img src="images/vesmir.png" alt="Mapa konceptů Chytrého já"
+                            class="w-full h-full object-cover opacity-30 animate-universe-rotation">
+                    </div>
+
+                    <div
+                        class="container mx-auto max-w-5xl px-6 relative z-10 py-12 md:py-16 bg-gray-900 bg-opacity-70 rounded-lg shadow-2xl border border-gray-700">
+                        <div class="text-center">
+                            <h2 class="text-5xl h2-thin-style text-white mb-6 drop-shadow-lg"
+                                style="letter-spacing: 0.05em;">
+                                Chytré já – Sokratovský AI agent
+                            </h2>
+                            <p
+                                class="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto mb-12 leading-relaxed drop-shadow-md">
+                                Osobní partner , "člověk", pro váš život, který vás vede a motivuje k dosahování vašich
+                                cílů.
+                            </p>
+                            <div class="space-x-4 animate-fade-in-up delay-600">
+                                <a href="app.html"
+                                    class="bg-blue-600 text-white font-semibold py-3 px-8 rounded-full shadow-lg hover:bg-blue-700 transition-transform transform hover:scale-105">
+                                    Vyzkoušet Demo
+                                </a>
+                                <a href="app.html"
+                                    class="bg-transparent border border-white text-white font-semibold py-3 px-8 rounded-full shadow-lg hover:bg-white hover:text-blue-600 transition-transform transform hover:scale-105">
+                                    Vyzkoušet Zdarma
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section id="co-je-chytre-ja" class="py-16 bg-white">
+                    <div class="container mx-auto px-6 text-center max-w-3xl">
+                        <h2 class="text-3xl font-bold text-gray-800 mb-8">Co vám Chytré já přináší?</h2>
+                        <p class="text-lg text-gray-700 leading-relaxed mb-6">
+                            Absolutní novinky v řízení firem a využití moderních technologií:
+                        </p>
+                        <div class="text-left space-y-4">
+                            <div class="flex items-start">
+                                <i class="fas fa-check-circle text-blue-500 text-xl mt-1 mr-3"></i>
+                                <p class="text-gray-700"><strong>Znalostní bázi přímo vám na míru:</strong> Články,
+                                    videa, audio nahrávky, praktické zkušenosti, úlohy pro plánování výroby (DBR),
+                                    průtokové účetnictví (TA), projektové řízení (CCPM) a další.
+                            </div>
+                            <div class="flex items-start">
+                                <i class="fas fa-check-circle text-blue-500 text-xl mt-1 mr-3"></i>
+                                <p class="text-gray-700"><strong>Sběr, analýzu,.....z vašich dat.</strong> A je jedno,
+                                    zda jde o
+                                    vaše zdraví, práci, zájmy, rodinu a další. A přitom zásadně nic neprogramujete.</p>
+                            </div>
+                            <div class="flex items-start">
+                                <i class="fas fa-check-circle text-blue-500 text-xl mt-1 mr-3"></i>
+                                <p class="text-gray-700"><strong>Chytré já není jen chat:</strong> Vybírá a úkoluje
+                                    tolik speciálních AI agentů, kolik je potřeba. Navrhuje vám další postup, neúkoluje,
+                                    nekritizuje, pouze vás motivuje k dalšímu úsilí. Stává se tak vaším skutečným
+                                    partnerem.
+                                </p>
+                            </div>
+                            <div class="flex items-start">
+                                <i class="fas fa-check-circle text-blue-500 text-xl mt-1 mr-3"></i>
+                                <p class="text-gray-700"><strong>Zabezpečení:</strong>
+                                    Robustními bezpečnostními protokoly zabezpečená data. Přísná kontrola přístupu a
+                                    šifrování podléhající vašemu vlastnímu ekosystému.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="mt-12">
+                            <a href="app.html"
+                                class="bg-purple-600 text-white font-semibold py-3 px-8 rounded-full shadow-lg hover:bg-purple-700 transition-transform transform hover:scale-105">
+                                Objevte potenciál Chytrého Já
+                            </a>
+                        </div>
+                    </div>
+                </section>
+                <section id="thematic-blocks" class="py-20 md:py-24 px-4">
+                    <div class="container mx-auto max-w-6xl">
+                        <h2 class="text-center text-4xl h2-thin-style mb-8">Využití Chytrého já je prakticky neomezené!
+                        </h2>
+                        <p class="text-center text-lg md:text-xl text-gray-700 max-w-2xl mx-auto mb-10">
+                            Vyzkoušejte zcela nové přístupy k řešení problémů, vzdělávání i
+                            řízení.Vyberte si z oblastí:</p>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                            <div class="bg-white p-6 rounded-2xl shadow-lg border-2 border-slate-300">
+                                <div class="text-4xl mb-4">📈</div>
+                                <h3 class="text-2xl font-bold text-gray-900 mb-2">Řízení firem pdle TOC
+                                </h3>
+                                <p class="text-gray-600">Hodnocení přínosů výrobků nebo
+                                    služeb, rozhodování o investicích, nákladech nebo přínosech středisek bez
+                                    chyb
+                                    způsobených
+                                    přerozdělováním nákladů. Zabráníte zbytečným ztrátám peněz.</p>
+                            </div>
+                            <div class="bg-white p-6 rounded-2xl shadow-lg border-2 border-slate-300">
+                                <div class="text-4xl mb-4">🗓️</div>
+                                <h3 class="text-2xl font-bold text-gray-900 mb-2">Plánování výroby a vytěžování
+                                    kapacit
+                                </h3>
+                                <p class="text-gray-600">Tvořte plány výroby a vytěžujte kapacity, jak to nedokáže
+                                    nikdo
+                                    jiný! Jednoduše, efektivně, dokonce bez přesných norem. Ideální řešení pro
+                                    kusovou a
+                                    malosériovou výrobu.</p>
+                            </div>
+                            <div class="bg-white p-6 rounded-2xl shadow-lg border-2 border-slate-300">
+                                <div class="text-4xl mb-4">⚠️</div>
+                                <h3 class="text-2xl font-bold text-gray-900 mb-2">Neporazitelné strategie</h3>
+                                <p class="text-gray-600">Inovujte váš byznys model podle průtokového řízení. Tvořte
+                                    varianty, simulujte přínosy. Budujte strategie, které konkurence nemá šanci
+                                    porazit.
+                                </p>
+                            </div>
+                            <div class="bg-white p-6 rounded-2xl shadow-lg border-2 border-slate-300">
+                                <div class="text-4xl mb-4">🌌</div>
+                                <h3 class="text-2xl font-bold text-gray-900 mb-2">Vzdělávání v TOC vesmíru</h3>
+                                <p class="text-gray-600">Učte se nové věci jinak. Využijte náš inovativní model TOC
+                                    vesmíru a učte se v kontextu, kdekoliv a kdykoliv. Vytěžte maximum z našich znalostí
+                                    a praxe.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section id="why-chytré-já" class="py-20 md:py-24">
+                    <div class="container mx-auto px-4 max-w-6xl">
+                        <div class="text-center mb-12">
+                            <h2 class="text-4xl h2-thin-style text-blue-800 mb-4">Proč je Chytré já nezbytností pro vaši
+                                firmu?</h2>
+                            <p class="text-lg text-gray-600 max-w-3xl mx-auto">Náš ekosystém je postaven na
+                                nejmodernějších technologiích a principech řízení tak, aby vám poskytl maximální náskok
+                                před
+                                konkurencí.</p>
+                        </div>
+                        <section id="multi-agent-diagram" class="py-16 px-4">
+                            <div class="max-w-6xl mx-auto">
+                                <h2 class="text-3xl font-bold text-gray-900 mb-2">Jak pracuje Chytré já – Sokratovský AI
+                                    Agent</h2>
+                                <p class="text-gray-600 mb-8">
+                                    Centrální agent klade otázky, integruje názory ostatních agentů a vede tým k
+                                    rozhodnutí. Níže je zjednodušené schéma orchestrace.
+                                </p>
+
+                                <!-- Wrap s poměrem stran kvůli mobilu -->
+                                <div
+                                    class="w-full max-w-6xl mx-auto rounded-xl border border-gray-200 bg-white shadow-sm">
+                                    <div class="relative w-full" style="aspect-ratio: 16/10;">
+                                        <svg viewBox="0 0 1200 750" class="w-full h-full">
+                                            <!-- Defs -->
+                                            <defs>
+                                                <linearGradient id="cardBg" x1="0" y1="0" x2="0" y2="1">
+                                                    <stop offset="0%" stop-color="#ffffff" />
+                                                    <stop offset="100%" stop-color="#f7fafc" />
+                                                </linearGradient>
+                                                <marker id="arrow" viewBox="0 0 10 10" refX="10" refY="5"
+                                                    markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                                                    <path d="M 0 0 L 10 5 L 0 10 z" fill="#94a3b8"></path>
+                                                </marker>
+                                            </defs>
+
+                                            <!-- Hlavní agent -->
+                                            <g>
+                                                <rect x="400" y="40" width="400" height="110" rx="18"
+                                                    fill="url(#cardBg)" stroke="#cbd5e1" />
+                                                <text x="600" y="85" text-anchor="middle" font-size="24"
+                                                    font-weight="700" fill="#111827">Sokratovský AI Agent</text>
+                                                <text x="600" y="115" text-anchor="middle" font-size="16"
+                                                    fill="#374151">„Co je teď skutečné omezení systému?“</text>
+                                            </g>
+
+                                            <!-- Spojky dolů -->
+                                            <g stroke="#94a3b8" stroke-width="2.5" marker-end="url(#arrow)">
+                                                <line x1="600" y1="150" x2="240" y2="290" />
+                                                <line x1="600" y1="150" x2="480" y2="290" />
+                                                <line x1="600" y1="150" x2="600" y2="290" />
+                                                <line x1="600" y1="150" x2="720" y2="290" />
+                                                <line x1="600" y1="150" x2="960" y2="290" />
+                                            </g>
+
+                                            <!-- Spodní agenti (karty) -->
+                                            <!-- FlowAgent (výroba) -->
+                                            <g>
+                                                <rect x="120" y="290" width="240" height="120" rx="16"
+                                                    fill="url(#cardBg)" stroke="#cbd5e1" />
+                                                <text x="240" y="330" text-anchor="middle" font-size="18"
+                                                    font-weight="700" fill="#111827">FlowAgent</text>
+                                                <text x="240" y="355" text-anchor="middle" font-size="14"
+                                                    fill="#374151">Výroba, úzká místa, DBR</text>
+                                                <text x="240" y="381" text-anchor="middle" font-size="13"
+                                                    fill="#6b7280">„Fronta na CNC-4: 27 zakázek.“</text>
+                                            </g>
+
+                                            <!-- FinAgent -->
+                                            <g>
+                                                <rect x="360" y="290" width="240" height="120" rx="16"
+                                                    fill="url(#cardBg)" stroke="#cbd5e1" />
+                                                <text x="480" y="330" text-anchor="middle" font-size="18"
+                                                    font-weight="700" fill="#111827">FinAgent</text>
+                                                <text x="480" y="355" text-anchor="middle" font-size="14"
+                                                    fill="#374151">Průtok, cash-flow, TA</text>
+                                                <text x="480" y="381" text-anchor="middle" font-size="13"
+                                                    fill="#6b7280">„Vázaná hotovost +12 %.“</text>
+                                            </g>
+
+                                            <!-- StratAgent -->
+                                            <g>
+                                                <rect x="600" y="290" width="240" height="120" rx="16"
+                                                    fill="url(#cardBg)" stroke="#cbd5e1" />
+                                                <text x="720" y="330" text-anchor="middle" font-size="18"
+                                                    font-weight="700" fill="#111827">StratAgent</text>
+                                                <text x="720" y="355" text-anchor="middle" font-size="14"
+                                                    fill="#374151">Směr změny, dopad</text>
+                                                <text x="720" y="381" text-anchor="middle" font-size="13"
+                                                    fill="#6b7280">„Analyzuj CNC-4 jako constraint.“</text>
+                                            </g>
+
+                                            <!-- MarketAgent -->
+                                            <g>
+                                                <rect x="840" y="290" width="240" height="120" rx="16"
+                                                    fill="url(#cardBg)" stroke="#cbd5e1" />
+                                                <text x="960" y="330" text-anchor="middle" font-size="18"
+                                                    font-weight="700" fill="#111827">MarketAgent</text>
+                                                <text x="960" y="355" text-anchor="middle" font-size="14"
+                                                    fill="#374151">Poptávka, lead-times</text>
+                                                <text x="960" y="381" text-anchor="middle" font-size="13"
+                                                    fill="#6b7280">„Zákazníci chtějí krátké LH.“</text>
+                                            </g>
+
+                                            <!-- TeamAgent -->
+                                            <g>
+                                                <rect x="420" y="460" width="360" height="120" rx="16"
+                                                    fill="url(#cardBg)" stroke="#cbd5e1" />
+                                                <text x="600" y="500" text-anchor="middle" font-size="18"
+                                                    font-weight="700" fill="#111827">TeamAgent</text>
+                                                <text x="600" y="525" text-anchor="middle" font-size="14"
+                                                    fill="#374151">Úkoly, dohody, eskalace</text>
+                                                <text x="600" y="551" text-anchor="middle" font-size="13"
+                                                    fill="#6b7280">„Přidělen experiment – CNC-4, 7 dní.“</text>
+                                            </g>
+
+                                            <!-- Spojky mezi spodní vrstvou a TeamAgentem -->
+                                            <g stroke="#94a3b8" stroke-width="2.5" marker-end="url(#arrow)">
+                                                <line x1="240" y1="410" x2="480" y2="460" /> <!-- Flow -> Team -->
+                                                <line x1="480" y1="410" x2="540" y2="460" /> <!-- Fin -> Team -->
+                                                <line x1="720" y1="410" x2="660" y2="460" /> <!-- Strat -> Team -->
+                                                <line x1="960" y1="410" x2="720" y2="460" /> <!-- Market -> Team -->
+                                            </g>
+
+                                            <!-- Shrnutí rozhodnutí -->
+                                            <g>
+                                                <rect x="260" y="620" width="680" height="90" rx="14" fill="#f1f5f9"
+                                                    stroke="#cbd5e1" />
+                                                <text x="600" y="650" text-anchor="middle" font-size="16"
+                                                    font-weight="700" fill="#0f172a">
+                                                    Shrnutí Chytrého Já
+                                                </text>
+                                                <text x="600" y="675" text-anchor="middle" font-size="14"
+                                                    fill="#334155">
+                                                    „Snížení fronty před CNC-4 o 30 % ⇒ throughput +12 %. Spouštím
+                                                    řízený experiment.“
+                                                </text>
+                                            </g>
+                                        </svg>
+                                    </div>
+                                </div>
+
+                                <!-- Mini příklad pod diagramem (čistý text) -->
+                                <div class="mt-6 grid gap-3 text-sm text-gray-700">
+                                    <div><span class="font-semibold text-gray-900">FlowAgent:</span> Fronta před CNC-4
+                                        způsobuje 25 % čekání na předchozí operace.</div>
+                                    <div><span class="font-semibold text-gray-900">FinAgent:</span> Přesčasová směna se
+                                        vrátí do 6 dní.</div>
+                                    <div><span class="font-semibold text-gray-900">StratAgent:</span> Největší dopad má
+                                        řízený experiment na constraint.</div>
+                                    <div><span class="font-semibold text-gray-900">Chytré Já:</span> „Spouštím
+                                        experiment, měřím průtok a zpětně vyhodnotím.“</div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                            <div
+                                class="bg-white rounded-xl shadow-lg p-8 transition-transform transform hover:scale-105">
+                                <div class="flex items-center space-x-4 mb-4"><span class="text-4xl">⚡</span>
+                                    <h3 class="text-xl font-bold text-gray-900">Blesková rychlost a flexibilita</h3>
+                                </div>
+                                <p class="text-gray-700">Využijte plný potenciál Progressive Web Applications (PWA) a
+                                    Single Page Applications (SPA) pro okamžitou odezvu.</p>
+                            </div>
+                            <div
+                                class="bg-white rounded-xl shadow-lg p-8 transition-transform transform hover:scale-105">
+                                <div class="flex items-center space-x-4 mb-4"><span class="text-4xl">🌱</span>
+                                    <h3 class="text-xl font-bold text-gray-900">Škálovatelná platforma</h3>
+                                </div>
+                                <p class="text-gray-700">Chytré já roste s vaší firmou a adaptuje se na vaše specifické
+                                    potřeby díky modulární architektuře.</p>
+                            </div>
+                            <div
+                                class="bg-white rounded-xl shadow-lg p-8 transition-transform transform hover:scale-105">
+                                <div class="flex items-center space-x-4 mb-4"><span class="text-4xl">🤖</span>
+                                    <h3 class="text-xl font-bold text-gray-900">Revoluční AI asistenti</h3>
+                                </div>
+                                <p class="text-gray-700">Síla specifických AI asistentů je v inovativním vzdělávání,
+                                    automatizaci kritických procesů a poskytování včasných varování.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section id="customers" class="py-20 md:py-24 bg-white">
+                    <div class="container mx-auto px-4 text-center max-w-6xl">
+                        <h2 class="text-4xl h2-thin-style mb-4">Našich školení nebo realizace projektů se doposud
+                            zúčastnilo více než 100 firem. Zde jsou některé z nich.</h2>
+                        <p class="text-lg text-gray-600 max-w-3xl mx-auto mb-12">Stavíme na dlouholetých zkušenostech a
+                            důvěře partnerů, kteří využívají naše pokročilé systémy a služby.</p>
+                        <div class="mt-12 flex justify-center">
+                            <img src="./images/reference.png" alt="Reference našich klientů"
+                                class="max-w-full h-auto rounded-lg shadow-md">
+                        </div>
+                    </div>
+                </section>
+                <section id="pricing" class="py-20 md:py-24">
+                    <div class="container mx-auto px-4 text-center max-w-6xl">
+                        <h2 class="text-4xl h2-thin-style mb-4">Začněte zdarma</h2>
+                        <p class="text-lg text-gray-600 max-w-3xl mx-auto mb-12">Získáte přístup do TOC slovníku,
+                            knihovny materiálů a free verze Chytrého já, kterou neustále rozšiřujeme a upravujeme.</p>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-left">
+                            <div class="p-8 bg-white rounded-2xl shadow-lg border-2 border-blue-500">
+                                <h3 class="text-2xl font-bold text-gray-900 mb-4">Vstup do FlowHubu</h3>
+                                <p class="text-gray-600 mb-6">Nahlédněte do našeho ekosystému. Přečtěte si nebo
+                                    poslechněte nové věci o řízení firem. Zjistěte, co se můžete
+                                    dozvědět v
+                                    případě těch placených, označených jako premium.</p><a href="#special-assistants"
+                                    class="inline-block bg-blue-500 text-white font-medium py-3 px-8 rounded-lg hover:bg-blue-600 transition-colors">Ano,
+                                    chci vstup zdarma</a>
+                            </div>
+                            <div class="p-8 bg-white rounded-2xl shadow-lg border-2 border-slate-300">
+                                <h3 class="text-2xl font-bold text-gray-900 mb-4">Prémiové řešení</h3>
+                                <p class="text-gray-600 mb-6">V současné době připravujeme, ale pokud se níže
+                                    zaregistrujete, budeme vás průběžně informovat a po otevření vstupu se to dozvíte
+                                    mezi
+                                    prvními.</p><a href="#contact"
+                                    class="inline-block bg-gray-800 text-white font-medium py-3 px-8 rounded-lg hover:bg-gray-900 transition-colors">Registrovat
+                                    se</a>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section class="bg-blue-600 text-white py-12 px-4">
+                    <div class="container mx-auto text-center max-w-6xl">
+                        <h2 class="text-3xl md:text-4xl font-bold mb-4">Jste připraveni najít největší omezení?</h2>
+                        <p class="text-lg md:text-xl font-light mb-6">Udělejte první
+                            krok k efektivnějšímu řízení a vyšším ziskům.</p>
+                        <div
+                            class="flex flex-col md:flex-row items-center justify-center space-y-4 md:space-y-0 md:space-x-4">
+                            <a href="https://app.iting.cz"
+                                class="bg-white text-blue-600 px-8 py-3 rounded-lg text-lg font-semibold shadow-lg hover:bg-blue-100 transition duration-300">Vyzkoušet
+                                zdarma</a>
+                        </div>
+                    </div>
+                </section>
+                <section id="contact" class="py-20 bg-white">
+                    <div class="container mx-auto px-4 max-w-6xl">
+                        <h2 class="text-4xl h2-thin-style mb-8 text-center">Kontaktujte nás</h2>
+                        <p class="text-lg text-gray-600 mb-12 text-center">Zavolejte nám nebo napište. Jsme tu pro vás.
+                        </p>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-start">
+                            <div class="space-y-8">
+                                <div class="bg-gray-50 p-6 rounded-lg">
+                                    <h3 class="text-xl font-bold text-gray-900 mb-2">Technická podpora</h3>
+                                    <p class="text-gray-700">Nefunguje vám aplikace nebo přístup? Pište na <a
+                                            href="mailto:podpora@iting.cz"
+                                            class="text-blue-600 hover:underline">podpora@iting.cz</a>.</p>
+                                </div>
+                                <div class="bg-gray-50 p-6 rounded-lg">
+                                    <h3 class="text-xl font-bold text-gray-900 mb-2">Obchodní podpora</h3>
+                                    <p class="text-gray-700">Chcete vědět více? Pište na <a
+                                            href="mailto:obchod@iting.cz"
+                                            class="text-blue-600 hover:underline">obchod@iting.cz</a> nebo volejte <a
+                                            href="tel:+420724166988" class="text-blue-600 hover:underline">+420 724 166
+                                            988</a>.</p>
+                                </div>
+                                <div class="bg-gray-50 p-6 rounded-lg">
+                                    <h3 class="text-xl font-bold text-gray-900 mb-2">Administrativa</h3>
+                                    <p class="text-gray-700">Potřebujete poradit s fakturací? Pište na <a
+                                            href="mailto:uctarna@iting.cz"
+                                            class="text-blue-600 hover:underline">uctarna@iting.cz</a> nebo volejte <a
+                                            href="tel:+420723999152" class="text-blue-600 hover:underline">+420 723 999
+                                            152</a>.</p>
+                                </div>
+                            </div>
+                            <div class="bg-gray-50 p-8 rounded-lg">
+                                <form id="contact-form">
+                                    <div class="mb-4"><label for="contact-name"
+                                            class="block text-gray-600 text-base font-normal mb-2">Jméno</label><input
+                                            type="text" id="contact-name" name="name"
+                                            class="shadow-sm appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                            required></div>
+                                    <div class="mb-4"><label for="contact-email"
+                                            class="block text-gray-600 text-base font-normal mb-2">E-mail</label><input
+                                            type="email" id="contact-email" name="email"
+                                            class="shadow-sm appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                            required></div>
+                                    <div class="mb-6"><label for="contact-message"
+                                            class="block text-gray-600 text-base font-normal mb-2">Napište nám
+                                            zprávu...</label><textarea id="contact-message" name="message" rows="5"
+                                            class="shadow-sm appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                            required></textarea></div>
+                                    <div class="flex items-center justify-between"><button type="submit"
+                                            class="bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-6 rounded-lg focus:outline-none focus:shadow-outline">Odeslat
+                                            zprávu</button></div>
+                                    <p class="text-xs text-gray-600 mt-4">Vaše osobní údaje použijeme pouze pro
+                                        zodpovězení vaší zprávy, viz <button type="button" onclick="showView('privacy')"
+                                            class="text-blue-600 hover:underline">Zásady zpracování osobních
+                                            údajů</button>.</p>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section id="faq" class="py-20">
+                    <div id="faq-container" class="container mx-auto px-4 text-center max-w-6xl"></div>
+                </section>
+            </div>
+        </section>
+
+        <section id="terms-view" class="view-section py-8 px-4">
+            <div class="container mx-auto bg-white p-8 md:p-12 rounded-2xl shadow-lg max-w-4xl">
+                <div id="terms-content" class="legal-content"></div>
+                <div class="mt-8 flex justify-center"><button onclick="showView('home')"
+                        class="bg-gray-300 text-gray-800 font-medium py-2 px-6 rounded-lg shadow-sm hover:bg-gray-400 transition-colors">Zavřít</button>
+                </div>
+            </div>
+        </section>
+        <section id="privacy-view" class="view-section py-8 px-4">
+            <div class="container mx-auto bg-white p-8 md:p-12 rounded-2xl shadow-lg max-w-4xl">
+                <div id="privacy-content" class="legal-content"></div>
+                <div class="mt-8 flex justify-center"><button onclick="showView('home')"
+                        class="bg-gray-300 text-gray-800 font-medium py-2 px-6 rounded-lg shadow-sm hover:bg-gray-400 transition-colors">Zavřít</button>
+                </div>
+            </div>
+        </section>
+        <section id="info-view" class="view-section py-8 px-4">
+            <div class="container mx-auto bg-white p-8 md:p-12 rounded-2xl shadow-lg max-w-2xl">
+                <h2 id="info-title" class="text-3xl font-bold text-gray-800 mb-6 text-center"></h2>
+                <div id="info-content-pages"></div>
+                <div class="mt-8 flex justify-between items-center"><button id="info-prev-btn"
+                        class="bg-gray-300 text-gray-800 font-medium py-2 px-6 rounded-lg shadow-sm hover:bg-gray-400 transition-colors"
+                        style="visibility: hidden;">Zpět</button>
+                    <div id="info-page-counter" class="text-gray-600 text-sm"></div><button id="info-next-btn"
+                        class="bg-blue-500 text-white font-medium py-2 px-6 rounded-lg shadow-sm hover:bg-blue-600 transition-colors">Další</button>
+                </div>
+                <div class="mt-8 flex justify-center"><button onclick="showView('home')"
+                        class="bg-gray-300 text-gray-800 font-medium py-2 px-6 rounded-lg shadow-sm hover:bg-gray-400 transition-colors">Zavřít</button>
+                </div>
+            </div>
+        </section>
+        <section id="library-view" class="view-section py-8 px-4">
+            <div class="container mx-auto bg-white p-8 md:p-12 rounded-2xl shadow-lg max-w-6xl">
+                <h2 class="text-3xl font-bold text-gray-800 mb-2 text-center">FlowHub zdrojů</h2>
+                <p class="text-center text-gray-600 mb-8">Prohledávejte a filtrujte materiály, které vám pomohou růst.
+                </p>
+
+                <div class="mb-8 max-w-lg mx-auto">
+                    <input type="text" id="library-search" placeholder="Hledat v knihovně..."
+                        class="w-full px-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+
+                <div id="library-tags-container" class="flex flex-wrap justify-center gap-2 mb-8">
+                </div>
+
+                <div id="library-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                </div>
+
+                <div id="library-pagination" class="flex justify-center items-center space-x-2 mt-8">
+                </div>
+
+                <div class="mt-8 flex justify-center">
+                    <button onclick="showView('home')"
+                        class="bg-gray-300 text-gray-800 font-medium py-2 px-6 rounded-lg shadow-sm hover:bg-gray-400 transition-colors">Zpět
+                        na hlavní stránku</button>
+                </div>
+            </div>
+        </section>
+        <section id="content-view" class="view-section py-8 px-4">
+            <div class="container mx-auto bg-white p-8 md:p-12 rounded-2xl shadow-lg max-w-4xl">
+                <div id="content-dynamic" class="prose max-w-none"></div>
+                <div class="mt-8"><button onclick="showView('library')"
+                        class="bg-gray-300 text-gray-800 font-medium py-2 px-6 rounded-lg shadow-sm hover:bg-gray-400 transition-colors">&larr;
+                        Zpět do knihovny</button></div>
+            </div>
+        </section>
+        <section id="production-plan-view" class="view-section">
+            <div class="w-full h-screen bg-white">
+                <iframe src="table-production.html" class="w-full h-full" frameborder="0"
+                    style="overscroll-behavior: contain;"></iframe>
+            </div>
+        </section>
+        <section id="minidashboard-view" class="view-section">
+            <div class="w-full h-screen bg-white">
+                <iframe src="minidashboard.html" class="w-full h-full" frameborder="0"
+                    style="overscroll-behavior: contain;"></iframe>
+            </div>
+        </section>
+        <section id="chat-view" class="view-section py-8 px-4">
+            <div
+                class="container mx-auto bg-white p-8 md:p-12 rounded-2xl shadow-lg flex flex-col items-center max-w-2xl">
+                <h2 id="chat-title" class="text-3xl font-bold text-gray-800 mb-6 text-center"></h2>
+                <div id="chat-box"
+                    class="chat-box w-full p-4 md:p-6 bg-gray-50 rounded-2xl shadow-inner mb-4 space-y-4"></div>
+                <div id="quick-replies" class="flex flex-wrap justify-center gap-2 mb-4"></div>
+                <div class="flex w-full items-center p-2 bg-white rounded-full shadow-lg border border-gray-200"
+                    id="chat-input-wrapper">
+                    <input type="text" placeholder="Napište svou odpověď..."
+                        class="flex-grow p-3 bg-white rounded-full focus:outline-none text-gray-800" id="chat-input" />
+
+                    <button id="mic-button" title="Zadat hlasem"
+                        class="bg-gray-200 text-gray-600 p-3 rounded-full ml-2 hover:bg-gray-300 transition-colors">
+                        <i class="fas fa-microphone"></i>
+                    </button>
+
+                    <button id="send-button"
+                        class="bg-blue-500 text-white p-3 rounded-full ml-2 hover:bg-blue-600 transition-colors">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+        <section id="checklist-view" class="view-section py-8 px-4">
+            <div class="container mx-auto bg-white p-8 md:p-12 rounded-2xl shadow-lg max-w-4xl">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 id="checklist-title" class="text-3xl font-bold text-gray-800"></h2>
+                    <div id="checklist-progress"
+                        class="font-semibold text-gray-700 bg-gray-100 rounded-full px-4 py-2 text-lg"></div>
+                </div>
+                <p id="checklist-intro" class="text-gray-600 mb-8 text-lg"></p>
+                <div id="checklist-container" class="space-y-8"></div>
+                <div class="mt-12 flex justify-center">
+                    <button onclick="showView('library')"
+                        class="bg-gray-300 text-gray-800 font-medium py-2 px-6 rounded-lg shadow-sm hover:bg-gray-400 transition-colors">&larr;
+                        Zpět do Portálu</button>
+                </div>
+            </div>
+        </section>
+        <section id="dashboard-view" class="view-section py-8 px-4">
+            <div class="container mx-auto bg-white p-8 md:p-12 rounded-2xl shadow-lg max-w-6xl">
+                <h2 id="dashboard-title" class="text-2xl font-bold text-gray-800 mb-6 text-center"></h2>
+                <div class="chart-container" style="position: relative; height:60vh; width:100%">
+                    <canvas id="myChartCanvas"></canvas>
+                </div>
+                <div class="mt-8 flex justify-center">
+                    <button onclick="showView('library')"
+                        class="bg-gray-300 text-gray-800 font-medium py-2 px-6 rounded-lg shadow-sm hover:bg-gray-400 transition-colors">&larr;
+                        Zpět do Knihovny</button>
+                </div>
+            </div>
+        </section>
+        <section id="iframe-view" class="view-section py-8 px-4">
+            <div class="container mx-auto bg-white p-8 md:p-12 rounded-2xl shadow-lg max-w-6xl">
+                <h2 id="iframe-title" class="text-2xl font-bold text-gray-800 mb-6"></h2>
+
+                <div id="iframe-container" class="w-full h-[70vh] border rounded-lg overflow-hidden">
+                </div>
+
+                <div class="mt-8">
+                    <button onclick="showView('library')"
+                        class="bg-gray-300 text-gray-800 font-medium py-2 px-6 rounded-lg shadow-sm hover:bg-gray-400 transition-colors">&larr;
+                        Zpět do Knihovny</button>
+                </div>
+            </div>
+        </section>
+        <section id="looker-report-view" class="view-section">
+            <div class="w-full h-screen bg-white">
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-gray-800 text-white py-8 mt-auto">
+        <div class="container mx-auto text-center px-4 max-w-6xl">
+            <div class="flex justify-center space-x-6 mb-4"><button onclick="showView('terms')"
+                    class="hover:text-blue-300 transition-colors">Obchodní podmínky</button><button
+                    onclick="showView('privacy')" class="hover:text-blue-300 transition-colors">Ochrana údajů</button>
+            </div>
+            <p>&copy; 2025 Chytré já. Všechna práva vyhrazena.</p>
+        </div>
+    </footer>
+
+    <div id="media-modal" class="hidden fixed inset-0 bg-black bg-opacity-75 items-center justify-center p-4 z-50">
+        <div id="modal-content"
+            class="bg-white rounded-lg shadow-xl max-w-3xl w-full max-h-full overflow-auto relative">
+            <button onclick="closeModal()"
+                class="absolute top-2 right-2 text-gray-500 hover:text-gray-800 text-3xl font-bold">&times;</button>
+            <div id="modal-body" class="p-4 md:p-6"></div>
         </div>
     </div>
-
-    <script type="module" src="./assets/js/universe-init.js"></script>
-
-    <div id="docOverlay">
-        <div id="docViewer">
-            <button id="closeDoc">✖</button>
-            <iframe id="docFrame" src=""></iframe>
-        </div>
-    </div>
-
+    <button id="back-to-library-fab"
+        class="hidden fixed bottom-4 right-4 bg-blue-600 text-white w-14 h-14 rounded-full shadow-lg flex items-center justify-center z-40">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+            stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 15L3 9m0 0l6-6M3 9h12a6 6 0 010 12h-3" />
+        </svg>
+    </button>
 </body>
+<script src="main.js" type="module"></script>
 
 </html>

@@ -1,4 +1,4 @@
-# Principy výživy
+# Principy Vyzivy
 
 Ne dieta. **Systém**, který udrží výkon a zdraví.
 

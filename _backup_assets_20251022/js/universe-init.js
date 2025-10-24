@@ -8,7 +8,7 @@ let currentModel = "dlouhovekost";
 
 // 🔹 Funkce pro načtení libovolného modelu
 async function loadModel(modelName = "dlouhovekost") {
-  const MODEL_URL = `./assets/models/${modelName}/${modelName}.json`;
+  const MODEL_URL = `../assets/models/${modelName}/${modelName}.json`;
 
   try {
     const response = await fetch(MODEL_URL);
@@ -21,12 +21,6 @@ async function loadModel(modelName = "dlouhovekost") {
     // Aktualizace titulku okna
     document.title = `Chytré Já – ${modelName === "toc" ? "TOC (Teorie omezení)" : "Model Dlouhověkosti"
       }`;
-
-    // 💬 Helper se inicializuje do mini stavu (jen lišta dole)
-    if (window.aiHelper) {
-      console.log("🤖 Inicializuji AI Helper (mini mód).");
-      // window.aiHelper.mini();
-    }
 
   } catch (err) {
     console.error(`❌ Nelze načíst model "${modelName}":`, err);
@@ -60,22 +54,3 @@ document.addEventListener("DOMContentLoaded", () => {
     }, 400);
   });
 });
-
-// Při zavření panelu schovej helper
-document.addEventListener("DOMContentLoaded", () => {
-  const closePanel = document.getElementById("closePanel");
-  if (closePanel) {
-    closePanel.addEventListener("click", () => {
-      sidePanel.classList.remove("visible");
-      // stará metoda už není potřeba
-      const helper = document.getElementById("aiHelper");
-      if (helper) {
-        helper.classList.remove("expanded");
-        helper.classList.add("mini");
-      }
-      sidePanel.classList.remove("chat-active");
-    });
-
-  }
-});
-

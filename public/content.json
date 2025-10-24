@@ -1,0 +1,367 @@
+{
+    "dictionary": [
+        {
+            "id": "teorie-omezeni",
+            "term": "Teorie omezení",
+            "definition": "Teorie omezení (Theory of Constraints - TOC) je ucelená manažerská filozofie přinášející nový přístup k řízení a trvalému zlepšování firem, zaměřená na identifikaci a efektivní správu úzkých míst systému. Tento úvodní článek pokrývá základy a principy TOC.",
+            "relatedTerms": [
+                "Omezení",
+                "Průtok",
+                "Proces pěti kroků",
+                "Výroba",
+                "Kritický řetěz",
+                "Finance",
+                "Měření",
+                "Strategie",
+                "Marketing"
+            ],
+            "color": "#2563EB",
+            "icon": "fas fa-sun",
+            "tasks": [
+                {
+                    "id": "prehled-toc",
+                    "name": "Přehled TOC pro manažery",
+                    "type": "článek"
+                },
+                {
+                    "id": "implementace-toc",
+                    "name": "Průvodce implementací TOC",
+                    "type": "článek"
+                }
+            ],
+            "mediaPanelContent": [
+                {
+                    "type": "audio",
+                    "libraryId": "audio-toc-uvod",
+                    "title": "Základy TOC (audio)"
+                },
+                {
+                    "type": "video",
+                    "libraryId": "video-001",
+                    "title": "Video: Plánovač Karel"
+                },
+                {
+                    "type": "image",
+                    "libraryId": "image-001",
+                    "title": "Obrázek: AI asistent"
+                },
+                {
+                    "type": "pdf-link",
+                    "libraryId": "checklist-pdf-002-kuchta",
+                    "title": "Kuchařka receptů (PDF)",
+                    "linkText": "Otevřít PDF v novém okně"
+                }
+            ],
+            "linkText": "Přečíst článek o TOC",
+            "contentTitle": "Teorie omezení: Úvod a principy",
+            "contentUrl": "clanky/co-je-teorie-omezeni.md",
+            "tags": [
+                "TOC",
+                "Základy",
+                "Úvod",
+                "manažerská filozofie",
+                "zlepšování"
+            ],
+            "subnodes": [
+                {
+                    "id": "puvod-toc",
+                    "term": "Původ TOC",
+                    "definition": "Vyvinuta Eliyahu M. Goldrattem v 80. letech, popularizována knihou Cíl.",
+                    "icon": "fas fa-scroll",
+                    "color": "#1E40AF"
+                }
+            ]
+        },
+        {
+            "id": "kriticky-retezec",
+            "term": "Kritický řetěz (CCPM)",
+            "definition": "Kritický řetěz (Critical Chain Project Management - CCPM) je metoda řízení projektů z Teorie omezení, která se zaměřuje na ochranu klíčových úkolů před zpožděním pomocí nárazníků a efektivního řízení zdrojů. Alternativa k tradičnímu řízení projektů.",
+            "relatedTerms": [
+                "Teorie omezení",
+                "Omezení",
+                "Projektový management",
+                "Strategie"
+            ],
+            "color": "#8B5CF6",
+            "icon": "fas fa-project-diagram",
+            "tasks": [
+                {
+                    "id": "ccpm-uvod",
+                    "name": "Úvod do Critical Chain Project Management",
+                    "type": "článek"
+                },
+                {
+                    "id": "ccpm-planovac",
+                    "name": "Simulátor kritického řetězu",
+                    "type": "nástroj"
+                }
+            ],
+            "linkText": "Více o Kritickém řetězu",
+            "contentTitle": "CCPM: Efektivní řízení projektů",
+            "contentUrl": "clanky/uspesna-firma-system.md",
+            "tags": [
+                "CCPM",
+                "projektový management",
+                "projekty",
+                "Goldratt"
+            ]
+        },
+        {
+            "id": "vyroba-dbr",
+            "term": "Výroba (DBR)",
+            "definition": "Principy řízení výroby z TOC, založené na metodice Buben, Nárazník, Lano (DBR), která koordinuje celý systém podle rytmu omezení (bubnu) pro maximalizaci průtoku. Optimalizace výrobních procesů.",
+            "relatedTerms": [
+                "Teorie omezení",
+                "Omezení",
+                "Průtok",
+                "Zásoby"
+            ],
+            "color": "#10B981",
+            "icon": "fas fa-industry",
+            "tasks": [
+                {
+                    "id": "dbn-simulace",
+                    "name": "Simulace DBR systému",
+                    "type": "nástroj"
+                },
+                {
+                    "id": "vyroba-optimalizace",
+                    "name": "Optimalizace výrobních procesů",
+                    "type": "článek"
+                }
+            ],
+            "linkText": "Zjistit více o DBR",
+            "contentTitle": "DBR: Buben, Nárazník, Lano ve výrobě",
+            "contentUrl": "clanky/vyroba-dbr.md",
+            "tags": [
+                "DBR",
+                "výroba",
+                "průtok",
+                "optimalizace"
+            ]
+        },
+        {
+            "id": "finance-ta",
+            "term": "Finance (TA)",
+            "definition": "Finanční aspekty Teorie omezení (Throughput Accounting - TA) poskytují nový pohled na účetnictví, kde se primárně zaměřujeme na průtok, investice a provozní náklady, nikoli na tradiční nákladové účetnictví. Zahrnuje také úvod do TA a TA kalkulačku.",
+            "relatedTerms": [
+                "Teorie omezení",
+                "Průtok",
+                "Měření",
+                "Strategie"
+            ],
+            "color": "#22C55E",
+            "icon": "fas fa-money-bill-wave",
+            "tasks": [
+                {
+                    "id": "ta-uvod",
+                    "name": "Úvod do Throughput Accounting",
+                    "type": "článek"
+                },
+                {
+                    "id": "ta-kalkulacka",
+                    "name": "Kalkulačka TA",
+                    "type": "nástroj"
+                }
+            ],
+            "linkText": "Pochopit finance podle TOC",
+            "contentTitle": "Finanční řízení s Throughput Accounting",
+            "contentUrl": "clanky/finance-ta.md",
+            "tags": [
+                "finance",
+                "účetnictví",
+                "TA",
+                "průtokové účetnictví"
+            ]
+        },
+        {
+            "id": "mereni",
+            "term": "Měření",
+            "definition": "V kontextu TOC se měření zaměřuje na globální metriky jako průtok, investice a provozní náklady, které odrážejí výkon celého systému, nikoli jen lokální efektivitu. Zahrnuje klíčové metriky TOC a Performance Dashboard.",
+            "relatedTerms": [
+                "Průtok",
+                "Finance"
+            ],
+            "color": "#F59E0B",
+            "icon": "fas fa-chart-line",
+            "tasks": [
+                {
+                    "id": "metriky-toc",
+                    "name": "Klíčové metriky TOC",
+                    "type": "článek"
+                },
+                {
+                    "id": "dashboard-vykon",
+                    "name": "Zobrazit Performance Dashboard",
+                    "type": "dashboard"
+                }
+            ],
+            "linkText": "Prozkoumat metriky",
+            "contentTitle": "Měření výkonu v TOC",
+            "contentUrl": "clanky/mereni.md",
+            "tags": [
+                "měření",
+                "metriky",
+                "výkon",
+                "KPI"
+            ]
+        },
+        {
+            "id": "logicke-stromy",
+            "term": "Logické stromy (TP)",
+            "definition": "Logické stromy (Thinking Processes - TP) jsou soubor nástrojů z TOC pro analýzu komplexních problémů, identifikaci základních příčin a vytváření robustních řešení. Patří sem Např. Strom současné reality, Strom budoucí reality a Strom přechodu. Obsahuje úvod do Thinking Processes a interaktivní TP nástroj.",
+            "relatedTerms": [
+                "Teorie omezení",
+                "Proces pěti kroků",
+                "Omezení"
+            ],
+            "color": "#60A5FA",
+            "icon": "fas fa-tree",
+            "tasks": [
+                {
+                    "id": "tp-uvod",
+                    "name": "Úvod do Thinking Processes",
+                    "type": "článek"
+                },
+                {
+                    "id": "tp-simulace",
+                    "name": "Interaktivní TP nástroj",
+                    "type": "nástroj"
+                }
+            ],
+            "linkText": "Naučit se Logické stromy",
+            "contentTitle": "Thinking Processes: Nástroje pro řešení problémů",
+            "contentUrl": "clanky/logicke-stromy-tp.md",
+            "tags": [
+                "logické stromy",
+                "Thinking Processes",
+                "řešení problémů",
+                "analýza"
+            ]
+        },
+        {
+            "id": "strategie",
+            "term": "Strategie",
+            "definition": "Vytváření a implementace dlouhodobých plánů a cílů organizace. TOC nabízí strategické nástroje pro identifikaci konkurenční výhody a zaměření zdrojů.",
+            "relatedTerms": [
+                "Měření",
+                "Logické stromy (TP)",
+                "Marketing"
+            ],
+            "color": "#7E22CE",
+            "icon": "fas fa-chess-king",
+            "tasks": [
+                {
+                    "id": "strategie-formulace",
+                    "name": "Formulace TOC strategie",
+                    "type": "článek"
+                },
+                {
+                    "id": "strategie-implementace",
+                    "name": "Plán implementace strategie",
+                    "type": "článek"
+                }
+            ],
+            "linkText": "Zjistit více o strategii",
+            "contentTitle": "Tvorba efektivní strategie s TOC",
+            "contentUrl": "clanky/strategie.md",
+            "tags": [
+                "strategie",
+                "řízení",
+                "konkurenční výhoda",
+                "plánování"
+            ]
+        },
+        {
+            "id": "marketing",
+            "term": "Marketing",
+            "definition": "Soubor aktivit pro vytváření, komunikaci, dodávání a výměnu nabídek, které mají hodnotu pro zákazníky a společnost. V TOC se marketing zaměřuje na využití omezení k získání konkurenční výhody.",
+            "relatedTerms": [
+                "Strategie",
+                "Průtok"
+            ],
+            "color": "#F472B6",
+            "icon": "fas fa-bullhorn",
+            "tasks": [
+                {
+                    "id": "marketing-toc",
+                    "name": "Marketingové strategie podle TOC",
+                    "type": "článek"
+                },
+                {
+                    "id": "komunikacni-kampane",
+                    "name": "Plán komunikace",
+                    "type": "článek"
+                }
+            ],
+            "linkText": "Objevte marketing s TOC",
+            "contentTitle": "Marketing a prodej v rámci TOC",
+            "contentUrl": "clanky/marketing.md",
+            "tags": [
+                "marketing",
+                "prodej",
+                "komunikace",
+                "zákazníci"
+            ]
+        }
+    ],
+    "library": [
+        {
+            "id": "audio-toc-uvod",
+            "title": "Základy TOC (audio)",
+            "type": "Audio",
+            "description": "Zde si poslechněte stručný úvod do Teorie Omezení a proč je důležitá.",
+            "url": "materialy/eliska.mp3",
+            "tags": [
+                "TOC",
+                "audio",
+                "poslech"
+            ]
+        },
+        {
+            "id": "video-001",
+            "title": "Plánovač Karel",
+            "type": "video",
+            "access": "free",
+            "published": true,
+            "icon": "fas fa-video text-red-500",
+            "description": "Zjistěte, jak se dá plánovat výroba v průtokovém světě.",
+            "url": "https://www.youtube.com/watch?v=LRXSXmQ5kZU&t=1s",
+            "linkText": "Zobrazit video",
+            "tags": [
+                "video",
+                "ukázka"
+            ]
+        },
+        {
+            "id": "image-001",
+            "title": "AI specializovaný asistent",
+            "type": "image",
+            "access": "free",
+            "published": true,
+            "icon": "fas fa-image text-indigo-500",
+            "description": "Popis obrázku nebo animovaného GIFu, ideální pro vizuální schémata.",
+            "url": "/images/kouc-192.png",
+            "linkText": "Zobrazit obrázek",
+            "tags": [
+                "obrázek",
+                "schéma"
+            ]
+        },
+        {
+            "id": "checklist-pdf-002-kuchta",
+            "title": "Kuchařka skvělých receptů",
+            "type": "pdf",
+            "access": "free",
+            "published": true,
+            "icon": "fas fa-file-pdf text-red-500",
+            "description": "Uvařte si podle skvělé kuchařky chutná jídla.",
+            "tags": [
+                "pdf",
+                "TOC"
+            ],
+            "url": "/materialy/kuchta.pdf",
+            "linkText": "Stáhnout PDF"
+        }
+    ]
+}

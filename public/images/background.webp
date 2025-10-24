@@ -1,0 +1,34 @@
+[
+    {
+        "id": "dlouhovekost",
+        "label": "Dlouhověkost",
+        "definition": "Cesta k dlouhému, zdravému a aktivnímu životu.",
+        "color": "#2563EB",
+        "icon": "fa-solid fa-heart-pulse",
+        "related": [
+            "pohyb",
+            "mysl",
+            "strava"
+        ],
+        "subnodes": [
+            {
+                "id": "pohyb",
+                "label": "Pohyb",
+                "definition": "Zdravý pohyb každý den.",
+                "color": "#16a34a"
+            },
+            {
+                "id": "mysl",
+                "label": "Mysl",
+                "definition": "Mentální rovnováha a meditace.",
+                "color": "#eab308"
+            },
+            {
+                "id": "strava",
+                "label": "Strava",
+                "definition": "Vyvážená výživa a hydratace.",
+                "color": "#dc2626"
+            }
+        ]
+    }
+]
