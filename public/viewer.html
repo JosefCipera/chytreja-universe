@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="cs">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>Chytré Já – Dokument</title>
+
+    <!-- Styl z vesmíru -->
+    <link rel="stylesheet" href="./assets/css/universe.css">
+
+    <!-- Markdown parser -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+    <style>
+        body {
+            background: radial-gradient(circle at center, #0f172a 0%, #020617 100%);
+            color: #e2e8f0;
+            font-family: "Inter", sans-serif;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            overflow-y: auto;
+        }
+
+        #sidePanel {
+            position: relative;
+            width: 90%;
+            max-width: 1000px;
+            margin: 2rem auto;
+            background: rgba(15, 23, 42, 0.96);
+            border-radius: 16px;
+            box-shadow: 0 0 25px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            overflow: hidden;
+        }
+
+        .panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #1e293b;
+            padding: 0.8rem 1.2rem;
+            color: #93c5fd;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .panel-content {
+            padding: 2rem;
+            overflow-y: auto;
+            max-height: calc(100vh - 100px);
+        }
+
+        h1,
+        h2,
+        h3 {
+            color: #93c5fd;
+            margin-top: 1.5rem;
+        }
+
+        p {
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        a {
+            color: #60a5fa;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        blockquote {
+            border-left: 4px solid #334155;
+            padding-left: 1rem;
+            color: #cbd5e1;
+            font-style: italic;
+            margin: 1rem 0;
+        }
+
+        pre,
+        code {
+            background: #1e293b;
+            color: #e2e8f0;
+            border-radius: 8px;
+            padding: 0.5rem 0.75rem;
+            overflow-x: auto;
+        }
+
+        #closePanel {
+            background: none;
+            border: none;
+            color: #f87171;
+            font-size: 1.4rem;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        #closePanel:hover {
+            transform: scale(1.15);
+        }
+    </style>
+</head>
+
+<body>
+    <div id="sidePanel" class="visible">
+        <div class="panel-header">
+            <h2 id="nodeTitle">Načítám dokument...</h2>
+            <button id="closePanel" title="Zavřít">✖</button>
+        </div>
+        <div class="panel-content">
+            <div id="docContent">Načítám...</div>
+        </div>
+    </div>
+
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const fileUrl = params.get("file");
+        const nodeTitle = document.getElementById("nodeTitle");
+        const docContent = document.getElementById("docContent");
+        const closeBtn = document.getElementById("closePanel");
+
+        // 🔹 Načti Markdown
+        if (fileUrl) {
+            nodeTitle.textContent = decodeURIComponent(fileUrl.split("/").pop().replace(".md", ""));
+            fetch(fileUrl)
+                .then(res => {
+                    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+                    return res.text();
+                })
+                .then(md => {
+                    docContent.innerHTML = marked.parse(md);
+                })
+                .catch(err => {
+                    docContent.innerHTML = `<p style="color:#f87171;">❌ Nelze načíst dokument: ${err.message}</p>`;
+                });
+        } else {
+            nodeTitle.textContent = "❌ Soubor nebyl určen.";
+        }
+
+        // 🔹 Zavření (zpět do vesmíru)
+        closeBtn.addEventListener("click", () => window.close());
+    </script>
+</body>
+
+</html>

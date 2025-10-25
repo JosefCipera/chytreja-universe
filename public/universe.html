@@ -2,21 +2,21 @@
 <html lang="cs">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Chytré Já – Universe</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>Vesmír Desktop 🌌</title>
 
-    <!-- CSS -->
-    <link rel="stylesheet" href="./assets/css/universe.css" />
+    <!-- 📦 Knihovny -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vis-network@9.1.9/dist/vis-network.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/vis-network@9.1.9/dist/vis-network.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-    <!-- vis-network (jen jeden CDN) -->
-    <script src="https://unpkg.com/vis-network@9.1.9/dist/vis-network.min.js"></script>
-    <link rel="stylesheet" href="https://unpkg.com/vis-network@9.1.9/styles/vis-network.min.css" />
-
+    <!-- 🎨 Styl -->
+    <link rel="stylesheet" href="./assets/css/universe.css">
 </head>
 
 <body>
-    <!-- Horní lišta -->
+    <!-- 🧭 Horní lišta -->
     <div class="app-header">
         <h1 id="appTitle">Chytré Já</h1>
         <select id="modelSelector" class="model-selector">
@@ -25,20 +25,25 @@
         </select>
     </div>
 
-    <!-- Plátno sítě -->
+    <!-- 🌌 Plátno sítě -->
     <div id="network"></div>
 
-    <!-- Postranní panel -->
+    <!-- === 🌌 Postranní panel s helperem === -->
     <aside id="sidePanel">
         <div class="panel-header">
-            <h2 id="nodeTitle">—</h2>
-            <button class="panel-close" id="closePanel" title="Zavřít">✖</button>
+            <h2 id="nodeTitle">Uzlový název</h2>
+            <button class="panel-close" id="closePanel">✖</button>
         </div>
+
         <div class="panel-content">
             <p class="definition" id="nodeDef"></p>
 
             <hr>
-            <h3>📄 Dokumenty</h3>
+            <h3>💬 Myšlenky</h3>
+            <ul id="nodeThoughts"></ul>
+
+            <hr>
+            <h3>📘 Dokumenty</h3>
             <ul id="nodeDocs"></ul>
 
             <hr>
@@ -46,123 +51,29 @@
             <ul id="nodeMedia"></ul>
 
             <hr>
-            <h3>✅ Úlohy</h3>
+            <h3>🧩 Úlohy</h3>
             <ul id="nodeTasks"></ul>
         </div>
 
-        <!-- === AI HELPER (inside #sidePanel) === -->
-        <div id="aiHelper" class="ai-helper mini">
-            <div class="aih-mini">
-                <div class="aih-title">🧠 Chytré Já</div>
-                <div class="aih-mini-input">
-                    <input id="aihInputMini" type="text" placeholder="Zeptej se na cokoliv…" />
-                    <span class="aih-mini-mic" title="Mluv 🎙️">🎙️</span>
-                </div>
+        <!-- 🧠 AI Helper -->
+        <div id="aiHelper" class="mini">
+            <div class="aih-header">
+                <span>🧠 Chytré Já</span>
+                <button id="aihClose">✖</button>
             </div>
 
             <div class="aih-body">
-                <div class="aih-header">
-                    <div>🧠 Chytré Já – Chat</div>
-                    <button id="aihClose">✖</button>
-                </div>
-
-                <div id="aihWindow" class="aih-window"></div>
-
+                <div id="aihMessages" class="aih-messages"></div>
                 <div class="aih-input">
-                    <input id="aihInput" type="text" placeholder="Zadej dotaz nebo mluv 🎙️…" />
-                    <button id="aihMic" title="Hlasový vstup">🎙️</button>
-                    <button id="aihSend">➤</button>
+                    <button id="aihMic"><i class="fa-solid fa-microphone"></i></button>
+                    <input id="aihInput" type="text" placeholder="Zeptej se na cokoliv…" />
+                    <button id="aihSend"><i class="fa-solid fa-paper-plane"></i></button>
                 </div>
             </div>
         </div>
-
-
-        <script>
-            (() => {
-                const cfg = {
-                    welcome: "Ahoj 👋 Jsem Chytré Já. Zeptej se na cokoliv.",
-                    replies: [
-                        "Zatím si jen trénuji paměť 😊",
-                        "Zkus to říct jinak?",
-                        "Zajímavá otázka – přemýšlím …"
-                    ]
-                };
-
-                const el = id => document.getElementById(id);
-                const helper = el("aiHelper"),
-                    miniInput = el("aihInputMini"),
-                    win = el("aihWindow"),
-                    inp = el("aihInput"),
-                    send = el("aihSend"),
-                    close = el("aihClose");
-
-                const append = (txt, who = "ai") => {
-                    const d = document.createElement("div");
-                    d.className = `aih-msg ${who}`;
-                    d.textContent = txt;
-                    win.appendChild(d);
-                    win.scrollTop = win.scrollHeight;
-                };
-
-                const reply = (t) => {
-                    const q = t.toLowerCase();
-                    if (q.includes("vo2max")) return "VO₂max zlepšíš Zone 2 a občas sprint. 🚴";
-                    if (q.includes("spánek")) return "Večer méně modrého světla a chladněji. 😴";
-                    const i = Math.floor(Math.random() * cfg.replies.length);
-                    return cfg.replies[i];
-                };
-
-                const sendMsg = (t) => {
-                    if (!t.trim()) return;
-                    append(t, "user");
-                    setTimeout(() => append(reply(t), "ai"), 400);
-                };
-
-                // mini input → expand
-                miniInput.addEventListener("focus", () => {
-                    helper.classList.remove("mini"); helper.classList.add("expanded");
-                    inp.focus();
-                });
-
-                inp.addEventListener("keydown", e => {
-                    if (e.key === "Enter") sendMsg(inp.value), inp.value = "";
-                });
-                send.addEventListener("click", () => { sendMsg(inp.value); inp.value = ""; });
-                close.addEventListener("click", () => {
-                    helper.classList.remove("expanded"); helper.classList.add("mini");
-                    win.innerHTML = "";
-                });
-
-                append(cfg.welcome, "ai");
-            })();
-        </script>
-
-        <script>
-            (() => {
-                const sidePanel = document.getElementById("sidePanel");
-                const aiHelper = document.getElementById("aiHelper");
-                const aiInputMini = document.getElementById("aihInputMini");
-                const aiClose = document.getElementById("aihClose");
-
-                // 🟢 Aktivace chatu (při psaní nebo mluvení)
-                aiInputMini.addEventListener("focus", () => {
-                    sidePanel.classList.add("chat-active");
-                    aiHelper.classList.remove("mini");
-                    aiHelper.classList.add("expanded");
-                });
-
-                // 🔴 Zavření chatu
-                aiClose.addEventListener("click", () => {
-                    sidePanel.classList.remove("chat-active");
-                    aiHelper.classList.remove("expanded");
-                    aiHelper.classList.add("mini");
-                });
-            })();
-        </script>
-
     </aside>
 
-    <!-- Overlay pro dokumenty (MD/PDF) -->
+    <!-- === 📄 Overlay pro dokumenty (MD/PDF) === -->
     <div id="docOverlay">
         <div id="docViewer">
             <button id="closeDoc" title="Zavřít">✖</button>
@@ -170,7 +81,63 @@
         </div>
     </div>
 
-    <!-- Init (ESM) -->
+    <!-- 🤖 AI Helper logika -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const helper = document.getElementById("aiHelper");
+            const header = helper.querySelector(".aih-header");
+            const input = document.getElementById("aihInput");
+            const sendBtn = document.getElementById("aihSend");
+            const micBtn = document.getElementById("aihMic");
+            const messages = document.getElementById("aihMessages");
+            const close = document.getElementById("aihClose");
+
+            // 🗨️ Přidání zprávy
+            const append = (text, who = "ai") => {
+                const div = document.createElement("div");
+                div.className = `msg ${who}`;
+                div.textContent = text;
+                messages.appendChild(div);
+                messages.scrollTop = messages.scrollHeight;
+            };
+
+            // 💬 Odpovědi helperu
+            const reply = t => {
+                const q = t.toLowerCase();
+                if (q.includes("spánek")) return "Spánek je základ – 7–8 hodin a tma.";
+                if (q.includes("výroba")) return "Najdi úzké místo a zesil tok. ⚙️";
+                if (q.includes("ahoj")) return "Ahoj 👋, jsem Chytré Já. Jak ti mohu pomoct?";
+                return "Zajímavé, pověz mi víc… 🤔";
+            };
+
+            // 🚀 Odeslání zprávy
+            const send = () => {
+                const text = input.value.trim();
+                if (!text) return;
+                append(text, "user");
+                input.value = "";
+                setTimeout(() => append(reply(text), "ai"), 400);
+            };
+
+            // 🔄 Přepínání režimů helperu
+            header.addEventListener("click", () => helper.classList.toggle("mini"));
+            close.addEventListener("click", e => {
+                e.stopPropagation();
+                helper.classList.add("mini");
+            });
+
+            sendBtn.addEventListener("click", send);
+            input.addEventListener("keydown", e => { if (e.key === "Enter") send(); });
+
+            // 🎙️ Mikrofon – placeholder
+            micBtn.addEventListener("click", () => append("🎤 Záznam hlasu zatím není aktivní.", "ai"));
+
+            // 🧠 Úvodní zpráva
+            append("Ahoj 👋 jsem Chytré Já. Ptej se na cokoliv.", "ai");
+        });
+    </script>
+
+    <!-- 🚀 Inicializace vesmíru -->
     <script type="module" src="./assets/js/universe-init.js"></script>
 </body>
 

@@ -269,22 +269,62 @@ function showPanel(node) {
   title.textContent = node.label || "—";
   def.textContent = node.definition || "";
 
+  // 🪐 Titulek s ikonou a barvou uzlu
+  if (node.icon) {
+    title.innerHTML = `
+    <i class="${node.icon}" 
+       style="
+         color:${node.color || '#93C5FD'};
+         filter: drop-shadow(0 0 4px ${node.color || '#93C5FD'}55);
+         font-size:1.25em;
+         margin-right:8px;
+       ">
+    </i>${node.label || "—"}`;
+  } else {
+    title.textContent = node.label || "—";
+  }
+
+  // 📘 Definice
+  def.textContent = node.definition || "";
+
   // Vyčistit seznamy
   [docs, media, tasks].forEach(el => el.innerHTML = "");
 
-  // 📄 Dokumenty
-  if (node.articles && node.articles.length > 0) {
+  // === 📄 Dokumenty ===
+  nodeDocs.innerHTML = "";
+  if (node.articles && node.articles.length) {
     node.articles.forEach(a => {
-      const li = document.createElement("li");
-      const link = document.createElement("a");
-      link.href = a.url;
-      link.textContent = a.title;
-      link.className = "doc-link";
-      link.target = "_blank";
-      li.appendChild(link);
-      docs.appendChild(li);
+      const aEl = document.createElement("a");
+      aEl.href = a.url;
+      aEl.textContent = a.title;
+      aEl.className = "doc-link";
+
+      // Kliknutí – otevře správný viewer
+      aEl.addEventListener("click", e => {
+        e.preventDefault();
+        const isPdf = a.url.toLowerCase().endsWith(".pdf");
+        const isMd = a.url.toLowerCase().endsWith(".md");
+
+        if (isPdf) openPdfViewer(a.url);
+        else if (isMd) openMdViewer(a.url);
+        else window.open(a.url, "_blank");
+      });
+
+      // Krátké shrnutí (pokud existuje)
+      if (a.summary) {
+        const p = document.createElement("p");
+        p.textContent = a.summary;
+        p.className = "article-summary";
+        nodeDocs.appendChild(aEl);
+        nodeDocs.appendChild(p);
+      } else {
+        nodeDocs.appendChild(aEl);
+      }
     });
+  } else {
+    nodeDocs.innerHTML = "<p><em>Žádné dokumenty nejsou k dispozici.</em></p>";
   }
+
 
   // 🎬 Média (pokud existují)
   if (node.media && node.media.length > 0) {
@@ -351,50 +391,10 @@ function openPdfViewer(url) {
 }
 
 function openMdViewer(url) {
-  fetch(url)
-    .then(r => r.text())
-    .then(md => {
-      const html = `
-        <html lang="cs">
-        <head>
-          <meta charset="UTF-8">
-          <title>${url.split("/").pop()}</title>
-          <style>
-            body {
-              background: #0f172a;
-              color: #cbd5e1;
-              font-family: 'Inter', sans-serif;
-              line-height: 1.7;
-              padding: 2rem;
-              max-width: 840px;
-              margin: auto;
-              font-size: 1.05rem;
-            }
-            h1, h2, h3 { color: #93c5fd; }
-            a { color: #7dd3fc; text-decoration: none; }
-            a:hover { text-decoration: underline; }
-            pre {
-              background: #1e293b;
-              padding: 10px 14px;
-              border-radius: 10px;
-              overflow-x: auto;
-            }
-            code { color: #facc15; }
-          </style>
-        </head>
-        <body>
-          <button onclick="window.close()" style="float:right;background:#1e293b;color:#93c5fd;border:none;border-radius:6px;padding:6px 12px;cursor:pointer;">✖ Zavřít</button>
-          ${convertMarkdownToHtml(md)}
-        </body>
-        </html>`;
-      const newWindow = window.open();
-      newWindow.document.write(html);
-      newWindow.document.close();
-    })
-    .catch(err => console.error("❌ Nelze načíst MD:", err));
+  // Otevři novou stránku s parametrem souboru
+  const viewerUrl = `./viewer.html?file=${encodeURIComponent(url)}`;
+  window.open(viewerUrl, "_blank");
 }
-
-
 
 function convertMarkdownToHtml(md) {
   // 🧹 Ořízni zbytečné mezery

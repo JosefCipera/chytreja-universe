@@ -64,6 +64,7 @@
         "id": "vyziva",
         "label": "Výživa",
         "definition": "Jídlo není cíl, ale nástroj. Výživa dlouhověkosti stojí na bílkovinách, stabilní glukóze a chytrých půstech, které podporují metabolickou flexibilitu.",
+        "icon": "fa-solid fa-apple-whole",
         "color": "#ef4444",
         "related": [],
         "articles": [
