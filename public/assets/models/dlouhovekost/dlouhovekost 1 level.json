@@ -1,0 +1,78 @@
+[
+    {
+        "id": "dlouhovekost",
+        "label": "Dlouhověkost",
+        "definition": "Dlouhověkost není jen o délce života, ale o jeho kvalitě. Je to strategie, jak řídit zdraví, tělo, mysl a výživu tak, abychom byli funkční, silní a duševně odolní i ve vyšším věku.",
+        "color": "#2563eb",
+        "related": [
+            "zdravi",
+            "telo",
+            "mysl",
+            "vyziva"
+        ],
+        "articles": [
+            {
+                "title": "Jak přemýšlet o dlouhověkosti",
+                "url": "../public/assets/docs/dlouhovekost/uvod.md",
+                "summary": "Peter Attia chápe dlouhověkost jako inženýrský problém – plánuj, měř a optimalizuj. Není to dieta ani cvičení, ale systém řízení života."
+            }
+        ]
+    },
+    {
+        "id": "zdravi",
+        "label": "Zdraví",
+        "definition": "Zdraví je aktuální stav našeho těla i mysli – to, co lze měřit a sledovat. Ukazuje, jak efektivně fungují naše návyky, spánek a trénink.",
+        "color": "#22c55e",
+        "related": [],
+        "articles": [
+            {
+                "title": "Zdraví jako zrcadlo tvých návyků",
+                "url": "../public/assets/docs/dlouhovekost/zdravi/zaklady-zdravi.md",
+                "summary": "Zdraví není dar, ale důsledek. Sleduj biomarkery, spánek, tlak a VO₂max – každý ukazuje, jak tělo zvládá zátěž."
+            }
+        ]
+    },
+    {
+        "id": "telo",
+        "label": "Tělo",
+        "definition": "Tělo je náš motor dlouhověkosti. Posiluj sílu, výdrž a stabilitu – tři pilíře, které rozhodují o tom, jak budeš žít po padesátce, šedesátce i déle.",
+        "color": "#f59e0b",
+        "related": [],
+        "articles": [
+            {
+                "title": "Centenarian Decathlon: připrav se na stovku",
+                "url": "../public/assets/docs/dlouhovekost/telo/centenarian-decathlon.md",
+                "summary": "Peter Attia učí, že tělo je třeba trénovat pro soběstačnost – ne pro výkon, ale pro život. Cvič tak, abys mohl žít aktivně i v 90."
+            }
+        ]
+    },
+    {
+        "id": "mysl",
+        "label": "Mysl",
+        "definition": "Psychická odolnost, klid a smysl jsou neoddělitelnou součástí dlouhověkosti. Bez zdravé mysli se žádný plán dlouhodobě neudrží.",
+        "color": "#a855f7",
+        "related": [],
+        "articles": [
+            {
+                "title": "Jak trénovat mentální odolnost",
+                "url": "../public/assets/docs/dlouhovekost/mysl/odolnost.md",
+                "summary": "Odolnost a klid jsou dovednosti – trénuj je jako svaly. Dýchej, piš vděčnost, buď přítomen. Každý den o 1 % lepší."
+            }
+        ]
+    },
+    {
+        "id": "vyziva",
+        "label": "Výživa",
+        "definition": "Jídlo není cíl, ale nástroj. Výživa dlouhověkosti stojí na bílkovinách, stabilní glukóze a chytrých půstech, které podporují metabolickou flexibilitu.",
+        "icon": "fa-solid fa-apple-whole",
+        "color": "#ef4444",
+        "related": [],
+        "articles": [
+            {
+                "title": "Jak jíst pro dlouhověkost",
+                "url": "../public/assets/docs/dlouhovekost/vyziva/principy-vyzivy.md",
+                "summary": "Jez pro sílu a regeneraci – ne pro uspokojení. Kvalita bílkovin, kontrola cukru, pravidelné půsty a klid při jídle jsou klíčové."
+            }
+        ]
+    }
+]

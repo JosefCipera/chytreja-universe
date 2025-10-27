@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="cs">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Zdraví – Biomarkery</title>
+    <style>
+        body {
+            font-family: "Inter", system-ui, sans-serif;
+            background-color: #0f172a;
+            color: #e2e8f0;
+            margin: 0;
+            padding: 2rem 1.5rem;
+        }
+
+        h2 {
+            font-weight: 600;
+            font-size: 1.3rem;
+            color: #93c5fd;
+            text-align: center;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 12px rgba(147, 197, 253, 0.3);
+            letter-spacing: 0.03em;
+        }
+
+        h3 {
+            font-weight: 500;
+            font-size: 1.1rem;
+            color: #a5b4fc;
+            text-align: center;
+            margin: 2.5rem 0 1rem 0;
+            letter-spacing: 0.02em;
+        }
+
+        .mini-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.25rem;
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        .mini-card {
+            background: #1e293b;
+            border-radius: 0.75rem;
+            padding: 1rem 1.25rem 1.25rem 1.25rem;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.45);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .mini-card:hover {
+            transform: scale(1.02);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.55);
+        }
+
+        .mini-title {
+            font-size: 0.9rem;
+            color: #cbd5e1;
+            margin-bottom: 0.35rem;
+        }
+
+        .mini-trend {
+            width: 100%;
+            height: 60px;
+            margin: 0.25rem 0 0.5rem 0;
+        }
+
+        .mini-value {
+            font-size: 1.65rem;
+            font-weight: 600;
+            color: #f1f5f9;
+            margin-top: 0.25rem;
+            margin-bottom: 0.4rem;
+        }
+
+        .mini-status {
+            font-size: 0.9rem;
+            color: #fbbf24;
+            margin-top: 0.25rem;
+        }
+
+        .mini-range {
+            font-size: 0.8rem;
+            color: #94a3b8;
+            margin-top: 0.25rem;
+        }
+
+        .mini-desc {
+            font-size: 0.85rem;
+            color: #cbd5e1;
+            margin-top: 0.75rem;
+            line-height: 1.4;
+        }
+
+        #backToUniverse {
+            display: block;
+            margin: 2.5rem auto 0 auto;
+            background: linear-gradient(90deg, #3b82f6, #2563eb);
+            border: none;
+            color: white;
+            padding: 10px 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+            box-shadow: 0 2px 6px rgba(59, 130, 246, 0.4);
+        }
+
+        #backToUniverse:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.6);
+        }
+    </style>
+</head>
+
+<body>
+    <h2>🧬 Zdraví – Biomarkery</h2>
+    <div class="mini-grid" id="bioGrid"></div>
+
+    <h3>💓 Fyziologické ukazatele</h3>
+    <div class="mini-grid" id="fyzioGrid"></div>
+
+    <button id="backToUniverse">⬅️ Zpět do vesmíru</button>
+
+    <script>
+        const biomarkers = [
+            {
+                name: "Glukóza",
+                value: "5,3 mmol/l",
+                range: "3,6–5,6",
+                status: "✅ Normální",
+                desc: "Hladina glukózy je v normě. Metabolismus glukózy funguje optimálně.",
+                trend: [5.1, 5.2, 5.3, 5.3],
+                color: "#22d3ee"
+            },
+            {
+                name: "Bilirubin",
+                value: "30,7 µmol/l",
+                range: "3–20",
+                status: "🟠 Mírně zvýšený",
+                desc: "Mírně zvýšený bilirubin může signalizovat zátěž jater nebo regeneraci červených krvinek.",
+                trend: [28, 30, 31, 30.7],
+                color: "#fbbf24"
+            },
+            {
+                name: "Leukocyty",
+                value: "14,1 ×10⁹/l",
+                range: "4–10",
+                status: "🔴 Vysoké",
+                desc: "Zvýšený počet bílých krvinek ukazuje na aktivní imunitní reakci nebo infekci.",
+                trend: [12.5, 13.5, 14, 14.1],
+                color: "#ef4444"
+            },
+            {
+                name: "Erytrocyty (moč)",
+                value: "16 počet/μl",
+                range: "0–10",
+                status: "🟠 Mírně zvýšené",
+                desc: "Zvýšené erytrocyty mohou naznačovat podráždění močových cest nebo fyzickou zátěž.",
+                trend: [10, 12, 15, 16],
+                color: "#fca5a5"
+            }
+        ];
+
+        const fyzio = [
+            {
+                name: "Tělesná teplota",
+                value: "36,6 °C",
+                range: "36,0–37,2",
+                status: "✅ Stabilní",
+                desc: "Optimální tělesná teplota. Naznačuje rovnováhu metabolismu.",
+                trend: [36.4, 36.5, 36.6, 36.6],
+                color: "#38bdf8"
+            },
+            {
+                name: "Krevní tlak",
+                value: "122/78 mmHg",
+                range: "120/80 ±10",
+                status: "✅ V normě",
+                desc: "Krevní tlak je v optimálním rozmezí, bez známek hypertenze.",
+                trend: [125, 120, 122, 122],
+                color: "#818cf8"
+            },
+            {
+                name: "Srdeční tep",
+                value: "64 bpm",
+                range: "50–80",
+                status: "✅ Klidový",
+                desc: "Klidový tep odpovídá dobré fyzické kondici a adaptaci.",
+                trend: [66, 65, 64, 64],
+                color: "#f472b6"
+            },
+            {
+                name: "SpO₂ (nasycení kyslíkem)",
+                value: "98 %",
+                range: "95–100",
+                status: "✅ Ideální",
+                desc: "Perfektní okysličení krve, žádné známky hypoxie.",
+                trend: [97, 98, 98, 98],
+                color: "#4ade80"
+            }
+        ];
+
+        function renderGrid(gridId, data) {
+            const grid = document.getElementById(gridId);
+            grid.innerHTML = "";
+            data.forEach(b => {
+                const card = document.createElement("div");
+                card.className = "mini-card";
+                card.innerHTML = `
+          <div class="mini-title">${b.name}</div>
+          <canvas class="mini-trend"></canvas>
+          <div class="mini-value">${b.value}</div>
+          <div class="mini-status">${b.status}</div>
+          <div class="mini-range">Rozmezí: ${b.range}</div>
+          <div class="mini-desc">${b.desc}</div>
+        `;
+                grid.appendChild(card);
+                const ctx = card.querySelector("canvas").getContext("2d");
+                drawMiniTrend(ctx, b.trend, b.color);
+            });
+        }
+
+        // 💪 Silnější čára + větší dutý bod + delší šedé pokračování
+        function drawMiniTrend(ctx, data, color) {
+            const w = ctx.canvas.width;
+            const h = ctx.canvas.height;
+            const marginX = 15;
+            const marginY = 10;
+            const min = Math.min(...data);
+            const max = Math.max(...data);
+            ctx.clearRect(0, 0, w, h);
+
+            // --- hlavní čára ---
+            ctx.beginPath();
+            ctx.lineWidth = 12;
+            ctx.lineJoin = "round";
+            ctx.lineCap = "round";
+            ctx.strokeStyle = color + "cc";
+
+            data.forEach((v, i) => {
+                const x = marginX + (i / (data.length - 1)) * (w - marginX * 2);
+                const y = h - ((v - min) / (max - min)) * (h - marginY * 2) - marginY;
+                if (i === 0) ctx.moveTo(x, y);
+                else ctx.lineTo(x, y);
+            });
+            ctx.stroke();
+
+            // --- pokračování ---
+            const lastX = marginX + ((data.length - 1) / (data.length - 1)) * (w - marginX * 2);
+            const lastY = h - ((data[data.length - 1] - min) / (max - min)) * (h - marginY * 2) - marginY;
+            ctx.beginPath();
+            ctx.moveTo(lastX, lastY);
+            ctx.lineTo(lastX + 60, lastY);
+            ctx.lineWidth = 10;
+            ctx.strokeStyle = "#64748b55";
+            ctx.stroke();
+
+            // --- větší kulatý bod ---
+            ctx.beginPath();
+            ctx.arc(lastX, lastY, 9, 0, Math.PI * 2);
+            ctx.fillStyle = "#ffffff";
+            ctx.fill();
+            ctx.lineWidth = 3;
+            ctx.strokeStyle = color;
+            ctx.shadowColor = color + "55";
+            ctx.shadowBlur = 8;
+            ctx.stroke();
+            ctx.shadowBlur = 0;
+        }
+
+        window.addEventListener("load", () => {
+            renderGrid("bioGrid", biomarkers);
+            renderGrid("fyzioGrid", fyzio);
+        });
+    </script>
+</body>
+
+</html>

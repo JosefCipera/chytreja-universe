@@ -1,0 +1,234 @@
+{
+    "id": "zdravi",
+    "label": "Zdraví",
+    "definition": "Zdraví je dynamická rovnováha mezi tělem, myslí a prostředím. Každá úroveň poskytuje jiný pohled — od biochemických ukazatelů po subjektivní prožitek vitality.",
+    "color": "#22c55e",
+    "related": [
+        "biomarkery",
+        "fyziologicke_ukazatele",
+        "funkcni_ukazatele",
+        "mentalni_ukazatele"
+    ],
+    "articles": [
+        {
+            "title": "Jak interpretovat laboratorní výsledky",
+            "url": "../public/assets/docs/zdravi/jak-interpretovat-vysledky.md",
+            "summary": "Nauč se číst své biomarkery v kontextu životního stylu. Jedna hodnota nikdy nevypoví celý příběh."
+        }
+    ],
+    "children": [
+        {
+            "id": "biomarkery",
+            "label": "Biomarkery",
+            "definition": "Biochemické ukazatele z krve, moči či jiných vzorků. Odhalují, jak fungují orgány, metabolismus a vnitřní rovnováha.",
+            "color": "#10b981",
+            "related": [],
+            "biomarkers": [
+                {
+                    "id": "S_Glukóza",
+                    "label": "Glukóza",
+                    "value": "5.3",
+                    "unit": "mmol/l",
+                    "range": "3.6–5.6",
+                    "status": "normální",
+                    "comment": "Hladina glukózy je stabilní. Metabolismus funguje optimálně.",
+                    "trend": [
+                        5.2,
+                        5.4,
+                        5.1,
+                        5.3
+                    ]
+                },
+                {
+                    "id": "S_Bilirubin",
+                    "label": "Bilirubin",
+                    "value": "30.7",
+                    "unit": "µmol/l",
+                    "range": "3–20",
+                    "status": "mírně zvýšený",
+                    "comment": "Mírně zvýšený bilirubin může signalizovat zátěž jater nebo regeneraci erytrocytů.",
+                    "trend": [
+                        28,
+                        32,
+                        30,
+                        31
+                    ]
+                },
+                {
+                    "id": "B_Leukocyty",
+                    "label": "Leukocyty",
+                    "value": "14.1",
+                    "unit": "×10⁹/l",
+                    "range": "4–10",
+                    "status": "výrazně zvýšené",
+                    "comment": "Zvýšený počet bílých krvinek ukazuje na aktivní imunitní reakci nebo infekci.",
+                    "trend": [
+                        12,
+                        13.5,
+                        14,
+                        14.1
+                    ]
+                },
+                {
+                    "id": "U_Erytrocyty",
+                    "label": "Erytrocyty (moč)",
+                    "value": "16",
+                    "unit": "počet/μl",
+                    "range": "0–10",
+                    "status": "mírně zvýšené",
+                    "comment": "Může jít o podráždění močových cest nebo fyzickou zátěž.",
+                    "trend": [
+                        10,
+                        14,
+                        16,
+                        16
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "fyziologicke_ukazatele",
+            "label": "Fyziologické ukazatele",
+            "definition": "Průběžné měření tělesných funkcí. Ukazuje, jak tělo reaguje na zátěž, regeneraci a spánek.",
+            "color": "#3b82f6",
+            "metrics": [
+                {
+                    "id": "T_teplota",
+                    "label": "Tělesná teplota",
+                    "value": "36.6",
+                    "unit": "°C",
+                    "range": "36.0–37.2",
+                    "status": "stabilní",
+                    "comment": "Normální tělesná teplota – optimální termoregulace.",
+                    "trend": [
+                        36.5,
+                        36.6,
+                        36.7,
+                        36.6
+                    ]
+                },
+                {
+                    "id": "T_tlak",
+                    "label": "Krevní tlak",
+                    "value": "122/78",
+                    "unit": "mmHg",
+                    "range": "120/80 ±10",
+                    "status": "optimální",
+                    "comment": "Krevní tlak v ideálním rozmezí, bez známek hypertenze.",
+                    "trend": [
+                        120,
+                        118,
+                        122,
+                        121
+                    ]
+                },
+                {
+                    "id": "T_puls",
+                    "label": "Tepová frekvence",
+                    "value": "64",
+                    "unit": "bpm",
+                    "range": "55–80",
+                    "status": "v normě",
+                    "comment": "Srdeční rytmus odpovídá klidovému stavu a dobré kondici.",
+                    "trend": [
+                        66,
+                        65,
+                        64,
+                        64
+                    ]
+                },
+                {
+                    "id": "T_spo2",
+                    "label": "Saturace kyslíkem",
+                    "value": "98",
+                    "unit": "%",
+                    "range": "95–100",
+                    "status": "v pořádku",
+                    "comment": "Dostatečná saturace kyslíku, dobrá ventilace plic.",
+                    "trend": [
+                        97,
+                        98,
+                        99,
+                        98
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "funkcni_ukazatele",
+            "label": "Funkční ukazatele",
+            "definition": "Zachycují, jak tělo zvládá výkon, regeneraci a adaptaci.",
+            "color": "#8b5cf6",
+            "metrics": [
+                {
+                    "id": "VO2max",
+                    "label": "VO₂max",
+                    "value": "45",
+                    "unit": "ml/kg/min",
+                    "range": "35–55",
+                    "status": "nadprůměrný",
+                    "comment": "Dobrá kardiorespirační kondice a efektivní využití kyslíku.",
+                    "trend": [
+                        42,
+                        44,
+                        45,
+                        45
+                    ]
+                },
+                {
+                    "id": "Regenerace",
+                    "label": "Regenerační index",
+                    "value": "82",
+                    "unit": "%",
+                    "range": "70–100",
+                    "status": "vyvážený",
+                    "comment": "Organismus je po zátěži v rovnováze a připraven na další aktivitu.",
+                    "trend": [
+                        78,
+                        80,
+                        82,
+                        82
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "mentalni_ukazatele",
+            "label": "Mentální ukazatele",
+            "definition": "Ukazují duševní stav, stres a kvalitu kognitivních funkcí.",
+            "color": "#f97316",
+            "metrics": [
+                {
+                    "id": "Stres",
+                    "label": "Úroveň stresu",
+                    "value": "nízká",
+                    "unit": "",
+                    "range": "nízká–vysoká",
+                    "status": "vyrovnaný",
+                    "comment": "Psychická rovnováha, bez známek chronického stresu.",
+                    "trend": [
+                        2,
+                        3,
+                        2,
+                        2
+                    ]
+                },
+                {
+                    "id": "Spánek",
+                    "label": "Kvalita spánku",
+                    "value": "85",
+                    "unit": "%",
+                    "range": "70–100",
+                    "status": "dobrá",
+                    "comment": "Dostatečný hluboký spánek a stabilní rytmus.",
+                    "trend": [
+                        80,
+                        82,
+                        85,
+                        85
+                    ]
+                }
+            ]
+        }
+    ]
+}

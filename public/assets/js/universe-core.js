@@ -235,14 +235,31 @@ function openSubUniverse(DATA, centerNode) {
 function smoothReturnToUniverse(DATA) {
   playWhoosh();
   el.network.classList.add("fade-blur-out");
+
   setTimeout(() => {
-    renderUniverse(DATA);
+    // 🧭 najdi hlavní uzel (root)
+    const root =
+      DATA.find(n => n.id === "dlouhovekost") ||
+      DATA.find(n => n.id === "toc") ||
+      DATA[0];
+
+    // 🧩 vyber jen root + jeho přímé děti
+    const firstLevel = [root, ...DATA.filter(n => n.parent === root.id)];
+
+    // propojit root s dětmi (kdyby neměl related)
+    if (!root.related || !root.related.length) {
+      root.related = firstLevel.filter(n => n.id !== root.id).map(n => n.id);
+    }
+
+    // 🪐 vykresli pouze tuto 1. úroveň
+    renderUniverse(DATA, firstLevel);
+
     el.network.classList.remove("fade-blur-out");
     el.network.classList.add("fade-blur-in");
-    //aiSpeak("Vracíme se zpět do hlavního vesmíru.");
     setTimeout(() => el.network.classList.remove("fade-blur-in"), 900);
   }, 900);
 }
+
 
 function closePanel() {
   el.side.classList.remove("visible");
@@ -265,98 +282,151 @@ function showPanel(node) {
 
   if (!panel) return;
 
-  // Naplnění obsahu uzlu
-  title.textContent = node.label || "—";
-  def.textContent = node.definition || "";
-
-  // 🪐 Titulek s ikonou a barvou uzlu
+  // 🪐 Titulek
   if (node.icon) {
     title.innerHTML = `
-    <i class="${node.icon}" 
-       style="
-         color:${node.color || '#93C5FD'};
-         filter: drop-shadow(0 0 4px ${node.color || '#93C5FD'}55);
-         font-size:1.25em;
-         margin-right:8px;
-       ">
-    </i>${node.label || "—"}`;
-  } else {
-    title.textContent = node.label || "—";
-  }
+      <i class="${node.icon}" 
+         style="color:${node.color || '#93C5FD'};
+                filter:drop-shadow(0 0 4px ${(node.color || '#93C5FD')}55);
+                font-size:1.25em;margin-right:8px;">
+      </i>${node.label || "—"}
+    `;
+  } else title.textContent = node.label || "—";
 
   // 📘 Definice
   def.textContent = node.definition || "";
 
-  // Vyčistit seznamy
-  [docs, media, tasks].forEach(el => el.innerHTML = "");
+  // 🧩 Vyčištění sekcí
+  [docs, media, tasks].forEach(el => (el.innerHTML = ""));
 
-  // === 📄 Dokumenty ===
-  nodeDocs.innerHTML = "";
-  if (node.articles && node.articles.length) {
-    node.articles.forEach(a => {
-      const aEl = document.createElement("a");
-      aEl.href = a.url;
-      aEl.textContent = a.title;
-      aEl.className = "doc-link";
+  // === 📘 Edukativní text pro biomarkery ===
+  if (node.id === "biomarkery") {
+    const interpret = document.createElement("div");
+    interpret.className = "lab-info";
+    interpret.innerHTML = `
+      <h4 style="margin-top:10px;color:#93c5fd;">Jak interpretovat laboratorní výsledky</h4>
+      <p style="font-size:0.9em;line-height:1.5;color:#cbd5e1;">
+        Laboratorní hodnoty ukazují okamžitý stav těla – nejsou diagnóza, ale signál.<br>
+        <b>Zelená</b> značí rovnováhu, <b>oranžová</b> přetížení nebo adaptaci, 
+        a <b>červená</b> upozorňuje na nutnost změny či konzultace.<br>
+        Sleduj <em>trend</em> – kam se hodnota pohybuje v čase – to je skutečný ukazatel zdraví.
+      </p>
+    `;
+    def.insertAdjacentElement("afterend", interpret);
+  }
 
-      // Kliknutí – otevře správný viewer
-      aEl.addEventListener("click", e => {
-        e.preventDefault();
-        const isPdf = a.url.toLowerCase().endsWith(".pdf");
-        const isMd = a.url.toLowerCase().endsWith(".md");
+  // === 📊 Zobrazení biometrických údajů s limitem + mini-grafem ===
+  if (node.value !== undefined && node.unit) {
+    if (!window.bioCards) window.bioCards = new Map();
 
-        if (isPdf) openPdfViewer(a.url);
-        else if (isMd) openMdViewer(a.url);
-        else window.open(a.url, "_blank");
+    // kontrola duplicity
+    if (window.bioCards.has(node.id)) return;
+    // limit 5
+    if (window.bioCards.size >= 5) return;
+
+    const container = document.createElement("div");
+    container.className = "metric-card";
+    container.dataset.id = node.id;
+
+    // --- výpočet poměru ---
+    const rangeParts = node.range ? node.range.split(/[-–]/).map(x => parseFloat(x)) : null;
+    const [min, max] = rangeParts || [null, null];
+    const value = parseFloat(node.value);
+    let ratio = 0.5;
+    if (min !== null && max !== null && !isNaN(value)) {
+      ratio = Math.min(1, Math.max(0, (value - min) / (max - min)));
+    }
+
+    // --- vzhled podle stavu ---
+    const status = node.status || "neuvedeno";
+    let icon = "⚪", bg = "#334155";
+    if (status.includes("v normě")) { icon = "✅"; bg = "#14532d"; }
+    else if (status.includes("nad")) { icon = "⚠️"; bg = "#78350f"; }
+    else if (status.includes("pod")) { icon = "🔻"; bg = "#1e3a8a"; }
+
+    // --- HTML ---
+    container.innerHTML = `
+      <div class="metric-header" style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
+        <span style="font-size:1.3em;">${icon}</span>
+        <b>${node.label}</b>
+      </div>
+      <div><b>Hodnota:</b> ${node.value} ${node.unit}</div>
+      <div><b>Rozmezí:</b> ${node.range || "—"}</div>
+      <div><b>Stav:</b> <span style="color:${node.color || "#fff"}">${status}</span></div>
+      <div class="metric-bar" style="background:#475569;border-radius:6px;height:10px;width:100%;overflow:hidden;margin-top:6px;position:relative;">
+        <div style="position:absolute;left:0;top:0;height:100%;width:${(ratio * 100).toFixed(1)}%;background:${node.color || "#22c55e"};transition:width 0.6s ease;"></div>
+      </div>
+      <canvas class="trend-canvas" width="200" height="40" style="margin-top:8px;"></canvas>
+    `;
+
+    container.style.background = bg;
+    container.style.color = "#f1f5f9";
+    container.style.padding = "10px 14px";
+    container.style.borderRadius = "12px";
+    container.style.marginTop = "10px";
+    container.style.boxShadow = "0 2px 6px rgba(0,0,0,0.3)";
+
+    // --- Mini trend graf ---
+    const canvas = container.querySelector(".trend-canvas");
+    if (canvas && canvas.getContext) {
+      const ctx = canvas.getContext("2d");
+      const values = node.history?.map(h => parseFloat(h.value)) ||
+        [node.value, node.value * 0.95, node.value * 1.05, node.value];
+      const w = canvas.width, h = canvas.height;
+      ctx.clearRect(0, 0, w, h);
+      ctx.beginPath();
+      ctx.lineWidth = 2;
+      ctx.strokeStyle = node.color || "#22c55e";
+      values.forEach((v, i) => {
+        const x = (i / (values.length - 1)) * w;
+        const y = h - (v / Math.max(...values)) * h;
+        if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
       });
+      ctx.stroke();
+      const lastX = w - 4;
+      const lastY = h - (values.at(-1) / Math.max(...values)) * h;
+      ctx.fillStyle = "#fff";
+      ctx.beginPath();
+      ctx.arc(lastX, lastY, 3, 0, 2 * Math.PI);
+      ctx.fill();
+    }
 
-      // Krátké shrnutí (pokud existuje)
-      if (a.summary) {
-        const p = document.createElement("p");
-        p.textContent = a.summary;
-        p.className = "article-summary";
-        nodeDocs.appendChild(aEl);
-        nodeDocs.appendChild(p);
-      } else {
-        nodeDocs.appendChild(aEl);
-      }
-    });
-  } else {
-    nodeDocs.innerHTML = "<p><em>Žádné dokumenty nejsou k dispozici.</em></p>";
+    window.bioCards.set(node.id, container);
+    def.insertAdjacentElement("afterend", container);
   }
 
-
-  // 🎬 Média (pokud existují)
-  if (node.media && node.media.length > 0) {
-    node.media.forEach(m => {
-      const li = document.createElement("li");
-      li.textContent = m.title || "—";
-      media.appendChild(li);
-    });
+  // === 🧬 Tlačítko pro otevření Mini Dashboardu ===
+  const existingBtn = document.getElementById("openBioDashboard");
+  if (existingBtn) existingBtn.remove();
+  if (node.id === "biomarkery" || node.id === "zdravi") {
+    const btn = document.createElement("button");
+    btn.id = "openBioDashboard";
+    btn.textContent = "🧬 Zobraz přehled biomarkerů";
+    btn.style.cssText = `
+      display:block;width:100%;margin-top:14px;padding:10px 14px;
+      font-size:1rem;background:#3b82f6;color:#fff;border:none;
+      border-radius:8px;cursor:pointer;font-weight:600;transition:background 0.3s;
+    `;
+    btn.onmouseenter = () => (btn.style.background = "#2563eb");
+    btn.onmouseleave = () => (btn.style.background = "#3b82f6");
+    btn.onclick = () => window.open("./assets/models/dlouhovekost/minidash-zdravi.html", "_blank");
+    def.insertAdjacentElement("afterend", btn);
   }
 
-  // ✅ Úlohy (pokud existují)
-  if (node.tasks && node.tasks.length > 0) {
-    node.tasks.forEach(t => {
-      const li = document.createElement("li");
-      li.textContent = t;
-      tasks.appendChild(li);
-    });
-  }
-
-  // 🔹 Otevřít panel
+  // === Zobraz panel ===
   panel.classList.add("visible");
 
-  // Pokud helper existuje → zmenšíme ho na mini
+  // === Reset helpera ===
   const helper = document.getElementById("aiHelper");
   if (helper) {
     helper.classList.remove("expanded");
     helper.classList.add("mini");
   }
 
-  // Uložit aktuální uzel (např. pro budoucí interakce)
+  // Uložit aktuální uzel
   window.currentNode = node;
 }
+
 
 
 // === HLAS ===

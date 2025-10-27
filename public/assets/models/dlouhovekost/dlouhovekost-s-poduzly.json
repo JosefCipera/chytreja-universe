@@ -21,7 +21,7 @@
     {
         "id": "zdravi",
         "label": "Zdraví",
-        "definition": "Zdraví je aktuální stav těla i mysli – to, co lze měřit a sledovat. Ukazuje, jak efektivně fungují návyky, spánek a trénink.",
+        "definition": "Zdraví je aktuální stav našeho těla i mysli – to, co lze měřit a sledovat. Ukazuje, jak efektivně fungují naše návyky, spánek a trénink.",
         "color": "#22c55e",
         "parent": "dlouhovekost",
         "related": [
@@ -54,98 +54,9 @@
     {
         "id": "biomarkery",
         "label": "Biomarkery",
-        "definition": "Krevní a močové ukazatele odhalují, jak tělo reaguje na výživu, regeneraci a zátěž.",
-        "color": "#15803d",
-        "parent": "zdravi",
-        "related": [
-            "glukoza",
-            "bilirubin",
-            "leukocyty",
-            "erytrocyty",
-            "souhrn_biomarkery"
-        ]
-    },
-    {
-        "id": "glukoza",
-        "label": "S_Glukóza",
-        "definition": "Hladina glukózy v krvi.",
-        "parent": "biomarkery",
-        "value": 5.3,
-        "unit": "mmol/l",
-        "range": "3.6–5.6",
-        "status": "v normě",
+        "definition": "Krevní testy, tlak, HRV a další data ukazují, jak tělo reaguje na tvůj životní styl.",
         "color": "#22c55e",
-        "history": [
-            {
-                "date": "2025-09-20",
-                "value": 5.7
-            },
-            {
-                "date": "2025-09-27",
-                "value": 5.4
-            },
-            {
-                "date": "2025-10-10",
-                "value": 5.2
-            },
-            {
-                "date": "2025-10-25",
-                "value": 5.3
-            }
-        ]
-    },
-    {
-        "id": "bilirubin",
-        "label": "S_Bilirubin",
-        "definition": "Ukazatel funkce jater a rozkladu červených krvinek.",
-        "parent": "biomarkery",
-        "value": 30.7,
-        "unit": "µmol/l",
-        "range": "3–20",
-        "status": "nad normu",
-        "color": "#f97316"
-    },
-    {
-        "id": "leukocyty",
-        "label": "B_Leukocyty",
-        "definition": "Počet bílých krvinek – marker zánětu nebo imunitní reakce.",
-        "parent": "biomarkery",
-        "value": 14.1,
-        "unit": "10⁹/l",
-        "range": "4–10",
-        "status": "nad normu",
-        "color": "#f97316"
-    },
-    {
-        "id": "erytrocyty",
-        "label": "U_Erytrocyty",
-        "definition": "Počet červených krvinek v moči – zvýšení může ukazovat na podráždění nebo zánět močových cest.",
-        "parent": "biomarkery",
-        "value": 16,
-        "unit": "počet/µl",
-        "range": "0–10",
-        "status": "nad normu",
-        "color": "#ef4444"
-    },
-    {
-        "id": "souhrn_biomarkery",
-        "label": "Souhrn biomarkerů",
-        "definition": "Shrnutí výsledků laboratorních testů – kolik hodnot je v normě a kolik mimo.",
-        "parent": "biomarkery",
-        "color": "#0ea5e9",
-        "evaluation": {
-            "celkem": 4,
-            "v_norme": 1,
-            "mimo_normu": 3,
-            "stav": "Zvýšené odchylky – doporučeno konzultovat životní styl a případně lékaře."
-        },
-        "articles": [
-            {
-                "title": "Jak interpretovat laboratorní výsledky",
-                "url": "../public/assets/docs/dlouhovekost/zdravi/biomarkery/souhrn.md",
-                "summary": "Souhrn biomarkerů ukazuje, kde tělo reaguje mimo optimální rovnováhu. Klíčem je dlouhodobé sledování trendů, ne jednorázová hodnota."
-            }
-        ]
+        "parent": "zdravi"
     },
     {
         "id": "obnova",
@@ -238,6 +149,7 @@
         "id": "vyziva",
         "label": "Výživa",
         "definition": "Jídlo není cíl, ale nástroj. Výživa dlouhověkosti stojí na bílkovinách, stabilní glukóze a chytrých půstech, které podporují metabolickou flexibilitu.",
+        "icon": "fa-solid fa-apple-whole",
         "color": "#ef4444",
         "parent": "dlouhovekost",
         "related": [
@@ -268,8 +180,8 @@
         "parent": "vyziva"
     },
     {
-        "id": "glukoza_vyziva",
-        "label": "Glukóza (výživa)",
+        "id": "glukoza",
+        "label": "Glukóza",
         "definition": "Stabilní hladina cukru = stabilní energie. Vyhýbej se výkyvům po jídle.",
         "color": "#ef9a9a",
         "parent": "vyziva"

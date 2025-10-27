@@ -28,10 +28,10 @@
     <!-- 🌌 Plátno sítě -->
     <div id="network"></div>
 
-    <!-- === 🌌 Postranní panel s helperem === -->
+    <!-- === 🌌 Postranní panel === -->
     <aside id="sidePanel">
         <div class="panel-header">
-            <h2 id="nodeTitle">Uzlový název</h2>
+            <h2 id="nodeTitle"><i class="fa-solid fa-circle-nodes"></i> Uzlový název</h2>
             <button class="panel-close" id="closePanel">✖</button>
         </div>
 
@@ -53,22 +53,26 @@
             <hr>
             <h3>🧩 Úlohy</h3>
             <ul id="nodeTasks"></ul>
+
+            <!-- === 🧠 Chytré já – sekce v panelu === -->
+            <hr class="ai-divider">
+            <h3 class="ai-section-title"><i class="fa-solid fa-brain"></i> Chytré já</h3>
+            <div id="aiPanelSection">
+                <input id="aiPanelInput" type="text" placeholder="Zeptej se Chytrého já…" />
+                <button id="aiPanelSend"><i class="fa-solid fa-paper-plane"></i></button>
+            </div>
         </div>
 
-        <!-- 🧠 AI Helper -->
-        <div id="aiHelper" class="mini">
-            <div class="aih-header">
-                <span>🧠 Chytré Já</span>
-                <button id="aihClose">✖</button>
+        <!-- === 🧠 Rozbalený chat === -->
+        <div id="aiChatOverlay" class="hidden">
+            <div class="ai-chat-header">
+                <h2><i class="fa-solid fa-brain"></i> Chytré já</h2>
+                <button id="aiChatClose">✖</button>
             </div>
-
-            <div class="aih-body">
-                <div id="aihMessages" class="aih-messages"></div>
-                <div class="aih-input">
-                    <button id="aihMic"><i class="fa-solid fa-microphone"></i></button>
-                    <input id="aihInput" type="text" placeholder="Zeptej se na cokoliv…" />
-                    <button id="aihSend"><i class="fa-solid fa-paper-plane"></i></button>
-                </div>
+            <div id="aiChatMessages"></div>
+            <div class="ai-chat-input">
+                <input id="aiChatInput" type="text" placeholder="Zeptej se..." />
+                <button id="aiChatSend"><i class="fa-solid fa-paper-plane"></i></button>
             </div>
         </div>
     </aside>
@@ -81,59 +85,185 @@
         </div>
     </div>
 
-    <!-- 🤖 AI Helper logika -->
+    <!-- 🤖 Logika Chytrého já -->
     <script>
         document.addEventListener("DOMContentLoaded", () => {
-            const helper = document.getElementById("aiHelper");
+            /* === 🧠 Chytré já – základní prvky === */
+            const panelInput = document.getElementById("aiPanelInput");
+            const panelSend = document.getElementById("aiPanelSend");
+            const chatOverlay = document.getElementById("aiChatOverlay");
+            const chatMessages = document.getElementById("aiChatMessages");
+            const chatInput = document.getElementById("aiChatInput");
+            const chatSend = document.getElementById("aiChatSend");
+            const chatClose = document.getElementById("aiChatClose");
+
+            /* === 💬 Pomocné funkce === */
+            const appendMsg = (text, who = "ai") => {
+                const div = document.createElement("div");
+                div.className = `msg ${who}`;
+                div.textContent = text;
+                chatMessages.appendChild(div);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            };
+
+            const aiReply = (text) => {
+                const q = text.toLowerCase();
+                if (q.includes("spánek")) return "Spánek je základ – 7–8 hodin a tma.";
+                if (q.includes("výroba")) return "Najdi úzké místo a zesil tok. ⚙️";
+                if (q.includes("ahoj")) return "Ahoj 👋, jsem Chytré já. Jak ti mohu pomoct?";
+                return "Zajímavé, pověz mi víc… 🤔";
+            };
+
+            /* === 🚀 Rozbalení chatu === */
+            const openChat = (text) => {
+                if (!text) return;
+
+                // 🎬 Zobraz overlay přes celý panel
+                chatOverlay.classList.add("visible");
+                chatOverlay.style.opacity = "1";
+                chatOverlay.style.pointerEvents = "all";
+                chatOverlay.style.transform = "translateY(0)";
+
+                // 🧹 Vyčisti a přidej zprávy
+                chatMessages.innerHTML = "";
+                appendMsg(text, "user");
+                panelInput.value = "";
+                setTimeout(() => appendMsg(aiReply(text), "ai"), 600);
+
+                console.log("🧠 Chytré já rozbaleno.");
+            };
+
+            /* === ❎ Zavření chatu === */
+            chatClose.addEventListener("click", () => {
+                chatOverlay.classList.remove("visible");
+                chatOverlay.style.opacity = "0";
+                chatOverlay.style.pointerEvents = "none";
+                chatOverlay.style.transform = "translateY(20px)";
+                console.log("❎ Chytré já skryto.");
+            });
+
+            /* === 📩 Odeslání dotazu ze sekce dole === */
+            panelSend.addEventListener("click", () => {
+                openChat(panelInput.value.trim());
+            });
+
+            panelInput.addEventListener("keydown", (e) => {
+                if (e.key === "Enter") openChat(panelInput.value.trim());
+            });
+
+            /* === 💬 Odeslání přímo z rozbaleného chatu === */
+            const sendChatMsg = () => {
+                const text = chatInput.value.trim();
+                if (!text) return;
+                appendMsg(text, "user");
+                chatInput.value = "";
+                setTimeout(() => appendMsg(aiReply(text), "ai"), 600);
+            };
+
+            chatSend.addEventListener("click", sendChatMsg);
+            chatInput.addEventListener("keydown", (e) => {
+                if (e.key === "Enter") sendChatMsg();
+            });
+
+            console.log("✅ Chytré já inicializováno.");
+        });
+    </script>
+    <!-- === 🧠 PLovoucí Chytré Já === -->
+    <div id="floatingAiHelper" class="ai-helper mini hidden">
+        <div class="aih-header">
+            <span>🧠 Chytré já</span>
+            <button id="aihClose">✖</button>
+        </div>
+
+        <div class="aih-mini">
+            <div class="aih-mini-title">🧠 Chytré já</div>
+            <div class="aih-mini-input">
+                <input id="aihMiniInput" type="text" placeholder="Zeptej se…" />
+                <button id="aihMiniMic"><i class="fa-solid fa-microphone"></i></button>
+            </div>
+        </div>
+
+        <div class="aih-body">
+            <div id="aihMessages" class="aih-window"></div>
+            <div class="aih-input">
+                <button id="aihMic"><i class="fa-solid fa-microphone"></i></button>
+                <input id="aihInput" type="text" placeholder="Zeptej se na cokoliv…" />
+                <button id="aihSend"><i class="fa-solid fa-paper-plane"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const helper = document.getElementById("floatingAiHelper");
             const header = helper.querySelector(".aih-header");
+            const messages = document.getElementById("aihMessages");
             const input = document.getElementById("aihInput");
             const sendBtn = document.getElementById("aihSend");
             const micBtn = document.getElementById("aihMic");
-            const messages = document.getElementById("aihMessages");
-            const close = document.getElementById("aihClose");
+            const miniInput = document.getElementById("aihMiniInput");
+            const miniMic = document.getElementById("aihMiniMic");
+            const closeBtn = document.getElementById("aihClose");
 
-            // 🗨️ Přidání zprávy
-            const append = (text, who = "ai") => {
+            // === Přidání zprávy ===
+            const appendMsg = (text, who = "ai") => {
                 const div = document.createElement("div");
-                div.className = `msg ${who}`;
+                div.className = `aih-msg ${who}`;
                 div.textContent = text;
                 messages.appendChild(div);
                 messages.scrollTop = messages.scrollHeight;
             };
 
-            // 💬 Odpovědi helperu
-            const reply = t => {
-                const q = t.toLowerCase();
+            // === Odpověď AI ===
+            const aiReply = (text) => {
+                const q = text.toLowerCase();
                 if (q.includes("spánek")) return "Spánek je základ – 7–8 hodin a tma.";
                 if (q.includes("výroba")) return "Najdi úzké místo a zesil tok. ⚙️";
-                if (q.includes("ahoj")) return "Ahoj 👋, jsem Chytré Já. Jak ti mohu pomoct?";
+                if (q.includes("ahoj")) return "Ahoj 👋, jsem Chytré já. Jak ti mohu pomoci?";
                 return "Zajímavé, pověz mi víc… 🤔";
             };
 
-            // 🚀 Odeslání zprávy
-            const send = () => {
-                const text = input.value.trim();
-                if (!text) return;
-                append(text, "user");
+            // === Odeslání ===
+            const send = (text) => {
+                if (!text.trim()) return;
+                appendMsg(text, "user");
                 input.value = "";
-                setTimeout(() => append(reply(text), "ai"), 400);
+                setTimeout(() => appendMsg(aiReply(text), "ai"), 500);
             };
 
-            // 🔄 Přepínání režimů helperu
-            header.addEventListener("click", () => helper.classList.toggle("mini"));
-            close.addEventListener("click", e => {
-                e.stopPropagation();
+            sendBtn.addEventListener("click", () => send(input.value));
+            input.addEventListener("keydown", (e) => e.key === "Enter" && send(input.value));
+
+            // === Mini režim ===
+            miniInput.addEventListener("keydown", (e) => {
+                if (e.key === "Enter") {
+                    helper.classList.remove("mini");
+                    helper.classList.add("expanded");
+                    send(miniInput.value);
+                    miniInput.value = "";
+                }
+            });
+
+            // === Zavření ===
+            closeBtn.addEventListener("click", () => {
+                helper.classList.add("hidden");
+                helper.classList.remove("expanded");
                 helper.classList.add("mini");
             });
 
-            sendBtn.addEventListener("click", send);
-            input.addEventListener("keydown", e => { if (e.key === "Enter") send(); });
+            // === Přepínání mezi mini/expanded ===
+            header.addEventListener("click", () => {
+                helper.classList.toggle("expanded");
+                helper.classList.toggle("mini");
+            });
 
-            // 🎙️ Mikrofon – placeholder
-            micBtn.addEventListener("click", () => append("🎤 Záznam hlasu zatím není aktivní.", "ai"));
+            // === Otevření z kódu ===
+            window.openAiChat = () => {
+                helper.classList.remove("hidden");
+                helper.classList.add("mini");
+            };
 
-            // 🧠 Úvodní zpráva
-            append("Ahoj 👋 jsem Chytré Já. Ptej se na cokoliv.", "ai");
+            console.log("✅ Plovoucí Chytré já inicializováno.");
         });
     </script>
 

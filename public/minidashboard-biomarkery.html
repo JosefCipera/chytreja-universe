@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="cs">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mini Dashboard – Biomarkery</title>
+    <style>
+        body {
+            font-family: 'Inter', 'Segoe UI', sans-serif;
+            background-color: #0f172a;
+            color: #e2e8f0;
+            margin: 0;
+            padding: 2rem;
+        }
+
+        h1 {
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: #94a3b8;
+            margin-bottom: 1.5rem;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1rem;
+        }
+
+        .card {
+            background: #1e293b;
+            border-radius: 0.75rem;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.25);
+            padding: 1rem 1rem 0.9rem;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.2s ease;
+        }
+
+        .card:hover {
+            transform: scale(1.03);
+        }
+
+        .card-title {
+            font-size: 0.85rem;
+            font-weight: 400;
+            color: #cbd5e1;
+            margin-bottom: 0.4rem;
+        }
+
+        .card-canvas {
+            width: 100%;
+            height: 55px;
+            margin-bottom: 0.4rem;
+        }
+
+        .card-value {
+            font-size: 1.6rem;
+            font-weight: 500;
+            color: #f8fafc;
+        }
+
+        .card-status {
+            font-size: 0.9rem;
+            margin-top: 0.2rem;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .card-status.normal {
+            color: #22c55e;
+        }
+
+        .card-status.warning {
+            color: #f59e0b;
+        }
+
+        .card-status.alert {
+            color: #ef4444;
+        }
+
+        .card-range {
+            font-size: 0.75rem;
+            color: #94a3b8;
+            margin-top: 0.2rem;
+        }
+
+        .card-comment {
+            font-size: 0.8rem;
+            color: #94a3b8;
+            margin-top: 0.4rem;
+            line-height: 1.4;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Biomarkery</h1>
+    <div class="grid">
+        <div class="card">
+            <div class="card-title">Glukóza</div>
+            <canvas class="card-canvas" id="glukozaCanvas"></canvas>
+            <div class="card-value">5.3 mmol/l</div>
+            <div class="card-status normal">🟢 Stabilní</div>
+            <div class="card-range">Rozmezí: 3.6 – 5.6</div>
+            <div class="card-comment">Hladina glukózy je v normě. Metabolismus glukózy funguje optimálně.</div>
+        </div>
+
+        <div class="card">
+            <div class="card-title">Bilirubin</div>
+            <canvas class="card-canvas" id="bilirubinCanvas"></canvas>
+            <div class="card-value">30.7 µmol/l</div>
+            <div class="card-status warning">🟠 Nad normou</div>
+            <div class="card-range">Rozmezí: 3 – 20</div>
+            <div class="card-comment">Mírně zvýšený bilirubin může signalizovat zátěž jater nebo regeneraci červených
+                krvinek.</div>
+        </div>
+
+        <div class="card">
+            <div class="card-title">Leukocyty</div>
+            <canvas class="card-canvas" id="leukocytyCanvas"></canvas>
+            <div class="card-value">14.1 ×10⁹/l</div>
+            <div class="card-status alert">🔴 Výrazně nad normou</div>
+            <div class="card-range">Rozmezí: 4 – 10</div>
+            <div class="card-comment">Zvýšený počet bílých krvinek ukazuje na aktivní imunitní reakci nebo infekci.
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // === Minimalistický trendový graf ===
+        function drawMiniTrend(canvasId, data, colorFrom, colorTo) {
+            const canvas = document.getElementById(canvasId);
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            const w = canvas.width = canvas.offsetWidth;
+            const h = canvas.height = 55;
+
+            const gradient = ctx.createLinearGradient(0, 0, w, 0);
+            gradient.addColorStop(0, colorFrom);
+            gradient.addColorStop(1, colorTo);
+
+            const max = Math.max(...data);
+            const min = Math.min(...data);
+
+            ctx.clearRect(0, 0, w, h);
+            ctx.beginPath();
+            ctx.lineWidth = 2.5;
+            ctx.strokeStyle = gradient;
+
+            data.forEach((v, i) => {
+                const x = (i / (data.length - 1)) * w;
+                const y = h - ((v - min) / (max - min)) * (h - 8) - 4;
+                if (i === 0) ctx.moveTo(x, y);
+                else ctx.lineTo(x, y);
+            });
+            ctx.stroke();
+
+            // Poslední bod
+            const lastX = w - 5;
+            const lastY = h - ((data.at(-1) - min) / (max - min)) * (h - 8) - 4;
+            ctx.beginPath();
+            ctx.arc(lastX, lastY, 3.5, 0, 2 * Math.PI);
+            ctx.fillStyle = "#f8fafc";
+            ctx.fill();
+        }
+
+        // === Inicializace grafů po načtení ===
+        window.addEventListener("load", () => {
+            drawMiniTrend("glukozaCanvas", [5.2, 5.4, 5.1, 5.3], "#06b6d4", "#22d3ee");
+            drawMiniTrend("bilirubinCanvas", [28, 32, 30, 31], "#f59e0b", "#fbbf24");
+            drawMiniTrend("leukocytyCanvas", [12, 13.5, 14, 14.1], "#ef4444", "#f87171");
+        });
+    </script>
+</body>
+
+</html>
