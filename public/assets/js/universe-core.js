@@ -126,6 +126,12 @@ function makeNode(it, isMain) {
       ? it.color.border
       : baseColor;
 
+  // 📱 Úprava velikosti podle zařízení
+  const isMobile = window.innerWidth < 768;
+
+  const sizeBase = isMain ? 48 : 34; // dříve 42 / 30
+  const fontBase = isMain ? 22 : 18; // dříve 20 / 17
+
   return {
     id: it.id,
     label: it.label,
@@ -138,12 +144,24 @@ function makeNode(it, isMain) {
       }
     },
     shape: "dot",
-    size: isMain ? 42 : 30,
-    font: { color: "#fff", size: isMain ? 20 : 17 },
+    size: isMobile ? sizeBase * 1.2 : sizeBase,
+    font: {
+      color: "#fff",
+      size: isMobile ? fontBase * 1.2 : fontBase,
+      face: "Inter, system-ui, sans-serif",
+      vadjust: 0
+    },
     borderWidth: 2,
-    shadow: true
+    shadow: {
+      enabled: true,
+      color: "rgba(0,0,0,0.25)",
+      size: 10,
+      x: 2,
+      y: 2
+    }
   };
 }
+
 
 function makeEdge(from, to) {
   const direction = Math.random() > 0.5 ? "curvedCW" : "curvedCCW";

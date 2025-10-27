@@ -222,6 +222,23 @@
             });
         }
 
+        // === 🧭 Návrat zpět do hlavního vesmíru ===
+        const backButton = document.getElementById("backToUniverse");
+        if (backButton) {
+            backButton.onclick = () => {
+                // 🔹 Univerzální logika návratu
+                if (window.opener) {
+                    window.close(); // otevřeno v novém okně
+                } else if (window.parent && window.parent !== window) {
+                    // běží v rámci PWA / iframe → pošle rodiči zprávu
+                    window.parent.postMessage("showUniverse", "*");
+                } else {
+                    // fallback – přesměrování na hlavní stránku
+                    window.location.href = "./index.html";
+                }
+            };
+        }
+
         // 💪 Silnější čára + větší dutý bod + delší šedé pokračování
         function drawMiniTrend(ctx, data, color) {
             const w = ctx.canvas.width;
