@@ -241,50 +241,73 @@
 
         // 💪 Silnější čára + větší dutý bod + delší šedé pokračování
         function drawMiniTrend(ctx, data, color) {
-            const w = ctx.canvas.width;
-            const h = ctx.canvas.height;
+            const canvas = ctx.canvas;
+            const w = canvas.clientWidth;
+            const h = canvas.clientHeight;
+            const dpr = window.devicePixelRatio || 1;
+
+            canvas.width = w * dpr;
+            canvas.height = h * dpr;
+            ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+            ctx.clearRect(0, 0, w, h);
+
             const marginX = 15;
             const marginY = 10;
             const min = Math.min(...data);
             const max = Math.max(...data);
-            ctx.clearRect(0, 0, w, h);
+            const range = Math.max(1e-6, max - min);
 
-            // --- hlavní čára ---
+            // přepočet bodů
+            const pts = data.map((v, i) => {
+                const x = marginX + (i / (data.length - 1)) * (w - marginX * 2);
+                const y = h - ((v - min) / range) * (h - marginY * 2) - marginY;
+                return { x, y };
+            });
+
+            // --- hlavní barevná čára (končí těsně před bodem) ---
             ctx.beginPath();
-            ctx.lineWidth = 12;
+            ctx.lineWidth = 9;
             ctx.lineJoin = "round";
             ctx.lineCap = "round";
-            ctx.strokeStyle = color + "cc";
+            ctx.strokeStyle = color + "e0";
 
-            data.forEach((v, i) => {
-                const x = marginX + (i / (data.length - 1)) * (w - marginX * 2);
-                const y = h - ((v - min) / (max - min)) * (h - marginY * 2) - marginY;
-                if (i === 0) ctx.moveTo(x, y);
-                else ctx.lineTo(x, y);
-            });
+            ctx.moveTo(pts[0].x, pts[0].y);
+            for (let i = 1; i < pts.length - 2; i++) {
+                const xc = (pts[i].x + pts[i + 1].x) / 2;
+                const yc = (pts[i].y + pts[i + 1].y) / 2;
+                ctx.quadraticCurveTo(pts[i].x, pts[i].y, xc, yc);
+            }
+            // poslední krátká část omezena, aby neskončila až za bodem
+            const last = pts[pts.length - 1];
+            const preLast = pts[pts.length - 2];
+            const endX = preLast.x + (last.x - preLast.x) * 0.9; // končí o něco dřív
+            const endY = preLast.y + (last.y - preLast.y) * 0.9;
+            ctx.quadraticCurveTo(preLast.x, preLast.y, endX, endY);
             ctx.stroke();
 
-            // --- pokračování ---
-            const lastX = marginX + ((data.length - 1) / (data.length - 1)) * (w - marginX * 2);
-            const lastY = h - ((data[data.length - 1] - min) / (max - min)) * (h - marginY * 2) - marginY;
+            // --- šedé pokračování ZA bodem ---
+            const grayStartX = endX + 5;
+            const grayEndX = endX + 240;
             ctx.beginPath();
-            ctx.moveTo(lastX, lastY);
-            ctx.lineTo(lastX + 60, lastY);
-            ctx.lineWidth = 10;
-            ctx.strokeStyle = "#64748b55";
+            ctx.moveTo(grayStartX, endY);
+            ctx.lineTo(grayEndX, endY);
+            ctx.lineWidth = 9;
+            ctx.lineCap = "round";
+            ctx.strokeStyle = "#94a3b877";
             ctx.stroke();
 
-            // --- větší kulatý bod ---
+            // --- kruhový bod ---
+            const R = 10;
+            const pointX = endX;
+            const pointY = endY;
+
             ctx.beginPath();
-            ctx.arc(lastX, lastY, 9, 0, Math.PI * 2);
-            ctx.fillStyle = "#ffffff";
+            ctx.arc(pointX, pointY, R, 0, Math.PI * 2);
+            ctx.fillStyle = color;
             ctx.fill();
             ctx.lineWidth = 3;
-            ctx.strokeStyle = color;
-            ctx.shadowColor = color + "55";
-            ctx.shadowBlur = 8;
+            ctx.strokeStyle = "#ffffff";
             ctx.stroke();
-            ctx.shadowBlur = 0;
         }
 
         window.addEventListener("load", () => {

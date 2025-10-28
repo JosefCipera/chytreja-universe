@@ -40,6 +40,8 @@ async function loadModel(modelName = "dlouhovekost") {
     if (!root.related || !root.related.length) {
       root.related = firstLevel.filter(n => n.id !== root.id).map(n => n.id);
     }
+    // 🚀 Uložit hlavní dataset pro návraty
+    window.MAIN_UNIVERSE_DATA = data;
 
     // 🚀 vykresli jen tuto část
     renderUniverse(data, firstLevel);

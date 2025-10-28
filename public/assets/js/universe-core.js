@@ -16,6 +16,11 @@ let network;
 let isSubUniverse = false;
 let currentCenter = null;
 
+// === Historie podsítí a poslední zobrazené uzly ===
+const universeHistory = [];
+let lastRenderedNodes = [];
+
+
 // 🌌 Vykreslení hlavní nebo podsítě
 export function renderUniverse(DATA, subset = null) {
   const nodes = [];
@@ -126,12 +131,6 @@ function makeNode(it, isMain) {
       ? it.color.border
       : baseColor;
 
-  // 📱 Úprava velikosti podle zařízení
-  const isMobile = window.innerWidth < 768;
-
-  const sizeBase = isMain ? 48 : 34; // dříve 42 / 30
-  const fontBase = isMain ? 22 : 18; // dříve 20 / 17
-
   return {
     id: it.id,
     label: it.label,
@@ -144,24 +143,12 @@ function makeNode(it, isMain) {
       }
     },
     shape: "dot",
-    size: isMobile ? sizeBase * 1.2 : sizeBase,
-    font: {
-      color: "#fff",
-      size: isMobile ? fontBase * 1.2 : fontBase,
-      face: "Inter, system-ui, sans-serif",
-      vadjust: 0
-    },
+    size: isMain ? 42 : 30,
+    font: { color: "#fff", size: isMain ? 20 : 17 },
     borderWidth: 2,
-    shadow: {
-      enabled: true,
-      color: "rgba(0,0,0,0.25)",
-      size: 10,
-      x: 2,
-      y: 2
-    }
+    shadow: true
   };
 }
-
 
 function makeEdge(from, to) {
   const direction = Math.random() > 0.5 ? "curvedCW" : "curvedCCW";
@@ -193,6 +180,14 @@ function openSubUniverse(DATA, centerNode) {
   let subNodes = [];
   const subEdges = [];
   const seen = new Set();
+
+  // 🔹 Ulož aktuální stav, než přejdeme do podsítě
+  if (currentCenter) {
+    universeHistory.push({
+      centerId: currentCenter,
+      subNodes: lastRenderedNodes || []
+    });
+  }
 
   if (centerNode.subnodes && centerNode.subnodes.length > 0) {
     subNodes = [centerNode, ...centerNode.subnodes];
@@ -248,6 +243,10 @@ function openSubUniverse(DATA, centerNode) {
     // aiSpeak(`Vstupuji do podvesmíru ${centerNode.label}.`);
     setTimeout(() => el.network.classList.remove("fade-blur-in"), 900);
   }, 900);
+
+  // 🪐 Uložit poslední zobrazené uzly
+  lastRenderedNodes = [...subNodes];
+
 }
 
 function smoothReturnToUniverse(DATA) {
@@ -255,29 +254,57 @@ function smoothReturnToUniverse(DATA) {
   el.network.classList.add("fade-blur-out");
 
   setTimeout(() => {
-    // 🧭 najdi hlavní uzel (root)
-    const root =
-      DATA.find(n => n.id === "dlouhovekost") ||
-      DATA.find(n => n.id === "toc") ||
-      DATA[0];
+    // 🧭 Návrat o jednu úroveň zpět, pokud existuje historie
+    if (universeHistory.length > 0) {
+      const prevState = universeHistory.pop();
 
-    // 🧩 vyber jen root + jeho přímé děti
-    const firstLevel = [root, ...DATA.filter(n => n.parent === root.id)];
+      if (prevState && prevState.subNodes && prevState.subNodes.length > 0) {
+        // 🔹 Vracíme se o jednu úroveň výš
+        renderUniverse(DATA, prevState.subNodes);
+        currentCenter = prevState.centerId;
+        isSubUniverse = true;
+      } else {
+        // 🔹 Vracíme se až na úplný začátek (hlavní uzel + jeho přímé potomky)
+        if (window.MAIN_UNIVERSE_DATA) {
+          const mainNode = window.MAIN_UNIVERSE_DATA.find(n => !n.parent);
+          if (mainNode) {
+            const firstLevel = window.MAIN_UNIVERSE_DATA.filter(
+              n => n.id === mainNode.id || n.parent === mainNode.id
+            );
+            renderUniverse(window.MAIN_UNIVERSE_DATA, firstLevel);
+          } else {
+            renderUniverse(window.MAIN_UNIVERSE_DATA);
+          }
+        }
+        currentCenter = null;
+        isSubUniverse = false;
+        universeHistory.length = 0; // reset historie
+      }
 
-    // propojit root s dětmi (kdyby neměl related)
-    if (!root.related || !root.related.length) {
-      root.related = firstLevel.filter(n => n.id !== root.id).map(n => n.id);
+    } else {
+      // 🔹 Není historie → rovnou hlavní úroveň (stejná logika jako výše)
+      if (window.MAIN_UNIVERSE_DATA) {
+        const mainNode = window.MAIN_UNIVERSE_DATA.find(n => !n.parent);
+        if (mainNode) {
+          const firstLevel = window.MAIN_UNIVERSE_DATA.filter(
+            n => n.id === mainNode.id || n.parent === mainNode.id
+          );
+          renderUniverse(window.MAIN_UNIVERSE_DATA, firstLevel);
+        } else {
+          renderUniverse(window.MAIN_UNIVERSE_DATA);
+        }
+      }
+
+      currentCenter = null;
+      isSubUniverse = false;
     }
 
-    // 🪐 vykresli pouze tuto 1. úroveň
-    renderUniverse(DATA, firstLevel);
-
+    // ✨ Animace návratu
     el.network.classList.remove("fade-blur-out");
     el.network.classList.add("fade-blur-in");
     setTimeout(() => el.network.classList.remove("fade-blur-in"), 900);
   }, 900);
 }
-
 
 function closePanel() {
   el.side.classList.remove("visible");

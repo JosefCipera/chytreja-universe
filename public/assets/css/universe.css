@@ -171,12 +171,11 @@ body {
 }
 
 /* --- Mobilní verze --- */
-@media (max-width: 900px) {
-    #sidePanel {
-        left: 12px;
-        right: 12px;
-        width: auto;
-        top: 60px;
+@media (max-width: 768px) {
+    .side-panel {
+        padding-left: 1rem;
+        padding-right: 1rem;
+        width: calc(100vw - 2rem);
     }
 
     #aiHelper {
