@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="cs">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dlouhověkost – Biomarkery</title>
+    <style>
+        body {
+            font-family: "Inter", system-ui, sans-serif;
+            background-color: #0f172a;
+            color: #e2e8f0;
+            margin: 0;
+            padding: 2rem 1.5rem;
+        }
+
+        h2 {
+            font-weight: 600;
+            font-size: 1.4rem;
+            color: #93c5fd;
+            text-align: center;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 0 12px rgba(147, 197, 253, 0.3);
+        }
+
+        h3 {
+            font-weight: 500;
+            font-size: 1.15rem;
+            color: #60a5fa;
+            text-align: left;
+            margin: 2rem auto 1rem;
+            max-width: 1300px;
+            letter-spacing: 0.02em;
+        }
+
+        .mini-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.25rem;
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        .mini-card {
+            background: #1e293b;
+            border-radius: 0.75rem;
+            padding: 1rem 1.25rem 1.25rem 1.25rem;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.45);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .mini-card:hover {
+            transform: scale(1.02);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.55);
+        }
+
+        .mini-title {
+            font-size: 0.9rem;
+            color: #cbd5e1;
+            margin-bottom: 0.35rem;
+        }
+
+        .mini-trend {
+            width: 100%;
+            height: 60px;
+            margin: 0.25rem 0 0.5rem 0;
+        }
+
+        .mini-value {
+            font-size: 1.6rem;
+            font-weight: 600;
+            color: #f1f5f9;
+            margin-top: 0.25rem;
+            margin-bottom: 0.4rem;
+        }
+
+        .mini-status {
+            font-size: 0.9rem;
+            color: #fbbf24;
+            margin-top: 0.25rem;
+        }
+
+        .mini-range {
+            font-size: 0.8rem;
+            color: #94a3b8;
+            margin-top: 0.25rem;
+        }
+
+        .mini-desc {
+            font-size: 0.85rem;
+            color: #cbd5e1;
+            margin-top: 0.75rem;
+            line-height: 1.4;
+        }
+
+        #backToUniverse {
+            display: block;
+            margin: 2.5rem auto 0 auto;
+            background: linear-gradient(90deg, #3b82f6, #2563eb);
+            border: none;
+            color: white;
+            padding: 10px 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+            box-shadow: 0 2px 6px rgba(59, 130, 246, 0.4);
+        }
+
+        #backToUniverse:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.6);
+        }
+    </style>
+</head>
+
+<body>
+    <h2 id="pageTitle">🧬 Dlouhověkost – Biomarkery</h2>
+    <p id="summaryLine" style="
+  text-align:center;
+  color:#cbd5e1;
+  font-size:1rem;
+  margin-top:0.3rem;
+  margin-bottom:1.5rem;
+"></p>
+
+    <div id="mainContent"></div>
+
+    <button id="backToUniverse">⬅️ Zpět do vesmíru</button>
+
+    <script>
+        const DATA_URL = "./longevity-biomarkers.json";
+
+        async function loadData() {
+            try {
+                const response = await fetch(DATA_URL);
+                if (!response.ok) throw new Error(`HTTP ${response.status}`);
+                const data = await response.json();
+                const biomarkers = allBiomarkers(data.groups);
+                updateSummary(biomarkers);
+
+                document.getElementById("pageTitle").innerHTML = data.title || "🧬 Biomarkery";
+                const container = document.getElementById("mainContent");
+                container.innerHTML = "";
+
+                const allGroups = data.groups || [];
+                allGroups.forEach(group => {
+                    const sectionTitle = document.createElement("h3");
+                    sectionTitle.textContent = group.label;
+                    container.appendChild(sectionTitle);
+
+                    const grid = document.createElement("div");
+                    grid.className = "mini-grid";
+                    container.appendChild(grid);
+
+                    renderGrid(grid, group.biomarkers);
+                });
+            } catch (err) {
+                console.error("❌ Nelze načíst data:", err);
+            }
+        }
+
+        function renderGrid(grid, data) {
+            grid.innerHTML = "";
+            data.forEach(b => {
+                const card = document.createElement("div");
+                card.className = "mini-card";
+                card.innerHTML = `
+          <div class="mini-title">${b.label || "—"}</div>
+          <canvas class="mini-trend"></canvas>
+          <div class="mini-value">${b.value} ${b.unit || ""}</div>
+          <div class="mini-status">${b.status || ""}</div>
+          <div class="mini-range">Rozmezí: ${b.range || ""}</div>
+          <div class="mini-desc">${b.desc || b.comment || ""}</div>
+        `;
+                grid.appendChild(card);
+                const ctx = card.querySelector("canvas").getContext("2d");
+                drawMiniTrend(ctx, b.trend || [], b.color || "#60a5fa");
+            });
+        }
+
+        function drawMiniTrend(ctx, data, color) {
+            if (!data || data.length < 2) return;
+            const canvas = ctx.canvas;
+            const w = canvas.clientWidth;
+            const h = canvas.clientHeight;
+            const dpr = window.devicePixelRatio || 1;
+
+            canvas.width = w * dpr;
+            canvas.height = h * dpr;
+            ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+            ctx.clearRect(0, 0, w, h);
+
+            const marginX = 15;
+            const marginY = 10;
+            const min = Math.min(...data);
+            const max = Math.max(...data);
+            const range = Math.max(1e-6, max - min);
+
+            const pts = data.map((v, i) => {
+                const x = marginX + (i / (data.length - 1)) * (w - marginX * 2);
+                const y = h - ((v - min) / range) * (h - marginY * 2) - marginY;
+                return { x, y };
+            });
+
+            ctx.beginPath();
+            ctx.lineWidth = 9;
+            ctx.lineJoin = "round";
+            ctx.lineCap = "round";
+            ctx.strokeStyle = color + "e0";
+            ctx.moveTo(pts[0].x, pts[0].y);
+            for (let i = 1; i < pts.length - 2; i++) {
+                const xc = (pts[i].x + pts[i + 1].x) / 2;
+                const yc = (pts[i].y + pts[i + 1].y) / 2;
+                ctx.quadraticCurveTo(pts[i].x, pts[i].y, xc, yc);
+            }
+            const last = pts[pts.length - 1];
+            const preLast = pts[pts.length - 2];
+            const endX = preLast.x + (last.x - preLast.x) * 0.9;
+            const endY = preLast.y + (last.y - preLast.y) * 0.9;
+            ctx.quadraticCurveTo(preLast.x, preLast.y, endX, endY);
+            ctx.stroke();
+
+            ctx.beginPath();
+            ctx.moveTo(endX + 5, endY);
+            ctx.lineTo(endX + 230, endY);
+            ctx.lineWidth = 9;
+            ctx.strokeStyle = "#94a3b877";
+            ctx.stroke();
+
+            ctx.beginPath();
+            ctx.arc(endX, endY, 10, 0, Math.PI * 2);
+            ctx.fillStyle = color;
+            ctx.fill();
+            ctx.lineWidth = 3;
+            ctx.strokeStyle = "#ffffff";
+            ctx.stroke();
+        }
+
+        document.getElementById("backToUniverse").onclick = () => {
+            if (window.opener) window.close();
+            else if (window.parent && window.parent !== window)
+                window.parent.postMessage("showUniverse", "*");
+            else window.location.href = "./index.html";
+        };
+
+        window.addEventListener("load", loadData);
+        function allBiomarkers(groups) {
+            return groups.flatMap(g => g.biomarkers || []);
+        }
+
+        function updateSummary(items) {
+            const total = items.length;
+            let normal = 0, high = 0, low = 0;
+            items.forEach(b => {
+                const s = (b.status || "").toLowerCase();
+                if (s.includes("v normě") || s.includes("normální") || s.includes("stabilní") || s.includes("optimální")) normal++;
+                else if (s.includes("zvýš")) high++;
+                else if (s.includes("nízk")) low++;
+            });
+            const summary = `🧩 Celkem: ${total} | 🟢 V normě: ${normal} | 🟠 Zvýšené: ${high} | 🔵 Nízké: ${low}`;
+            document.getElementById("summaryLine").innerText = summary;
+        }
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,526 @@
+{
+    "groups": [
+        {
+            "id": "regenerace",
+            "label": "🛌 Regenerace a spánek",
+            "color": "#22c55e",
+            "biomarkers": [
+                {
+                    "id": "spanek",
+                    "label": "Délka spánku",
+                    "value": "7,8",
+                    "unit": "h",
+                    "range": "7–9",
+                    "status": "optimální",
+                    "comment": "Dostatek spánku podporuje hormonální rovnováhu a regeneraci.",
+                    "trend": [
+                        7,
+                        7.2,
+                        7.5,
+                        7.8
+                    ],
+                    "color": "#22c55e"
+                },
+                {
+                    "id": "hrv",
+                    "label": "HRV (variabilita srdeční frekvence)",
+                    "value": "82",
+                    "unit": "ms",
+                    "range": "60–100",
+                    "status": "v normě",
+                    "comment": "Vysoká HRV značí dobrou regeneraci a vyrovnaný nervový systém.",
+                    "trend": [
+                        75,
+                        80,
+                        83,
+                        82
+                    ],
+                    "color": "#4ade80"
+                },
+                {
+                    "id": "kortizol",
+                    "label": "Kortizol (ranní)",
+                    "value": "380",
+                    "unit": "nmol/l",
+                    "range": "150–500",
+                    "status": "v normě",
+                    "comment": "Fyziologicky zvýšený ráno; pomáhá nastartovat metabolismus.",
+                    "trend": [
+                        350,
+                        370,
+                        385,
+                        380
+                    ],
+                    "color": "#86efac"
+                },
+                {
+                    "id": "melatonin",
+                    "label": "Melatonin (noční)",
+                    "value": "46",
+                    "unit": "pg/ml",
+                    "range": "30–80",
+                    "status": "v normě",
+                    "comment": "Zdravý cirkadiánní rytmus a kvalitní spánek.",
+                    "trend": [
+                        38,
+                        42,
+                        45,
+                        46
+                    ],
+                    "color": "#10b981"
+                },
+                {
+                    "id": "teplota",
+                    "label": "Tělesná teplota",
+                    "value": "36,6",
+                    "unit": "°C",
+                    "range": "36,0–37,2",
+                    "status": "stabilní",
+                    "comment": "Stabilní tělesná teplota odráží rovnováhu metabolismu.",
+                    "trend": [
+                        36.4,
+                        36.6,
+                        36.7,
+                        36.6
+                    ],
+                    "color": "#34d399"
+                }
+            ]
+        },
+        {
+            "id": "metabolismus",
+            "label": "🔥 Metabolismus a energie",
+            "color": "#f59e0b",
+            "biomarkers": [
+                {
+                    "id": "glukoza",
+                    "label": "Glukóza",
+                    "value": "5,3",
+                    "unit": "mmol/l",
+                    "range": "3,6–5,6",
+                    "status": "optimální",
+                    "comment": "Stabilní hladina glukózy značí vyrovnanou inzulinovou citlivost.",
+                    "trend": [
+                        5.1,
+                        5.3,
+                        5.4,
+                        5.3
+                    ],
+                    "color": "#fbbf24"
+                },
+                {
+                    "id": "inzulin",
+                    "label": "Inzulin",
+                    "value": "6,2",
+                    "unit": "mIU/l",
+                    "range": "2–10",
+                    "status": "v normě",
+                    "comment": "Nízký inzulin ukazuje na dobrou citlivost buněk.",
+                    "trend": [
+                        5.9,
+                        6.1,
+                        6.3,
+                        6.2
+                    ],
+                    "color": "#facc15"
+                },
+                {
+                    "id": "homa",
+                    "label": "HOMA-IR",
+                    "value": "1,6",
+                    "unit": "",
+                    "range": "< 2,0",
+                    "status": "v normě",
+                    "comment": "Dobrá inzulinová citlivost a stabilní metabolismus.",
+                    "trend": [
+                        1.7,
+                        1.6,
+                        1.5,
+                        1.6
+                    ],
+                    "color": "#fbbf24"
+                },
+                {
+                    "id": "vo2max",
+                    "label": "VO₂max",
+                    "value": "44,2",
+                    "unit": "ml/kg/min",
+                    "range": "40–50",
+                    "status": "optimální",
+                    "comment": "Ukazuje efektivitu využití kyslíku – prediktor dlouhověkosti.",
+                    "trend": [
+                        42.5,
+                        43.5,
+                        44,
+                        44.2
+                    ],
+                    "color": "#f97316"
+                },
+                {
+                    "id": "tep",
+                    "label": "Klidová srdeční frekvence",
+                    "value": "64",
+                    "unit": "bpm",
+                    "range": "50–80",
+                    "status": "v normě",
+                    "comment": "Nízký klidový tep značí dobrou fyzickou kondici.",
+                    "trend": [
+                        66,
+                        65,
+                        64,
+                        64
+                    ],
+                    "color": "#f59e0b"
+                }
+            ]
+        },
+        {
+            "id": "neuroendokrinni",
+            "label": "🧠 Stres a hormony",
+            "color": "#a855f7",
+            "biomarkers": [
+                {
+                    "id": "dhea",
+                    "label": "DHEA-S",
+                    "value": "5,8",
+                    "unit": "µmol/l",
+                    "range": "3–9",
+                    "status": "v normě",
+                    "comment": "Zrcadlí vitalitu a rovnováhu mezi stresovými hormony.",
+                    "trend": [
+                        5.2,
+                        5.5,
+                        5.8,
+                        5.8
+                    ],
+                    "color": "#c084fc"
+                },
+                {
+                    "id": "testosteron",
+                    "label": "Testosteron",
+                    "value": "19,2",
+                    "unit": "nmol/l",
+                    "range": "10–30",
+                    "status": "optimální",
+                    "comment": "Ukazatel vitality, síly a regenerace.",
+                    "trend": [
+                        18.5,
+                        19.0,
+                        19.2,
+                        19.2
+                    ],
+                    "color": "#d946ef"
+                },
+                {
+                    "id": "tsh",
+                    "label": "TSH",
+                    "value": "1,8",
+                    "unit": "mIU/l",
+                    "range": "0,5–4,0",
+                    "status": "v normě",
+                    "comment": "Hormon řízení štítné žlázy – ovlivňuje metabolismus.",
+                    "trend": [
+                        2.0,
+                        1.9,
+                        1.8,
+                        1.8
+                    ],
+                    "color": "#e879f9"
+                },
+                {
+                    "id": "kortizol_vecerni",
+                    "label": "Kortizol (večerní)",
+                    "value": "110",
+                    "unit": "nmol/l",
+                    "range": "50–150",
+                    "status": "v normě",
+                    "comment": "Pokles večer značí zdravý cirkadiánní rytmus.",
+                    "trend": [
+                        120,
+                        115,
+                        112,
+                        110
+                    ],
+                    "color": "#a855f7"
+                },
+                {
+                    "id": "serotonin",
+                    "label": "Serotonin",
+                    "value": "160",
+                    "unit": "ng/ml",
+                    "range": "100–200",
+                    "status": "v normě",
+                    "comment": "Vyvážená nálada, regenerace a spánek.",
+                    "trend": [
+                        150,
+                        155,
+                        160,
+                        160
+                    ],
+                    "color": "#d8b4fe"
+                }
+            ]
+        },
+        {
+            "id": "imunita",
+            "label": "🩸 Imunita a zánět",
+            "color": "#ef4444",
+            "biomarkers": [
+                {
+                    "id": "wbc",
+                    "label": "Leukocyty (WBC)",
+                    "value": "6,2",
+                    "unit": "×10⁹/l",
+                    "range": "4–10",
+                    "status": "v normě",
+                    "comment": "Ukazuje stav imunitního systému.",
+                    "trend": [
+                        6.5,
+                        6.4,
+                        6.3,
+                        6.2
+                    ],
+                    "color": "#f87171"
+                },
+                {
+                    "id": "crp",
+                    "label": "CRP (vysoko-senzitivní)",
+                    "value": "0,9",
+                    "unit": "mg/l",
+                    "range": "0–3",
+                    "status": "v normě",
+                    "comment": "Ukazatel systémového zánětu.",
+                    "trend": [
+                        1.5,
+                        1.2,
+                        1.0,
+                        0.9
+                    ],
+                    "color": "#fca5a5"
+                },
+                {
+                    "id": "ferritin",
+                    "label": "Ferritin",
+                    "value": "120",
+                    "unit": "µg/l",
+                    "range": "30–300",
+                    "status": "v normě",
+                    "comment": "Zásoba železa, ukazatel regenerace a zánětu.",
+                    "trend": [
+                        100,
+                        110,
+                        115,
+                        120
+                    ],
+                    "color": "#f87171"
+                },
+                {
+                    "id": "vitc",
+                    "label": "Vitamin C",
+                    "value": "74",
+                    "unit": "µmol/l",
+                    "range": "50–100",
+                    "status": "v normě",
+                    "comment": "Antioxidant, který pomáhá snižovat oxidační stres.",
+                    "trend": [
+                        70,
+                        72,
+                        74,
+                        74
+                    ],
+                    "color": "#ef4444"
+                },
+                {
+                    "id": "igG",
+                    "label": "Imunoglobulin G",
+                    "value": "11,4",
+                    "unit": "g/l",
+                    "range": "7–16",
+                    "status": "v normě",
+                    "comment": "Zdravá hladina pro dlouhodobou imunitní rovnováhu.",
+                    "trend": [
+                        10.9,
+                        11.2,
+                        11.3,
+                        11.4
+                    ],
+                    "color": "#b91c1c"
+                }
+            ]
+        },
+        {
+            "id": "vyziva",
+            "label": "🥦 Mikronutrienty",
+            "color": "#10b981",
+            "biomarkers": [
+                {
+                    "id": "vitd",
+                    "label": "Vitamin D",
+                    "value": "82",
+                    "unit": "nmol/l",
+                    "range": "75–150",
+                    "status": "v normě",
+                    "comment": "Podporuje imunitu, regeneraci i náladu.",
+                    "trend": [
+                        78,
+                        80,
+                        82,
+                        82
+                    ],
+                    "color": "#34d399"
+                },
+                {
+                    "id": "b12",
+                    "label": "Vitamin B12",
+                    "value": "420",
+                    "unit": "pmol/l",
+                    "range": "250–700",
+                    "status": "v normě",
+                    "comment": "Klíčový pro nervy, krvetvorbu a energii.",
+                    "trend": [
+                        400,
+                        410,
+                        420,
+                        420
+                    ],
+                    "color": "#10b981"
+                },
+                {
+                    "id": "homocystein",
+                    "label": "Homocystein",
+                    "value": "9,2",
+                    "unit": "µmol/l",
+                    "range": "5–12",
+                    "status": "optimální",
+                    "comment": "Vyšší hladiny zvyšují riziko kardiovaskulárních onemocnění.",
+                    "trend": [
+                        10.5,
+                        9.8,
+                        9.4,
+                        9.2
+                    ],
+                    "color": "#059669"
+                },
+                {
+                    "id": "magnesium",
+                    "label": "Hořčík (Mg)",
+                    "value": "0,86",
+                    "unit": "mmol/l",
+                    "range": "0,7–1,0",
+                    "status": "v normě",
+                    "comment": "Podporuje nervy, svaly a kvalitu spánku.",
+                    "trend": [
+                        0.8,
+                        0.85,
+                        0.86,
+                        0.86
+                    ],
+                    "color": "#16a34a"
+                },
+                {
+                    "id": "zinek",
+                    "label": "Zinek",
+                    "value": "16,2",
+                    "unit": "µmol/l",
+                    "range": "10–19",
+                    "status": "v normě",
+                    "comment": "Důležitý pro imunitu, kůži a regeneraci tkání.",
+                    "trend": [
+                        15.5,
+                        16.0,
+                        16.2,
+                        16.2
+                    ],
+                    "color": "#22c55e"
+                }
+            ]
+        },
+        {
+            "id": "bunecne",
+            "label": "🧬 Buněčné zdraví",
+            "color": "#06b6d4",
+            "biomarkers": [
+                {
+                    "id": "apob",
+                    "label": "ApoB",
+                    "value": "0,8",
+                    "unit": "g/l",
+                    "range": "0,6–1,0",
+                    "status": "v normě",
+                    "comment": "Ukazatel transportu cholesterolu – klíčový pro prevenci aterosklerózy.",
+                    "trend": [
+                        0.85,
+                        0.82,
+                        0.81,
+                        0.8
+                    ],
+                    "color": "#06b6d4"
+                },
+                {
+                    "id": "oxldl",
+                    "label": "Oxidovaný LDL",
+                    "value": "54",
+                    "unit": "U/l",
+                    "range": "0–60",
+                    "status": "v normě",
+                    "comment": "Měří oxidační stres lipidů, důležitý pro stárnutí.",
+                    "trend": [
+                        56,
+                        55,
+                        54,
+                        54
+                    ],
+                    "color": "#22d3ee"
+                },
+                {
+                    "id": "epigeneticky_vek",
+                    "label": "Epigenetický věk",
+                    "value": "43",
+                    "unit": "let",
+                    "range": "≈ biologický věk",
+                    "status": "v normě",
+                    "comment": "Odhaluje biologické stárnutí podle metylace DNA.",
+                    "trend": [
+                        44,
+                        44,
+                        43,
+                        43
+                    ],
+                    "color": "#0ea5e9"
+                },
+                {
+                    "id": "telomery",
+                    "label": "Délka telomer",
+                    "value": "7,8",
+                    "unit": "kb",
+                    "range": "6–9",
+                    "status": "v normě",
+                    "comment": "Delší telomery značí lepší buněčnou obnovu.",
+                    "trend": [
+                        7.5,
+                        7.6,
+                        7.7,
+                        7.8
+                    ],
+                    "color": "#3b82f6"
+                },
+                {
+                    "id": "mito",
+                    "label": "Mitochondriální efektivita",
+                    "value": "92",
+                    "unit": "%",
+                    "range": "80–100",
+                    "status": "optimální",
+                    "comment": "Vysoká efektivita buněčných elektráren zajišťuje energii a vitalitu.",
+                    "trend": [
+                        88,
+                        90,
+                        91,
+                        92
+                    ],
+                    "color": "#38bdf8"
+                }
+            ]
+        }
+    ]
+}

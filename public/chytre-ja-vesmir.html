@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="cs">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>Mapa Vesmíru Chytrého já</title>
+    <style>
+        body {
+            margin: 0;
+            background: #050a12;
+            overflow: hidden;
+            color: #8ff;
+            user-select: none
+        }
+
+        canvas {
+            display: block;
+            margin: auto;
+            background: radial-gradient(circle at center, #050a12, #000)
+        }
+
+        #legend {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            background: rgba(0, 0, 0, 0.4);
+            padding: 10px 15px;
+            border-radius: 10px;
+            font-family: sans-serif;
+            font-size: 14px;
+            color: #8ff
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="vesmir"></canvas>
+    <div id="legend">
+        ☀️ Superagent (Slunce)<br>
+        🪐 Chytrá já – Dlouhověk / TOC / Hudba<br>
+        🌙 Agenti a Subagenti
+    </div>
+
+    <script>
+        const canvas = document.getElementById('vesmir');
+        const ctx = canvas.getContext('2d');
+        resize();
+        window.addEventListener('resize', resize);
+        function resize() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+
+        const center = { x: canvas.width / 2, y: canvas.height / 2 };
+        let t = 0;
+
+        const system = [
+            {
+                name: "Dlouhověk",
+                radius: 180,
+                color: "#00ffd0",
+                moons: [
+                    { name: "Spánek", r: 20, speed: 0.03, phase: 0 },
+                    { name: "Pohyb", r: 30, speed: 0.02, phase: 2 },
+                    { name: "Výživa", r: 40, speed: 0.025, phase: 4 }
+                ]
+            },
+            {
+                name: "TOC",
+                radius: 260,
+                color: "#00aaff",
+                moons: [
+                    { name: "Flow", r: 25, speed: 0.018, phase: 1 },
+                    { name: "Finance", r: 35, speed: 0.015, phase: 3 },
+                    { name: "Tým", r: 45, speed: 0.017, phase: 5 }
+                ]
+            },
+            {
+                name: "Hudba",
+                radius: 340,
+                color: "#ff7afc",
+                moons: [
+                    { name: "Rytmus", r: 25, speed: 0.02, phase: 2 },
+                    { name: "Inspirace", r: 35, speed: 0.018, phase: 4 }
+                ]
+            }
+        ];
+
+        function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            const cx = canvas.width / 2, cy = canvas.height / 2;
+
+            // Slunce
+            const pulz = 1 + 0.1 * Math.sin(t * 0.02);
+            const grd = ctx.createRadialGradient(cx, cy, 0, cx, cy, 60 * pulz);
+            grd.addColorStop(0, "#0ff");
+            grd.addColorStop(1, "rgba(0,255,255,0)");
+            ctx.fillStyle = grd;
+            ctx.beginPath();
+            ctx.arc(cx, cy, 60 * pulz, 0, Math.PI * 2);
+            ctx.fill();
+
+            // Planety a měsíce
+            system.forEach((planet, i) => {
+                const angle = t * 0.001 * (1 + i * 0.3);
+                const x = cx + Math.cos(angle) * planet.radius;
+                const y = cy + Math.sin(angle) * planet.radius;
+
+                // Orbit
+                ctx.strokeStyle = "rgba(0,255,255,0.1)";
+                ctx.beginPath();
+                ctx.arc(cx, cy, planet.radius, 0, Math.PI * 2);
+                ctx.stroke();
+
+                // Planeta
+                ctx.fillStyle = planet.color;
+                ctx.beginPath();
+                ctx.arc(x, y, 20, 0, Math.PI * 2);
+                ctx.fill();
+
+                ctx.font = "12px sans-serif";
+                ctx.fillText(planet.name, x + 25, y + 5);
+
+                // Moons
+                planet.moons.forEach(m => {
+                    const mx = x + Math.cos(t * m.speed + m.phase) * m.r;
+                    const my = y + Math.sin(t * m.speed + m.phase) * m.r;
+                    ctx.fillStyle = "rgba(255,255,255,0.8)";
+                    ctx.beginPath();
+                    ctx.arc(mx, my, 5, 0, Math.PI * 2);
+                    ctx.fill();
+                });
+            });
+
+            t += 1;
+            requestAnimationFrame(draw);
+        }
+        draw();
+    </script>
+</body>
+
+</html>

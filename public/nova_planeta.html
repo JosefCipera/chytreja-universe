@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="cs">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Továrna na novou planetu Chytrého já</title>
+    <style>
+        body {
+            font-family: system-ui, Arial, sans-serif;
+            background: #0b0f16;
+            color: #8ff;
+            margin: 0;
+            padding: 30px
+        }
+
+        h1 {
+            color: #0ff
+        }
+
+        label {
+            display: block;
+            margin-top: 15px
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border-radius: 6px;
+            border: none;
+            background: #111;
+            color: #0ff
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 10px 25px;
+            background: #0ff;
+            color: #000;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer
+        }
+
+        #output {
+            margin-top: 30px;
+            white-space: pre;
+            background: #111;
+            padding: 15px;
+            border-radius: 10px
+        }
+    </style>
+</head>
+
+<body>
+    <h1>🪐 Nová planeta Chytrého já</h1>
+
+    <label>Název planety</label>
+    <input id="name" placeholder="např. Dlouhověk">
+
+    <label>Účel / smysl</label>
+    <textarea id="purpose" rows="3" placeholder="např. Hledá rovnováhu těla a mysli"></textarea>
+
+    <label>Agenti (odděleni čárkou)</label>
+    <input id="agents" placeholder="např. Spánek, Výživa, Pohyb">
+
+    <label>Sokratovské otázky (odděleni čárkou)</label>
+    <input id="questions" placeholder="např. Kde se ztrácí energie?, Co tě dnes omezuje?">
+
+    <button onclick="generate()">Vygeneruj JSON</button>
+
+    <pre id="output"></pre>
+
+    <script>
+        function generate() {
+            const planet = {
+                name: document.getElementById("name").value.trim(),
+                purpose: document.getElementById("purpose").value.trim(),
+                agents: document.getElementById("agents").value.split(",").map(a => ({ name: a.trim() })).filter(a => a.name),
+                questions: document.getElementById("questions").value.split(",").map(q => q.trim()).filter(q => q)
+            };
+            const json = JSON.stringify(planet, null, 2);
+            document.getElementById("output").textContent = json;
+        }
+    </script>
+</body>
+
+</html>
