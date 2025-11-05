@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="cs">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chytré Já – Tvůj digitální vesmír</title>
+    <link rel="stylesheet" href="assets/css/universe-web.css" />
+    <style>
+        body {
+            font-family: "Inter", system-ui, sans-serif;
+            margin: 0;
+            background: linear-gradient(180deg, #0b1220 0%, #101c35 100%);
+            color: #e2e8f0;
+            overflow-x: hidden;
+        }
+
+        header {
+            text-align: center;
+            padding: 5rem 1rem 3rem;
+            background: radial-gradient(circle at 50% 20%, rgba(59, 130, 246, 0.15), transparent 70%);
+        }
+
+        header h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #a8c7ff;
+            text-shadow: 0 0 12px rgba(56, 189, 248, 0.3);
+            margin-bottom: 1rem;
+        }
+
+        header p {
+            font-size: 1.3rem;
+            color: #cbd5e1;
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .btn-primary {
+            display: inline-block;
+            background: linear-gradient(90deg, #3b82f6, #2563eb);
+            color: white;
+            padding: 0.9rem 1.6rem;
+            border-radius: 10px;
+            margin-top: 2rem;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.35);
+        }
+
+        .btn-primary:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 18px rgba(37, 99, 235, 0.55);
+        }
+
+        section {
+            padding: 4rem 1rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h2 {
+            font-size: 2rem;
+            font-weight: 600;
+            color: #35ABE1;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature {
+            background: rgba(30, 41, 59, 0.75);
+            padding: 2rem;
+            border-radius: 14px;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
+            transition: all 0.3s ease;
+        }
+
+        .feature:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 6px 24px rgba(37, 99, 235, 0.45);
+        }
+
+        .feature h3 {
+            color: #a8c7ff;
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature p {
+            color: #cbd5e1;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .pricing {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+        }
+
+        .price-card {
+            background: rgba(15, 23, 42, 0.85);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            width: 280px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .price-card:hover {
+            transform: scale(1.03);
+            box-shadow: 0 8px 26px rgba(37, 99, 235, 0.45);
+        }
+
+        .price-card h3 {
+            color: #93c5fd;
+            font-size: 1.4rem;
+            margin-bottom: 0.6rem;
+        }
+
+        .price {
+            font-size: 2rem;
+            color: #35ABE1;
+            font-weight: 700;
+            margin: 1rem 0;
+        }
+
+        .price-card p {
+            font-size: 0.95rem;
+            color: #cbd5e1;
+            line-height: 1.5;
+        }
+
+        footer {
+            background: #0f172a;
+            padding: 3rem 1rem;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        footer p {
+            color: #94a3b8;
+            font-size: 0.9rem;
+        }
+
+        .contact {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .contact a {
+            color: #60a5fa;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .contact a:hover {
+            text-decoration: underline;
+        }
+
+        /* Světlejší přechod mezi sekcemi */
+        .alt-bg {
+            background: linear-gradient(180deg, #101c35 0%, #0b1220 100%);
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>🌌 Chytré Já</h1>
+        <p>Tvoje digitální vědomí, které propojuje měření, rozhodování a vizualizaci do jednoho živého systému řízení.
+        </p>
+        <a href="universe.html" class="btn-primary">Vstoupit do vesmíru</a>
+    </header>
+
+    <section>
+        <h2>🚀 Co přináší Chytré Já</h2>
+        <div class="features">
+            <div class="feature">
+                <h3>Propojení dat a myšlenek</h3>
+                <p>Všechna data, procesy i rozhodnutí na jednom místě – propojená a vizuálně srozumitelná.</p>
+            </div>
+            <div class="feature">
+                <h3>Hlasové ovládání</h3>
+                <p>Říkej, co chceš vidět nebo dělat. Hlasové povely se přenášejí do systému a spouštějí akce.</p>
+            </div>
+            <div class="feature">
+                <h3>Vizualizace vesmíru</h3>
+                <p>Každá oblast firmy nebo života má své místo ve vesmíru Chytrého Já. Vidíš souvislosti, které jinde
+                    unikají.</p>
+            </div>
+            <div class="feature">
+                <h3>AI Mentoring</h3>
+                <p>Tvůj průvodce, který pomáhá pochopit výsledky, doporučuje kroky a vysvětluje změny v čase.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="alt-bg">
+        <h2>💎 Ceník</h2>
+        <div class="pricing">
+            <div class="price-card">
+                <h3>Start</h3>
+                <div class="price">Zdarma</div>
+                <p>Základní přístup k vesmíru Chytrého Já, včetně hlasových příkazů a vizualizací.</p>
+            </div>
+            <div class="price-card">
+                <h3>Pro</h3>
+                <div class="price">490 Kč / měsíc</div>
+                <p>Rozšířené moduly, AI analýza, propojení s Tabidoo a přístup ke všem modelům.</p>
+            </div>
+            <div class="price-card">
+                <h3>Enterprise</h3>
+                <div class="price">Na dotaz</div>
+                <p>Plně přizpůsobené řešení pro firmy, včetně vlastního hostingu a správy dat.</p>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <h2>📞 Kontakt</h2>
+        <p style="text-align:center; max-width:700px; margin:0 auto 1rem; color:#cbd5e1;">
+            Chceš vyzkoušet Chytré Já ve své firmě nebo se zapojit do vývoje?
+            Napiš nám, rádi ti ukážeme cestu.
+        </p>
+        <div class="contact">
+            <a href="mailto:info@iting.cz">info@iting.cz</a>
+            <a href="https://iting.cz" target="_blank">www.iting.cz</a>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2025 Chytré Já – Projekt ITING.CZ</p>
+    </footer>
+
+</body>
+
+</html>

@@ -1,0 +1,281 @@
+/* === 🌌 VESMÍRNÝ WEB – ZÁKLAD === */
+html,
+body {
+    margin: 0;
+    padding: 0;
+    background: #0b1220;
+    color: #e2e8f0;
+    font-family: "Inter", system-ui, sans-serif;
+    scroll-behavior: smooth;
+}
+
+/* === 💫 HERO SEKCE === */
+.hero {
+    background: radial-gradient(circle at 50% 20%, #1e293b, #0b1220 80%);
+    text-align: center;
+    padding: 8rem 1rem 6rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 50% 10%, rgba(37, 99, 235, 0.25), transparent 70%);
+    z-index: 0;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1;
+}
+
+.hero h1 {
+    font-size: 3.2rem;
+    margin: 0;
+    font-weight: 700;
+    background: linear-gradient(90deg, #60a5fa, #a78bfa);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 25px rgba(37, 99, 235, 0.3);
+}
+
+.hero .subtitle {
+    font-size: 1.25rem;
+    color: #cbd5e1;
+    margin: 1rem 0 2rem;
+}
+
+.cta-btn {
+    background: linear-gradient(90deg, #2563eb, #7c3aed);
+    border: none;
+    color: white;
+    font-size: 1.1rem;
+    padding: 0.8rem 2rem;
+    border-radius: 8px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.4);
+}
+
+.cta-btn:hover {
+    background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+    transform: scale(1.05);
+    box-shadow: 0 0 30px rgba(59, 130, 246, 0.6);
+}
+
+/* === 🌌 GALAXIE SEKCE === */
+#galaxy {
+    background: radial-gradient(circle at 50% 10%, rgba(37, 99, 235, 0.08), transparent 80%);
+    color: #e2e8f0;
+    padding: 5rem 1rem;
+    position: relative;
+}
+
+#galaxy::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 60% 40%, rgba(59, 130, 246, 0.05), transparent 70%);
+    z-index: 0;
+}
+
+#galaxy h2 {
+    text-align: center;
+    font-size: 2.4rem;
+    background: linear-gradient(90deg, #93c5fd, #38bdf8);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 2.5rem;
+    text-shadow: 0 0 12px rgba(59, 130, 246, 0.25);
+    position: relative;
+    z-index: 1;
+}
+
+.galaxy-text {
+    max-width: 900px;
+    margin: 0 auto;
+    line-height: 1.75;
+    font-size: 1.05rem;
+    color: #cbd5e1;
+    position: relative;
+    z-index: 1;
+}
+
+.galaxy-text b {
+    color: #f1f5f9;
+}
+
+.ai-divider {
+    border: 0;
+    border-top: 1px solid rgba(96, 165, 250, 0.25);
+    margin: 2rem 0 1.5rem;
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* === ⚙️ SEKCÍ PRINCIPY === */
+#galaxy h3 {
+    color: #93c5fd;
+    text-align: center;
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+}
+
+/* === 🚀 FEATURES === */
+#features {
+    padding: 5rem 1rem;
+    background: #0f172a;
+    text-align: center;
+}
+
+#features h2 {
+    font-size: 2rem;
+    background: linear-gradient(90deg, #60a5fa, #a78bfa);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 2.5rem;
+}
+
+.features-grid {
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.feature {
+    background: rgba(30, 41, 59, 0.8);
+    border: 1px solid rgba(96, 165, 250, 0.2);
+    border-radius: 12px;
+    padding: 1.8rem;
+    transition: all 0.3s ease;
+}
+
+.feature:hover {
+    transform: translateY(-6px);
+    border-color: rgba(147, 197, 253, 0.6);
+    box-shadow: 0 0 25px rgba(59, 130, 246, 0.15);
+}
+
+.feature h3 {
+    margin-bottom: 1rem;
+    color: #93c5fd;
+}
+
+/* === 💎 CENÍK === */
+#pricing {
+    background: #0b1220;
+    padding: 5rem 1rem;
+    text-align: center;
+}
+
+#pricing h2 {
+    font-size: 2rem;
+    background: linear-gradient(90deg, #38bdf8, #818cf8);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 2.5rem;
+}
+
+.pricing-grid {
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.price-card {
+    background: rgba(30, 41, 59, 0.85);
+    border: 1px solid rgba(96, 165, 250, 0.15);
+    border-radius: 12px;
+    padding: 2rem;
+    transition: all 0.3s ease;
+}
+
+.price-card:hover {
+    border-color: rgba(147, 197, 253, 0.5);
+    transform: translateY(-6px);
+}
+
+.price-card.highlight {
+    background: rgba(37, 99, 235, 0.2);
+    border-color: rgba(96, 165, 250, 0.5);
+    box-shadow: 0 0 25px rgba(37, 99, 235, 0.2);
+}
+
+.price {
+    font-size: 1.8rem;
+    margin: 0.5rem 0 1rem;
+    color: #93c5fd;
+}
+
+.price-card ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.price-card li {
+    margin: 0.6rem 0;
+    color: #cbd5e1;
+}
+
+/* === 📞 KONTAKT === */
+#contact {
+    background: #0f172a;
+    text-align: center;
+    padding: 4rem 1rem;
+    color: #cbd5e1;
+}
+
+#contact h2 {
+    font-size: 2rem;
+    background: linear-gradient(90deg, #60a5fa, #818cf8);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 1.5rem;
+}
+
+#contact a {
+    color: #93c5fd;
+    text-decoration: none;
+}
+
+#contact a:hover {
+    text-decoration: underline;
+}
+
+/* === 🧠 FOOTER === */
+footer {
+    background: #0b1220;
+    text-align: center;
+    padding: 2rem 1rem;
+    color: #64748b;
+    font-size: 0.9rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* === 📱 RESPONSIVE === */
+@media (max-width: 768px) {
+    .hero {
+        padding: 6rem 1rem 4rem;
+    }
+
+    .hero h1 {
+        font-size: 2.2rem;
+    }
+
+    #galaxy h2 {
+        font-size: 1.9rem;
+    }
+
+    .galaxy-text {
+        font-size: 1rem;
+    }
+}
