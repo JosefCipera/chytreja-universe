@@ -8,7 +8,8 @@ let currentModel = "dlouhovekost";
 
 // 🔹 Funkce pro načtení libovolného modelu
 async function loadModel(modelName = "dlouhovekost") {
-  const MODEL_URL = `/assets/models/${modelName}.json`;
+  // const MODEL_URL = `/assets/models/${modelName}.json`;
+  const MODEL_URL = `${window.location.origin}/public/assets/models/${modelName}.json`;
 
   try {
     const response = await fetch(MODEL_URL);
