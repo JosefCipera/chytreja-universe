@@ -1,5 +1,28 @@
 // === UNIVERSE-INIT.JS ===
 // Spouští model vesmíru (desktop + mobil verze)
+console.group("🌌 Debug Universe Paths");
+console.log("window.location.origin:", window.location.origin);
+console.log("window.location.pathname:", window.location.pathname);
+console.log("Aktuální URL stránky:", window.location.href);
+console.groupEnd();
+
+(async () => {
+  const variants = [
+    `${window.location.origin}/assets/models/dlouhovekost.json`,
+    `${window.location.origin}/public/assets/models/dlouhovekost.json`,
+    `${window.location.origin}/chytreja-universe/assets/models/dlouhovekost.json`,
+    `${window.location.origin}/chytreja-universe/public/assets/models/dlouhovekost.json`,
+  ];
+
+  for (const url of variants) {
+    try {
+      const res = await fetch(url);
+      console.log(url, res.status);
+    } catch (e) {
+      console.log(url, "❌ Fetch error", e);
+    }
+  }
+})();
 
 import { renderUniverse } from "./universe-core.js";
 
