@@ -8,13 +8,18 @@ let currentModel = "dlouhovekost";
 
 // 🔹 Funkce pro načtení libovolného modelu
 async function loadModel(modelName = "dlouhovekost") {
-  // const MODEL_URL = `/assets/models/${modelName}.json`;
-  const MODEL_URL = `${window.location.origin}/public/assets/models/${modelName}.json`;
+  // 💡 Automatická detekce správné cesty (lokál vs. Vercel)
+  const basePath = window.location.pathname.includes("/public/")
+    ? `${window.location.origin}/public/assets/models/`
+    : `${window.location.origin}/assets/models/`;
+
+  const MODEL_URL = `${basePath}${modelName}.json`;
 
   try {
     const response = await fetch(MODEL_URL);
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
     const data = await response.json();
+
     // 🔁 Automatické doplnění related podle parent
     const map = new Map();
     data.forEach(node => {
@@ -30,7 +35,7 @@ async function loadModel(modelName = "dlouhovekost") {
       }
     });
 
-    console.log(`✅ Model "${modelName}" načten:`, data);
+    console.log(`✅ Model "${modelName}" načten z:`, MODEL_URL);
     // 🧭 Zobrazíme jen root + jeho přímé děti (1. úroveň)
     const root = data.find(n => n.id === "dlouhovekost") || data[0];
 
@@ -41,7 +46,8 @@ async function loadModel(modelName = "dlouhovekost") {
     if (!root.related || !root.related.length) {
       root.related = firstLevel.filter(n => n.id !== root.id).map(n => n.id);
     }
-    // 🚀 Uložit hlavní dataset pro návraty
+
+    // 🚀 Uložit dataset pro návraty
     window.MAIN_UNIVERSE_DATA = data;
 
     // 🚀 vykresli jen tuto část
@@ -51,12 +57,11 @@ async function loadModel(modelName = "dlouhovekost") {
     document.title = `Chytré Já – ${modelName === "toc" ? "TOC (Teorie omezení)" : "Model Dlouhověkosti"
       }`;
 
-    // 💬 Helper se inicializuje do mini stavu (jen lišta dole)
+    // 💬 Inicializace mini-AI helperu
     if (window.aiHelper) {
       console.log("🤖 Inicializuji AI Helper (mini mód).");
       // window.aiHelper.mini();
     }
-
   } catch (err) {
     console.error(`❌ Nelze načíst model "${modelName}":`, err);
   }
@@ -74,7 +79,7 @@ document.addEventListener("DOMContentLoaded", () => {
     return;
   }
 
-  selector.addEventListener("change", async (e) => {
+  selector.addEventListener("change", async e => {
     const selected = e.target.value;
     currentModel = selected;
     console.log("🔄 Přepínám na model:", selected);
@@ -96,7 +101,6 @@ document.addEventListener("DOMContentLoaded", () => {
   if (closePanel) {
     closePanel.addEventListener("click", () => {
       sidePanel.classList.remove("visible");
-      // stará metoda už není potřeba
       const helper = document.getElementById("aiHelper");
       if (helper) {
         helper.classList.remove("expanded");
@@ -104,7 +108,6 @@ document.addEventListener("DOMContentLoaded", () => {
       }
       sidePanel.classList.remove("chat-active");
     });
-
   }
 });
 
@@ -167,4 +170,3 @@ document.addEventListener("DOMContentLoaded", () => {
     if (e.key === "Enter") ask(input.value.trim());
   });
 })();
-
