@@ -279,3 +279,231 @@ footer {
         font-size: 1rem;
     }
 }
+
+/* === 💬 CHAT PANEL (Vesmírný styl) === */
+#chat-ai {
+    position: relative;
+    background: radial-gradient(circle at 50% 20%, rgba(59, 130, 246, 0.15), transparent 70%),
+        linear-gradient(180deg, #0b1220 0%, #101c35 100%);
+    padding: 6rem 1rem 5rem;
+}
+
+#chat-ai h2 {
+    text-align: left;
+    font-size: 2.5rem;
+    background: linear-gradient(90deg, #60a5fa, #a78bfa);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 1rem;
+}
+
+#chat-ai p {
+    text-align: justify;
+    font-size: 1.1rem;
+    color: #cbd5e1;
+    margin-bottom: 2rem;
+}
+
+#chat-ai #chat-log {
+    background: rgba(15, 23, 42, 0.6);
+    border: 1px solid rgba(96, 165, 250, 0.3);
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 0 25px rgba(37, 99, 235, 0.15);
+    transition: all 0.3s ease;
+}
+
+#chat-ai #chat-log:hover {
+    box-shadow: 0 0 35px rgba(147, 197, 253, 0.25);
+}
+
+#chat-ai input[type="text"] {
+    background: rgba(30, 41, 59, 0.7);
+    border: 1px solid rgba(96, 165, 250, 0.3);
+    border-radius: 10px;
+    color: #e2e8f0;
+    padding: 0.8rem 1rem;
+}
+
+#chat-ai button {
+    background: linear-gradient(90deg, #2563eb, #7c3aed);
+    border: none;
+    color: white;
+    padding: 0.8rem 1.8rem;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 600;
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.4);
+    transition: all 0.3s ease;
+}
+
+#chat-ai button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 30px rgba(59, 130, 246, 0.6);
+}
+
+/* === 🎬 MEDIOTÉKA === */
+#medioteka {
+    background: radial-gradient(circle at top, rgba(15, 23, 42, 0.95) 0%, rgba(2, 6, 23, 1) 100%);
+    padding: 5rem 1rem;
+    text-align: center;
+    color: #e2e8f0;
+}
+
+#medioteka h2 {
+    font-size: 2.4rem;
+    background: linear-gradient(90deg, #60a5fa, #818cf8);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 1.5rem;
+    text-shadow: 0 0 8px rgba(59, 130, 246, 0.25);
+}
+
+#medioteka p {
+    max-width: 700px;
+    margin: 0.75rem auto;
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: #cbd5e1;
+}
+
+/* === 💬 ZEPTEJTE SE CHYTRÉHO JÁ – FINAL CLEAN === */
+#faq-chat {
+    background: #0b1220;
+    color: #e2e8f0;
+    padding: 5rem 1rem;
+    text-align: center;
+}
+
+#faq-chat h2 {
+    font-size: 2.4rem;
+    color: #93c5fd;
+    text-shadow: 0 0 12px rgba(59, 130, 246, 0.35);
+    margin-bottom: 1rem;
+}
+
+#faq-chat p {
+    color: #cbd5e1;
+    font-size: 1.1rem;
+    max-width: 900px;
+    margin: 0 auto 2rem;
+    line-height: 1.7;
+    text-align: justify;
+}
+
+/* === 📦 CHAT BOX === */
+.chat-box {
+    background: #101c35;
+    border: 1px solid rgba(96, 165, 250, 0.3);
+    border-radius: 16px;
+    padding: 1.2rem 1rem;
+    max-width: 760px;
+    margin: 0 auto;
+    box-shadow: 0 0 25px rgba(59, 130, 246, 0.15);
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+}
+
+/* === 💭 ZPRÁVY === */
+.chat-messages {
+    max-height: 340px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    padding: 0;
+    margin-bottom: 1rem;
+}
+
+/* 🤖 Chytré já (vlevo) */
+.chat-message.ai {
+    background: rgba(59, 130, 246, 0.15);
+    color: #e2e8f0;
+    align-self: flex-start;
+    border-radius: 10px;
+    border-bottom-left-radius: 4px;
+    text-align: left;
+    margin-left: 0.25rem;
+    margin-right: auto;
+    padding: 0.8rem 1rem;
+    max-width: 85%;
+}
+
+/* 🧑 Uživatel (vpravo) */
+.chat-message.user {
+    background: linear-gradient(90deg, #2563eb, #3b82f6);
+    color: #fff;
+    align-self: flex-end;
+    border-radius: 10px;
+    border-bottom-right-radius: 4px;
+    text-align: right;
+    margin-right: 0.25rem;
+    margin-left: auto;
+    margin-bottom: 0.1rem;
+    padding: 0.8rem 1rem;
+    max-width: 85%;
+    box-shadow: 0 2px 8px rgba(37, 99, 235, 0.25);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.chat-message.user:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.35);
+}
+
+/* === 🧩 INPUT A TLAČÍTKO === */
+.chat-input-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 0;
+    padding: 0 0.25rem;
+}
+
+.chat-input-row input {
+    flex: 1;
+    background: rgba(30, 41, 59, 0.8);
+    border: 1px solid rgba(59, 130, 246, 0.3);
+    border-radius: 8px;
+    padding: 0.8rem 1rem;
+    color: #e2e8f0;
+    font-size: 1rem;
+    margin-top: 0.2rem;
+    /* srovnání se spodní hranou bublin */
+}
+
+.chat-input-row input:focus {
+    outline: none;
+    border-color: rgba(96, 165, 250, 0.6);
+    box-shadow: 0 0 8px rgba(59, 130, 246, 0.4);
+}
+
+/* ✈️ Odesílací tlačítko */
+.chat-input-row button {
+    background: linear-gradient(90deg, #2563eb, #3b82f6);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 0.8rem 1rem;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.chat-input-row button:hover {
+    transform: scale(1.05);
+    background: linear-gradient(90deg, #3b82f6, #60a5fa);
+}
+
+/* === 🎯 ZAROVNÁNÍ BUBLIN S INPUTEM === */
+.chat-messages,
+.chat-input-row {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+}
+
+.chat-message.ai,
+.chat-message.user {
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+}

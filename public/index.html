@@ -5,7 +5,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Chytré já – Tvůj digitální vesmír</title>
+    <!-- Font Awesome 6 Free -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
     <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/universe-web.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.6.2"></script>
     <script src="./assets/js/main.js"></script>
@@ -17,12 +20,14 @@
         <div class="nav-container">
             <div class="nav-logo">🌌 Chytré já</div>
             <ul class="nav-links" id="navLinks">
-                <li><a href="#onas">O nás</a></li>
-                <li><a href="#reference">Reference</a></li>
-                <li><a href="#faq">FAQ</a></li>
+                <li><a href="#medioteka">Mediotéka</a></li>
+                <li><a href="#faq-chat">Zeptejte se</a></li>
+                <!-- <li><a href="#reference">Reference</a></li>
+                <li><a href="#faq">FAQ</a></li> -->
                 <li><a href="#cenik">Ceník</a></li>
+                <li><a href="#onas">O nás</a></li>
                 <li><a href="#kontakt">Kontakt</a></li>
-            </ul> <a href="#" class="login-btn">Přihlásit</a>
+            </ul> <a href="app.html" class="login-btn">Přihlásit</a>
             <div class="hamburger" id="hamburger">
                 <div class="bar"></div>
                 <div class="bar"></div>
@@ -221,23 +226,95 @@
                     světy řízení života a firmy </text>
             </svg>
         </div>
-    </section> <!-- ===== O NÁS ===== -->
-    <section id="onas" class="about-section">
-        <div class="about-content">
-            <div class="about-header">
-                <h2>🌠 O nás</h2>
+    </section>
+
+    <!-- 📚 MEDIOTÉKA -->
+    <section id="medioteka" class="about-section">
+        <h2>📚 Mediotéka</h2>
+        <p>
+            Tato sekce bude brzy obsahovat multimediální knihovnu chytrého já.
+            Najdete zde videa, audio nahrávky, vizualizace a další interaktivní obsah
+            propojený s vašimi asistenty a vzdělávacími moduly.
+        </p>
+        <p>
+            Cílem je nabídnout prostor, kde se technologie, vzdělávání a inspirace
+            potkávají. Mediotéka se tak stane centrem znalostí v digitálním vesmíru
+            Chytrého já.
+        </p>
+    </section>
+
+    <section id="faq-chat" class="faq-section">
+        <div class="chat-container">
+            <h2>💬 Zeptejte se Chytrého já</h2>
+            <p>
+                Zajímají vás informace o systému, možnostech propojení nebo o tom, jak začít?
+                Napište dotaz nebo použijte mikrofon a Chytré já vám odpoví.
+            </p>
+
+            <div class="chat-box">
+                <div id="chat-messages" class="chat-messages">
+                    <div class="chat-message ai">👋 Ahoj, jsem Chytré já. Jak ti mohu pomoci?</div>
+                </div>
+                <div class="chat-input-row">
+                    <input id="chat-input" type="text" placeholder="Napište zprávu..." />
+                    <button id="chat-send-button">📤</button>
+                </div>
             </div>
-            <p> Začínali jsme jako parta programátorů a konzultantů, kteří chtěli zjednodušit plánování výroby tam, kde
-                běžné ERP systémy ztrácely dech. Z této snahy vznikl průtokový přístup, který dokázal propojit výrobu,
-                projekty i finance do jednoho smysluplného toku. </p>
-            <p> Dnes jsme o krok dál. Svět se mění – digitalizace, automatizace a umělá inteligence otevírají nové
-                galaxie možností. <strong>Chytré já</strong> je přirozeným vyústěním této cesty: místo, kde se
-                technologie potkává s principy průtokového řízení TOC, kde data ožívají, procesy se propojují a firma se
-                stává živým organismem. </p>
-            <p class="highlight"> Naší vizí je jednoduchost. Věříme, že budoucnost řízení firem patří těm, kteří dokážou
-                přemýšlet chytře – a vidět celý svůj vesmír v jednom systému. </p>
         </div>
-    </section> <!-- ===== REFERENCE ===== -->
+    </section>
+
+    <!-- ===== CENÍK ===== -->
+    <section id="cenik" class="alt-bg">
+        <h2>💎 Ceník</h2>
+        <div class="pricing">
+            <div class="price-card">
+                <h3>🚀 Start</h3>
+                <div class="price">Zdarma</div>
+                <p>Základní přístup k vesmíru Chytrého já, včetně hlasových příkazů a vizualizací.</p>
+            </div>
+            <div class="price-card highlight">
+                <h3>✨ Pro</h3>
+                <div class="price">490 Kč / měsíc</div>
+                <p>Rozšířené moduly, AI analýza, propojení s Tabidoo a přístup ke všem modelům.</p>
+            </div>
+            <div class="price-card">
+                <h3>🏢 Enterprise</h3>
+                <div class="price">Na dotaz</div>
+                <p>Plně přizpůsobené řešení pro firmy, včetně vlastního hostingu a správy dat.</p>
+            </div>
+        </div>
+    </section>
+    <!-- ===== FAQ CHAT ===== 
+    <section id="chat-ai" class="faq-section bg-slate-900 py-20 text-gray-300">
+        <div class="max-w-4xl mx-auto px-6 text-center">
+            <h2 class="text-4xl font-bold text-blue-300 mb-6">💬 Zeptejte se chytrého já</h2>
+            <p class="text-lg text-gray-400 mb-10">
+                Zajímají vás informace o systému, možnostech propojení nebo o tom, jak začít?
+                Napište dotaz nebo použijte mikrofon a Chytré já vám odpoví.
+            </p>
+
+            Chat Box 
+            <div class="bg-slate-800 rounded-2xl shadow-lg p-6 max-w-3xl mx-auto">
+                <div id="chat-messages" class="h-80 overflow-y-auto mb-4 text-left space-y-3">
+                    <div class="bg-slate-700 text-gray-200 p-3 rounded-lg inline-block">
+                        👋 Ahoj, jsem Chytré já. Jak ti mohu pomoci?
+                    </div>
+                </div>
+
+                 Input bar 
+                <div class="flex items-center gap-2">
+                    <input id="chat-input" type="text" placeholder="Napište dotaz..."
+                        class="flex-1 px-4 py-3 rounded-lg bg-slate-700 border border-slate-600 focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-100" />
+                    <button id="chat-mic-button" class="p-3 bg-blue-600 rounded-lg hover:bg-blue-700 transition"
+                        title="Mluvte">
+                        🎤
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section> -->
+
+    <!-- ===== REFERENCE ===== 
     <section id="reference" class="alt-bg">
         <h2>🌟 Reference</h2>
         <p class="reference-intro"> Naši první uživatelé testují Chytré já v reálném prostředí. Brzy zde přibudou jejich
@@ -260,34 +337,32 @@
                 <h4>– IT firma</h4>
             </div>
         </div>
-    </section> <!-- ===== FAQ ===== -->
+    </section>  ===== FAQ ===== 
     <section id="faq">
         <h2>FAQ</h2>
         <p style="text-align:center; max-width:800px; margin:auto;"> <strong>❓ Co je Chytré já?</strong><br> Digitální
             vědomí propojující tvé nástroje, data a rozhodnutí.<br><br> <strong>💬 Jak funguje?</strong><br> Ovládáš ho
             hlasem, reaguje vizuálně a spouští akce v systému.<br><br> <strong>💰 Kolik stojí?</strong><br> Základní
             verze zdarma, rozšířené funkce od 490 Kč měsíčně. </p>
-    </section> <!-- ===== CENÍK ===== -->
-    <section id="cenik" class="alt-bg">
-        <h2>💎 Ceník</h2>
-        <div class="pricing">
-            <div class="price-card">
-                <h3>🚀 Start</h3>
-                <div class="price">Zdarma</div>
-                <p>Základní přístup k vesmíru Chytrého já, včetně hlasových příkazů a vizualizací.</p>
+    </section> -->
+    <!-- ===== O NÁS ===== -->
+    <section id="onas" class="about-section">
+        <div class="about-content">
+            <div class="about-header">
+                <h2>🌠 O nás</h2>
             </div>
-            <div class="price-card highlight">
-                <h3>✨ Pro</h3>
-                <div class="price">490 Kč / měsíc</div>
-                <p>Rozšířené moduly, AI analýza, propojení s Tabidoo a přístup ke všem modelům.</p>
-            </div>
-            <div class="price-card">
-                <h3>🏢 Enterprise</h3>
-                <div class="price">Na dotaz</div>
-                <p>Plně přizpůsobené řešení pro firmy, včetně vlastního hostingu a správy dat.</p>
-            </div>
+            <p> Začínali jsme jako parta programátorů a konzultantů, kteří chtěli zjednodušit plánování výroby tam, kde
+                běžné ERP systémy ztrácely dech. Z této snahy vznikl průtokový přístup, který dokázal propojit výrobu,
+                projekty i finance do jednoho smysluplného toku. </p>
+            <p> Dnes jsme o krok dál. Svět se mění – digitalizace, automatizace a umělá inteligence otevírají nové
+                galaxie možností. <strong>Chytré já</strong> je přirozeným vyústěním této cesty: místo, kde se
+                technologie potkává s principy průtokového řízení TOC, kde data ožívají, procesy se propojují a firma se
+                stává živým organismem. </p>
+            <p class="highlight"> Naší vizí je jednoduchost. Věříme, že budoucnost řízení firem patří těm, kteří dokážou
+                přemýšlet chytře – a vidět celý svůj vesmír v jednom systému. </p>
         </div>
-    </section> <!-- ===== KONTAKT ===== -->
+    </section>
+    <!-- ===== KONTAKT ===== -->
     <section id="kontakt" class="alt-bg">
         <h2>📞 Kontaktujte nás</h2>
         <p style="text-align:center; opacity:0.9; margin-bottom:2rem;"> Zavolejte nám nebo napište. Jsme tu pro vás.
@@ -341,6 +416,14 @@
         </div>
     </footer> <!-- ===== SCRIPT pro hamburger ===== -->
     <script> const hamburger = document.getElementById("hamburger"); const navLinks = document.getElementById("navLinks"); hamburger.addEventListener("click", () => { navLinks.classList.toggle("open"); hamburger.classList.toggle("active"); }); </script>
+
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            lucide.createIcons();
+        });
+    </script>
+
 </body>
 
 </html>
