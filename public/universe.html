@@ -13,17 +13,34 @@
 
     <!-- 🎨 Styl -->
     <link rel="stylesheet" href="./assets/css/universe-core.css">
+    <link rel="stylesheet" href="./assets/css/universe-header.css">
+
 </head>
 
 <body>
     <!-- 🧭 Horní lišta -->
-    <div class="app-header">
-        <h1 id="appTitle">Chytré Já</h1>
-        <select id="modelSelector" class="model-selector">
-            <option value="dlouhovekost" selected>Dlouhověkost</option>
-            <option value="toc">TOC – Teorie omezení</option>
-        </select>
-    </div>
+    <header id="appHeader" class="app-header">
+        <h1 id="appTitle">
+            🌌 Chytré já
+        </h1>
+
+        <div class="header-controls">
+            <label for="modelSelector">Model:</label>
+            <select id="modelSelector">
+                <option value="dlouhovekost">Dlouhověkost</option>
+                <option value="toc">TOC</option>
+            </select>
+
+            <label for="roleSelect">Režim:</label>
+            <select id="roleSelect">
+                <option value="demo">Demo</option>
+                <option value="free">Free</option>
+                <option value="pro">Pro</option>
+                <option value="user">User</option>
+            </select>
+        </div>
+
+    </header>
 
     <!-- 🌌 Plátno sítě -->
     <div id="network"></div>

@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="cs">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Access Editor – Chytré Já</title>
+    <link rel="stylesheet" href="../assets/styles/dashboard.css">
+    <style>
+        body {
+            background: radial-gradient(circle at top, #0a0f24, #000);
+            color: #e2e8f0;
+            font-family: "Inter", sans-serif;
+            margin: 0;
+            padding: 1.5rem;
+        }
+
+        h1 {
+            text-align: center;
+            color: #93c5fd;
+            margin-bottom: 1rem;
+        }
+
+        #controls {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        select,
+        button,
+        input[type="file"] {
+            padding: 0.6rem 1rem;
+            border-radius: 8px;
+            border: 1px solid #334155;
+            background: #1e293b;
+            color: #f8fafc;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.2s ease;
+        }
+
+        button:hover {
+            background: #2563eb;
+        }
+
+        #node-legend {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 10px;
+            margin: 2rem auto;
+            max-width: 950px;
+            padding: 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+    </style>
+</head>
+
+<body>
+    <h1>🔐 Access Editor – Dlouhověkost</h1>
+
+    <div id="controls">
+        <select id="variantSelect">
+            <option value="demo">💡 Demo verze</option>
+            <option value="free">🧭 Free (registrovaní)</option>
+            <option value="pro">🚀 Pro (předplatitelé)</option>
+        </select>
+
+        <button id="loadAccess">📂 Načíst variantu JSON</button>
+        <button id="saveAccess">💾 Uložit variantu JSON</button>
+        <button id="resetAccess">♻️ Reset na původní model</button>
+    </div>
+
+    <div id="node-legend"></div>
+
+    <script type="module">
+        const sources = [
+            `${window.location.origin}/assets/models/dlouhovekost.json`,
+            `${window.location.origin}/public/assets/models/dlouhovekost.json`,
+        ];
+
+        let data = null;
+        let original = null;
+
+        // 🔹 Načtení hlavního modelu
+        for (const url of sources) {
+            try {
+                const res = await fetch(url);
+                if (res.ok) {
+                    data = await res.json();
+                    original = structuredClone(data);
+                    console.log(`✅ Model načten z: ${url}`);
+                    break;
+                }
+            } catch (err) {
+                console.warn(`❌ Chyba při načítání z ${url}`, err);
+            }
+        }
+
+        if (!data) {
+            document.body.innerHTML = "<p style='text-align:center;color:#f87171'>❌ Nepodařilo se načíst JSON model.</p>";
+            throw new Error("Model nenalezen");
+        }
+
+        renderNodeLegend();
+
+        // 🌈 Vykreslení seznamu uzlů
+        function renderNodeLegend() {
+            const legend = document.getElementById("node-legend");
+            legend.innerHTML = data.map(node => {
+                const access = node.access || "full";
+                const { icon, border, opacity, labelColor } = accessStyles(access, node.color);
+
+                return `
+        <div class="node-card" data-id="${node.id}" title="${node.definition || ''}" style="
+          display:flex;
+          align-items:center;
+          gap:10px;
+          padding:10px 14px;
+          border:1px solid ${border};
+          border-radius:10px;
+          background:rgba(255,255,255,0.03);
+          box-shadow:0 0 10px ${border}44;
+          cursor:pointer;
+          opacity:${opacity};
+          transition:transform 0.2s ease;
+        "
+        onmouseover="this.style.transform='scale(1.03)'"
+        onmouseout="this.style.transform='scale(1)'">
+          <div style="
+            width:18px;
+            height:18px;
+            border-radius:50%;
+            background:${border};
+            box-shadow:0 0 8px ${border};
+          "></div>
+          <div style="flex:1;color:${labelColor}">
+            <strong>${node.label}</strong>
+            <span style="opacity:0.8;font-size:0.9em;">${icon}</span>
+          </div>
+        </div>`;
+            }).join("");
+
+            // Aktivace klikací logiky
+            document.querySelectorAll(".node-card").forEach(card => {
+                card.addEventListener("click", () => toggleAccess(card.dataset.id));
+            });
+        }
+
+        // 🔁 Cyklická změna accessu
+        function toggleAccess(id) {
+            const node = data.find(n => n.id === id);
+            if (!node) return;
+
+            const current = node.access || "full";
+            const next = { full: "locked", locked: "hidden", hidden: "full" }[current];
+            node.access = next;
+            console.log(`🔄 ${node.label}: ${current} → ${next}`);
+
+            renderNodeLegend();
+        }
+
+        // 🎨 Styl uzlu podle accessu
+        function accessStyles(access, baseColor = "#3b82f6") {
+            switch (access) {
+                case "locked":
+                    return { icon: "🔒", border: "#64748b", opacity: 0.6, labelColor: "#94a3b8" };
+                case "hidden":
+                    return { icon: "🚫", border: "#334155", opacity: 0.3, labelColor: "#64748b" };
+                default:
+                    return { icon: "✅", border: baseColor, opacity: 1, labelColor: "#f8fafc" };
+            }
+        }
+
+        // 💾 Export do JSON (připravené pro /assets/models/)
+        document.getElementById("saveAccess").onclick = () => {
+            const variant = document.getElementById("variantSelect").value;
+            const filename = `access-${variant}.json`;
+            const json = JSON.stringify(data, null, 2);
+
+            const blob = new Blob([json], { type: "application/json" });
+            const a = document.createElement("a");
+            a.href = URL.createObjectURL(blob);
+            a.download = filename;
+            a.click();
+            URL.revokeObjectURL(a.href);
+
+            console.log(`✅ Access varianta "${variant}" připravena ke stažení.`);
+            alert(`✅ Soubor ${filename} uložen (stáhnut). Nahraj ho do /assets/models/.`);
+        };
+
+        // ♻️ Reset do původního modelu
+        document.getElementById("resetAccess").onclick = () => {
+            if (!original) return;
+            data = structuredClone(original);
+            renderNodeLegend();
+            alert("🔄 Původní model obnoven.");
+        };
+
+        // 📂 Načtení uložené varianty z disku
+        document.getElementById("loadAccess").onclick = async () => {
+            const input = document.createElement("input");
+            input.type = "file";
+            input.accept = ".json";
+            input.onchange = async e => {
+                const file = e.target.files[0];
+                if (!file) return;
+
+                try {
+                    const text = await file.text();
+                    const json = JSON.parse(text);
+                    if (Array.isArray(json)) {
+                        data = json;
+                        renderNodeLegend();
+                        console.log(`📂 Načtena varianta: ${file.name}`);
+                        alert(`✅ Načtena varianta: ${file.name}`);
+                    } else {
+                        throw new Error("Soubor není platný JSON pole uzlů");
+                    }
+                } catch (err) {
+                    console.error("❌ Chyba při načítání varianty:", err);
+                    alert("❌ Soubor není platný access model.");
+                }
+            };
+            input.click();
+        };
+    </script>
+</body>
+
+</html>

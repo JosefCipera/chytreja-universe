@@ -1,0 +1,32 @@
+[
+    {
+        "id": "dlouhovekost",
+        "label": "Dlouhověkost",
+        "definition": "Strategie života s rovnováhou těla, mysli a výživy.",
+        "color": "#2563eb"
+    },
+    {
+        "id": "zdravi",
+        "label": "Zdraví",
+        "parent": "dlouhovekost",
+        "color": "#22c55e"
+    },
+    {
+        "id": "telo",
+        "label": "Tělo",
+        "parent": "dlouhovekost",
+        "color": "#f59e0b"
+    },
+    {
+        "id": "mysl",
+        "label": "Mysl",
+        "parent": "dlouhovekost",
+        "color": "#a855f7"
+    },
+    {
+        "id": "vyziva",
+        "label": "Výživa",
+        "parent": "dlouhovekost",
+        "color": "#ef4444"
+    }
+]

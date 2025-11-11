@@ -1,195 +1,171 @@
-// === UNIVERSE-INIT.JS ===
-// Spouští model vesmíru (desktop + mobil verze)
-console.group("🌌 Debug Universe Paths");
-console.log("window.location.origin:", window.location.origin);
-console.log("window.location.pathname:", window.location.pathname);
-console.log("Aktuální URL stránky:", window.location.href);
-console.groupEnd();
-
-(async () => {
-  const variants = [
-    `${window.location.origin}/assets/models/dlouhovekost.json`,
-    `${window.location.origin}/public/assets/models/dlouhovekost.json`,
-    `${window.location.origin}/chytreja-universe/assets/models/dlouhovekost.json`,
-    `${window.location.origin}/chytreja-universe/public/assets/models/dlouhovekost.json`,
-  ];
-
-  for (const url of variants) {
-    try {
-      const res = await fetch(url);
-      console.log(url, res.status);
-    } catch (e) {
-      console.log(url, "❌ Fetch error", e);
-    }
-  }
-})();
-
 import { renderUniverse } from "./universe-core.js";
 
-// 🌌 Výchozí model
-let currentModel = "dlouhovekost";
+console.log("✨ Spouštím Chytré Já – vesmír dlouhověkosti");
 
-// 🔹 Funkce pro načtení libovolného modelu
-async function loadModel(modelName = "dlouhovekost") {
-  // 💡 Automatická detekce správné cesty (lokál vs. Vercel)
-  const basePath = window.location.pathname.includes("/public/")
-    ? `${window.location.origin}/public/assets/models/`
-    : `${window.location.origin}/assets/models/`;
+// 🧭 ADMIN režim (přepínatelné)
+const isAdmin = localStorage.getItem("adminMode") === "true";
 
-  const MODEL_URL = `${basePath}${modelName}.json`;
+// 🧩 Inicializace
+(async function initUniverse() {
+  const modelName = localStorage.getItem("currentModel") || "dlouhovekost";
+  const role = localStorage.getItem("userRole") || "demo";
 
-  try {
-    const response = await fetch(MODEL_URL);
-    if (!response.ok) throw new Error(`HTTP ${response.status}`);
-    const data = await response.json();
+  await loadAndRenderModel(modelName, role);
+  initHeaderControls();
+})();
 
-    // 🔁 Automatické doplnění related podle parent
-    const map = new Map();
-    data.forEach(node => {
-      if (!node.related) node.related = [];
-      if (node.parent) {
-        const parentNode = data.find(n => n.id === node.parent);
-        if (parentNode) {
-          if (!parentNode.related) parentNode.related = [];
-          if (!parentNode.related.includes(node.id)) {
-            parentNode.related.push(node.id);
-          }
-        }
+// === 🌍 Načtení modelu a jeho vykreslení ===
+async function loadAndRenderModel(modelName, role) {
+  const sources = [
+    `./assets/models/${modelName}.json`,
+    `./public/assets/models/${modelName}.json`,
+  ];
+
+  const model = await loadModel(sources);
+  if (!model) return console.error(`❌ Nelze načíst model: ${modelName}`);
+
+  window.MAIN_UNIVERSE_DATA = model;
+
+  await applyAccessModel(role, model);
+  renderVisibleUniverse(model);
+  updateHeaderColor(role);
+}
+
+// === 💾 Načtení JSON modelu ===
+async function loadModel(urls) {
+  for (const url of urls) {
+    try {
+      const res = await fetch(url);
+      if (res.ok) {
+        console.log(`✅ Model načten z: ${url}`);
+        return await res.json();
       }
+    } catch (err) {
+      console.warn(`⚠️ Nelze načíst z ${url}`, err);
+    }
+  }
+  return null;
+}
+
+// === 🔐 Access varianta podle režimu ===
+async function applyAccessModel(role, model) {
+  const variantUrl = `./assets/models/access-${role}.json`;
+  try {
+    const res = await fetch(variantUrl);
+    if (!res.ok) {
+      console.log(`⚠️ Access model ${variantUrl} nenalezen, používám výchozí.`);
+      return;
+    }
+
+    const accessData = await res.json();
+    const accessMap = new Map(accessData.map(n => [n.id, n.access]));
+    model.forEach(n => {
+      n.access = accessMap.get(n.id) || "visible";
     });
 
-    console.log(`✅ Model "${modelName}" načten z:`, MODEL_URL);
-    // 🧭 Zobrazíme jen root + jeho přímé děti (1. úroveň)
-    const root = data.find(n => n.id === "dlouhovekost") || data[0];
-
-    // Najdi děti rootu (ty mají parent = root.id)
-    const firstLevel = [root, ...data.filter(n => n.parent === root.id)];
-
-    // Ať jsou mezi sebou propojené podle related
-    if (!root.related || !root.related.length) {
-      root.related = firstLevel.filter(n => n.id !== root.id).map(n => n.id);
-    }
-
-    // 🚀 Uložit dataset pro návraty
-    window.MAIN_UNIVERSE_DATA = data;
-
-    // 🚀 vykresli jen tuto část
-    renderUniverse(data, firstLevel);
-
-    // Aktualizace titulku okna
-    document.title = `Chytré Já – ${modelName === "toc" ? "TOC (Teorie omezení)" : "Model Dlouhověkosti"
-      }`;
-
-    // 💬 Inicializace mini-AI helperu
-    if (window.aiHelper) {
-      console.log("🤖 Inicializuji AI Helper (mini mód).");
-      // window.aiHelper.mini();
-    }
+    console.log(`🔐 Access model "${role}" načten – ${accessData.length} uzlů`);
   } catch (err) {
-    console.error(`❌ Nelze načíst model "${modelName}":`, err);
+    console.warn(`❌ Chyba při načítání access modelu: ${role}`, err);
   }
 }
 
-// 🚀 Načti výchozí model (Dlouhověkost)
-loadModel(currentModel);
+// === 🌌 Vykreslení jen viditelných uzlů ===
+function renderVisibleUniverse(model) {
+  const visibleNodes = model.filter(n => n.access !== "hidden");
+  const mainNode = visibleNodes.find(n => !n.parent) || visibleNodes[0];
+  const firstLevel = visibleNodes.filter(
+    n => n.id === mainNode.id || n.parent === mainNode.id
+  );
 
-// 🧭 Přepínání modelů (Dlouhověkost ↔ TOC)
-document.addEventListener("DOMContentLoaded", () => {
-  const selector = document.getElementById("modelSelector");
-
-  if (!selector) {
-    console.warn("⚠️ Přepínač modelů (modelSelector) nebyl nalezen v HTML.");
-    return;
+  if (window.UNIVERSE_NETWORK) {
+    window.UNIVERSE_NETWORK.destroy();
+    window.UNIVERSE_NETWORK = null;
   }
 
-  selector.addEventListener("change", async e => {
-    const selected = e.target.value;
-    currentModel = selected;
-    console.log("🔄 Přepínám na model:", selected);
+  console.log(`🌌 Vykresluji vesmír (${visibleNodes.length} uzlů)`);
+  renderUniverse(visibleNodes, firstLevel);
+}
 
-    // Fade-out efekt
-    const graph = document.getElementById("graphContainer");
-    if (graph) graph.style.opacity = 0;
+// === 🎛️ Přepínače v hlavičce ===
+function initHeaderControls() {
+  const roleSelect = document.getElementById("roleSelect");
+  const modelSelect = document.getElementById("modelSelector");
+  const headerControls = document.querySelector(".header-controls");
 
-    setTimeout(async () => {
-      await loadModel(selected);
-      if (graph) graph.style.opacity = 1;
-    }, 400);
-  });
-});
+  if (!roleSelect || !modelSelect) return;
 
-// Při zavření panelu schovej helper
-document.addEventListener("DOMContentLoaded", () => {
-  const closePanel = document.getElementById("closePanel");
-  if (closePanel) {
-    closePanel.addEventListener("click", () => {
-      sidePanel.classList.remove("visible");
-      const helper = document.getElementById("aiHelper");
-      if (helper) {
-        helper.classList.remove("expanded");
-        helper.classList.add("mini");
-      }
-      sidePanel.classList.remove("chat-active");
-    });
+  // 🧠 Načti aktuální nastavení
+  const role = localStorage.getItem("userRole") || "demo";
+  const modelName = localStorage.getItem("currentModel") || "dlouhovekost";
+  roleSelect.value = role;
+  modelSelect.value = modelName;
+
+  document.body.classList.add(role);
+
+  // === 🎭 Režim "User" (čistý pohled) ===
+  if (role === "user") {
+    if (headerControls) headerControls.style.display = "none";
+    console.log("👤 Režim 'user' – přepínače skryty, čisté UI.");
+    return; // zastav inicializaci přepínačů
   }
-});
 
-// === 🧠 CHYTRÉ JÁ – logika mini + overlay ===
-(() => {
-  const miniInput = document.getElementById("aiMiniInput");
-  const miniMic = document.getElementById("aiMiniMic");
-  const overlay = document.getElementById("aiOverlay");
-  const closeBtn = document.getElementById("aiClose");
-  const chat = document.getElementById("aiChatWindow");
-  const sendBtn = document.getElementById("aiSend");
-  const micBtn = document.getElementById("aiMic");
-  const input = document.getElementById("aiInput");
+  // === 🔄 Přepínání režimu ===
+  updateHeaderColor(role);
+  roleSelect.addEventListener("change", async (e) => {
+    const newRole = e.target.value;
+    localStorage.setItem("userRole", newRole);
+    document.body.classList.remove("demo", "free", "pro", "user");
+    document.body.classList.add(newRole);
+    updateHeaderColor(newRole);
 
-  if (!miniInput || !overlay) return;
+    if (newRole === "user") {
+      if (headerControls) headerControls.style.display = "none";
+      console.log("👤 Přepnuto na 'user' – přepínače skryty.");
+      return location.reload();
+    }
 
-  const appendMsg = (who, text) => {
-    const div = document.createElement("div");
-    div.className = `msg ${who}`;
-    div.textContent = text;
-    chat.appendChild(div);
-    chat.scrollTop = chat.scrollHeight;
-  };
-
-  const send = text => {
-    if (!text) return;
-    appendMsg("user", text);
-    setTimeout(() => appendMsg("ai", `Zajímavé… ${text}? Pověz mi víc.`), 600);
-  };
-
-  miniInput.addEventListener("focus", () => overlay.classList.add("visible"));
-  miniMic.addEventListener("click", () => overlay.classList.add("visible"));
-  closeBtn.addEventListener("click", () => overlay.classList.remove("visible"));
-
-  sendBtn.addEventListener("click", () => {
-    send(input.value.trim());
-    input.value = "";
-  });
-  input.addEventListener("keydown", e => {
-    if (e.key === "Enter") {
-      send(input.value.trim());
-      input.value = "";
+    if (window.MAIN_UNIVERSE_DATA) {
+      await applyAccessModel(newRole, window.MAIN_UNIVERSE_DATA);
+      renderVisibleUniverse(window.MAIN_UNIVERSE_DATA);
     }
   });
-})();
 
-(() => {
-  const input = document.getElementById("aiPanelInput");
-  const send = document.getElementById("aiPanelSend");
-  if (!input || !send) return;
+  // === 🔄 Přepínání modelu ===
+  modelSelect.addEventListener("change", async (e) => {
+    const newModel = e.target.value;
+    localStorage.setItem("currentModel", newModel);
+    const role = localStorage.getItem("userRole") || "demo";
+    await loadAndRenderModel(newModel, role);
+  });
+}
 
-  const ask = text => {
-    if (!text) return;
-    console.log("🧠 Chytré Já:", text);
-    input.value = "";
+// === 🎨 Barvy lišty podle režimu ===
+function updateHeaderColor(role) {
+  const header = document.getElementById("appHeader");
+  if (!header) return;
+
+  const colors = {
+    demo: "rgba(59,130,246,0.25)",   // 💡 modrá
+    free: "rgba(34,197,94,0.25)",    // 🧭 zelená
+    pro: "rgba(251,191,36,0.25)",    // 🚀 zlatá
+    user: "rgba(15,23,42,0.9)"       // 🔒 neutrální tmavá
   };
 
-  send.addEventListener("click", () => ask(input.value.trim()));
-  input.addEventListener("keydown", e => {
-    if (e.key === "Enter") ask(input.value.trim());
-  });
-})();
+  header.style.background = colors[role] || "rgba(15,23,42,0.9)";
+}
+// 🧑‍💻 Trojitý klik pro vývojáře – návrat z režimu "user" do "demo"
+let clickCount = 0;
+
+document.getElementById("appTitle")?.addEventListener("click", () => {
+  // reaguje jen v režimu user
+  if (localStorage.getItem("userRole") !== "user") return;
+
+  clickCount++;
+  setTimeout(() => (clickCount = 0), 800); // reset po 0.8 s
+
+  if (clickCount === 3) {
+    console.log("🧠 Přepínám z režimu USER na DEMO...");
+    localStorage.setItem("userRole", "demo");
+    location.reload();
+  }
+});

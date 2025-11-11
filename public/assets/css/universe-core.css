@@ -749,3 +749,133 @@ body {
     background-color: #475569;
     border-radius: 4px;
 }
+
+.lock-message {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(30, 41, 59, 0.9);
+    color: #f8fafc;
+    border: 1px solid #475569;
+    padding: 10px 20px;
+    border-radius: 12px;
+    font-family: "Inter", sans-serif;
+    font-size: 0.95rem;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+    animation: fadeInOut 2.5s ease forwards;
+    z-index: 9999;
+}
+
+@keyframes fadeInOut {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, 20px);
+    }
+
+    10%,
+    80% {
+        opacity: 1;
+        transform: translate(-50%, 0);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translate(-50%, -20px);
+    }
+}
+
+#modelSelector {
+    background: #1e293b;
+    border: 1px solid #334155;
+    color: #f1f5f9;
+    padding: 6px 10px;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    /* zvýšeno */
+    cursor: pointer;
+    transition: background 0.3s, border-color 0.3s;
+}
+
+#modelSelector:hover {
+    background: #334155;
+}
+
+#roleSelect {
+    background: #1e293b;
+    border: 1px solid #334155;
+    color: #f1f5f9;
+    padding: 6px 10px;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: background 0.3s, border-color 0.3s, color 0.3s;
+}
+
+#roleSelect:hover {
+    background: #334155;
+}
+
+/* 💡 Barvy podle režimu */
+body.demo #roleSelect {
+    border-color: #3b82f6;
+    background: rgba(59, 130, 246, 0.15);
+    color: #e0f2fe;
+}
+
+body.free #roleSelect {
+    border-color: #22c55e;
+    background: rgba(34, 197, 94, 0.15);
+    color: #dcfce7;
+}
+
+body.pro #roleSelect {
+    border-color: #fbbf24;
+    background: rgba(251, 191, 36, 0.15);
+    color: #fef9c3;
+}
+
+/* === Combo pro výběr modelu i režimu === */
+/* === ✅ Combo pro výběr modelu i režimu – finální styl === */
+#modelSelector,
+#roleSelect {
+    background: #1E293B !important;
+    /* tmavé pozadí */
+    border: 1px solid #334155;
+    color: #bfdbfe;
+    /* světle modrý text */
+    padding: 6px 10px;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    cursor: pointer;
+    appearance: none;
+    /* odstraní systémové pozadí */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: none !important;
+    transition: background 0.3s, border-color 0.3s, color 0.3s;
+}
+
+#modelSelector:hover,
+#roleSelect:hover {
+    background: #334155;
+}
+
+/* === 💡 Barevné režimy pro přehled === */
+body.demo #roleSelect {
+    border-color: #3b82f6;
+    box-shadow: 0 0 6px rgba(59, 130, 246, 0.4);
+    color: #bfdbfe;
+}
+
+body.free #roleSelect {
+    border-color: #22c55e;
+    box-shadow: 0 0 6px rgba(34, 197, 94, 0.4);
+    color: #bbf7d0;
+}
+
+body.pro #roleSelect {
+    border-color: #fbbf24;
+    box-shadow: 0 0 6px rgba(251, 191, 36, 0.4);
+    color: #fef08a;
+}
