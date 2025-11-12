@@ -1,10 +1,11 @@
 {
-    "title": "🧬 Zdraví – Biomarkery dlouhověkosti",
-    "subtitle": "Přehled hlavních ukazatelů podle oblastí",
+    "title": "🧬 Dlouhověkost – Biomarkery podle Medicine 3.0",
+    "subtitle": "Přehled klíčových oblastí zdraví podle Petera Attii",
     "groups": [
         {
             "id": "regenerace",
-            "label": "🛌 Regenerace a spánek",
+            "label": "Regenerace a spánek",
+            "icon": "🛌",
             "biomarkers": [
                 {
                     "id": "sleep_duration",
@@ -61,7 +62,7 @@
                     "unit": "%",
                     "range": "15–25",
                     "status": "✅ v normě",
-                    "desc": "Hluboký spánek je klíčový pro obnovu tkání a uvolnění růstového hormonu.",
+                    "desc": "Hluboký spánek je klíčový pro obnovu tkání a růstový hormon.",
                     "trend": [
                         14,
                         15,
@@ -93,7 +94,7 @@
                     "unit": "bpm",
                     "range": "50–65",
                     "status": "✅ v normě",
-                    "desc": "Nižší klidová tepová frekvence souvisí s dobrou kondicí a regenerací.",
+                    "desc": "Nižší klidová TF → lepší kondice a regenerace.",
                     "trend": [
                         62,
                         60,
@@ -106,7 +107,8 @@
         },
         {
             "id": "metabolismus",
-            "label": "🔥 Metabolismus a energie",
+            "label": "Metabolismus a energie",
+            "icon": "🔥",
             "biomarkers": [
                 {
                     "id": "glukoza",
@@ -131,7 +133,7 @@
                     "unit": "%",
                     "range": "4,0–5,4",
                     "status": "✅ v normě",
-                    "desc": "Dlouhodobá kontrola glukózy; nižší hodnoty znamenají nižší riziko.",
+                    "desc": "Dlouhodobá kontrola glukózy; nižší hodnoty = nižší riziko.",
                     "trend": [
                         5.1,
                         5.0,
@@ -147,7 +149,7 @@
                     "unit": "mIU/l",
                     "range": "2–10",
                     "status": "✅ v normě",
-                    "desc": "Nižší inzulin obvykle znamená lepší citlivost tkání.",
+                    "desc": "Nižší inzulin značí lepší citlivost tkání.",
                     "trend": [
                         6.9,
                         6.6,
@@ -177,7 +179,7 @@
                     "label": "HDL-cholesterol",
                     "value": "1,5",
                     "unit": "mmol/l",
-                    "range": "≥ 1,0 (muži) / ≥ 1,3 (ženy)",
+                    "range": "≥ 1,0 / ≥ 1,3",
                     "status": "✅ v normě",
                     "desc": "Vyšší HDL má protektivní efekt v lipidovém profilu.",
                     "trend": [
@@ -208,7 +210,8 @@
         },
         {
             "id": "stres_hormony",
-            "label": "🧠 Stres a hormony",
+            "label": "Stres a hormony",
+            "icon": "🧠",
             "biomarkers": [
                 {
                     "id": "kortizol_am",
@@ -310,7 +313,8 @@
         },
         {
             "id": "imunita_zanet",
-            "label": "🩸 Imunita a zánět",
+            "label": "Imunita a zánět",
+            "icon": "🩸",
             "biomarkers": [
                 {
                     "id": "wbc",
@@ -396,7 +400,8 @@
         },
         {
             "id": "mikronutrienty",
-            "label": "🥦 Mikronutrienty",
+            "label": "Mikronutrienty",
+            "icon": "🥦",
             "biomarkers": [
                 {
                     "id": "vitd",
@@ -421,7 +426,7 @@
                     "unit": "pmol/l",
                     "range": "250–700",
                     "status": "✅ v normě",
-                    "desc": "Energie, nervy a krvetvorba; vegani by měli pravidelně doplňovat.",
+                    "desc": "Energie, nervy a krvetvorba; vegani by měli doplňovat.",
                     "trend": [
                         400,
                         410,
@@ -437,7 +442,7 @@
                     "unit": "ng/ml",
                     "range": "7–20",
                     "status": "✅ v normě",
-                    "desc": "Spolu s B12 a B6 ovlivňuje homocystein a metylaci.",
+                    "desc": "S B12 a B6 ovlivňuje homocystein a metylaci.",
                     "trend": [
                         13.2,
                         14.0,
@@ -482,7 +487,8 @@
         },
         {
             "id": "bunecne",
-            "label": "🧬 Buněčné zdraví",
+            "label": "Buněčné zdraví",
+            "icon": "🧬",
             "biomarkers": [
                 {
                     "id": "apob",
@@ -555,7 +561,7 @@
                     "unit": "let",
                     "range": "≈ biologický věk",
                     "status": "ℹ️ informativní",
-                    "desc": "Odráží metylační vzorce DNA; důležitý je dlouhodobý trend.",
+                    "desc": "Odráží metylační vzorce DNA; důležitý je trend.",
                     "trend": [
                         44,
                         44,

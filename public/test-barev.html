@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="cs">
+
+<head>
+    <meta charset="UTF-8">
+    <title>🎨 Paleta dlouhověkosti</title>
+    <style>
+        body {
+            background: #0f172a;
+            color: #e2e8f0;
+            font-family: "Inter", sans-serif;
+            margin: 0;
+            padding: 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .branch {
+            background: #1e293b;
+            border-radius: 12px;
+            padding: 1.2rem;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .branch h2 {
+            margin: 0 0 1rem 0;
+            font-size: 1.2rem;
+            text-align: center;
+            color: #93c5fd;
+        }
+
+        .level {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 0.5rem 0.6rem;
+            border-radius: 8px;
+            margin-bottom: 0.4rem;
+            transition: transform 0.2s ease;
+        }
+
+        .level:hover {
+            transform: scale(1.03);
+        }
+
+        .color-box {
+            width: 28px;
+            height: 28px;
+            border-radius: 6px;
+            box-shadow: 0 0 8px rgba(255, 255, 255, 0.15);
+        }
+
+        .label {
+            font-size: 0.95rem;
+            color: #f1f5f9;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- 🧬 Zdraví -->
+    <div class="branch">
+        <h2>🧬 Zdraví</h2>
+        <div class="level">
+            <div class="color-box" style="background:#22C55E"></div><span class="label">1️⃣ Zdraví</span>
+        </div>
+        <div class="level">
+            <div class="color-box" style="background:#16A34A"></div><span class="label">2️⃣ Regenerace /
+                Metabolismus</span>
+        </div>
+        <div class="level">
+            <div class="color-box" style="background:#10B981"></div><span class="label">3️⃣ Biomarkery / Data</span>
+        </div>
+    </div>
+
+    <!-- 🏋️ Tělo -->
+    <div class="branch">
+        <h2>🏋️ Tělo</h2>
+        <div class="level">
+            <div class="color-box" style="background:#F59E0B"></div><span class="label">1️⃣ Tělo</span>
+        </div>
+        <div class="level">
+            <div class="color-box" style="background:#FBBF24"></div><span class="label">2️⃣ Systémy tréninku</span>
+        </div>
+        <div class="level">
+            <div class="color-box" style="background:#D97706"></div><span class="label">3️⃣ Výkonová data</span>
+        </div>
+    </div>
+
+    <!-- 🧠 Mysl -->
+    <div class="branch">
+        <h2>🧠 Mysl</h2>
+        <div class="level">
+            <div class="color-box" style="background:#A855F7"></div><span class="label">1️⃣ Mysl</span>
+        </div>
+        <div class="level">
+            <div class="color-box" style="background:#C084FC"></div><span class="label">2️⃣ Psychologické oblasti</span>
+        </div>
+        <div class="level">
+            <div class="color-box" style="background:#D8B4FE"></div><span class="label">3️⃣ Praktické nástroje</span>
+        </div>
+    </div>
+
+    <!-- 🍎 Výživa -->
+    <div class="branch">
+        <h2>🍎 Výživa</h2>
+        <div class="level">
+            <div class="color-box" style="background:#EF4444"></div><span class="label">1️⃣ Výživa</span>
+        </div>
+        <div class="level">
+            <div class="color-box" style="background:#F87171"></div><span class="label">2️⃣ Nutriční strategie</span>
+        </div>
+        <div class="level">
+            <div class="color-box" style="background:#FCA5A5"></div><span class="label">3️⃣ Metabolické parametry</span>
+        </div>
+    </div>
+
+</body>
+
+</html>
