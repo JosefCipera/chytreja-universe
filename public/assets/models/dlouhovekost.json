@@ -13,7 +13,7 @@
         "articles": [
             {
                 "title": "Jak přemýšlet o dlouhověkosti",
-                "url": "../public/assets/docs/dlouhovekost/uvod.md",
+                "url": "../assets/docs/dlouhovekost/uvod.md",
                 "summary": "Peter Attia chápe dlouhověkost jako inženýrský problém – plánuj, měř a optimalizuj. Není to dieta ani cvičení, ale systém řízení života."
             }
         ]
@@ -36,7 +36,7 @@
         "articles": [
             {
                 "title": "Zdraví jako zrcadlo tvých návyků",
-                "url": "../public/assets/docs/dlouhovekost/zdravi/zaklady-zdravi.md",
+                "url": "../assets/docs/dlouhovekost/zdravi/zaklady-zdravi.md",
                 "summary": "Zdraví není dar, ale důsledek. Sleduj biomarkery, spánek, tlak a VO₂max – každý ukazuje, jak tělo zvládá zátěž."
             }
         ]
@@ -50,7 +50,7 @@
         "articles": [
             {
                 "title": "Jak posílit srdce bez přetížení",
-                "url": "../public/assets/docs/dlouhovekost/zdravi/kardio.md",
+                "url": "../assets/docs/dlouhovekost/zdravi/kardio.md",
                 "summary": "Zóna 2 a dechové cvičení jsou nejúčinnější způsoby, jak zlepšit oběh a regeneraci."
             }
         ]
@@ -71,7 +71,7 @@
         "articles": [
             {
                 "title": "Metabolická flexibilita jako základ dlouhověkosti",
-                "url": "../public/assets/docs/dlouhovekost/zdravi/metabolicke-zdravi.md",
+                "url": "../assets/docs/dlouhovekost/zdravi/metabolicke-zdravi.md",
                 "summary": "Metabolické zdraví znamená schopnost těla přepínat mezi spalováním cukrů a tuků bez výkyvů energie."
             }
         ]
@@ -99,7 +99,7 @@
         "articles": [
             {
                 "title": "Proč je spánek základ dlouhověkosti",
-                "url": "../public/assets/docs/dlouhovekost/zdravi/spanek/spanek.md",
+                "url": "../assets/docs/dlouhovekost/zdravi/spanek/spanek.md",
                 "summary": "Spánek není pasivní stav. Je to aktivní proces obnovy těla i mysli, který rozhoduje o zdraví i výkonu."
             }
         ],
@@ -113,7 +113,7 @@
             {
                 "type": "audio",
                 "title": "Předspánková relaxace (3 minuty)",
-                "url": "../public/assets/media/dlouhovekost/zdravi/spanek/eliska.mp3",
+                "url": "../assets/media/dlouhovekost/zdravi/spanek/eliska.mp3",
                 "summary": "Krátká řízená relaxace, která pomáhá zklidnit dech a připravit mozek na spánek."
             }
         ],
@@ -121,7 +121,7 @@
             {
                 "type": "pdf",
                 "title": "Zásady zdravého spánku – přehled",
-                "url": "../public/assets/docs/dlouhovekost/zdravi/spanek/kuchta.pdf",
+                "url": "../assets/docs/dlouhovekost/zdravi/spanek/kuchta.pdf",
                 "summary": "Jednostránkový přehled doporučení: délka spánku, světlo, teplota, rutina, kofein, obrazovky."
             }
         ]
@@ -217,7 +217,7 @@
         "articles": [
             {
                 "title": "Jak interpretovat laboratorní výsledky",
-                "url": "../public/assets/docs/dlouhovekost/zdravi/biomarkery/souhrn.md",
+                "url": "../docs/dlouhovekost/zdravi/biomarkery/souhrn.md",
                 "summary": "Souhrn biomarkerů ukazuje, kde tělo reaguje mimo optimální rovnováhu. Klíčem je dlouhodobé sledování trendů, ne jednorázová hodnota."
             }
         ]
@@ -253,7 +253,7 @@
         "articles": [
             {
                 "title": "Centenarian Decathlon: připrav se na stovku",
-                "url": "../public/assets/docs/dlouhovekost/telo/centenarian-decathlon.md",
+                "url": "../assets/docs/dlouhovekost/telo/centenarian-decathlon.md",
                 "summary": "Attia učí, že tělo je třeba trénovat pro soběstačnost – ne pro výkon, ale pro život. Cvič tak, abys mohl žít aktivně i v 90."
             }
         ]
@@ -267,7 +267,7 @@
         "articles": [
             {
                 "title": "Proč je síla klíčem k dlouhověkosti",
-                "url": "../public/assets/docs/dlouhovekost/telo/sila.md",
+                "url": "../assets/docs/dlouhovekost/telo/sila.md",
                 "summary": "Svaly nejsou jen estetika – chrání tělo, podporují metabolismus a stabilizují klouby."
             }
         ]
@@ -281,7 +281,7 @@
         "articles": [
             {
                 "title": "Aerobní kapacita jako ukazatel dlouhověkosti",
-                "url": "../public/assets/docs/dlouhovekost/telo/vytrvalost.md",
+                "url": "../assets/docs/dlouhovekost/telo/vytrvalost.md",
                 "summary": "Attia považuje VO₂max za nejdůležitější biomarker dlouhověkosti – trénuj zóny 2 a 5."
             }
         ]
@@ -351,7 +351,7 @@
         "articles": [
             {
                 "title": "Dech jako nástroj dlouhověkosti",
-                "url": "../public/assets/docs/dlouhovekost/telo/dychani/uvod.md",
+                "url": "../assets/docs/dlouhovekost/telo/dychani/uvod.md",
                 "summary": "Jak vědomé dýchání ovlivňuje regeneraci, stres i kvalitu spánku."
             }
         ]
@@ -365,7 +365,7 @@
         "articles": [
             {
                 "title": "Význam nosního dýchání",
-                "url": "../public/assets/docs/dlouhovekost/telo/dychani/nosni-dychani.md",
+                "url": "../assets/docs/dlouhovekost/telo/dychani/nosni-dychani.md",
                 "summary": "Dýchání nosem zlepšuje okysličení, výkon i regeneraci."
             }
         ]
@@ -379,7 +379,7 @@
         "articles": [
             {
                 "title": "Koherentní dýchání a HRV",
-                "url": "../public/assets/docs/dlouhovekost/telo/dychani/dechova-koherence.md",
+                "url": "../assets/docs/dlouhovekost/telo/dychani/dechova-koherence.md",
                 "summary": "Jak koherentní dech stimuluje parasympatikus a zlepšuje HRV."
             }
         ]
@@ -393,7 +393,7 @@
         "articles": [
             {
                 "title": "Principy Buteyko metody",
-                "url": "../public/assets/docs/dlouhovekost/telo/dychani/buteyko.md",
+                "url": "../assets/docs/dlouhovekost/telo/dychani/buteyko.md",
                 "summary": "Buteyko metoda učí tělo dýchat jemněji, tišeji a s větším respektem k CO₂."
             }
         ]
@@ -416,7 +416,7 @@
         "articles": [
             {
                 "title": "Jak trénovat mentální odolnost",
-                "url": "../public/assets/docs/dlouhovekost/mysl/odolnost.md",
+                "url": "../assets/docs/dlouhovekost/mysl/odolnost.md",
                 "summary": "Odolnost a klid jsou dovednosti – trénuj je jako svaly. Dýchej, piš vděčnost, buď přítomen. Každý den o 1 % lepší."
             }
         ]
@@ -430,7 +430,7 @@
         "articles": [
             {
                 "title": "Adaptace místo vyhýbání se stresu",
-                "url": "../public/assets/docs/dlouhovekost/mysl/stres.md",
+                "url": "../assets/docs/dlouhovekost/mysl/stres.md",
                 "summary": "Cílem není život bez stresu, ale rychlejší návrat do klidu – pomocí dechu, pohybu a rituálů."
             }
         ]
@@ -444,7 +444,7 @@
         "articles": [
             {
                 "title": "Proč je smysl největší zdroj energie",
-                "url": "../public/assets/docs/dlouhovekost/mysl/smysl.md",
+                "url": "../assets/docs/dlouhovekost/mysl/smysl.md",
                 "summary": "Smysl redukuje stres, zlepšuje regeneraci i imunitu. Je to kompas dlouhověkosti."
             }
         ]
@@ -473,7 +473,7 @@
             {
                 "type": "audio",
                 "title": "Krátká meditace 5 minut – Dech a klid",
-                "url": "../public/assets/media/dlouhovekost/mysl/meditace_5min.mp3",
+                "url": "../assets/media/dlouhovekost/mysl/meditace_5min.mp3",
                 "summary": "Vedená dechová meditace pro zklidnění nervové soustavy a snížení napětí."
             }
         ]
@@ -509,7 +509,7 @@
         "articles": [
             {
                 "title": "Jak jíst pro dlouhověkost",
-                "url": "../public/assets/docs/dlouhovekost/vyziva/principy-vyzivy.md",
+                "url": "../assets/docs/dlouhovekost/vyziva/principy-vyzivy.md",
                 "summary": "Jez pro sílu a regeneraci – ne pro uspokojení. Kvalita bílkovin, kontrola cukru, pravidelné půsty a klid při jídle jsou klíčové."
             }
         ]
@@ -523,7 +523,7 @@
         "articles": [
             {
                 "title": "Jak začít s půstem bezpečně",
-                "url": "../public/assets/docs/dlouhovekost/vyziva/pust.md",
+                "url": "../assets/docs/dlouhovekost/vyziva/pust.md",
                 "summary": "Od 12hodinového okna po delší protokoly – půst je nástroj, ne soutěž. Důležitá je konzistence a regenerace."
             }
         ]
@@ -537,7 +537,7 @@
         "articles": [
             {
                 "title": "Jak spočítat denní příjem bílkovin",
-                "url": "../public/assets/docs/dlouhovekost/vyziva/bilkoviny.md",
+                "url": "../assets/docs/dlouhovekost/vyziva/bilkoviny.md",
                 "summary": "Protein je základ regenerace a prevence ztráty svalové hmoty s věkem. Kvalita > kvantita."
             }
         ]
@@ -551,7 +551,7 @@
         "articles": [
             {
                 "title": "Glykémie a výživa v praxi",
-                "url": "../public/assets/docs/dlouhovekost/vyziva/glukoza-vyziva.md",
+                "url": "../assets/docs/dlouhovekost/vyziva/glukoza-vyziva.md",
                 "summary": "Používej glukometr nebo CGM pro zpětnou vazbu – cílem je stabilní energie, ne extrémy."
             }
         ]
@@ -565,7 +565,7 @@
         "articles": [
             {
                 "title": "Drobnosti s velkým dopadem",
-                "url": "../public/assets/docs/dlouhovekost/vyziva/mikronutrienty.md",
+                "url": "../assets/docs/dlouhovekost/vyziva/mikronutrienty.md",
                 "summary": "Optimalizace mikronutrientů zlepšuje výkon, spánek i imunitu. Suplementuj až po měření."
             }
         ]
@@ -579,7 +579,7 @@
         "articles": [
             {
                 "title": "Jak pít chytře",
-                "url": "../public/assets/docs/dlouhovekost/vyziva/hydratace.md",
+                "url": "../assets/docs/dlouhovekost/vyziva/hydratace.md",
                 "summary": "Dbej na rovnováhu elektrolytů. Při zátěži doplň sodík a hořčík, ne jen vodu."
             }
         ]

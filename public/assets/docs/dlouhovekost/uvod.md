@@ -1,4 +1,4 @@
-# 🫁 Dech jako nástroj dlouhověkosti
+# 🌿 Dech jako nástroj dlouhověkosti
 
 Dýchání je první i poslední pohyb našeho života – a přesto mu většina lidí věnuje nejmenší pozornost.  
 Kvalita dechu ovlivňuje okysličení, tepovou frekvenci, spánek i stres.

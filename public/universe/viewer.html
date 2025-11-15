@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="cs">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📝 Viewer</title>
+
+    <style>
+        body {
+            background: #0f172a;
+            margin: 0;
+            font-family: system-ui, sans-serif;
+            color: #e2e8f0;
+            overflow: hidden;
+        }
+
+        #wrapper {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        iframe {
+            width: 100%;
+            height: calc(100vh - 40px);
+            border: none;
+            display: block;
+            border-radius: 10px;
+            background: #1e293b;
+        }
+
+        .md-content {
+            white-space: normal;
+            line-height: 1.6;
+            font-size: 1.05rem;
+            padding-bottom: 120px;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4 {
+            color: #f1f5f9;
+            margin-top: 1.4em;
+            margin-bottom: 0.6em;
+        }
+
+        a {
+            color: #38bdf8;
+        }
+
+        blockquote {
+            border-left: 4px solid #38bdf8;
+            padding-left: 12px;
+            margin-left: 0;
+            color: #94a3b8;
+        }
+
+        img,
+        video,
+        audio {
+            max-width: 100%;
+            border-radius: 10px;
+            margin-top: 12px;
+            margin-bottom: 12px;
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="wrapper">
+        <div id="content">Načítám…</div>
+    </div>
+
+    <script type="module">
+        import { convertMarkdownToHtml } from "../assets/js/universe-viewers.js";
+
+        const params = new URLSearchParams(window.location.search);
+        const file = params.get("file");
+        const type = params.get("type");
+
+        const content = document.getElementById("content");
+
+        if (!file) {
+            content.innerHTML = "<p>⚠️ Chyba: Soubor nebyl zadán.</p>";
+        }
+
+        // --- PDF ---
+        if (type === "pdf") {
+            content.innerHTML = `
+        <iframe src="${file}"></iframe>
+      `;
+        }
+
+        // --- Markdown ---
+        else if (type === "md") {
+            fetch(file)
+                .then(res => res.text())
+                .then(md => {
+                    content.innerHTML = `<div class="md-content">${convertMarkdownToHtml(md)}</div>`;
+                })
+                .catch(err => {
+                    content.innerHTML = `<p>❌ Nelze načíst markdown: ${err}</p>`;
+                });
+        }
+
+        // --- Video ---
+        else if (type === "video") {
+            content.innerHTML = `
+        <video controls>
+          <source src="${file}" type="video/mp4">
+          Video nelze přehrát.
+        </video>`;
+        }
+
+        // --- Audio ---
+        else if (type === "audio") {
+            content.innerHTML = `
+        <audio controls>
+          <source src="${file}" type="audio/mpeg">
+          Audio nelze přehrát.
+        </audio>`;
+        }
+
+        // --- Obrázky ---
+        else if (type === "image") {
+            content.innerHTML = `<img src="${file}" alt="">`;
+        }
+    </script>
+</body>
+
+</html>

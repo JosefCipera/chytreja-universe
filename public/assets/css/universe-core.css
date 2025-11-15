@@ -46,29 +46,72 @@ body {
     padding: .35rem .6rem;
 }
 
-/* === 🌠 PANEL PRAVÉ STRANY === */
+/* === 🌌 PANEL – společné pro desktop i mobil === */
 #sidePanel {
     position: fixed;
-    top: 80px;
-    /* 🆕 bylo 64px – teď lehký odstup */
-    right: 16px;
+    top: 72px;
+    /* ✔ identické odsazení */
+    right: 8px;
+    /* desktop default */
+    left: auto;
     bottom: 16px;
     width: 360px;
     max-width: 88vw;
     background: rgba(15, 23, 42, .9);
-    border: 1px solid rgba(255, 255, 255, .08);
     border-radius: 14px;
-    box-shadow: 0 15px 40px rgba(0, 0, 0, .4);
-    transform: translateY(110%);
+    transform: translateX(110%);
     transition: transform 0.4s ease, opacity 0.3s ease;
     opacity: 0;
-    overflow: visible;
-    z-index: 999;
+    overflow-y: auto;
+    z-index: 9999;
 }
 
+/* Otevřený panel */
 #sidePanel.visible {
-    transform: translateY(0);
+    transform: translateX(0);
     opacity: 1;
+}
+
+/* === 📱 Mobil – jen šířku upravíme, ale top zůstává stejné === */
+@media (max-width: 768px) {
+    #sidePanel {
+        right: 8px;
+        left: 8px;
+        /* ✔ vycentrováno */
+        width: auto;
+        max-width: none;
+        bottom: 12px;
+        border-radius: 12px;
+    }
+}
+
+.app-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 1rem;
+    background: #0f172a;
+    border-bottom: 1px solid #1e293b;
+
+    /* ⭐ nový jemný stín */
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.35);
+
+    z-index: 1000;
+}
+
+/* scrollbary MUSÍ být samostatně – mimo #sidePanel */
+#sidePanel::-webkit-scrollbar {
+    width: 8px;
+}
+
+#sidePanel::-webkit-scrollbar-thumb {
+    background-color: #475569;
+    border-radius: 4px;
 }
 
 /* === HLAVIČKA PANELU === */
@@ -160,7 +203,6 @@ body {
     font-size: 0.98rem;
 }
 
-
 .doc-link {
     color: #60a5fa;
     text-decoration: none;
@@ -168,23 +210,6 @@ body {
 
 .doc-link:hover {
     text-decoration: underline;
-}
-
-/* --- Mobilní verze --- */
-@media (max-width: 768px) {
-    .side-panel {
-        padding-left: 1rem;
-        padding-right: 1rem;
-        width: calc(100vw - 2rem);
-    }
-
-    #aiHelper {
-        border-radius: 12px;
-    }
-
-    #aiHelper.expanded {
-        height: 50vh;
-    }
 }
 
 /* === 📄 Overlay dokumentů (MD/PDF) === */
@@ -206,12 +231,20 @@ body {
 
 #docViewer {
     position: relative;
-    width: 90%;
-    height: 90%;
+    width: 70%;
+    /* 🆕 místo 90% — lépe se čte */
+    max-width: 1000px;
+    /* 🆕 příjemná šířka na velkých monitorech */
+    height: 85%;
+    /* 🆕 trošku nižší, více prostoru */
+    margin: auto;
+    /* středy */
     background: #0b1220;
-    border: 1px solid rgba(255, 255, 255, .06);
-    border-radius: 12px;
+    border-radius: 14px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
     overflow: hidden;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.55);
+    /* pěkný efekt */
 }
 
 #closeDoc {
@@ -734,22 +767,6 @@ body {
     box-shadow: 0 0 6px rgba(255, 255, 255, 0.5);
 }
 
-#sidePanel {
-    overflow-y: auto;
-    max-height: 100vh;
-    scrollbar-width: thin;
-    scrollbar-color: #475569 #1e293b;
-}
-
-#sidePanel::-webkit-scrollbar {
-    width: 8px;
-}
-
-#sidePanel::-webkit-scrollbar-thumb {
-    background-color: #475569;
-    border-radius: 4px;
-}
-
 .lock-message {
     position: fixed;
     bottom: 20px;
@@ -878,4 +895,9 @@ body.pro #roleSelect {
     border-color: #fbbf24;
     box-shadow: 0 0 6px rgba(251, 191, 36, 0.4);
     color: #fef08a;
+}
+
+#closePanel {
+    position: relative;
+    z-index: 10000;
 }

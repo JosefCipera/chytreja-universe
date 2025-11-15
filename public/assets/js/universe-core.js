@@ -1,6 +1,8 @@
 // === UNIVERSE-CORE.JS ===
 // Stabilní verze s podporou podsítí, panelu, hlasu a PDF/MD viewerů
 
+import { showPanel, closePanel } from "./universe-panel.js";
+
 const el = {
   network: document.getElementById("network"),
   side: document.getElementById("sidePanel"),
@@ -9,7 +11,7 @@ const el = {
   docs: document.getElementById("nodeDocs"),
   media: document.getElementById("nodeMedia"),
   tasks: document.getElementById("nodeTasks"),
-  close: document.getElementById("closePanel")
+  //close: document.getElementById("closePanel")
 };
 
 let network;
@@ -114,7 +116,7 @@ export function renderUniverse(DATA, subset = null) {
     openSubUniverse(DATA, node);
   });
 
-  el.close.onclick = () => closePanel();
+  //el.close.onclick = () => closePanel();
 }
 
 // === Pomocné funkce ===
@@ -304,16 +306,16 @@ function smoothReturnToUniverse(DATA) {
   }, 900);
 }
 
-function closePanel() {
-  el.side.classList.remove("visible");
-}
+//function closePanel() {
+//  el.side.classList.remove("visible");
+//}
 
 function playWhoosh() {
-  const audio = new Audio("./assets/media/whoosh.mp3");
+  const audio = new Audio("../assets/media/whoosh.mp3");
   audio.volume = 0.25;
   audio.play().catch(() => { });
 }
-
+/*
 // === PANEL ===
 function showPanel(node) {
   console.log("🟢 showPanel běží pro uzel:", node.id);
@@ -575,7 +577,7 @@ function showPanel(node) {
 
   // Uložit aktuální uzel
   window.currentNode = node;
-}
+}*/
 
 // === HLAS ===
 function aiSpeak(text) {

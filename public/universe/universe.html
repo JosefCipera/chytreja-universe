@@ -12,8 +12,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
     <!-- 🎨 Styl -->
-    <link rel="stylesheet" href="./assets/css/universe-core.css">
-    <link rel="stylesheet" href="./assets/css/universe-header.css">
+    <link rel="stylesheet" href="../assets/css/universe-core.css">
+    <link rel="stylesheet" href="../assets/css/universe-header.css">
+    <script type="module" src="../assets/js/universe-panel.js"></script>
 
 </head>
 
@@ -283,9 +284,12 @@
             console.log("✅ Plovoucí Chytré já inicializováno.");
         });
     </script>
-
-    <!-- 🚀 Inicializace vesmíru -->
-    <script type="module" src="./assets/js/universe-init.js"></script>
+    <!-- 🔥 Universe moduly – MUSÍ být v tomto pořadí -->
+    <script type="module" src="../assets/js/universe-viewers.js"></script>
+    <script type="module" src="../assets/js/universe-access.js"></script>
+    <script type="module" src="../assets/js/universe-panel.js"></script>
+    <script type="module" src="../assets/js/universe-core.js"></script>
+    <script type="module" src="../assets/js/universe-init.js"></script>
 </body>
 
 </html>

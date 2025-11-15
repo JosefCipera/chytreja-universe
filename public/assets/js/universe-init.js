@@ -17,8 +17,7 @@ const isAdmin = localStorage.getItem("adminMode") === "true";
 // === 🌍 Načtení modelu a jeho vykreslení ===
 async function loadAndRenderModel(modelName, role) {
   const sources = [
-    `./assets/models/${modelName}.json`,
-    `./public/assets/models/${modelName}.json`,
+    `../assets/models/${modelName}.json`,
   ];
 
   const model = await loadModel(sources);
@@ -31,17 +30,22 @@ async function loadAndRenderModel(modelName, role) {
   updateHeaderColor(role);
 }
 
-// === 💾 Načtení JSON modelu ===
+// === 💾 Načtení JSON modelu — TICHÁ varianta bez 404 v konzoli ===
 async function loadModel(urls) {
   for (const url of urls) {
     try {
+      // Nejprve zkusíme tichý HEAD request → ten NEVYPISUJE 404 chybu.
+      const head = await fetch(url, { method: "HEAD" });
+
+      if (!head.ok) continue; // soubor neexistuje → žádná chyba v konzoli
+
+      // Soubor existuje → načteme JSON
       const res = await fetch(url);
-      if (res.ok) {
-        console.log(`✅ Model načten z: ${url}`);
-        return await res.json();
-      }
+      console.log(`✅ Model načten z: ${url}`);
+      return await res.json();
     } catch (err) {
-      console.warn(`⚠️ Nelze načíst z ${url}`, err);
+      // sem to nespadne v případě 404 → jen v případě síťové chyby
+      console.warn(`⚠️ Nelze načíst z ${url}`);
     }
   }
   return null;
@@ -49,11 +53,11 @@ async function loadModel(urls) {
 
 // === 🔐 Access varianta podle režimu ===
 async function applyAccessModel(role, model) {
-  const variantUrl = `./assets/models/access-${role}.json`;
+  const variantUrl = `../assets/models/access-${role}.json`;
   try {
     const res = await fetch(variantUrl);
     if (!res.ok) {
-      console.log(`⚠️ Access model ${variantUrl} nenalezen, používám výchozí.`);
+      console.log(`⚠️ Access model ${variantUrl} nenalezen — ticho, používáme výchozí.`);
       return;
     }
 
