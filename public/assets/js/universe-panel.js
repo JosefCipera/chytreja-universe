@@ -56,7 +56,34 @@ export function showPanel(node) {
     ? `<i class="${node.icon}" style="color:${node.color};margin-right:6px;"></i>`
     : `<i class="fa-solid fa-circle-nodes" style="color:${node.color};margin-right:6px;"></i>`;
 
-  titleEl.innerHTML = `${icon} ${node.label || "—"}`;
+  // === Ikona + nadpis ===
+  let iconHTML = "";
+  if (node.icon) {
+    iconHTML = `
+    <span style="
+      font-size: 32px;           /* menší než předtím (původně 40) */
+      line-height: 1;
+      margin-right: 10px;
+      display: inline-flex;
+      align-items: center;
+      transform: translateY(1px); /* optické zarovnání */
+    ">
+      ${node.icon}
+    </span>`;
+  }
+
+  titleEl.innerHTML = `
+  <div style="display:flex;align-items:center;">
+    ${iconHTML}
+    <span style="
+      font-size: 22px;
+      font-weight:600;
+      color:#f1f5f9;
+    ">
+      ${node.label}
+    </span>
+  </div>
+`;
 
   // --- Definice ---
   defEl.textContent = node.definition || "";
@@ -113,7 +140,7 @@ export function showPanel(node) {
   }
 
   // ================================
-  //  🎬 3) MEDIA (video/audio)
+  //  🎬 3) MEDIA (video/audio/image)
   // ================================
   if (node.media) {
     node.media.forEach(m => {
@@ -122,33 +149,50 @@ export function showPanel(node) {
       li.style.marginBottom = "20px";
 
       let html = `
-        <b style="color:#f1f5f9">${m.title}</b><br>
-        <small style="color:#94a3b8">${m.summary || ""}</small>
-        <br>
-      `;
+  <p style="
+    color:#38bdf8;
+    font-weight:500;
+    margin:0 0 4px 0;
+    text-decoration:none;
+  ">
+    ${m.title}
+  </p>
+
+  <small style="color:#94a3b8">${m.summary || ""}</small>
+  <br>
+`;
+
 
       if (m.type === "video") {
-        if (m.url.includes("youtube.com")) {
-          html += `
-            <iframe width="100%" height="220"
-                    src="${m.url}"
-                    frameborder="0"
-                    allowfullscreen
-                    style="border-radius:10px;margin-top:8px;">
-            </iframe>`;
-        } else {
-          html += `
-            <video controls style="width:100%;border-radius:10px;margin-top:8px;">
-              <source src="${m.url}">
-            </video>`;
-        }
+        html += `
+        <iframe width="100%" height="220"
+                src="${m.url}"
+                frameborder="0"
+                allowfullscreen
+                style="border-radius:10px;margin-top:8px;">
+        </iframe>`;
       }
 
       if (m.type === "audio") {
         html += `
-          <audio controls style="width:100%;margin-top:8px;">
-            <source src="${m.url}">
-          </audio>`;
+        <audio controls style="width:100%;margin-top:8px;">
+          <source src="${m.url}">
+        </audio>`;
+      }
+
+      if (m.type === "image") {
+        html += `
+        <img src="${m.url}"
+             alt="${m.title}"
+             style="
+        display:block;
+        margin:12px auto;
+        width:100%;
+        max-width:180px;
+        border-radius:12px;
+        box-shadow:0 0 8px rgba(0,0,0,0.35);
+      ">
+      `;
       }
 
       li.innerHTML = html;
