@@ -11,6 +11,18 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.6.2"></script>
     <script src="./assets/js/main.js"></script>
+
+    <link rel="manifest" href="/manifest.webmanifest">
+    <meta name="theme-color" content="#101c35">
+
+    <script>
+        if ("serviceWorker" in navigator) {
+            navigator.serviceWorker.register("/service-worker.js")
+                .then(() => console.log("🧠 Web SW registrován"))
+                .catch(err => console.error("Web SW chyba:", err));
+        }
+    </script>
+
     <style> </style>
 </head>
 
@@ -37,7 +49,7 @@
     <header>
         <h1>🌌 Chytré já</h1>
         <p>Tvoje digitální vědomí, které propojuje měření, rozhodování a vizualizaci do jednoho živého systému řízení.
-        </p> <a href="/public/universe/universe.html" class="btn-primary">Vstoupit do vesmíru</a>
+        </p> <a href="universe/universe.html" class="btn-primary">Vstoupit do vesmíru</a>
     </header> <!-- ===== GALAXIE (vložíš svůj SVG blok) ===== -->
     <section id="galaxie-chytreho-ja" class="galaxy-wrap">
         <div class="galaxy-card" style="max-width:1200px; margin:auto;">
