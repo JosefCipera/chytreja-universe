@@ -934,3 +934,261 @@ footer p {
     opacity: 1;
   }
 }
+
+/* ====== FLOWHUB DARK THEME ====== */
+
+body.dark {
+  background-color: #0c0f17;
+  color: #e0e6f0;
+}
+
+/* Nadpis a popis */
+#library-view h2,
+#library-view p {
+  color: #e0e6f0 !important;
+}
+
+/* Karta */
+.library-card {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.06));
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 24px;
+  transition: all 0.25s ease;
+  color: #dce3ec;
+  box-shadow: 0 0 16px rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(6px);
+}
+
+/* Hover efekt – decentní neon */
+.library-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(0, 255, 255, 0.4);
+  box-shadow: 0 0 12px rgba(0, 255, 255, 0.25);
+}
+
+/* Ikona + titulek */
+.library-card .title-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.library-card .title-row i {
+  font-size: 24px;
+  margin-right: 12px;
+  color: #8cf2ff;
+}
+
+.library-card h3 {
+  font-size: 20px;
+  font-weight: 600;
+  color: #e7eef7;
+}
+
+/* Text popisu */
+.library-card p {
+  color: #b7c2d0;
+}
+
+/* Odkaz nebo tlačítko */
+.library-card button,
+.library-card a {
+  color: #67dfff !important;
+  font-weight: 600;
+  margin-top: auto;
+  display: inline-block;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding-top: 12px;
+  transition: color 0.2s;
+}
+
+.library-card button:hover,
+.library-card a:hover {
+  color: #9cf3ff !important;
+}
+
+/* Badge Premium */
+.premium-badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: linear-gradient(135deg, #ffe28a, #ffca3a);
+  color: #5a4208;
+  font-size: 11px;
+  padding: 4px 8px;
+  border-radius: 10px;
+  font-weight: 700;
+}
+
+/* Tagy */
+#library-tags-container button {
+  background: rgba(255, 255, 255, 0.08);
+  color: #e0e6f0;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+#library-tags-container button:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+#library-tags-container .bg-blue-600 {
+  background: #00b6ff !important;
+  color: #0b0f14 !important;
+}
+
+/* Vyhledávání */
+#library-search {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #e0e6f0;
+}
+
+#library-search::placeholder {
+  color: #9ba8b6;
+}
+
+/* === PAGE === */
+
+.medioteka-body {
+  background: #0e172a;
+  color: #fff;
+  font-family: 'Inter', sans-serif;
+}
+
+.medioteka-container {
+  max-width: 1100px;
+  margin: auto;
+  padding: 40px;
+  text-align: center;
+}
+
+.medioteka-title {
+  font-size: 40px;
+  margin-bottom: 10px;
+}
+
+.medioteka-subtitle {
+  opacity: 0.7;
+  margin-bottom: 30px;
+}
+
+.medioteka-search {
+  width: 60%;
+  padding: 12px 20px;
+  border-radius: 12px;
+  background: #1a2335;
+  border: 1px solid #24314a;
+  color: #fff;
+  margin-bottom: 40px;
+}
+
+.medioteka-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 25px;
+}
+
+/* === CARDS === */
+
+.medioteka-card {
+  background: linear-gradient(145deg, #1b2538, #0f1625);
+  border: 1px solid #24314a;
+  padding: 22px;
+  border-radius: 14px;
+  cursor: pointer;
+  transition: 0.25s ease;
+  text-align: left;
+}
+
+.medioteka-card:hover {
+  transform: translateY(-5px);
+  background: linear-gradient(145deg, #24314a, #111a2d);
+}
+
+.medioteka-card h3 {
+  font-size: 19px;
+  margin: 10px 0 6px;
+}
+
+.medioteka-card p {
+  opacity: 0.8;
+  font-size: 14px;
+}
+
+.medioteka-tag {
+  display: inline-block;
+  margin-top: 10px;
+  font-size: 11px;
+  opacity: 0.6;
+}
+
+/* === TYPE ICONS === */
+
+.medioteka-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background-size: cover;
+  margin-bottom: 15px;
+}
+
+.audio {
+  background: url('/icons/audio.png') center/cover;
+}
+
+.video {
+  background: url('/icons/video.png') center/cover;
+}
+
+.image {
+  background: url('/icons/image.png') center/cover;
+}
+
+.pdf {
+  background: url('/icons/pdf.png') center/cover;
+}
+
+.article {
+  background: url('/icons/article.png') center/cover;
+}
+
+/* === MODAL === */
+
+.medioteka-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hidden {
+  display: none;
+}
+
+.medioteka-modal-content {
+  background: #0f1625;
+  border: 1px solid #2a3755;
+  padding: 20px;
+  border-radius: 10px;
+  width: 80%;
+  max-width: 700px;
+}
+
+.medioteka-modal-close {
+  float: right;
+  font-size: 28px;
+  cursor: pointer;
+  opacity: 0.7;
+}
+
+.medioteka-modal-close:hover {
+  opacity: 1;
+}
+
+.modal-image {
+  width: 100%;
+  border-radius: 10px;
+}
