@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="cs">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Viewer</title>
+
+    <link rel="stylesheet" href="./assets/css/viewer.css">
+</head>
+
+<body>
+
+    <div id="topbar">
+        <div class="btn" id="btnBack">← Zpět</div>
+        <div class="btn" id="btnPrint">🖨️ Tisk</div>
+        <div class="btn" id="btnDownload">⬇️ Stáhnout</div>
+    </div>
+
+    <div id="wrapper">
+        <div id="content">Načítám…</div>
+    </div>
+
+    <script type="module">
+        import { convertMarkdownToHtml } from "./assets/js/universe-viewers.js";
+
+        const params = new URLSearchParams(window.location.search);
+        const file = params.get("file");
+        const type = params.get("type");
+
+        const content = document.getElementById("content");
+
+        document.getElementById("btnBack").onclick = () => window.close();
+        document.getElementById("btnPrint").onclick = () => window.print();
+
+        document.getElementById("btnDownload").onclick = () => {
+            const a = document.createElement("a");
+            a.href = file;
+            a.download = file.split("/").pop();
+            a.click();
+        };
+
+        if (type === "pdf") {
+            content.innerHTML = `<iframe src="${file}"></iframe>`;
+        }
+        else if (type === "article" || type === "md") {
+            fetch(file)
+                .then(r => r.text())
+                .then(md => {
+                    content.innerHTML =
+                        `<div class="md-content">${convertMarkdownToHtml(md)}</div>`;
+                });
+        }
+        else if (type === "image") {
+            content.innerHTML = `<img src="${file}" style="max-width:100%;border-radius:12px;">`;
+        }
+        else if (type === "audio") {
+            content.innerHTML = `
+                <audio controls style="width:100%">
+                    <source src="${file}">
+                </audio>`;
+        }
+        else if (type === "video") {
+            content.innerHTML = `
+                <iframe width="100%" height="520"
+                    src="${file.replace("watch?v=", "embed/")}"
+                    frameborder="0"
+                    allowfullscreen></iframe>`;
+        }
+    </script>
+
+</body>
+
+</html>

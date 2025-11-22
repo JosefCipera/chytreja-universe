@@ -1192,3 +1192,89 @@ body.dark {
   width: 100%;
   border-radius: 10px;
 }
+
+/* ===== PROČ CHYTRÉ JÁ – STYL ===== */
+#proc-chytre-ja {
+  padding: 5rem 1rem 6rem;
+  background: radial-gradient(circle at 50% 10%, rgba(59, 130, 246, 0.08), transparent 70%),
+    linear-gradient(180deg, #0b1220 0%, #101c35 100%);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+#proc-chytre-ja .proc-intro {
+  max-width: 800px;
+  margin: 0 auto 3rem;
+  color: #cbd5e1;
+  font-size: 1.15rem;
+}
+
+.proc-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 2rem;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.proc-card {
+  background: rgba(30, 41, 59, 0.75);
+  padding: 2rem;
+  border-radius: 14px;
+  text-align: center;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(59, 130, 246, 0.1);
+  transition: all .3s ease;
+}
+
+.proc-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 22px rgba(37, 99, 235, 0.35);
+}
+
+.proc-card i {
+  font-size: 2.2rem;
+  color: #60a5fa;
+  margin-bottom: 1rem;
+}
+
+.proc-card h3 {
+  color: #a8c7ff;
+  font-size: 1.3rem;
+  margin-bottom: 0.7rem;
+}
+
+.proc-card p {
+  color: #cbd5e1;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.proc-footer {
+  max-width: 900px;
+  margin: 3rem auto 0;
+  color: #e2e8f0;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.proc-card {
+  min-height: 260px;
+  /* nebo 280–300 podle pocitu */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.proc-grid {
+  align-items: stretch;
+}
+
+.proc-card h3 {
+  margin-top: 0.8rem;
+}
+
+.proc-card p {
+  margin-top: 0.6rem;
+}

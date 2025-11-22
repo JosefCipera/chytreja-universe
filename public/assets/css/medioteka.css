@@ -1,38 +1,52 @@
-/* Tmavé pozadí */
+/* ------------------------------- */
+/* ZÁKLADNÍ NASTAVENÍ */
+/* ------------------------------- */
+
 .medioteka-body {
     background-color: #0d1117;
     color: #e5e7eb;
     font-family: system-ui, sans-serif;
     margin: 0;
-    padding: 40px;
+    padding: 0;
 }
 
-/* Kontejner */
+/* Odsazení shora */
 .medioteka-container {
     max-width: 1400px;
-    margin: 0 auto;
+    margin: 40px auto 0 auto;
+    padding: 0 20px;
+    padding-top: 30px;
+    padding-bottom: 10px;
+    /* menší mezera k tlačítku */
 }
 
-/* Nadpisy */
-.medioteka-title {
-    font-size: 2.8rem;
-    font-weight: 700;
+/* ------------------------------- */
+/* NADPIS & PODNADPIS */
+/* ------------------------------- */
+
+/* MUSÍ být maximálně specifické, jinak to přepíše Tailwind/style.css */
+html body.medioteka-body .medioteka-container .medioteka-title {
+    font-size: 2.5rem !important;
+    font-weight: 600 !important;
     text-align: center;
     margin-bottom: 10px;
-    color: #4dabf7;
+    color: #4dabf7 !important;
 }
 
-.medioteka-subtitle {
+html body.medioteka-body .medioteka-container .medioteka-subtitle {
     text-align: center;
     color: #94a3b8;
     margin-bottom: 25px;
 }
 
-/* Vyhledávání */
+/* ------------------------------- */
+/* VYHLEDÁVÁNÍ */
+/* ------------------------------- */
+
 .medioteka-search {
     width: 100%;
     max-width: 420px;
-    margin: 0 auto 30px;
+    margin: 0 auto 35px auto;
     display: block;
     padding: 12px 18px;
     border-radius: 10px;
@@ -46,14 +60,20 @@
     color: #64748b;
 }
 
-/* GRID → 4 pevné sloupce */
+/* ------------------------------- */
+/* GRID – 4 sloupce */
+/* ------------------------------- */
+
 .medioteka-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 22px;
 }
 
-/* Karta */
+/* ------------------------------- */
+/* KARTA */
+/* ------------------------------- */
+
 .medioteka-card {
     background: #1a1f27;
     padding: 20px;
@@ -68,7 +88,10 @@
     border-color: #4dabf7;
 }
 
-/* Nadpis karty */
+.medioteka-card-icon {
+    margin-bottom: 12px;
+}
+
 .medioteka-card-title {
     font-size: 1.1rem;
     font-weight: 600;
@@ -76,25 +99,26 @@
     color: #f1f5f9;
 }
 
-/* Popis */
 .medioteka-card-desc {
     font-size: 0.9rem;
     color: #94a3b8;
-    margin-bottom: 10px;
+    margin-bottom: 12px;
 }
 
-/* Štítek typu */
-.medioteka-card-type {
+.medioteka-card-tag {
     font-size: 0.75rem;
     font-weight: bold;
     color: #4dabf7;
 }
 
-/* Modal */
+/* ------------------------------- */
+/* MODAL */
+/* ------------------------------- */
+
 .medioteka-modal {
     position: fixed;
     inset: 0;
-    background: rgba(0, 0, 0, 0.6);
+    background: rgba(0, 0, 0, 0.65);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -121,7 +145,9 @@
     float: right;
 }
 
-/* Fade animace */
+/* ------------------------------- */
+/* FADE ANIMACE */
+/* ------------------------------- */
 @keyframes fadeIn {
     from {
         opacity: 0;
@@ -134,7 +160,38 @@
     }
 }
 
-/* Responzivita */
+/* ------------------------------- */
+/* SPODNÍ TLAČÍTKO */
+/* ------------------------------- */
+
+.medioteka-back {
+    margin-top: 55px;
+    text-align: center;
+    margin-bottom: 65px;
+}
+
+.medioteka-back-btn {
+    padding: 12px 28px;
+    background: #1e293b;
+    border-radius: 8px;
+    color: #cbd5e1;
+    border: 1px solid #334155;
+    text-decoration: none;
+    font-size: 1rem;
+    transition: 0.2s;
+    margin-top: 50px;
+    margin-bottom: 70px;
+}
+
+.medioteka-back-btn:hover {
+    background: #334155;
+    border-color: #475569;
+}
+
+/* ------------------------------- */
+/* RESPONZIVITA */
+/* ------------------------------- */
+
 @media (max-width: 1200px) {
     .medioteka-grid {
         grid-template-columns: repeat(3, 1fr);
@@ -153,23 +210,80 @@
     }
 }
 
+/* === FIX PRO MEDIOTÉKU (přebití globálního CSS) === */
+
+/* Titulek */
+.medioteka-container .medioteka-title {
+    font-size: 2.4rem !important;
+    font-weight: 600 !important;
+    color: #a8c7ff !important;
+    margin-top: 10px !important;
+    margin-bottom: 14px !important;
+    text-shadow: 0 0 10px rgba(96, 165, 250, 0.25) !important;
+}
+
+/* Podnadpis */
+.medioteka-container .medioteka-subtitle {
+    margin-top: 5px !important;
+    margin-bottom: 28px !important;
+}
+
+/* Vyhledávání – posun blíž k titulkům */
+.medioteka-search {
+    margin-top: 0 !important;
+    margin-bottom: 38px !important;
+}
+
+/* Spodní tlačítko – více místa */
 .medioteka-back {
-    margin-top: 40px;
-    text-align: center;
+    margin-top: 60px !important;
+    margin-bottom: 40px !important;
 }
 
-.medioteka-back-btn {
-    padding: 12px 28px;
-    background: #1e293b;
-    border-radius: 8px;
-    color: #cbd5e1;
+/* TAGY */
+.medioteka-card-tags {
+    margin-top: 14px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.tag {
+    font-size: 11px;
+    background: #24314a;
+    padding: 4px 8px;
+    border-radius: 6px;
+    color: #bcd0ea;
     border: 1px solid #334155;
-    text-decoration: none;
-    font-size: 1rem;
-    transition: 0.2s;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
 }
 
-.medioteka-back-btn:hover {
-    background: #334155;
-    border-color: #475569;
+.tag.type {
+    background: rgba(59, 130, 246, 0.35);
+    border-color: #3b82f6;
+    color: #dbeafe;
+    font-weight: 600;
+}
+
+.medioteka-card-tags {
+    margin-top: 12px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.medioteka-tag {
+    background: #1e293b;
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-size: 11px;
+    opacity: 0.8;
+}
+
+.medioteka-audio {
+    width: 90%;
+    max-width: 480px;
+    margin: 20px auto;
+    display: block;
 }
