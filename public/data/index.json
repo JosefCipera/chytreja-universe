@@ -5,7 +5,7 @@
             "title": "Základy TOC (audio)",
             "type": "audio",
             "description": "Stručný úvod do Teorie omezení.",
-            "url": "/media/audio/eliska.mp3",
+            "url": "media/audio/eliska.mp3",
             "access": "demo",
             "tags": [
                 "TOC",
@@ -30,7 +30,7 @@
             "title": "AI specializovaný asistent",
             "type": "image",
             "description": "Ukázkový obrázek asistenta vytvořený pomocí AI.",
-            "url": "/media/images/kouc-192.png",
+            "url": "media/images/kouc-192.png",
             "access": "free",
             "tags": [
                 "obrázek",
@@ -42,7 +42,7 @@
             "title": "Kuchařka skvělých receptů",
             "type": "pdf",
             "description": "Kuchařka jako ukázkový PDF dokument.",
-            "url": "/media/pdf/kuchta.pdf",
+            "url": "media/pdf/kuchta.pdf",
             "access": "demo",
             "tags": [
                 "pdf",
@@ -54,7 +54,7 @@
             "title": "Jak funguje Chytré já",
             "type": "article",
             "description": "Krátký demo článek pro testování zobrazení obsahu.",
-            "contentUrl": "/public/clanky/firemni-politiky.md",
+            "contentUrl": "clanky/firemni-politiky.md",
             "access": "demo",
             "tags": [
                 "demo",

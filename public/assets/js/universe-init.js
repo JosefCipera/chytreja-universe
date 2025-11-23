@@ -17,7 +17,7 @@ const isAdmin = localStorage.getItem("adminMode") === "true";
 // === 🌍 Načtení modelu a jeho vykreslení ===
 async function loadAndRenderModel(modelName, role) {
   const sources = [
-    `../assets/models/${modelName}.json`,
+    `../data/models/${modelName}.json`,
   ];
 
   const model = await loadModel(sources);
@@ -53,7 +53,7 @@ async function loadModel(urls) {
 
 // === 🔐 Access varianta podle režimu ===
 async function applyAccessModel(role, model) {
-  const variantUrl = `../assets/models/access-${role}.json`;
+  const variantUrl = `../data/models/access-${role}.json`;
   try {
     const res = await fetch(variantUrl);
     if (!res.ok) {

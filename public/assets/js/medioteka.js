@@ -83,7 +83,7 @@ function openItem(id) {
 
     // MUST BE RELATIVE PATH
     window.open(
-      `./viewer.html?type=${item.type}&file=${encodeURIComponent(file)}`,
+      `/public/viewer.html?type=${item.type}&file=/${encodeURIComponent(file)}`,
       "_blank"
     );
   });

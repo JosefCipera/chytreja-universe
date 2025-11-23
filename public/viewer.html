@@ -7,6 +7,9 @@
     <title>Viewer</title>
 
     <link rel="stylesheet" href="./assets/css/viewer.css">
+
+    <!-- Marked – ESM verze -->
+    <script type="module" src="https://cdn.jsdelivr.net/npm/marked/marked.esm.js"></script>
 </head>
 
 <body>
@@ -25,8 +28,8 @@
         import { convertMarkdownToHtml } from "./assets/js/universe-viewers.js";
 
         const params = new URLSearchParams(window.location.search);
-        const file = params.get("file");
         const type = params.get("type");
+        let file = params.get("file"); // cesta z JSONu
 
         const content = document.getElementById("content");
 
@@ -40,32 +43,53 @@
             a.click();
         };
 
+        // === PDF ===
         if (type === "pdf") {
-            content.innerHTML = `<iframe src="${file}"></iframe>`;
+            content.innerHTML = `<iframe src="/public/${file}"></iframe>`;
         }
+
+        // === AUDIO ===
+        else if (type === "audio") {
+            content.innerHTML = `
+            <audio controls style="width:100%">
+                <source src="/public/${file}">
+            </audio>`;
+        }
+
+        // === IMAGE ===
+        else if (type === "image") {
+            content.innerHTML = `<img src="/public/${file}" style="max-width:100%;border-radius:12px;">`;
+        }
+
+        // === VIDEO ===
+        else if (type === "video") {
+            const embed = file.replace("watch?v=", "embed/");
+            content.innerHTML = `
+            <iframe width="100%" height="520"
+                src="${embed}"
+                frameborder="0"
+                allowfullscreen></iframe>`;
+        }
+
+        // === MARKDOWN (article) ===
         else if (type === "article" || type === "md") {
-            fetch(file)
-                .then(r => r.text())
+
+            // MD jsou vždy ve složce /public/clanky/
+            const mdPath = `/public/${file}`;
+
+            fetch(mdPath)
+                .then(r => {
+                    if (!r.ok) throw new Error("Soubor nenalezen: " + mdPath);
+                    return r.text();
+                })
                 .then(md => {
                     content.innerHTML =
                         `<div class="md-content">${convertMarkdownToHtml(md)}</div>`;
+                })
+                .catch(err => {
+                    content.innerHTML =
+                        `<p style="color:#f88">Nepodařilo se načíst článek.<br>${err}</p>`;
                 });
-        }
-        else if (type === "image") {
-            content.innerHTML = `<img src="${file}" style="max-width:100%;border-radius:12px;">`;
-        }
-        else if (type === "audio") {
-            content.innerHTML = `
-                <audio controls style="width:100%">
-                    <source src="${file}">
-                </audio>`;
-        }
-        else if (type === "video") {
-            content.innerHTML = `
-                <iframe width="100%" height="520"
-                    src="${file.replace("watch?v=", "embed/")}"
-                    frameborder="0"
-                    allowfullscreen></iframe>`;
         }
     </script>
 
