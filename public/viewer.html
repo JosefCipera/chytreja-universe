@@ -29,7 +29,14 @@
 
         const params = new URLSearchParams(window.location.search);
         const type = params.get("type");
-        let file = params.get("file"); // cesta z JSONu
+        let file = params.get("file");
+
+        if (!file.startsWith("/")) {
+            file = "/" + file;
+        }
+
+        fetch(file)
+
 
         const content = document.getElementById("content");
 

@@ -48,7 +48,7 @@
     </nav> <!-- ===== HLAVIČKA ===== -->
     <header>
         <h1>🌌 Chytré já</h1>
-        <p>Váš AI osobní a firemní průvodce. Pomůže vám rozhodovat se lépe, mít víc energie a fungovat chytřeji.
+        <p>Tvé druhé, digitální já. Pomáhá ti rozhodovat, řešit úkoly a fungovat chytřeji doma i v práci.
         </p> <a href="universe/universe.html" class="btn-primary">Vstoupit do vesmíru</a>
     </header> <!-- ===== GALAXIE (vložíš svůj SVG blok) ===== -->
     <section id="galaxie-chytreho-ja" class="galaxy-wrap">
@@ -240,7 +240,6 @@
     </section>
 
     <!-- ===== PROČ VZNIKLO CHYTRÉ JÁ ===== -->
-    <!-- ===== PROČ VZNIKLO CHYTRÉ JÁ ===== -->
     <section id="proc-chytre-ja" class="about-section alt-bg">
         <h2>🚀 Budoucnost patří inteligentním průvodcům</h2>
 
@@ -283,24 +282,30 @@
     </section>
 
 
-    <section id="faq-chat" class="faq-section">
-        <div class="chat-container">
-            <h2>💬 Zeptejte se Chytrého já</h2>
-            <p>
-                Zajímají vás informace o systému, možnostech propojení nebo o tom, jak začít?
-                Napište dotaz nebo použijte mikrofon a Chytré já vám odpoví.
-            </p>
+    <!-- ====== Odpovědní box ====== -->
+    <section id="ask-section" class="ask-section">
+        <h2 class="ask-title">💬 Zeptej se Chytrého já</h2>
 
-            <div class="chat-box">
-                <div id="chat-messages" class="chat-messages">
-                    <div class="chat-message ai">👋 Ahoj, jsem Chytré já. Jak ti mohu pomoci?</div>
-                </div>
-                <div class="chat-input-row">
-                    <input id="chat-input" type="text" placeholder="Napište zprávu..." />
-                    <button id="chat-send-button">📤</button>
-                </div>
-            </div>
+        <p class="ask-sub">
+            Odpovídá jen na otázky o Chytrém já – co umí, jak funguje a jak ti může pomoci.
+        </p>
+
+        <!-- Rychlé dotazy -->
+        <div class="ask-quick">
+            <button class="ask-quick-btn">Co je Chytré já?</button>
+            <button class="ask-quick-btn">Jak fungují hlasové povely?</button>
+            <button class="ask-quick-btn">Digitální dvojník — co umí?</button>
+            <button class="ask-quick-btn">Demo / Free / Pro</button>
         </div>
+
+        <!-- Input -->
+        <div class="ask-input-row">
+            <textarea id="askInput" placeholder="Zeptej se o Chytrém já…" rows="3"></textarea>
+            <button id="askBtn">Odeslat</button>
+        </div>
+
+        <!-- Výstup (chat bubliny) -->
+        <div id="askOutput" class="ask-output"></div>
     </section>
 
     <!-- ===== CENÍK ===== -->
@@ -449,6 +454,23 @@
         </div>
     </div>
     <script src="/public/assets/js/cookies.js"></script>
+    <script src="assets/js/ask.js"></script>
+    <!-- === AI CHAT PANEL – vysouvací okno === -->
+    <button id="aiToggleBtn" class="ai-floating-btn">💬</button>
+
+    <div id="aiPanel" class="ai-panel hidden">
+        <div class="ai-panel-header">
+            <span>Chytré já</span>
+            <button id="aiCloseBtn" class="ai-close">×</button>
+        </div>
+
+        <div id="aiChatBody" class="ai-chat-body"></div>
+
+        <div class="ai-input-row">
+            <textarea id="aiInput" placeholder="Zeptej se o Chytrém já…" rows="2"></textarea>
+            <button id="aiSend">➤</button>
+        </div>
+    </div>
 
 </body>
 

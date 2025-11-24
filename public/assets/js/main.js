@@ -343,7 +343,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 async function loadTexts(lang = "cs") {
   try {
-    const response = await fetch(`./assets/models/texts.json`);
+    const response = await fetch(`./data/models/texts.json`);
     const data = await response.json();
 
     // Sekce "O nás"
