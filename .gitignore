@@ -43,8 +43,10 @@ manifest.json
 /public/assets/models/*.json
 /public/assets/temp/
 /public/assets/cache/
+/public/assets/js/env.js
 
 # === OS SYSTEM FILES ===
 ehthumbs.db
 Desktop.ini
 Icon?
+

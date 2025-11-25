@@ -11,6 +11,11 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.6.2"></script>
     <script src="./assets/js/main.js"></script>
+    <!-- ENV s API klíčem -->
+    <script type="module" src="assets/js/env.js"></script>
+
+    <!-- Chat Widget 
+    <script type="module" src="assets/js/cj-widget.js"></script> -->
 
     <link rel="manifest" href="/manifest.webmanifest">
     <meta name="theme-color" content="#101c35">
@@ -48,7 +53,7 @@
     </nav> <!-- ===== HLAVIČKA ===== -->
     <header>
         <h1>🌌 Chytré já</h1>
-        <p>Tvé druhé, digitální já. Pomáhá ti rozhodovat, řešit úkoly a fungovat chytřeji doma i v práci.
+        <p>Tvé druhé, digitální já. Pomáhá ti správně se rozhodovat, řešit úkoly a fungovat chytřeji doma i v práci.
         </p> <a href="universe/universe.html" class="btn-primary">Vstoupit do vesmíru</a>
     </header> <!-- ===== GALAXIE (vložíš svůj SVG blok) ===== -->
     <section id="galaxie-chytreho-ja" class="galaxy-wrap">
@@ -283,30 +288,7 @@
 
 
     <!-- ====== Odpovědní box ====== -->
-    <section id="ask-section" class="ask-section">
-        <h2 class="ask-title">💬 Zeptej se Chytrého já</h2>
 
-        <p class="ask-sub">
-            Odpovídá jen na otázky o Chytrém já – co umí, jak funguje a jak ti může pomoci.
-        </p>
-
-        <!-- Rychlé dotazy -->
-        <div class="ask-quick">
-            <button class="ask-quick-btn">Co je Chytré já?</button>
-            <button class="ask-quick-btn">Jak fungují hlasové povely?</button>
-            <button class="ask-quick-btn">Digitální dvojník — co umí?</button>
-            <button class="ask-quick-btn">Demo / Free / Pro</button>
-        </div>
-
-        <!-- Input -->
-        <div class="ask-input-row">
-            <textarea id="askInput" placeholder="Zeptej se o Chytrém já…" rows="3"></textarea>
-            <button id="askBtn">Odeslat</button>
-        </div>
-
-        <!-- Výstup (chat bubliny) -->
-        <div id="askOutput" class="ask-output"></div>
-    </section>
 
     <!-- ===== CENÍK ===== -->
     <section id="cenik" class="alt-bg">
@@ -428,11 +410,6 @@
     <script> const hamburger = document.getElementById("hamburger"); const navLinks = document.getElementById("navLinks"); hamburger.addEventListener("click", () => { navLinks.classList.toggle("open"); hamburger.classList.toggle("active"); }); </script>
 
     <script src="https://unpkg.com/lucide@latest"></script>
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            lucide.createIcons();
-        });
-    </script>
     <div id="cookie-banner" class="cookie-banner hidden">
         <div class="cookie-box">
             <h3>🍪 Cookies</h3>
@@ -454,23 +431,28 @@
         </div>
     </div>
     <script src="/public/assets/js/cookies.js"></script>
-    <script src="assets/js/ask.js"></script>
-    <!-- === AI CHAT PANEL – vysouvací okno === -->
-    <button id="aiToggleBtn" class="ai-floating-btn">💬</button>
 
-    <div id="aiPanel" class="ai-panel hidden">
-        <div class="ai-panel-header">
-            <span>Chytré já</span>
-            <button id="aiCloseBtn" class="ai-close">×</button>
+    <!-- ===== 💬 CHYTRÉ JÁ – FLOATING CHAT WIDGET ===== -->
+    <div id="cj-widget-btn">
+        <div class="cj-icon">💬</div>
+    </div>
+
+    <div id="cj-widget-panel">
+        <div class="cj-header">
+            <span>💬 Chytré já</span>
+            <button id="cj-close">✖</button>
         </div>
 
-        <div id="aiChatBody" class="ai-chat-body"></div>
+        <div id="cj-messages" class="cj-messages"></div>
 
-        <div class="ai-input-row">
-            <textarea id="aiInput" placeholder="Zeptej se o Chytrém já…" rows="2"></textarea>
-            <button id="aiSend">➤</button>
+        <div class="cj-input-row">
+            <input id="cj-input" type="text" placeholder="Napiš dotaz…" />
+            <button id="cj-send">➤</button>
         </div>
     </div>
+
+    <!-- JS widget – modul -->
+    <script type="module" src="assets/js/cj-widget.js"></script>
 
 </body>
 

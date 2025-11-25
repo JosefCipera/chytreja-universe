@@ -388,3 +388,4 @@ async function loadTexts(lang = "cs") {
 
 document.addEventListener("DOMContentLoaded", () => loadTexts());
 
+
