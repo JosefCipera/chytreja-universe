@@ -5,21 +5,27 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Chytré já – Tvůj digitální vesmír</title>
+
     <!-- Font Awesome 6 Free -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+    <!-- Hlavní styl -->
     <link rel="stylesheet" href="assets/css/style.css">
+
+    <!-- Knihovny -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.6.2"></script>
-    <script src="./assets/js/main.js"></script>
-    <!-- ENV s API klíčem -->
-    <script type="module" src="assets/js/env.js"></script>
 
-    <!-- Chat Widget 
-    <script type="module" src="assets/js/cj-widget.js"></script> -->
+    <!-- Main JS -->
+    <script src="./assets/js/main.js"></script>
+
+    <!-- ENV -->
+    <script type="module" src="assets/js/env.js"></script>
 
     <link rel="manifest" href="/manifest.webmanifest">
     <meta name="theme-color" content="#101c35">
 
+    <!-- Service Worker -->
     <script>
         if ("serviceWorker" in navigator) {
             navigator.serviceWorker.register("/service-worker.js")
@@ -27,220 +33,43 @@
                 .catch(err => console.error("Web SW chyba:", err));
         }
     </script>
-
-    <style> </style>
 </head>
 
-<body> <!-- ===== MENU ===== -->
+<body>
+
+    <!-- ===== MENU ===== -->
     <nav class="main-nav">
         <div class="nav-container">
             <div class="nav-logo">🌌 Chytré já</div>
             <ul class="nav-links" id="navLinks">
                 <li><a href="medioteka.html">Mediotéka</a></li>
+                <li><a href="/public/founders/founders.html">Founders Pack</a></li>
                 <li><a href="#faq-chat">Zeptejte se</a></li>
-                <!-- <li><a href="#reference">Reference</a></li>
-                <li><a href="#faq">FAQ</a></li> -->
                 <li><a href="#cenik">Ceník</a></li>
                 <li><a href="#onas">O nás</a></li>
                 <li><a href="#kontakt">Kontakt</a></li>
-            </ul> <a href="app.html" class="login-btn">Přihlásit</a>
+            </ul>
+            <a href="app.html" class="login-btn">Přihlásit</a>
+
             <div class="hamburger" id="hamburger">
                 <div class="bar"></div>
                 <div class="bar"></div>
                 <div class="bar"></div>
             </div>
         </div>
-    </nav> <!-- ===== HLAVIČKA ===== -->
+    </nav>
+
+    <!-- ===== HLAVIČKA ===== -->
     <header>
         <h1>🌌 Chytré já</h1>
-        <p>Tvé druhé, digitální já. Pomáhá ti správně se rozhodovat, řešit úkoly a fungovat chytřeji doma i v práci.
-        </p> <a href="universe/universe.html" class="btn-primary">Vstoupit do vesmíru</a>
-    </header> <!-- ===== GALAXIE (vložíš svůj SVG blok) ===== -->
-    <section id="galaxie-chytreho-ja" class="galaxy-wrap">
-        <div class="galaxy-card" style="max-width:1200px; margin:auto;">
-            <!-- <h2 class="galaxy-title">Galaxie Chytrého já</h2> -->
-            <p class="galaxy-subtitle" style="text-align:center; max-width:900px; margin:0 auto 1.5rem;">
-                <!-- Centrum: <strong>Chytré já</strong> (Sagittarius A*) • Tři světy: <strong>Dlouhověkost</strong>, <strong>Strategie</strong>, <strong>TOC</strong> -->
-            </p> <svg class="galaxy-svg" viewBox="0 0 1200 800" role="img" aria-label="Galaxie Chytrého já">
-                <defs>
-                    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
-                        <feGaussianBlur stdDeviation="6" result="blur" />
-                        <feMerge>
-                            <feMergeNode in="blur" />
-                            <feMergeNode in="SourceGraphic" />
-                        </feMerge>
-                    </filter>
-                    <radialGradient id="coreGrad" cx="50%" cy="50%" r="50%">
-                        <stop offset="0%" stop-color="#93c5fd" stop-opacity="1" />
-                        <stop offset="55%" stop-color="#60a5fa" stop-opacity="0.9" />
-                        <stop offset="100%" stop-color="#2563eb" stop-opacity="0.2" />
-                    </radialGradient>
-                    <radialGradient id="starGrad" cx="50%" cy="50%" r="50%">
-                        <stop offset="0%" stop-color="#fff" stop-opacity="1" />
-                        <stop offset="70%" stop-color="#a5b4fc" stop-opacity="0.8" />
-                        <stop offset="100%" stop-color="#6366f1" stop-opacity="0.2" />
-                    </radialGradient>
-                    <style>
-                        .galaxy-svg {
-                            width: 100%;
-                            max-width: 1200px;
-                            height: auto;
-                            display: block;
-                            margin: 0 auto;
-                            border-radius: 12px;
-                            background: radial-gradient(1200px 800px at 50% 50%, #0b1220 0%, #0b1220 40%, #0a1020 100%);
-                        }
+        <p>Tvé druhé, digitální já. Pomáhá ti správně se rozhodovat, řešit úkoly a fungovat chytřeji doma i v práci.</p>
+        <a href="universe/universe.html" class="btn-primary">Vstoupit do vesmíru</a>
+    </header>
 
-                        @keyframes rotate {
-                            from {
-                                transform: rotate(0deg);
-                            }
-
-                            to {
-                                transform: rotate(360deg);
-                            }
-                        }
-
-                        .core-pulse {
-                            animation: pulse 4s ease-in-out infinite;
-                            transform-origin: 600px 400px;
-                        }
-
-                        @keyframes pulse {
-
-                            0%,
-                            100% {
-                                transform: scale(1);
-                                opacity: .95;
-                            }
-
-                            50% {
-                                transform: scale(1.06);
-                                opacity: 1;
-                            }
-                        }
-
-                        .galaxy-rotate {
-                            animation: rotate 320s linear infinite;
-                            transform-origin: 600px 400px;
-                        }
-
-                        /* rotace planet */
-                        #longevity .orbit-local {
-                            animation: rotate 25s linear infinite;
-                            transform-origin: 0 0;
-                        }
-
-                        #strategy .orbit-local {
-                            animation: rotate 35s linear infinite;
-                            transform-origin: 0 0;
-                        }
-
-                        #toc .orbit-local {
-                            animation: rotate 45s linear infinite;
-                            transform-origin: 0 0;
-                        }
-
-                        .orbit-path {
-                            stroke: rgba(96, 165, 250, .35);
-                            stroke-width: 1.5;
-                            fill: none;
-                        }
-
-                        .star-label {
-                            font: 700 18px Inter, sans-serif;
-                            fill: #e2e8f0;
-                            text-anchor: middle;
-                        }
-
-                        .planet-label {
-                            font: 600 14px Inter, sans-serif;
-                            fill: #cbd5e1;
-                            text-anchor: middle;
-                        }
-
-                        .tag {
-                            font: 600 12px Inter, sans-serif;
-                            fill: #9fb6e3;
-                            text-anchor: middle;
-                        }
-                    </style>
-                </defs> <!-- CENTRUM GALAXIE -->
-                <g id="core">
-                    <circle cx="600" cy="400" r="120" fill="url(#coreGrad)" filter="url(#glow)" opacity="0.9" />
-                    <circle class="core-pulse" cx="600" cy="400" r="32" fill="#60a5fa" filter="url(#glow)" /> <text
-                        x="600" y="455" class="star-label" style="font-size:20px; fill:#a8c7ff;">Chytré já</text> <text
-                        x="600" y="478" class="tag">Sagittarius A*</text>
-                </g> <!-- GALAKTICKÉ SYSTÉMY -->
-                <g class="galaxy-rotate"> <!-- Dlouhověkost -->
-                    <g id="longevity" transform="translate(320,200)">
-                        <circle cx="0" cy="0" r="24" fill="url(#starGrad)" filter="url(#glow)" /> <text x="0" y="-36"
-                            class="star-label">Dlouhověkost</text>
-                        <g class="orbit-local">
-                            <circle class="orbit-path" cx="0" cy="0" r="90" />
-                            <g transform="rotate(0)">
-                                <circle cx="0" cy="-90" r="11" fill="#22c55e" filter="url(#glow)" /> <text x="0"
-                                    y="-110" class="planet-label">Zdraví</text>
-                            </g>
-                            <g transform="rotate(120)">
-                                <circle cx="0" cy="-90" r="11" fill="#f59e0b" filter="url(#glow)" /> <text x="0"
-                                    y="-110" class="planet-label">Tělo</text>
-                            </g>
-                            <g transform="rotate(210)">
-                                <circle cx="0" cy="-90" r="11" fill="#a855f7" filter="url(#glow)" /> <text x="0"
-                                    y="-110" class="planet-label">Mysl</text>
-                            </g>
-                            <g transform="rotate(300)">
-                                <circle cx="0" cy="-90" r="11" fill="#ef4444" filter="url(#glow)" /> <text x="0"
-                                    y="-110" class="planet-label">Výživa</text>
-                            </g>
-                        </g>
-                    </g> <!-- Strategie -->
-                    <g id="strategy" transform="translate(880,200)">
-                        <circle cx="0" cy="0" r="24" fill="url(#starGrad)" filter="url(#glow)" /> <text x="0" y="-36"
-                            class="star-label">Strategie</text>
-                        <g class="orbit-local">
-                            <circle class="orbit-path" cx="0" cy="0" r="110" />
-                            <g transform="rotate(45)">
-                                <circle cx="0" cy="-110" r="10" fill="#38bdf8" filter="url(#glow)" /> <text x="0"
-                                    y="-130" class="planet-label">Byznys model</text>
-                            </g>
-                            <g transform="rotate(165)">
-                                <circle cx="0" cy="-110" r="10" fill="#60a5fa" filter="url(#glow)" /> <text x="0"
-                                    y="-130" class="planet-label">Modrý oceán</text>
-                            </g>
-                            <g transform="rotate(285)">
-                                <circle cx="0" cy="-110" r="10" fill="#818cf8" filter="url(#glow)" /> <text x="0"
-                                    y="-130" class="planet-label">Byznys plán</text>
-                            </g>
-                        </g>
-                    </g> <!-- TOC -->
-                    <g id="toc" transform="translate(850,560)">
-                        <circle cx="0" cy="0" r="24" fill="url(#starGrad)" filter="url(#glow)" /> <text x="0" y="-36"
-                            class="star-label">TOC</text>
-                        <g class="orbit-local">
-                            <circle class="orbit-path" cx="0" cy="0" r="120" />
-                            <g transform="rotate(0)">
-                                <circle cx="0" cy="-120" r="10" fill="#34d399" filter="url(#glow)" /> <text x="0"
-                                    y="-140" class="planet-label">Výroba</text>
-                            </g>
-                            <g transform="rotate(90)">
-                                <circle cx="0" cy="-120" r="10" fill="#fbbf24" filter="url(#glow)" /> <text x="0"
-                                    y="-140" class="planet-label">Projekty</text>
-                            </g>
-                            <g transform="rotate(210)">
-                                <circle cx="0" cy="-120" r="10" fill="#f87171" filter="url(#glow)" /> <text x="0"
-                                    y="-140" class="planet-label">Průtokové účetnictví</text>
-                            </g>
-                            <g transform="rotate(150)">
-                                <circle cx="0" cy="-120" r="10" fill="#fb7185" filter="url(#glow)" /> <text x="0"
-                                    y="-140" class="planet-label">Marketing</text>
-                            </g>
-                        </g>
-                    </g>
-                </g> <text x="600" y="770" class="tag" style="fill:#8fb0ff; font-size:13px;"> Galaxie Chytrého já – tři
-                    světy řízení života a firmy </text>
-            </svg>
+    <section id="galaxie-chytreho-ja" class="galaxy-wrap parallax-container">
+        <div class="galaxy-card parallax-item">
+            <object data="assets/svg/universe.svg" type="image/svg+xml" class="galaxy-object">
+            </object>
         </div>
     </section>
 
@@ -285,30 +114,99 @@
             Chytré já je jako vesmír, který spojuje váš život i vaši práci — a každý den vám ukazuje další správný krok.
         </p>
     </section>
+    <!-- ===== CO ZÍSKÁTE ===== -->
+    <section id="co-ziskate" class="about-section">
+        <h2>✨ Co získáte v jednotlivých tarifech</h2>
 
+        <p class="proc-intro" style="max-width:700px; margin:0 auto 3rem; opacity:0.9;">
+            Každý tarif otevírá jinou část vašeho digitálního vesmíru.
+            Vyberte si, jak hluboko chcete jít.
+        </p>
 
-    <!-- ====== Odpovědní box ====== -->
+        <div class="benefit-grid">
 
+            <div class="benefit-card">
+                <h3>🚀 Start – zdarma</h3>
+                <ul>
+                    <li>✔ Základní Universe</li>
+                    <li>✔ Základní AI chat (rychlý režim)</li>
+                    <li>✔ Ukázkové uzly a vizualizace</li>
+                    <li>✔ Hlasové příkazy</li>
+                    <li>✖ Žádné pokročilé moduly</li>
+                    <li>✖ Omezený počet dotazů</li>
+                </ul>
+            </div>
+
+            <div class="benefit-card highlight-card">
+                <h3>✨ PRO – 490 Kč / měsíc</h3>
+                <ul>
+                    <li>✔ Vše ze Startu</li>
+                    <li>✔ Plný Universe</li>
+                    <li>✔ Plánování projektů a práce</li>
+                    <li>✔ Automatizace a integrace</li>
+                    <li>✔ Dashboardy a vizualizace</li>
+                    <li>✔ AI modely (rychlý i přesný režim)</li>
+                    <li>✔ Priority support</li>
+                </ul>
+            </div>
+
+            <div class="benefit-card">
+                <h3>🏢 Enterprise – na míru</h3>
+                <ul>
+                    <li>✔ Vše z PRO</li>
+                    <li>✔ Firemní API integrace</li>
+                    <li>✔ Týmová práva a role</li>
+                    <li>✔ Admin portál</li>
+                    <li>✔ Firemní AI modely</li>
+                    <li>✔ SLA podpora</li>
+                    <li>✔ Školení týmu</li>
+                </ul>
+            </div>
+
+        </div>
+    </section>
 
     <!-- ===== CENÍK ===== -->
     <section id="cenik" class="alt-bg">
         <h2>💎 Ceník</h2>
+
+        <p style="text-align:center; max-width:600px; margin:0 auto 2.5rem; opacity:0.9;">
+            Vyberte si, jak hluboko chcete vstoupit do vesmíru Chytrého já.
+            Start je zdarma, PRO pro pokročilé a Enterprise pro firmy.
+        </p>
+
         <div class="pricing">
+
             <div class="price-card">
                 <h3>🚀 Start</h3>
                 <div class="price">Zdarma</div>
-                <p>Základní přístup k vesmíru Chytrého já, včetně hlasových příkazů a vizualizací.</p>
+                <p>Základní přístup do Universe, hlasové příkazy a ukázkové moduly.</p>
             </div>
+
             <div class="price-card highlight">
-                <h3>✨ Pro</h3>
+                <h3>✨ PRO</h3>
                 <div class="price">490 Kč / měsíc</div>
-                <p>Rozšířené moduly, AI analýza, propojení s Tabidoo a přístup ke všem modelům.</p>
+                <p>Plná síla Chytrého já: všechny moduly, plný Universe, vizualizace, plánování a AI modely.</p>
             </div>
+
             <div class="price-card">
                 <h3>🏢 Enterprise</h3>
                 <div class="price">Na dotaz</div>
-                <p>Plně přizpůsobené řešení pro firmy, včetně vlastního hostingu a správy dat.</p>
+                <p>Integrace na míru, firemní API, týmové licence a SLA podpora.</p>
             </div>
+
+        </div>
+
+    </section>
+    <!-- ===== FOUNDERS CTA ===== -->
+    <section id="founders-cta" class="alt-bg" style="padding-top:2rem; padding-bottom:3rem;">
+        <div class="founders-cta-box">
+            <h3>🌌 Odemkněte celý vesmír jako Founders</h3>
+            <p>
+                Founders Pack vám dává doživotní přístup ke všem současným i budoucím modulům,
+                uzlům Universe, AI nástrojům a exkluzivním funkcím.
+            </p>
+            <a href="/public/founders/founders.html" class="founders-btn">Zjistit více</a>
         </div>
     </section>
 
@@ -324,35 +222,51 @@
                 Pomáháme lidem i firmám vidět celý svůj vesmír jasně, jednoduše a chytře.</p>
         </div>
     </section>
+
     <!-- ===== KONTAKT ===== -->
     <section id="kontakt" class="alt-bg">
         <h2>📞 Kontaktujte nás</h2>
-        <p style="text-align:center; opacity:0.9; margin-bottom:2rem;"> Zavolejte nám nebo napište. Jsme tu pro vás.
+
+        <p style="text-align:center; opacity:0.9; margin-bottom:2rem;">
+            Zavolejte nám nebo napište. Jsme tu pro vás.
         </p>
-        <div class="contact-grid"> <!-- Levá část -->
+
+        <div class="contact-grid">
+
             <div class="contact-info">
                 <div class="contact-card">
                     <h3>Technická podpora</h3>
                     <p>Nefunguje vám aplikace nebo přístup?<br> Pište na <a
                             href="mailto:podpora@iting.cz">podpora@iting.cz</a>. </p>
                 </div>
+
                 <div class="contact-card">
                     <h3>Obchodní podpora</h3>
                     <p>Chcete vědět více?<br> Napište na <a href="mailto:obchod@iting.cz">obchod@iting.cz</a><br> nebo
                         volejte <a href="tel:+420724166988">+420 724 166 988</a>. </p>
                 </div>
+
                 <div class="contact-card">
                     <h3>Administrativa</h3>
                     <p>Potřebujete poradit s fakturací?<br> Pište na <a
                             href="mailto:uctarna@iting.cz">uctarna@iting.cz</a><br> nebo volejte <a
                             href="tel:+420723999152">+420 723 999 152</a>. </p>
                 </div>
-            </div> <!-- Pravá část -->
+            </div>
+
             <div class="contact-form">
-                <form> <label for="name">Jméno</label> <input type="text" id="name" name="name" required> <label
-                        for="email">E-mail</label> <input type="email" id="email" name="email" required> <label
-                        for="message">Zpráva</label> <textarea id="message" name="message" rows="5" required></textarea>
+                <form>
+                    <label for="name">Jméno</label>
+                    <input type="text" id="name" name="name" required>
+
+                    <label for="email">E-mail</label>
+                    <input type="email" id="email" name="email" required>
+
+                    <label for="message">Zpráva</label>
+                    <textarea id="message" name="message" rows="5" required></textarea>
+
                     <button type="submit">Odeslat zprávu</button>
+
                     <p class="note">
                         Vaše údaje použijeme pouze pro odpověď na zprávu.<br>
                         Viz <a href="/public/legal/ochrana-osobnich-udaju.html" target="_blank">
@@ -364,11 +278,17 @@
             </div>
         </div>
     </section>
-    <footer class="site-footer bg-gray-900 text-gray-300 py-10 border-t border-gray-700">
+
+    <section class="founders-end-cta">
+        <p>🚀 Chcete být mezi prvními, kdo vstoupí do celého digitálního vesmíru?</p>
+        <a href="/public/founders/founders.html">Podívat se na Founders Pack</a>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="site-footer">
         <div
             class="footer-content max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-8 items-center text-center md:text-left">
 
-            <!-- Logo a popis -->
             <div class="footer-logo">
                 <h3 class="text-2xl font-bold text-white mb-2">🌌 Chytré já</h3>
                 <p class="text-gray-400 text-sm leading-relaxed">
@@ -376,9 +296,7 @@
                 </p>
             </div>
 
-            <!-- Navigační odkazy -->
-            <div class="footer-links flex flex-col space-y-2 md:space-y-1">
-
+            <div class="footer-links">
                 <a href="#kontakt" class="hover:text-white transition-colors duration-200">
                     Kontakt
                 </a>
@@ -395,10 +313,8 @@
                 <a href="/public/legal/cookies.html" class="hover:text-white transition-colors duration-200">
                     Cookies
                 </a>
-
             </div>
 
-            <!-- Copyright -->
             <div class="footer-copy text-gray-500 text-sm md:text-right">
                 © 2025 <span class="text-white font-semibold">Chytré já</span>.
                 Všechna práva vyhrazena.
@@ -406,10 +322,21 @@
 
         </div>
     </footer>
-    <!-- ===== SCRIPT pro hamburger ===== -->
-    <script> const hamburger = document.getElementById("hamburger"); const navLinks = document.getElementById("navLinks"); hamburger.addEventListener("click", () => { navLinks.classList.toggle("open"); hamburger.classList.toggle("active"); }); </script>
+
+    <!-- ===== HAMBURGER SCRIPT ===== -->
+    <script>
+        const hamburger = document.getElementById("hamburger");
+        const navLinks = document.getElementById("navLinks");
+
+        hamburger.addEventListener("click", () => {
+            navLinks.classList.toggle("open");
+            hamburger.classList.toggle("active");
+        });
+    </script>
 
     <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- COOKIES -->
     <div id="cookie-banner" class="cookie-banner hidden">
         <div class="cookie-box">
             <h3>🍪 Cookies</h3>
@@ -430,9 +357,10 @@
             </div>
         </div>
     </div>
+
     <script src="/public/assets/js/cookies.js"></script>
 
-    <!-- ===== 💬 CHYTRÉ JÁ – FLOATING CHAT WIDGET ===== -->
+    <!-- ===== CHYTRÉ JÁ CHAT WIDGET ===== -->
     <div id="cj-widget-btn">
         <div class="cj-icon">💬</div>
     </div>
@@ -451,7 +379,6 @@
         </div>
     </div>
 
-    <!-- JS widget – modul -->
     <script type="module" src="assets/js/cj-widget.js"></script>
 
 </body>

@@ -387,5 +387,22 @@ async function loadTexts(lang = "cs") {
 }
 
 document.addEventListener("DOMContentLoaded", () => loadTexts());
+/* ==========================
+   Jemný parallax scroll efekt
+========================== */
+
+const parallaxItem = document.querySelector(".parallax-item");
+
+if (parallaxItem) {
+  window.addEventListener("scroll", () => {
+    const scrollY = window.scrollY;
+
+    // jemný posun: 0.05 = velmi decentní
+    const offset = scrollY * 0.05;
+
+    // transformační posun
+    parallaxItem.style.transform = `translateY(${offset}px)`;
+  });
+}
 
 
