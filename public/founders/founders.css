@@ -1,154 +1,533 @@
+/* =========================================
+   GLOBAL THEME
+========================================= */
 body {
   margin: 0;
-  background: linear-gradient(180deg, #0b1220, #101c35);
+  background: #0a0f1c;
   color: #e2e8f0;
-  font-family: "Inter", sans-serif;
+  font-family: Inter, sans-serif;
 }
 
-/* === HERO === */
+/* =========================================
+   HERO
+========================================= */
 .founders-hero {
-  padding: 6rem 1rem 5rem;
+  padding: 5rem 1rem;
   text-align: center;
-  background: radial-gradient(circle at 50% 20%, rgba(59, 130, 246, 0.2), transparent 70%);
+  background: radial-gradient(circle at center, #1e3a8a 0%, #0a0f1c 70%);
+  color: #fff;
 }
 
 .founders-hero h1 {
-  font-size: 3rem;
-  color: #93c5fd;
-  margin-bottom: 0.5rem;
+  font-size: 3.2rem;
+  margin-bottom: 1rem;
 }
 
-.founders-hero h2 {
-  font-size: 1.8rem;
-  color: #a8c7ff;
-  margin-bottom: 1.5rem;
-}
-
-.founders-hero p {
-  font-size: 1.15rem;
+.founders-subtitle {
+  opacity: 0.9;
+  font-size: 1.3rem;
   max-width: 650px;
-  margin: 0 auto 2rem;
-  color: #cbd5e1;
+  margin: 0 auto 2.2rem;
 }
 
-.btn-primary {
-  background: linear-gradient(90deg, #3b82f6, #2563eb);
-  padding: 0.9rem 1.6rem;
-  color: white;
-  text-decoration: none;
-  border-radius: 10px;
-  font-weight: 600;
-  transition: 0.25s ease;
+.founders-btn-big {
   display: inline-block;
+  padding: 1rem 2rem;
+  background: linear-gradient(90deg, #3b82f6, #2563eb);
+  color: #fff;
+  border-radius: 14px;
+  text-decoration: none;
+  font-size: 1.2rem;
+  font-weight: 600;
+  box-shadow: 0 4px 22px rgba(37, 99, 235, 0.4);
+  transition: 0.25s;
 }
 
-.btn-primary:hover {
-  transform: scale(1.05);
+.founders-btn-big:hover {
+  transform: scale(1.06);
+  box-shadow: 0 6px 28px rgba(37, 99, 235, 0.6);
 }
 
-/* === SECTIONS === */
+/* =========================================
+   GENERIC SECTIONS
+========================================= */
 .founders-section {
   padding: 4rem 1rem;
-  max-width: 1200px;
+  text-align: center;
+}
+
+.founders-title {
+  font-size: 2.2rem;
+  margin-bottom: 1rem;
+  color: #a8c7ff;
+  text-shadow: 0 0 12px rgba(96, 165, 250, .25);
+}
+
+.founders-lead {
+  max-width: 700px;
+  margin: .5rem auto 3rem;
+  opacity: .9;
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+/* =========================================
+   GRID CARDS
+========================================= */
+.founders-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 2rem;
+  max-width: 1100px;
   margin: 0 auto;
 }
 
-.founders-section.alt {
-  background: rgba(255, 255, 255, 0.02);
-  border-top: 1px solid rgba(59, 130, 246, 0.15);
-  border-bottom: 1px solid rgba(59, 130, 246, 0.15);
-}
-
-.founders-section h2 {
-  text-align: center;
-  color: #a8c7ff;
-  font-size: 2.2rem;
-}
-
-/* === GRID === */
-.founders-grid {
-  margin-top: 3rem;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 2rem;
-}
-
 .founders-card {
+  background: #111827;
+  border: 1px solid rgba(147, 197, 253, 0.25);
   padding: 2rem;
-  background: rgba(15, 23, 42, 0.85);
   border-radius: 14px;
-  border: 1px solid rgba(96, 165, 250, 0.2);
-  box-shadow: 0 0 18px rgba(37, 99, 235, 0.15);
+  text-align: left;
+  box-shadow: 0 0 14px rgba(0, 0, 0, .3);
 }
 
-.founders-card h3 {
-  color: #93c5fd;
-  margin-bottom: 0.8rem;
+/* =========================================
+   DETAIL BENEFITS
+========================================= */
+.detail-grid {
+  display: grid;
+  gap: 2rem;
+  max-width: 1100px;
+  margin: 0 auto;
 }
 
-.founders-card ul {
+@media (min-width: 900px) {
+  .detail-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.detail-card {
+  background: rgba(15, 23, 42, 0.75);
+  border: 1px solid rgba(96, 165, 250, 0.25);
+  border-radius: 14px;
+  padding: 2rem;
+  box-shadow: 0 0 18px rgba(0, 0, 0, 0.35);
+  transition: .25s;
+}
+
+.detail-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 8px 26px rgba(96, 165, 250, 0.35);
+}
+
+.detail-card h3 {
+  color: #a8c7ff;
+  margin-bottom: .6rem;
+}
+
+/* =========================================
+   ORBIT PREVIEW (VARIANTA A — FIXED TEXT)
+========================================= */
+.founders-section-alt {
+  background: rgba(20, 28, 50, 0.4);
+  backdrop-filter: blur(6px);
+}
+
+.orbit-wrapper {
+  position: relative;
+  width: 500px;
+  max-width: 92%;
+  margin: 2rem auto 4rem;
+}
+
+.stars-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.15;
+  pointer-events: none;
+}
+
+.orbit-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #1e3a8a;
+  padding: 1rem 1.5rem;
+  border-radius: 50%;
+  color: #fff;
+  font-weight: 700;
+  box-shadow: 0 0 22px rgba(96, 165, 250, .4);
+  z-index: 5;
+}
+
+/* Rotuje jen kruh, ne text */
+.orbit-svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.orbit-line {
+  fill: none;
+  stroke: rgba(96, 165, 250, .3);
+  stroke-width: 2;
+  animation: orbit-rotate 38s linear infinite;
+}
+
+@keyframes orbit-rotate {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.orbit-node {
+  text-anchor: middle;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.orbit-node text {
+  fill: #e2e8f0;
+}
+
+/* ACTIVE */
+.orbit-node.active circle {
+  fill: #3b82f6;
+  stroke: #60a5fa;
+  stroke-width: 2;
+}
+
+/* FUTURE */
+.orbit-node.future circle {
+  fill: #1e293b;
+  stroke: rgba(148, 163, 184, .4);
+  stroke-width: 2;
+}
+
+/* =========================================
+   MODEL DESCRIPTION
+========================================= */
+.model-description {
+  max-width: 700px;
+  margin: 0 auto 3rem;
+  color: #cbd5e1;
+  text-align: center;
+  line-height: 1.65;
+}
+
+/* CTA BOX */
+.founders-cta-box {
+  max-width: 700px;
+  margin: 3rem auto;
+  background: rgba(30, 41, 59, .55);
+  border: 1px solid rgba(147, 197, 253, .25);
+  padding: 2rem;
+  border-radius: 14px;
+  box-shadow: 0 0 20px rgba(37, 99, 235, .25);
+}
+
+/* =========================================
+   ROADMAP
+========================================= */
+.founders-roadmap {
+  max-width: 700px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.founders-roadmap-item {
+  background: #0f172a;
+  padding: 1.3rem;
+  border-radius: 12px;
+  margin-bottom: 1rem;
+  border: 1px solid rgba(96, 165, 250, .25);
+}
+
+/* =========================================
+   FAQ
+========================================= */
+.founders-faq details {
+  background: #0f172a;
+  padding: 1rem 1.3rem;
+  margin-bottom: 1rem;
+  border-radius: 10px;
+  border: 1px solid rgba(96, 165, 250, .25);
+}
+
+/* FINAL CTA */
+.founders-final-cta {
+  padding: 4rem 1rem;
+  text-align: center;
+}
+
+/* =========================================
+   GEMINI INTEGRATION SECTION
+========================================= */
+/* --- Proměnné a Základní reset --- */
+:root {
+  --color-dark-blue: #0A192F;
+  /* Tmavé pozadí (vesmírná) */
+  --color-light-blue: #64FFDA;
+  /* Akcentní barva (azurová/tyrkysová) */
+  --color-white: #E6F1FF;
+  /* Barva textu */
+  --color-gray: #8892B0;
+  /* Šedá pro disabled/info */
+}
+
+/* --- Kontejner Ceníku --- */
+.pricing-container {
+  padding: 80px 20px;
+  background-color: var(--color-dark-blue);
+  color: var(--color-white);
+  font-family: Arial, sans-serif;
+  text-align: center;
+}
+
+.section-title {
+  font-size: 2.5em;
+  margin-bottom: 10px;
+  color: var(--color-light-blue);
+}
+
+.section-subtitle {
+  font-size: 1.1em;
+  color: var(--color-gray);
+  margin-bottom: 50px;
+}
+
+/* --- Karty s Tarify --- */
+.pricing-cards {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  flex-wrap: wrap;
+  /* Pro responzivitu */
+}
+
+.price-card {
+  background-color: #112240;
+  /* Tmavší pozadí pro karty */
+  padding: 30px;
+  border-radius: 8px;
+  width: 300px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  transition: transform 0.3s, box-shadow 0.3s;
+  position: relative;
+  border-top: 5px solid transparent;
+}
+
+.price-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.7);
+}
+
+/* --- Karta ZAKLADATELÉ (Zvýraznění) --- */
+.price-card.founders {
+  background-color: #172a45;
+  /* Ještě tmavší a bohatší */
+  border-top-color: var(--color-light-blue);
+  transform: scale(1.05);
+  /* Opticky větší */
+}
+
+.price-card.founders:hover {
+  transform: scale(1.08) translateY(-5px);
+}
+
+.badge {
+  position: absolute;
+  top: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--color-light-blue);
+  color: var(--color-dark-blue);
+  padding: 5px 15px;
+  border-radius: 20px;
+  font-weight: bold;
+  font-size: 0.85em;
+}
+
+/* --- Obsah Karet --- */
+.card-title {
+  font-size: 1.8em;
+  margin-bottom: 15px;
+  color: var(--color-light-blue);
+}
+
+.price-value {
+  font-size: 3em;
+  font-weight: bold;
+  color: var(--color-white);
+  line-height: 1;
+}
+
+.price-period {
+  color: var(--color-gray);
+  margin-bottom: 20px;
+  font-size: 1em;
+}
+
+.price-card hr {
+  border: 0;
+  height: 1px;
+  background: #303C54;
+  margin: 20px 0;
+}
+
+.features-list {
   list-style: none;
   padding: 0;
-  margin: 0;
+  text-align: left;
+  margin-bottom: 30px;
 }
 
-.founders-card li {
-  margin: 0.4rem 0;
+.features-list li {
+  padding: 8px 0;
+  color: var(--color-white);
+  position: relative;
+  padding-left: 20px;
 }
 
-/* === WHY / REASONS === */
-.founders-wide {
-  max-width: 800px;
-  margin: 0 auto 3rem;
+.features-list li::before {
+  content: '✓';
+  color: var(--color-light-blue);
+  font-weight: bold;
+  position: absolute;
+  left: 0;
+}
+
+.features-list li.disabled {
+  color: var(--color-gray);
+  text-decoration: line-through;
+}
+
+.features-list li.disabled::before {
+  content: '✗';
+  color: #6a6a6a;
+}
+
+.small-info {
+  font-size: 0.9em;
+  color: var(--color-light-blue);
+  margin-top: 15px;
+}
+
+/* --- Tlačítka --- */
+.btn {
+  display: inline-block;
+  padding: 12px 25px;
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.btn-primary {
+  background-color: var(--color-light-blue);
+  color: var(--color-dark-blue);
+  border: 2px solid var(--color-light-blue);
+}
+
+.btn-primary:hover {
+  background-color: var(--color-white);
+}
+
+.btn-secondary {
+  background-color: transparent;
+  color: var(--color-light-blue);
+  border: 2px solid var(--color-light-blue);
+}
+
+.btn-secondary:hover {
+  background-color: var(--color-light-blue);
+  color: var(--color-dark-blue);
+}
+
+/* --- Responzivita pro mobilní zařízení --- */
+@media (max-width: 960px) {
+  .pricing-cards {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .price-card {
+    width: 85%;
+    margin-bottom: 30px;
+  }
+
+  .price-card.founders {
+    transform: scale(1.0);
+  }
+
+  .price-card.founders:hover {
+    transform: translateY(-5px);
+  }
+}
+
+/* ===============================
+   ZÁVĚREČNÝ ZÁVAZEK FOUNDERŮM
+================================ */
+.founders-commit {
+  padding: 5rem 1rem 6rem;
+  background: radial-gradient(circle at 50% 20%, rgba(59, 130, 246, 0.08), transparent 70%),
+    linear-gradient(180deg, #0a0f1c 0%, #0f172a 100%);
   text-align: center;
+  margin-top: 4rem;
 }
 
-.founders-reasons {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 2rem;
-  justify-content: center;
+.commit-inner {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 3rem 2rem;
+  background: rgba(30, 41, 59, 0.55);
+  border: 1px solid rgba(147, 197, 253, 0.22);
+  border-radius: 16px;
+  box-shadow: 0 0 20px rgba(37, 99, 235, 0.25);
+  backdrop-filter: blur(6px);
 }
 
-.reason {
-  background: rgba(30, 41, 59, 0.75);
-  padding: 2rem;
-  border-radius: 12px;
-  max-width: 300px;
-  text-align: center;
+.founders-commit h2 {
+  font-size: 2.4rem;
+  color: #a8c7ff;
+  margin-bottom: 1.4rem;
+  text-shadow: 0 0 14px rgba(96, 165, 250, 0.35);
 }
 
-/* === FAQ === */
-.faq-item {
-  background: rgba(255, 255, 255, 0.04);
-  padding: 1.4rem;
-  border-radius: 10px;
-  margin: 1rem 0;
-  border: 1px solid rgba(96, 165, 250, 0.15);
+.commit-text {
+  color: #dbeafe;
+  font-size: 1.15rem;
+  line-height: 1.75;
+  max-width: 700px;
+  margin: 0 auto 2.5rem;
 }
 
-.faq-item h3 {
+.commit-text strong {
   color: #93c5fd;
-  margin-bottom: 0.5rem;
 }
 
-/* === CTA FOOTER === */
-.founders-footer {
-  text-align: center;
-  padding: 4rem 1rem 6rem;
-}
-
-.founders-footer h2 {
-  font-size: 2.2rem;
-  color: #93c5fd;
-}
-
-.founders-footer p {
+.commit-sign {
+  margin-top: 2rem;
+  font-size: 1.1rem;
   color: #cbd5e1;
-  margin-bottom: 2rem;
 }
 
-.btn-primary.big {
-  padding: 1.1rem 2rem;
+.commit-name {
+  font-weight: 700;
+  margin-bottom: 0.3rem;
   font-size: 1.2rem;
+  color: #e2e8f0;
+}
+
+.commit-role {
+  font-size: 0.95rem;
+  opacity: 0.8;
 }

@@ -2296,3 +2296,961 @@ details p {
   margin-top: 3rem !important;
   padding-top: 2rem !important;
 }
+
+/* ==============================
+   CO ZÍSKÁTE – VYLEPŠENÝ STYL
+============================== */
+
+.benefit-card {
+  background: rgba(15, 23, 42, 0.75);
+  border: 1px solid rgba(96, 165, 250, 0.25);
+  padding: 2rem;
+  border-radius: 18px;
+  box-shadow: 0 0 18px rgba(0, 0, 0, 0.35);
+  transition: 0.25s ease;
+  text-align: left;
+}
+
+.benefit-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 8px 26px rgba(96, 165, 250, 0.35);
+  border-color: rgba(147, 197, 253, 0.45);
+}
+
+/* Nadpis s ikonou */
+.benefit-card h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: #a8c7ff;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+/* Zvýraznění ikon u nadpisu */
+.benefit-card h3 i,
+.benefit-card h3 span.emoji-icon {
+  font-size: 1.7rem;
+  filter: drop-shadow(0 0 6px rgba(96, 165, 250, .35));
+}
+
+/* Seznam výhod */
+.benefit-card ul {
+  margin: 0;
+  padding-left: 1.2rem;
+  line-height: 1.6;
+  color: #cbd5e1;
+  font-size: 1.05rem;
+}
+
+.benefit-card ul li {
+  margin-bottom: 0.4rem;
+}
+
+/* Zvýrazněná karta (PRO) */
+.highlight-card {
+  border: 1px solid rgba(56, 189, 248, 0.5);
+  background: rgba(15, 23, 42, 0.9);
+  box-shadow: 0 0 22px rgba(56, 189, 248, 0.25);
+}
+
+/* ======================================
+   CO ZÍSKÁTE – PODOBNÝ STYL JAKO CENÍK
+====================================== */
+
+.benefit-card {
+  background: rgba(15, 23, 42, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 2.5rem 2rem;
+  text-align: center;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+  transition: all 0.3s ease;
+}
+
+.benefit-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 32px rgba(96, 165, 250, 0.35);
+  border-color: rgba(147, 197, 253, 0.45);
+}
+
+/* NADPIS – jako v ceníku */
+.benefit-card h3 {
+  font-size: 1.65rem;
+  font-weight: 700;
+  margin-bottom: 0.8rem;
+  color: #a8c7ff;
+}
+
+/* PODNADPIS (krátký text) – styl jako v ceníku */
+.benefit-card>p {
+  font-size: 1.05rem;
+  opacity: 0.9;
+  margin-bottom: 1.8rem;
+  color: #cbd5e1;
+}
+
+/* ODRÁŽKY – stejné odsazení jako pricing */
+.benefit-card ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.benefit-card ul li {
+  padding: 0.45rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  font-size: 1.05rem;
+}
+
+.benefit-card ul li:last-child {
+  border-bottom: none;
+}
+
+/* Zvýrazněná karta (PRO) */
+.highlight-card {
+  background: rgba(30, 41, 59, 0.9);
+  border: 1px solid rgba(56, 189, 248, 0.45);
+  box-shadow: 0 0 22px rgba(56, 189, 248, 0.25);
+}
+
+/* ======================================
+   CO ZÍSKÁTE — ÚPRAVA DO STYLU CENÍKU
+====================================== */
+
+/* CELÁ KARTA */
+.benefit-card {
+  background: rgba(15, 23, 42, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 2.4rem 2rem 2rem;
+  text-align: left;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+  transition: all 0.3s ease;
+}
+
+.benefit-card:hover {
+  transform: translateY(-8px);
+  border-color: rgba(147, 197, 253, 0.5);
+  box-shadow: 0 12px 32px rgba(96, 165, 250, 0.35);
+}
+
+/* HLAVNÍ NADPIS – ikona + jméno */
+.benefit-card h3 {
+  font-size: 1.9rem;
+  font-weight: 700;
+  margin: 0 0 0.2rem 0;
+  color: #e2e8f0;
+}
+
+/* CENA – stejný modrý styl jako pricing */
+.benefit-card .benefit-price {
+  font-size: 1.45rem;
+  font-weight: 600;
+  margin-bottom: 1.3rem;
+  background: linear-gradient(90deg, #60a5fa, #3b82f6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ODRÁŽKY — bod 3: čisté bullet body, žádné fajfky */
+.benefit-card ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.benefit-card ul li {
+  position: relative;
+  padding: 0.55rem 0 0.55rem 1.4rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  font-size: 1.05rem;
+  color: #cbd5e1;
+}
+
+.benefit-card ul li:last-child {
+  border-bottom: none;
+}
+
+/* TEČKA místo ikon */
+.benefit-card ul li::before {
+  content: "";
+  position: absolute;
+  left: 0.4rem;
+  top: 0.95rem;
+  width: 7px;
+  height: 7px;
+  background: #60a5fa;
+  border-radius: 50%;
+}
+
+/* ZVÝRAZNĚNÁ PRO karta */
+.benefit-card.highlight-card {
+  border: 1px solid rgba(56, 189, 248, 0.45);
+  background: rgba(30, 41, 59, 0.92);
+  box-shadow: 0 0 22px rgba(56, 189, 248, 0.25);
+}
+
+.price-test {
+  list-style: none;
+  padding: 0;
+  margin: 1.5rem 0 0;
+}
+
+.price-test li {
+  padding: 0.55rem 0 0.55rem 1.4rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  font-size: 1rem;
+  color: #cbd5e1;
+  position: relative;
+}
+
+.price-test li:last-child {
+  border-bottom: none;
+}
+
+.price-test li::before {
+  content: "";
+  position: absolute;
+  left: 0.4rem;
+  top: 0.95rem;
+  width: 7px;
+  height: 7px;
+  background: #60a5fa;
+  border-radius: 50%;
+}
+
+/* ===== CO ZÍSKÁTE – NADPIS A TEXT ===== */
+#co-ziskate h2 {
+  color: #60a5fa;
+  /* modrá podle ceníku */
+  font-size: 2.2rem;
+  margin-bottom: 0.6rem;
+  text-align: center;
+}
+
+#co-ziskate .proc-intro {
+  text-align: left;
+  margin-bottom: 2.2rem;
+  line-height: 1.6;
+}
+
+/* ===== OPRAVA ODRÁŽEK ===== */
+#co-ziskate .benefit-card ul {
+  list-style: none;
+  /* odstraní default tečky */
+  padding: 0;
+  margin: 0;
+}
+
+#co-ziskate .benefit-card li {
+  padding: 0.45rem 0 0.45rem 1.6rem;
+  position: relative;
+  font-size: 1rem;
+  color: #e2e8f0;
+}
+
+/* ✔ modrá fajfka */
+#co-ziskate .benefit-card li::before {
+  content: "✔";
+  position: absolute;
+  left: 0;
+  top: 0.2rem;
+  font-weight: 700;
+  color: #60a5fa;
+}
+
+/* ✖ červený křížek — podle textu */
+#co-ziskate .benefit-card li:has(> span.red-x)::before,
+#co-ziskate .benefit-card li.x::before {
+  content: "✖";
+  color: #ef4444;
+}
+
+/* Nadpis sekce – jemná modrá, ale zarovnání zůstává CENTER */
+#co-ziskate h2 {
+  color: #60a5fa;
+  /* jemná šablonová modrá */
+  font-size: 2.2rem;
+  margin-bottom: 0.8rem;
+  text-align: center;
+  /* VRÁCENO */
+}
+
+/* Podnadpis zůstává uprostřed */
+#co-ziskate .proc-intro {
+  text-align: center;
+  /* VRÁCENO */
+  max-width: 700px;
+  margin: 0 auto 2.2rem;
+  line-height: 1.6;
+  opacity: 0.9;
+}
+
+/* KARTY BENEFITŮ – text vlevo */
+#co-ziskate .benefit-card {
+  background: rgba(15, 23, 42, 0.75);
+  border: 1px solid rgba(96, 165, 250, 0.25);
+  border-radius: 14px;
+  padding: 2rem;
+  text-align: left;
+  /* zarovnání textu vlevo */
+  transition: 0.25s;
+}
+
+/* Nadpisy karet */
+#co-ziskate .benefit-card h3 {
+  color: #a8c7ff;
+  margin-bottom: 0.9rem;
+  font-size: 1.25rem;
+}
+
+/* Seznam bez teček */
+#co-ziskate .benefit-card ul {
+  list-style: none;
+  /* ODSTRANĚNÍ TEČEK */
+  padding: 0;
+  margin: 0;
+}
+
+/* Řádek položky */
+#co-ziskate .benefit-card li {
+  padding: 0.45rem 0 0.45rem 1.9rem;
+  position: relative;
+  font-size: 1rem;
+  color: #e2e8f0;
+}
+
+/* ✔ modrá */
+#co-ziskate .benefit-card li::before {
+  content: "✔";
+  position: absolute;
+  left: 0;
+  color: #60a5fa;
+  font-weight: 700;
+}
+
+/* ✖ červená */
+#co-ziskate .benefit-card li.x::before {
+  content: "✖";
+  color: #ef4444;
+  font-weight: 700;
+}
+
+/* ============================================
+   FIX – sekce "Co získáte"
+   Zarovnání textů + odstranění teček + ✔ ✖
+============================================ */
+
+/* Zarovnání textu pod nadpisem vlevo */
+#co-ziskate .benefit-card p {
+  text-align: left !important;
+  margin-bottom: 1rem;
+}
+
+/* Jednotné zarovnání celého obsahu vlevo */
+#co-ziskate .benefit-card {
+  text-align: left !important;
+}
+
+/* Oprava seznamu – bez default teček */
+#co-ziskate .benefit-card ul {
+  list-style: none !important;
+  margin: 0;
+  padding: 0;
+}
+
+/* Skrytí původních FA ikonek */
+#co-ziskate .benefit-card li i {
+  display: none !important;
+}
+
+/* Základní styl pro řádek */
+#co-ziskate .benefit-card li {
+  position: relative;
+  padding-left: 26px;
+  /* místo pro ikonku ✔ */
+  margin: 0.4rem 0;
+  line-height: 1.45;
+}
+
+/* ✔ MODRÁ – výchozí */
+#co-ziskate .benefit-card li::before {
+  content: "✔";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: #3b82f6;
+  /* krásná modrá jako v šabloně */
+  font-weight: 700;
+}
+
+/* ✖ ČERVENÁ – položky s třídou .x */
+#co-ziskate .benefit-card li.x::before {
+  content: "✖";
+  color: #ef4444;
+}
+
+/* Volitelné: červená i pro text, pokud chceš výraznější NE 
+#co-ziskate .benefit-card li.x {
+  color: #f87171;
+} */
+
+/* ============================================
+   CO ZÍSKÁTE – menší text + decentní odrážky
+============================================ */
+
+/* Zmenšení textu uvnitř benefit karet */
+#co-ziskate .benefit-card li {
+  font-size: 0.92rem;
+  line-height: 1.35;
+  /* menší rozteč */
+  margin: 0.25rem 0;
+}
+
+/* Jemné modré tečky místo velkých bulletů */
+#co-ziskate .benefit-card ul {
+  list-style: disc;
+  margin-left: 1.2rem;
+  padding-left: 0.2rem;
+}
+
+#co-ziskate .benefit-card ul li {
+  list-style-position: outside;
+  color: #d8e1ec;
+}
+
+#co-ziskate .benefit-card ul li::marker {
+  color: #60a5fa;
+  /* světle modrá z tvé šablony */
+  font-size: 0.8rem;
+  /* menší tečka */
+}
+
+/* Odstranění odrážek */
+#co-ziskate .benefit-card ul {
+  list-style: none !important;
+  padding-left: 0 !important;
+  margin-left: 0 !important;
+}
+
+/* Zmenšení textů a řádkování */
+#co-ziskate .benefit-card li {
+  font-size: 0.92rem;
+  line-height: 1.35;
+  margin: 0.35rem 0;
+  padding-left: 0;
+  /* nic tam nebude */
+}
+
+/* ZRUŠENÍ VŠECH PUNTÍKŮ V SEKCI CO ZÍSKÁTE */
+#co-ziskate .benefit-card ul,
+#co-ziskate .benefit-card li {
+  list-style: none !important;
+}
+
+/* ZABITÍ VŠECH PSEUDO-ODRÁŽEK 🔥 */
+#co-ziskate .benefit-card li::before {
+  content: "" !important;
+  display: none !important;
+}
+
+/* Zarovnání + menší písmo */
+#co-ziskate .benefit-card li {
+  font-size: 0.92rem;
+  line-height: 1.35;
+  margin: 0.35rem 0;
+  padding-left: 0 !important;
+  /* odstraní mezery po bulletech */
+}
+
+/* Zmenšení textu pod nadpisem */
+#co-ziskate .benefit-card p,
+#co-ziskate .benefit-card>div,
+#co-ziskate .benefit-card>*:not(h3):not(ul) {
+  font-size: 0.95rem !important;
+  line-height: 1.45 !important;
+  text-align: left;
+}
+
+/* Žádné puntíky */
+#co-ziskate .benefit-card ul,
+#co-ziskate .benefit-card li {
+  list-style: none !important;
+  padding-left: 0 !important;
+}
+
+/* Barvy ikon ✔ ✖ */
+.ok {
+  color: #60a5fa;
+  /* světle modrá podle šablony */
+  font-weight: 700;
+  margin-right: 6px;
+}
+
+.no {
+  color: #f87171;
+  /* jemná červená */
+  font-weight: 700;
+  margin-right: 6px;
+}
+
+/* Text menší, zarovnaný */
+#co-ziskate .benefit-card li {
+  font-size: 0.92rem;
+  line-height: 1.35;
+  margin: 0.35rem 0;
+  display: flex;
+  align-items: center;
+}
+
+/* Odrážky pryč */
+#co-ziskate .benefit-card ul,
+#co-ziskate .benefit-card li {
+  list-style: none;
+  padding-left: 0;
+  margin-left: 0;
+}
+
+/* Hezké ✔ a ✖ */
+.ok {
+  color: #60a5fa;
+  /* světle modrá */
+  font-weight: 700;
+  margin-right: 8px;
+  font-size: 1.05rem;
+}
+
+.no {
+  color: #f87171;
+  /* červená */
+  font-weight: 700;
+  margin-right: 8px;
+  font-size: 1.05rem;
+}
+
+/* Menší text + řádkování */
+#co-ziskate .benefit-card li {
+  font-size: 0.92rem;
+  line-height: 1.35;
+  margin: 0.35rem 0;
+  display: flex;
+  align-items: flex-start;
+}
+
+/* === Nadpisy plánů ve dvou řádcích === */
+.benefit-card h3 {
+  text-align: left;
+  margin-bottom: 1.2rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #e2e8f0;
+}
+
+.plan-name {
+  margin-left: 0.3rem;
+}
+
+.plan-price {
+  display: block;
+  font-size: 1.7rem;
+  font-weight: 700;
+  color: #3b82f6;
+  /* modrá jako v ceníku */
+  margin-top: 0.25rem;
+}
+
+/* Popisek plánu */
+.plan-desc {
+  text-align: left;
+  font-size: 0.95rem;
+  opacity: 0.85;
+  margin-bottom: 1.2rem;
+  line-height: 1.45;
+}
+
+/* Jemná čára před odrážkami */
+.benefit-separator {
+  width: 100%;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.08);
+  margin: 1rem 0 1.3rem;
+}
+
+/* Odrážky – čisté, bez teček */
+.benefit-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  text-align: left;
+}
+
+.benefit-list li {
+  display: flex;
+  align-items: center;
+  margin: 0.35rem 0;
+  font-size: 0.9rem;
+  line-height: 1.35;
+}
+
+/* Barevné ikony */
+.ok {
+  color: #60a5fa;
+  margin-right: 8px;
+  font-weight: 700;
+}
+
+.no {
+  color: #f87171;
+  margin-right: 8px;
+  font-weight: 700;
+}
+
+/* Tabs */
+.plan-tabs {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+
+.plan-tab {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: #dbeafe;
+  padding: .8rem 1.5rem;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: 0.25s;
+}
+
+.plan-tab.active {
+  background: #2563eb;
+  border-color: #3b82f6;
+  color: white;
+}
+
+/* Boxy */
+.plan-box {
+  display: none;
+  background: rgba(15, 23, 42, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 2rem;
+  border-radius: 16px;
+  max-width: 700px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.plan-box.active {
+  display: block;
+}
+
+.plan-sub {
+  color: #60a5fa;
+  font-size: 1.3rem;
+  margin-top: -.5rem;
+  margin-bottom: 1.2rem;
+}
+
+.plan-cat {
+  margin-top: 1.8rem;
+  margin-bottom: 0.6rem;
+  color: #93c5fd;
+  font-weight: 600;
+}
+
+/* Listy */
+.plan-list {
+  list-style: none;
+  padding-left: 0;
+}
+
+.plan-list li {
+  padding: .35rem 0;
+  font-size: 1rem;
+}
+
+/* Barvy fajfek */
+.ok.new {
+  color: #7dd3fc;
+}
+
+/* světle modrá */
+.ok.old {
+  color: #94a3b8;
+}
+
+/* šedě modrá */
+.no {
+  color: #f87171;
+}
+
+/* ====== TABY ====== */
+.plan-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.plan-tab {
+  padding: 0.8rem 1.6rem;
+  border: 1px solid rgba(96, 165, 250, 0.35);
+  background: rgba(15, 23, 42, 0.6);
+  color: #e2e8f0;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.25s;
+}
+
+.plan-tab:hover {
+  background: rgba(30, 41, 59, 0.7);
+}
+
+.plan-tab.active {
+  background: #3b82f6;
+  color: white;
+  border-color: #60a5fa;
+}
+
+
+/* ====== BOXY ====== */
+.plan-box {
+  display: none;
+  animation: fadeIn 0.3s ease;
+}
+
+.plan-box.active {
+  display: block;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* ====== NADPIS + CENA ====== */
+.plan-box h3 {
+  font-size: 1.9rem;
+  margin-bottom: 0.3rem;
+  color: #a8c7ff;
+}
+
+.plan-sub {
+  font-size: 1.3rem;
+  color: #60a5fa;
+  font-weight: 600;
+  margin-bottom: 1.4rem;
+}
+
+
+/* ====== KATEGORIE ====== */
+.plan-cat {
+  margin-top: 2rem;
+  margin-bottom: 0.6rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #a8c7ff;
+  text-align: left;
+}
+
+
+/* ====== SEZNAM ====== */
+.plan-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.plan-list li {
+  padding: 0.45rem 0;
+  display: flex;
+  gap: 0.6rem;
+  font-size: 0.95rem;
+  line-height: 1.35;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.plan-list li:last-child {
+  border-bottom: none;
+}
+
+/* Fajfky modře – křížky červeně */
+.plan-list .ok::before {
+  content: "✔";
+  color: #3b82f6;
+  font-weight: 700;
+}
+
+.plan-list .no::before {
+  content: "✖";
+  color: #ef4444;
+  font-weight: 700;
+}
+
+/* --- CENÍK – vycentrování podnadpisu --- */
+#cenik .proc-intro {
+  text-align: center;
+}
+
+/* --- ZMENŠENÍ MEZERY MEZI CENÍKEM A VÝČTEM FUNKCÍ --- */
+#co-ziskate {
+  padding-top: 1rem !important;
+  /* původně 4–6rem, to bylo moc */
+  margin-top: -1.5rem;
+  /* přitáhne sekci blíže k cenám */
+}
+
+/* --- benefit-grid: trochu menší mezery --- */
+#co-ziskate .benefit-grid {
+  gap: 1.5rem;
+}
+
+/* --- benefit-card: zmenšení paddingu --- */
+#co-ziskate .benefit-card {
+  padding: 1.8rem 1.6rem;
+}
+
+/* --- seznamy – menší řádkování + zarovnání vlevo --- */
+#co-ziskate ul {
+  padding-left: 0;
+  margin-left: 0;
+  list-style: none;
+}
+
+#co-ziskate li {
+  margin-bottom: 0.4rem;
+  font-size: 0.95rem;
+  line-height: 1.3;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* ✔ modře */
+#co-ziskate .ok {
+  color: #60a5fa;
+  font-weight: 600;
+}
+
+/* ✖ červeně */
+#co-ziskate .no {
+  color: #f87171;
+  font-weight: 600;
+}
+
+/* --- Plány a ceny – posunout nadpis výš --- */
+#cenik h2 {
+  margin-bottom: 0.5rem;
+  /* menší mezera mezi h2 a podnadpisem */
+}
+
+#cenik .proc-intro {
+  margin-bottom: 1.8rem;
+  /* podnadpis výš */
+}
+
+#cenik {
+  padding-top: 2rem !important;
+  /* celou sekci posuneme výš */
+}
+
+/* === O NÁs – upravené řádkování === */
+#onas p {
+  line-height: 1.35 !important;
+  margin-bottom: 0.6rem !important;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+/* ============================
+   VERTIKÁLNÍ TIMELINE – O nás
+============================ */
+.history-timeline {
+  margin: 3rem auto 0;
+  padding: 2rem 0;
+  max-width: 700px;
+  position: relative;
+}
+
+.history-timeline::before {
+  content: "";
+  position: absolute;
+  left: 24px;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: rgba(96, 165, 250, 0.35);
+}
+
+.timeline-item {
+  position: relative;
+  padding-left: 60px;
+  margin-bottom: 2.5rem;
+}
+
+.timeline-dot {
+  width: 12px;
+  height: 12px;
+  background: #3b82f6;
+  border: 3px solid #60a5fa;
+  border-radius: 50%;
+  position: absolute;
+  left: 18px;
+  top: 4px;
+  box-shadow: 0 0 10px rgba(96, 165, 250, 0.6);
+}
+
+.timeline-content h4 {
+  color: #a8c7ff;
+  margin: 0 0 0.4rem 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.timeline-content p {
+  margin: 0;
+  color: #cbd5e1;
+  line-height: 1.4;
+}
+
+/* O NÁS – BOX */
+.onas-box {
+  background: rgba(15, 23, 42, 0.55);
+  border: 1px solid rgba(96, 165, 250, 0.12);
+  border-radius: 18px;
+  padding: 3rem 2rem 4rem;
+  margin-bottom: 4rem;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.35);
+}
+
+/* O NÁS – text */
+.onas-text p {
+  font-size: 1.15rem;
+  line-height: 1.65;
+  margin-bottom: 1.5rem;
+  color: #dbeafe;
+}
+
+/* O NÁS – nadpis */
+#onas h2 {
+  text-align: center;
+  margin-bottom: 2rem;
+  color: #a8c7ff;
+  text-shadow: 0 0 10px rgba(96, 165, 250, 0.25);
+}

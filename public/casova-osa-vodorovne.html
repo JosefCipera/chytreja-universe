@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="cs">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vesmírná Časová Osa - Finální Rotace</title>
+    <style>
+        /* --- 1. Definice Animací S PREFIXY --- */
+        @keyframes planet-rotation {
+            0% {
+                background-position: 0% center;
+            }
+
+            100% {
+                background-position: 100% center;
+            }
+        }
+
+        @-webkit-keyframes planet-rotation {
+            0% {
+                background-position: 0% center;
+            }
+
+            100% {
+                background-position: 100% center;
+            }
+        }
+
+        @-moz-keyframes planet-rotation {
+            0% {
+                background-position: 0% center;
+            }
+
+            100% {
+                background-position: 100% center;
+            }
+        }
+
+        /* Pulzování @keyframes pulse je odstraněno */
+
+        /* --- 2. Základní a Kontejnerové Styly --- */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding: 50px;
+            background-color: #0d1a2b;
+            color: #e0e0e0;
+            overflow-x: hidden;
+        }
+
+        .timeline-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background-color: #1a2a3a;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .timeline {
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+            padding: 100px 0;
+        }
+
+        /* --- 3. Centrální Spojnice (Čára) --- */
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(to right, #007bff, #87ceeb, #007bff);
+            transform: translateY(-50%);
+            z-index: 1;
+        }
+
+        /* --- 4. Styly Uzlů a Planet (Bez pulzování) --- */
+        .timeline-node {
+            flex-basis: 22%;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .planet {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 0 15px rgba(0, 123, 255, 0.6), inset 0 0 10px rgba(0, 0, 0, 0.5);
+            z-index: 3;
+            background-size: 200% 100%;
+            overflow: hidden;
+
+            animation: planet-rotation 5s linear infinite;
+            -webkit-animation: planet-rotation 5s linear infinite;
+            -moz-animation: planet-rotation 5s linear infinite;
+        }
+
+        .planet-ring {
+            position: absolute;
+            width: 80px;
+            height: 20px;
+            border-radius: 50%;
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
+            z-index: -1;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotateZ(-30deg) scaleY(0.5);
+        }
+
+        /* --- 5. BAREVNÉ TEXTURY PLANET (beze změny) --- */
+        .planet.planet-earth {
+            background: radial-gradient(circle at 70% 30%,
+                    #4CAF50 0%,
+                    #2196F3 30%,
+                    #0056b3 80%,
+                    #003366 100%);
+        }
+
+        .planet.planet-mars {
+            background: radial-gradient(circle at 70% 30%,
+                    #FF5722 0%,
+                    #D32F2F 50%,
+                    #8b4513 100%);
+        }
+
+        .planet.planet-saturn {
+            background: radial-gradient(circle at 70% 30%,
+                    #FFEB3B 0%,
+                    #FFC107 50%,
+                    #B8860B 100%);
+        }
+
+        .planet.planet-nebula {
+            background: radial-gradient(circle at 70% 30%,
+                    #40e0d0 0%,
+                    #008080 50%,
+                    #004d4d 100%);
+        }
+
+        /* --- 6. Pozicování Textu (beze změny) --- */
+        .content {
+            color: #e0e0e0;
+            font-size: 0.9em;
+            max-width: 180px;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            text-shadow: 0 0 4px rgba(0, 0, 0, 0.9);
+        }
+
+        .timeline-node:nth-child(odd) .content {
+            top: calc(50% + 50px);
+        }
+
+        .timeline-node:nth-child(even) .content {
+            bottom: calc(50% + 50px);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="timeline-container">
+        <div class="timeline">
+            <div class="timeline-node">
+                <div class="planet planet-earth"></div>
+                <div class="content">Počátek cesty: Start ze Země, příprava mise, poslední rozloučení.</div>
+            </div>
+            <div class="timeline-node">
+                <div class="planet planet-mars"></div>
+                <div class="content">Mezistanice a rychlost světla: Cesta k Marsu, testování systémů.</div>
+            </div>
+            <div class="timeline-node">
+                <div class="planet planet-saturn">
+                    <div class="planet-ring"></div>
+                </div>
+                <div class="content">Vzdálená galaxie: Objev nové hvězdy, průzkum neznámých světů.</div>
+            </div>
+            <div class="timeline-node">
+                <div class="planet planet-nebula"></div>
+                <div class="content">Konečný cíl: Prozkoumání hranic vesmíru, nekonečné možnosti.</div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
