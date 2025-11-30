@@ -1,0 +1,113 @@
+/* =====================================================
+   NADPISY – Globální hierarchie H1–H6
+   ===================================================== */
+
+/* 🔥 H1 – hlavní titulky */
+h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    color: #a8c7ff;
+    text-align: center;
+    margin-bottom: 1rem;
+    text-shadow: 0 0 18px rgba(96, 165, 250, 0.35);
+}
+
+/* 💎 H2 – sekční nadpisy */
+h2 {
+    font-size: 2.4rem;
+    font-weight: 600;
+    color: #a8c7ff;
+    margin-bottom: 1.6rem;
+    text-align: center;
+    text-shadow: 0 0 10px rgba(96, 165, 250, 0.25);
+}
+
+/* ⭐ H3 – podsekce */
+h3 {
+    font-size: 1.45rem;
+    font-weight: 600;
+    color: #dbeafe;
+    margin-bottom: .8rem;
+}
+
+/* 🟦 H4 – menší nadpis */
+h4 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #93c5fd;
+    margin-bottom: .4rem;
+}
+
+/* 🟩 H5 – malé nadpisy */
+h5 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #bfdbfe;
+}
+
+/* ⚪ H6 – nenápadné */
+h6 {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #94a3b8;
+}
+
+/* =====================================================
+   SEKČNÍ PODNADPISY – společný styl pro všechny sekce
+   ===================================================== */
+
+.section-subtitle,
+.proc-intro {
+    font-size: 1.1rem;
+    color: #94a3b8;
+    line-height: 1.75;
+    text-align: center;
+    max-width: 780px;
+    margin: 0 auto 2.5rem;
+}
+
+/* =====================================================
+   TEXTY – odstavce, drobný text, mikroteksty
+   ===================================================== */
+
+/* Hlavní odstavec */
+p {
+    font-size: 1.05rem;
+    line-height: 1.75;
+    color: #cbd5e1;
+}
+
+/* Menší popisky */
+.small {
+    font-size: 0.9rem;
+    color: #a8b0c2;
+    line-height: 1.55;
+}
+
+/* Mikrotext – právní a technické upozornění */
+.micro {
+    font-size: 0.78rem;
+    color: #94a3b8;
+    opacity: 0.9;
+    line-height: 1.45;
+}
+
+section h2 {
+    font-size: 2.4rem;
+    color: #cfe4ff;
+    text-align: center;
+    margin-bottom: 1rem;
+    text-shadow: 0 0 16px rgba(120, 160, 255, 0.25);
+}
+
+h1,
+h2,
+h3,
+h4 {
+    color: #a8c7ff !important;
+}
+
+section h2,
+section h3 {
+    color: #a8c7ff !important;
+}

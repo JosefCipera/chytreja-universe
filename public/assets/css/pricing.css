@@ -174,3 +174,122 @@ li {
   opacity: .6;
   font-size: .9rem;
 }
+
+.ok {
+  color: #60a5fa;
+  font-weight: 700;
+  margin-right: 8px;
+}
+
+.no {
+  color: #f87171;
+  font-weight: 700;
+  margin-right: 8px;
+}
+
+/* ======== FIX: pricing – zarovnání odrážek + oddělovací čára ======== */
+
+.pricing-card ul {
+  text-align: left;
+  /* zarovnání textů vlevo */
+  padding-left: 0;
+  /* už tam máš, ale jistota */
+}
+
+/* Oddělovací čára před prvním li */
+.pricing-card ul::before {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.08);
+  margin: 1rem 0 1.2rem;
+}
+
+.pro-card {
+  position: relative;
+  border: 1px solid rgba(96, 165, 250, 0.35);
+  box-shadow: 0 0 22px rgba(96, 165, 250, 0.25);
+  transform: scale(1.03);
+}
+
+.badge-top {
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+
+  background: linear-gradient(90deg, #3b82f6, #2563eb);
+  color: #ffffff;
+
+  padding: 8px 22px;
+  border-radius: 14px;
+
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+
+  box-shadow: 0 0 16px rgba(59, 130, 246, 0.45);
+  border: 1px solid rgba(147, 197, 253, 0.35);
+
+  white-space: nowrap;
+  z-index: 20;
+}
+
+.badge-top .icon-star {
+  font-size: 1.1rem;
+}
+
+/* === Oddělení celé sekce Ceník === */
+#cenik {
+  background: linear-gradient(180deg,
+      rgba(15, 23, 42, 0.6),
+      rgba(10, 15, 28, 0.8));
+  padding-top: 5rem !important;
+  padding-bottom: 5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* === Vycentrování podnadpisu === */
+#cenik .proc-intro {
+  text-align: center !important;
+  max-width: 700px;
+  margin: 0 auto 2.2rem !important;
+  opacity: 0.9;
+  line-height: 1.55;
+  font-size: 1.15rem;
+}
+
+/* === PRO – zvýrazněná karta === */
+.pro-card {
+  position: relative;
+  border: 1px solid rgba(96, 165, 250, 0.35);
+  box-shadow: 0 0 22px rgba(96, 165, 250, 0.25);
+  transform: scale(1.03);
+}
+
+/* Štítek NEJOBLÍBENĚJŠÍ */
+.badge-top {
+  position: absolute;
+  top: -14px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #3b82f6;
+  color: white;
+  padding: 4px 14px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  box-shadow: 0 0 12px rgba(59, 130, 246, 0.5);
+}
+
+/* Hover – jen u PRO */
+.pro-card:hover {
+  transform: scale(1.06);
+  box-shadow: 0 12px 36px rgba(96, 165, 250, 0.45);
+  border-color: rgba(147, 197, 253, 0.55);
+}

@@ -11,6 +11,15 @@
 
     <!-- Hlavní styl -->
     <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/typography.css">
+    <link rel="stylesheet" href="assets/css/onas.css">
+    <link rel="stylesheet" href="assets/css/pricing.css">
+    <link rel="stylesheet" href="assets/css/founders.css">
+    <link rel="stylesheet" href="assets/css/contact.css">
+    <link rel="stylesheet" href="assets/css/footer.css">
+    <link rel="stylesheet" href="assets/css/cookies.css">
+    <link rel="stylesheet" href="assets/css/cj-widget.css">
+    <link rel="stylesheet" href="assets/css/landing.css">
 
     <!-- Knihovny -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -43,7 +52,7 @@
             <div class="nav-logo">🌌 Chytré já</div>
             <ul class="nav-links" id="navLinks">
                 <li><a href="medioteka.html">Mediotéka</a></li>
-                <li><a href="/public/founders/founders.html">Founders Pack</a></li>
+                <li><a href="/public/founders/founders.html">Zakladatelé</a></li>
                 <li><a href="#faq-chat">Zeptejte se</a></li>
                 <li><a href="#cenik">Ceník</a></li>
                 <li><a href="#onas">O nás</a></li>
@@ -66,11 +75,8 @@
         <a href="universe/universe.html" class="btn-primary">Vstoupit do vesmíru</a>
     </header>
 
-    <section id="galaxie-chytreho-ja" class="galaxy-wrap parallax-container">
-        <div class="galaxy-card parallax-item">
-            <object data="assets/svg/universe.svg" type="image/svg+xml" class="galaxy-object">
-            </object>
-        </div>
+    <section id="universe-preview">
+        <object data="assets/svg/universe.svg" type="image/svg+xml"></object>
     </section>
 
     <!-- ===== PROČ VZNIKLO CHYTRÉ JÁ ===== -->
@@ -123,67 +129,12 @@
             Každý tarif otevírá jinou část vašeho digitálního vesmíru.
             Vyberte si, jak hluboko až chcete jít.
         </p>
+        <div class="pricing-grid">
 
-        <div class="pricing">
-
-            <!-- START -->
-            <div class="price-card">
+            <div class="pricing-card">
                 <h3>🚀 Start</h3>
                 <div class="price">Zdarma</div>
                 <p>Základní přístup do Universe, hlasové příkazy a ukázkové moduly.</p>
-
-                <ul class="price-features">
-                    <li>✔ Základní Universe</li>
-                    <li>✔ Základní AI chat (rychlý režim)</li>
-                    <li>✔ Ukázkové uzly a vizualizace</li>
-                    <li>✔ Hlasové příkazy</li>
-                    <li>✖ Žádné pokročilé moduly</li>
-                    <li>✖ Omezený počet dotazů</li>
-                </ul>
-            </div>
-
-            <!-- PRO -->
-            <div class="price-card highlight">
-                <h3>✨ PRO</h3>
-                <div class="price">490 Kč / měsíc</div>
-                <p>Plná síla Chytrého já: všechny moduly, plný Universe, vizualizace, plánování a AI modely.</p>
-
-                <ul class="price-features">
-                    <li>✔ Vše ze Startu</li>
-                    <li>✔ Plný Universe</li>
-                    <li>✔ Plánování projektů a práce</li>
-                    <li>✔ Automatizace a integrace</li>
-                    <li>✔ Dashboardy a vizualizace</li>
-                    <li>✔ AI modely (rychlý i přesný režim)</li>
-                    <li>✔ Priority support</li>
-                </ul>
-            </div>
-
-            <!-- ENTERPRISE -->
-            <div class="price-card">
-                <h3>🏢 Enterprise</h3>
-                <div class="price">Na dotaz</div>
-                <p>Integrace na míru, firemní API, týmové licence a SLA podpora.</p>
-
-                <ul class="price-features">
-                    <li>✔ Vše z PRO</li>
-                    <li>✔ Firemní API integrace</li>
-                    <li>✔ Týmová práva a role</li>
-                    <li>✔ Admin portál</li>
-                    <li>✔ Firemní AI modely</li>
-                    <li>✔ SLA podpora</li>
-                    <li>✔ Školení týmu</li>
-                </ul>
-            </div>
-
-        </div>
-    </section>
-
-    <section id="co-ziskate" class="about-section">
-        <div class="benefit-grid">
-            <!-- START -->
-            <div class="benefit-card">
-
                 <ul>
                     <li><span class="ok">✔</span> Základní Universe</li>
                     <li><span class="ok">✔</span> Základní AI chat (rychlý režim)</li>
@@ -192,11 +143,14 @@
                     <li><span class="no">✖</span> Žádné pokročilé moduly</li>
                     <li><span class="no">✖</span> Omezený počet dotazů</li>
                 </ul>
+                <button class="btn">Začít</button>
             </div>
 
-            <!-- PRO -->
-            <div class="benefit-card highlight-card">
-
+            <div class="pricing-card pro-card">
+                <div class="badge-top">NEJOBLÍBENĚJŠÍ</div>
+                <h3>✨ Pro</h3>
+                <div class="price">490 Kč / měsíc</div>
+                <p>Plná síla Chytrého já: všechny moduly, plný Universe, vizualizace, plánování a AI modely.</p>
                 <ul>
                     <li><span class="ok">✔</span> Vše ze Startu</li>
                     <li><span class="ok">✔</span> Plný Universe</li>
@@ -206,34 +160,39 @@
                     <li><span class="ok">✔</span> AI modely (rychlý i přesný režim)</li>
                     <li><span class="ok">✔</span> Priority support</li>
                 </ul>
+                <button class="btn primary">Aktivovat</button>
             </div>
 
-            <!-- ENTERPRISE -->
-            <div class="benefit-card">
-
+            <div class="pricing-card">
+                <h3>🏢 Enterprise</h3>
+                <div class="price">Na dotaz</div>
+                <p>Integrace na míru, firemní API, týmové licence a SLA podpora.</p>
                 <ul>
-                    <li><span class="ok">✔</span> Vše z PRO</li>
-                    <li><span class="ok">✔</span> Firemní API integrace</li>
-                    <li><span class="ok">✔</span> Týmová práva a role</li>
-                    <li><span class="ok">✔</span> Admin portál</li>
-                    <li><span class="ok">✔</span> Firemní AI modely</li>
-                    <li><span class="ok">✔</span> SLA podpora</li>
-                    <li><span class="ok">✔</span> Školení týmu</li>
+                    <li><span class="ok">✔</span> Vše ze Startu</li>
+                    <li><span class="ok">✔</span> Plný Universe</li>
+                    <li><span class="ok">✔</span> Plánování projektů a práce</li>
+                    <li><span class="ok">✔</span> Automatizace a integrace</li>
+                    <li><span class="ok">✔</span> Dashboardy a vizualizace</li>
+                    <li><span class="ok">✔</span> AI modely (rychlý i přesný režim)</li>
+                    <li><span class="ok">✔</span> Priority support</li>
                 </ul>
+                <button class="btn">Kontaktovat</button>
             </div>
-
         </div>
-    </section>
 
+    </section>
     <!-- ===== FOUNDERS CTA ===== -->
-    <section id="founders-cta" class="alt-bg" style="padding-top:2rem; padding-bottom:3rem;">
+    <section id="founders-cta" class="founders-cta-section">
         <div class="founders-cta-box">
             <h3>🌌 Odemkněte celý vesmír jako Zakladatelé</h3>
             <p>
                 Získáte doživotní přístup ke všem současným i budoucím modulům,
                 uzlům Vesmíru, AI nástrojům a exkluzivním funkcím.
             </p>
-            <a href="/public/founders/founders.html" class="founders-btn">Zjistit více</a>
+
+            <a href="/public/founders/founders.html" class="founders-cta-link">
+                Zjistit více
+            </a>
         </div>
     </section>
 
@@ -348,9 +307,18 @@
         </div>
     </section>
 
-    <section class="founders-end-cta">
-        <p>🚀 Chcete být mezi prvními, kdo vstoupí do celého digitálního vesmíru?</p>
-        <a href="/public/founders/founders.html">Podívat se na Founders Pack</a>
+    <section id="founders-cta" class="founders-cta-section">
+        <div class="founders-cta-box">
+            <h3>🌌 Odemkněte celý vesmír jako Zakladatelé</h3>
+            <p>
+                Získáte doživotní přístup ke všem současným i budoucím modulům,
+                uzlům Vesmíru, AI nástrojům a exkluzivním funkcím.
+            </p>
+
+            <a href="/public/founders/founders.html" class="founders-cta-link">
+                Zjistit více
+            </a>
+        </div>
     </section>
 
     <!-- ===== FOOTER ===== -->
@@ -427,9 +395,8 @@
         </div>
     </div>
 
-    <script src="/public/assets/js/cookies.js"></script>
-
-    <!-- ===== CHYTRÉ JÁ CHAT WIDGET ===== -->
+    <!-- ===== CHYTRÉ JÁ CHAT WIDGET ===== 
+    <div class="cj-widget"> -->
     <div id="cj-widget-btn">
         <div class="cj-icon">💬</div>
     </div>
@@ -447,6 +414,7 @@
             <button id="cj-send">➤</button>
         </div>
     </div>
+    <!-- </div> -->
 
     <script type="module" src="assets/js/cj-widget.js"></script>
 

@@ -1,8 +1,8 @@
 // =====================================================
-// 🧠 Chytré já – Floating Widget (FULL CLEAN VERSION)
+// 🧠 Chytré já – Floating Widget (FULL CLEAN VERSION v2025-03-10)
 // =====================================================
 
-console.log("🔥 CJ-WIDGET VERSION: 2025-03-09-02 LOADED");
+console.log("🔥 CJ-WIDGET VERSION: 2025-03-10 LOADED");
 
 // test proměnná
 window.cjTest = "CJ WIDGET IS ACTIVE";
@@ -67,10 +67,10 @@ let API_KEY = "";
     return div;
   }
 
-  // ====== OPENAI VOLÁNÍ ======
+  // ====== OPENAI VOLÁNÍ – UPRAVENÁ VERZE ======
   async function askOpenAI(question) {
     if (!API_KEY) {
-      return "Nemám přístup k API. Zkontroluj API klíč.";
+      return "Nemám API klíč. Zkontroluj konfiguraci 🔑.";
     }
 
     try {
@@ -82,31 +82,31 @@ let API_KEY = "";
         },
         body: JSON.stringify({
           model: "gpt-4.1-mini",
-          input: question,
-          max_output_tokens: 200,
+          input: [
+            {
+              role: "system",
+              content:
+                "Jsi Chytré já — digitální firemní a životní AI asistent. Odpovídej česky, stručně, jasně a přátelsky. Umíš velmi dobře TOC, dlouhověkost, výrobu, procesy a firemní řízení."
+            },
+            {
+              role: "user",
+              content: question
+            }
+          ],
+          max_output_tokens: 250,
         }),
       });
 
       const data = await response.json();
       console.log("📨 API DATA:", data);
 
-      // 🧠 ZDE JE NOVÝ STRUKTUROVANÝ FORMÁT
-      if (
-        data.output &&
-        data.output[0] &&
-        data.output[0].content &&
-        data.output[0].content[0] &&
-        data.output[0].content[0].text
-      ) {
-        return data.output[0].content[0].text;
-      }
+      const out = data?.output?.[0]?.content?.[0]?.text;
+      if (out) return out;
 
-      console.error("❌ API nenávrátilo text:", data);
-      return "API vrátilo neplatnou strukturu.";
-
+      return "Nerozumím odpovědi od serveru.";
     } catch (err) {
       console.error("FETCH ERROR:", err);
-      return "Nastala chyba při komunikaci s API.";
+      return "Došlo k chybě při komunikaci s API.";
     }
   }
 
@@ -135,12 +135,12 @@ let API_KEY = "";
 
   widgetBtn.addEventListener("click", () => {
     widgetPanel.classList.add("open");
-    widgetBtn.classList.add("hide");
+    widgetBtn.classList.add("hide");   // bublina zmizí
   });
 
   closeBtn.addEventListener("click", () => {
     widgetPanel.classList.remove("open");
-    setTimeout(() => widgetBtn.classList.remove("hide"), 300);
+    setTimeout(() => widgetBtn.classList.remove("hide"), 300); // vrátí bublinu
   });
 
   console.log("✅ Chytré já připraveno (FULL CLEAN)");

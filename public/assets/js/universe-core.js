@@ -35,10 +35,11 @@ export function renderUniverse(DATA, subset = null) {
     network.destroy();
   }
 
-  // 🧠 dynamický hlavní uzel (podpora pro dlouhověkost i TOC)
+  // 🧠 dynamický hlavní uzel (podpora pro dlouhověkost, TOC, BMC)
   const preferredRoot =
     source.find(n => n.id === "dlouhovekost") ||
     source.find(n => n.id === "toc") ||
+    source.find(n => n.id === "bmc") ||
     source[0];
   const mainId = preferredRoot?.id;
 
