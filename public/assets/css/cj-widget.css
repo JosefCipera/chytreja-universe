@@ -250,21 +250,13 @@
 
 /* ===== Widget Bubble ===== */
 #cj-widget-btn {
-    position: fixed;
-    bottom: 26px;
-    right: 26px;
-    width: 58px;
-    height: 58px;
-    background: #2563eb;
+    width: 48px;
+    height: 48px;
+    background: #1e40af;
     border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 28px;
-    cursor: pointer;
-    box-shadow: 0 0 20px rgba(37, 99, 235, 0.4);
-    transition: .25s;
-    z-index: 9999;
 }
 
 #cj-widget-btn.hide {
@@ -396,4 +388,33 @@
 
 #cj-send:hover {
     background: #1d4ed8;
+}
+
+#cj-widget-btn .cj-icon i {
+    font-size: 20px;
+    color: #dbeafe;
+}
+
+.cj-header span {
+    font-size: 1.25rem;
+    /* větší text */
+    font-weight: 600;
+}
+
+.cj-header span i {
+    font-size: 1.35rem;
+    /* větší ikonka */
+    margin-right: 6px;
+    color: #93c5fd;
+}
+
+#cj-widget-btn .cj-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    line-height: 1;
+    font-size: 22px;
+    /* --- uprav, podle toho jak velkou chceš šipku --- */
 }

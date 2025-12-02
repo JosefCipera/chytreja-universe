@@ -5,7 +5,7 @@
             "title": "Základy TOC (audio)",
             "type": "audio",
             "description": "Stručný úvod do Teorie omezení.",
-            "url": "media/audio/eliska.mp3",
+            "url": "eliska.mp3",
             "access": "demo",
             "tags": [
                 "TOC",
@@ -18,7 +18,7 @@
             "title": "Plánovač Karel",
             "type": "video",
             "description": "Jak plánovat výrobu v průtokovém světě.",
-            "url": "https://www.youtube.com/watch?v=LRXSXmQ5kZU",
+            "url": "https://www.youtube.com/embed/LRXSXmQ5kZU",
             "access": "free",
             "tags": [
                 "video",
@@ -54,7 +54,7 @@
             "title": "Jak funguje Chytré já",
             "type": "article",
             "description": "Krátký demo článek pro testování zobrazení obsahu.",
-            "contentUrl": "clanky/demo-chytre-ja.md",
+            "contentUrl": "clanky/firemni-politiky.md",
             "access": "demo",
             "tags": [
                 "demo",

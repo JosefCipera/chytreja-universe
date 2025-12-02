@@ -1,80 +1,40 @@
 {
-    "library": [
+    "universe": {
+        "longevity": {
+            "label": "Dlouhověkost",
+            "modelFile": "/public/data/models/longevity.json",
+            "assistantFile": "/public/data/assistants/assistant-longevity.json",
+            "access": "demo"
+        },
+        "toc": {
+            "label": "Teorie omezení (TOC)",
+            "modelFile": "/public/data/models/toc.json",
+            "assistantFile": "/public/data/assistants/assistant-toc.json",
+            "access": "free"
+        },
+        "bmc": {
+            "label": "Plátno byznys modelu (BMC)",
+            "modelFile": "/public/data/models/bmc.json",
+            "assistantFile": "/public/data/assistants/assistant-bmc.json",
+            "access": "free"
+        }
+    },
+    "media": [
         {
             "id": "audio-toc-uvod",
-            "title": "Základy TOC (audio)",
             "type": "audio",
+            "title": "Základy TOC (audio)",
             "description": "Stručný úvod do Teorie omezení.",
-            "url": "media/audio/eliska.mp3",
-            "access": "demo",
-            "tags": [
-                "TOC",
-                "audio",
-                "poslech"
-            ]
+            "url": "audio/eliska.mp3",
+            "access": "demo"
         },
         {
             "id": "video-001",
-            "title": "Plánovač Karel",
             "type": "video",
+            "title": "Plánovač Karel",
             "description": "Jak plánovat výrobu v průtokovém světě.",
-            "url": "https://www.youtube.com/watch?v=LRXSXmQ5kZU",
-            "access": "free",
-            "tags": [
-                "video",
-                "ukázka"
-            ]
-        },
-        {
-            "id": "image-001",
-            "title": "AI specializovaný asistent",
-            "type": "image",
-            "description": "Ukázkový obrázek asistenta vytvořený pomocí AI.",
-            "url": "media/images/kouc-192.png",
-            "access": "free",
-            "tags": [
-                "obrázek",
-                "schéma"
-            ]
-        },
-        {
-            "id": "checklist-pdf-002-kuchta",
-            "title": "Kuchařka skvělých receptů",
-            "type": "pdf",
-            "description": "Kuchařka jako ukázkový PDF dokument.",
-            "url": "media/pdf/kuchta.pdf",
-            "access": "demo",
-            "tags": [
-                "pdf",
-                "TOC"
-            ]
-        },
-        {
-            "id": "test-clanek-001",
-            "title": "Jak funguje Chytré já",
-            "type": "article",
-            "description": "Krátký demo článek pro testování zobrazení obsahu.",
-            "contentUrl": "clanky/firemni-politiky.md",
-            "access": "demo",
-            "tags": [
-                "demo",
-                "článek",
-                "chytré já"
-            ]
-        }
-    ],
-    "universe": {
-        "dlouhovekost": {
-            "modelFile": "/data/models/dlouhovekost.json",
-            "access": "demo"
-        },
-        "strategie": {
-            "modelFile": "/data/models/strategie.json",
-            "access": "free"
-        },
-        "toc": {
-            "modelFile": "/data/models/toc.json",
+            "url": "https://www.youtube.com/embed/LRXSXmQ5kZU",
             "access": "free"
         }
-    }
+    ]
 }

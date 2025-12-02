@@ -345,3 +345,39 @@ a {
   color: #ff6666;
   /* světlejší */
 }
+
+.founders-cta-section,
+.founders-cta-box,
+.founders-cta-box h3,
+.founders-cta-box p,
+.founders-cta-link {
+  text-align: center !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+.founders-cta-btn {
+  display: inline-block;
+  padding: 12px 28px;
+  background: #1e293b;
+  border: 1px solid #334155;
+  border-radius: 10px;
+  color: #e2e8f0;
+  font-size: 1rem;
+  text-decoration: none;
+  transition: 0.2s;
+  margin-top: 18px;
+}
+
+.founders-cta-btn:hover {
+  background: #334155;
+  border-color: #475569;
+  color: #ffffff;
+}
+
+.founders-cta-section {
+  margin-top: 80px !important;
+  /* odsazení nad banner */
+  margin-bottom: 80px !important;
+  /* odsazení pod banner */
+}

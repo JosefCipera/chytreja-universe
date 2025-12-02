@@ -300,3 +300,70 @@ header a.btn-primary {
   object-position: center !important;
   display: block !important;
 }
+
+/* ============================================
+   HLAVNÍ MENU – JEMNÁ BÍLÁ (NENÍ AGRESIVNÍ)
+   ============================================ */
+
+/* Kontejner */
+.main-nav {
+  background: #0d1117;
+  /* stejné jako mediotéka */
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Logo vlevo */
+.nav-logo {
+  color: #e2e8f0 !important;
+  /* jemně bílá */
+  font-weight: 600;
+  font-size: 1.3rem;
+}
+
+/* Odkazy v menu */
+.main-nav .nav-links a {
+  color: #e2e8f0 !important;
+  /* jemná bílá */
+  text-decoration: none;
+  font-weight: 500;
+  transition: 0.2s ease;
+}
+
+/* Hover – jemná modrá */
+.main-nav .nav-links a:hover {
+  color: #93c5fd !important;
+}
+
+/* Aktivní položka (pokud nějaká bude) */
+.main-nav .nav-links a.active {
+  color: #a8c7ff !important;
+}
+
+/* Přihlásit tlačítko */
+.login-btn {
+  color: #e2e8f0 !important;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  padding: 8px 18px;
+  border-radius: 6px;
+  transition: 0.2s ease;
+}
+
+.login-btn:hover {
+  border-color: #93c5fd;
+  color: #93c5fd !important;
+}
+
+/* Hamburger – čárky */
+.hamburger .bar {
+  background: #e2e8f0 !important;
+}
+
+/* Po otevření menu */
+.hamburger.active .bar {
+  background: #93c5fd !important;
+}
+
+/* Mobilní verze odkazy */
+.nav-links.open a {
+  color: #e2e8f0 !important;
+}
