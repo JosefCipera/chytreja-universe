@@ -1,0 +1,403 @@
+[
+    {
+        "id": "dlouhovekost",
+        "label": "Dlouhověkost",
+        "icon": "🧬",
+        "parent": null,
+        "definition": "Dlouhověkost není jen o délce života, ale o jeho kvalitě. Je to strategie, jak řídit zdraví, tělo, mysl a výživu tak, abychom byli funkční, silní a duševně odolní i ve vyšším věku.",
+        "color": "#2563eb",
+        "related": [
+            "zdravi",
+            "telo",
+            "mysl",
+            "vyziva"
+        ],
+        "documents": [
+            {
+                "title": "Jak přemýšlet o dlouhověkosti",
+                "summary": "Peter Attia chápe dlouhověkost jako inženýrský problém – plánuj, měř a optimalizuj.",
+                "url": "./data/docs/uvod.md"
+            }
+        ]
+    },
+    {
+        "id": "zdravi",
+        "label": "Zdraví",
+        "icon": "⚕️",
+        "definition": "Zdraví je aktuální stav těla i mysli – to, co lze měřit a sledovat. Ukazuje, jak efektivně fungují návyky, spánek a trénink.",
+        "color": "#22c55e",
+        "parent": "dlouhovekost",
+        "related": [
+            "spanek",
+            "biomarkery",
+            "obnova",
+            "kardiovaskularni",
+            "metabolicke",
+            "imunitni",
+            "nervovy_system"
+        ],
+        "documents": [
+            {
+                "title": "Úvod do zdraví",
+                "summary": "Základní přehled dlouhověkosti a biomarkerů.",
+                "url": "./data/docs/zdravi/zaklady-zdravi.md"
+            },
+            {
+                "title": "Zdravý spánek – PDF",
+                "type": "pdf",
+                "summary": "Test PDF dokumentu.",
+                "url": "./media/pdf/kuchta.pdf"
+            }
+        ],
+        "media": [
+            {
+                "type": "video",
+                "title": "Tok, ne vytížení",
+                "summary": "Princip DBR – řízení podle úzkého místa.",
+                "url": "https://www.youtube.com/embed/r2xvPjNDaVw"
+            },
+            {
+                "type": "audio",
+                "title": "Eliška – ukázka",
+                "summary": "Test přehrávání audia.",
+                "url": "./media/audio/eliska.mp3"
+            },
+            {
+                "type": "image",
+                "title": "Kouč – obrázek",
+                "summary": "Ukázka obrázku.",
+                "url": "./media/images/kouc-192.png"
+            }
+        ]
+    },
+    {
+        "id": "metabolicke",
+        "label": "Metabolické zdraví",
+        "icon": "🟩",
+        "definition": "Glukóza, inzulin, lipidy – klíčové ukazatele efektivity metabolismu.",
+        "color": "#4ade80",
+        "parent": "zdravi",
+        "documents": [
+            {
+                "title": "Metabolická flexibilita",
+                "summary": "Jak tělo přepíná mezi cukry a tuky.",
+                "url": "./data/docs/zdravi/metabolicke-zdravi.md"
+            }
+        ]
+    },
+    {
+        "id": "imunitni",
+        "label": "Imunitní rovnováha",
+        "icon": "🛡️",
+        "definition": "Vyvážená imunita chrání před infekcemi i chronickým zánětem.",
+        "color": "#22c55e",
+        "parent": "zdravi"
+    },
+    {
+        "id": "nervovy_system",
+        "label": "Nervový systém",
+        "icon": "🧠",
+        "definition": "Autonomní nervový systém řídí adaptaci – rovnováhu mezi stresem a regenerací.",
+        "color": "#15803d",
+        "parent": "zdravi"
+    },
+    {
+        "id": "spanek",
+        "label": "Spánek",
+        "icon": "🌙",
+        "definition": "Kvalitní spánek je základní pilíř regenerace.",
+        "color": "#16a34a",
+        "parent": "zdravi",
+        "documents": [
+            {
+                "title": "Proč je spánek základ dlouhověkosti",
+                "summary": "Spánek je aktivní proces obnovy těla a mysli.",
+                "url": "./data/docs/zdravi/spanek/spanek.md"
+            },
+            {
+                "title": "Zdravý spánek – přehled",
+                "type": "pdf",
+                "summary": "Jednostránkový přehled doporučení.",
+                "url": "./media/pdf/kuchta.pdf"
+            }
+        ],
+        "media": [
+            {
+                "type": "video",
+                "title": "Attia – Why Sleep Matters",
+                "url": "https://www.youtube.com/embed/8d5du-Q5a5A",
+                "summary": "Jak spánek ovlivňuje dlouhověkost."
+            },
+            {
+                "type": "audio",
+                "title": "Předspánková relaxace",
+                "url": "./media/audio/eliska.mp3",
+                "summary": "3min relaxace."
+            }
+        ]
+    },
+    {
+        "id": "biomarkery",
+        "label": "Biomarkery",
+        "icon": "📊",
+        "definition": "Laboratorní ukazatele tělesné rovnováhy.",
+        "color": "#15803d",
+        "parent": "zdravi"
+    },
+    {
+        "id": "obnova",
+        "label": "Obnova",
+        "icon": "🔄",
+        "definition": "Regenerace po zátěži je klíčová.",
+        "color": "#10b981",
+        "parent": "zdravi"
+    },
+    {
+        "id": "telo",
+        "label": "Tělo",
+        "icon": "💪",
+        "definition": "Tělo je motor dlouhověkosti.",
+        "color": "#f59e0b",
+        "parent": "dlouhovekost",
+        "documents": [
+            {
+                "title": "Centenarian Decathlon",
+                "summary": "Cvič tak, abys mohl žít aktivně i v 90.",
+                "url": "./data/docs/telo/centenarian-decathlon.md"
+            }
+        ]
+    },
+    {
+        "id": "sila",
+        "label": "Síla",
+        "icon": "🏋️",
+        "definition": "Síla je zásadní pro soběstačnost.",
+        "color": "#fbbf24",
+        "parent": "telo",
+        "documents": [
+            {
+                "title": "Síla a dlouhověkost",
+                "summary": "Svaly chrání tělo a metabolismus.",
+                "url": "./data/docs/telo/sila.md"
+            }
+        ]
+    },
+    {
+        "id": "vytrvalost",
+        "label": "Výdrž",
+        "icon": "🏃‍♂️",
+        "definition": "Schopnost vykonávat aktivitu delší dobu.",
+        "color": "#f59e0b",
+        "parent": "telo",
+        "documents": [
+            {
+                "title": "Aerobní kapacita",
+                "summary": "VO₂max jako biomarker dlouhověkosti.",
+                "url": "./data/docs/telo/vytrvalost.md"
+            }
+        ]
+    },
+    {
+        "id": "dychani",
+        "label": "Dýchání",
+        "icon": "🌬️",
+        "definition": "Dech ovlivňuje regeneraci i stres.",
+        "color": "#fbbf24",
+        "parent": "telo",
+        "documents": [
+            {
+                "title": "Dech jako nástroj dlouhověkosti",
+                "summary": "Vědomé dýchání mění fyziologii.",
+                "url": "./data/docs/telo/dychani/uvod.md"
+            }
+        ]
+    },
+    {
+        "id": "nosni_dychani",
+        "label": "Nosní dýchání",
+        "icon": "👃",
+        "definition": "Dýchej nosem – filtruje, ohřívá, zvlhčuje.",
+        "color": "#FDE68A",
+        "parent": "dychani",
+        "documents": [
+            {
+                "title": "Význam nosního dýchání",
+                "summary": "Dýchání nosem zlepšuje okysličení.",
+                "url": "./data/docs/telo/dychani/nosni-dychani.md"
+            }
+        ]
+    },
+    {
+        "id": "dechova_koherence",
+        "label": "Dechová koherence",
+        "icon": "〰️",
+        "definition": "Pomalé dýchání (6 dechů / min).",
+        "color": "#FEF3C7",
+        "parent": "dychani",
+        "documents": [
+            {
+                "title": "Koherentní dýchání",
+                "summary": "Dýchání synchronizuje nervový systém.",
+                "url": "./data/docs/telo/dychani/dechova-koherence.md"
+            }
+        ]
+    },
+    {
+        "id": "butejko",
+        "label": "Buteyko metoda",
+        "icon": "🫁",
+        "definition": "Technika jemného dýchání.",
+        "color": "#FEF08A",
+        "parent": "dychani",
+        "documents": [
+            {
+                "title": "Buteyko metoda",
+                "summary": "Jemné dýchání zvyšuje CO₂ toleranci.",
+                "url": "./data/docs/telo/dychani/buteyko.md"
+            }
+        ]
+    },
+    {
+        "id": "mysl",
+        "label": "Mysl",
+        "icon": "🧘",
+        "definition": "Psychická odolnost je součást dlouhověkosti.",
+        "color": "#a855f7",
+        "parent": "dlouhovekost",
+        "documents": [
+            {
+                "title": "Mentální odolnost",
+                "summary": "Odolnost je trénovatelná.",
+                "url": "./data/docs/mysl/odolnost.md"
+            }
+        ]
+    },
+    {
+        "id": "stres",
+        "label": "Stres",
+        "icon": "⚡",
+        "definition": "Cílem není odstranit stres, ale adaptovat se.",
+        "color": "#c084fc",
+        "parent": "mysl",
+        "documents": [
+            {
+                "title": "Adaptace na stres",
+                "summary": "Adaptace místo vyhýbání.",
+                "url": "./data/docs/mysl/stres.md"
+            }
+        ]
+    },
+    {
+        "id": "smysl",
+        "label": "Smysl",
+        "icon": "🎯",
+        "definition": "Smysl dává energii.",
+        "color": "#d8b4fe",
+        "parent": "mysl",
+        "documents": [
+            {
+                "title": "Smysl jako kompas",
+                "summary": "Smysl = silný zdroj energie.",
+                "url": "./data/docs/mysl/smysl.md"
+            }
+        ]
+    },
+    {
+        "id": "vyziva",
+        "label": "Výživa",
+        "icon": "🥗",
+        "definition": "Stabilní glukóza, bílkoviny a chytré půsty.",
+        "color": "#ef4444",
+        "parent": "dlouhovekost",
+        "documents": [
+            {
+                "title": "Základy výživy",
+                "summary": "Bílkoviny, glukóza, půsty.",
+                "url": "./data/docs/vyziva/principy-vyzivy.md"
+            }
+        ]
+    },
+    {
+        "id": "pust",
+        "label": "Půst",
+        "icon": "⏳",
+        "definition": "Půst podporuje metabolickou flexibilitu.",
+        "color": "#f87171",
+        "parent": "vyziva",
+        "documents": [
+            {
+                "title": "Jak začít s půstem",
+                "summary": "Půst je nástroj — začni pozvolna.",
+                "url": "./data/docs/vyziva/pust.md"
+            }
+        ]
+    },
+    {
+        "id": "bilkoviny",
+        "label": "Bílkoviny",
+        "icon": "🥚",
+        "definition": "Základ regenerace, síly a hormonů.",
+        "color": "#fca5a5",
+        "parent": "vyziva",
+        "documents": [
+            {
+                "title": "Denní příjem bílkovin",
+                "summary": "Bílkoviny podporují regeneraci.",
+                "url": "./data/docs/vyziva/bilkoviny.md"
+            }
+        ]
+    },
+    {
+        "id": "glukoza_vyziva",
+        "label": "Glukóza (výživa)",
+        "icon": "🍬",
+        "definition": "Stabilní glukóza = stabilní energie.",
+        "color": "#ef9a9a",
+        "parent": "vyziva",
+        "documents": [
+            {
+                "title": "Glykémie v praxi",
+                "summary": "Kontrola glukózy přes glukometr nebo CGM.",
+                "url": "./data/docs/vyziva/glukoza-vyziva.md"
+            }
+        ]
+    },
+    {
+        "id": "mikronutrienty",
+        "label": "Mikronutrienty",
+        "icon": "💊",
+        "definition": "Vitaminy a minerály podporují buněčnou rovnováhu.",
+        "color": "#fb7185",
+        "parent": "vyziva",
+        "documents": [
+            {
+                "title": "Mikronutrienty",
+                "summary": "Drobnosti s velkým dopadem.",
+                "url": "./data/docs/vyziva/mikronutrienty.md"
+            }
+        ]
+    },
+    {
+        "id": "hydratace",
+        "label": "Hydratace",
+        "icon": "💧",
+        "definition": "Voda je základ fyziologických procesů.",
+        "color": "#fca5a5",
+        "parent": "vyziva",
+        "documents": [
+            {
+                "title": "Hydratace",
+                "summary": "Jak pít chytře.",
+                "url": "./data/docs/vyziva/hydratace.md"
+            }
+        ]
+    },
+    {
+        "id": "casovani_jidel",
+        "label": "Časování jídel",
+        "icon": "⏰",
+        "definition": "Načasování jídla ovlivňuje metabolismus i spánek.",
+        "color": "#f87171",
+        "parent": "vyziva"
+    }
+]

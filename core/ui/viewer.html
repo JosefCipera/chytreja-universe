@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="cs">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Viewer</title>
+
+    <!-- 📝 Markdown parser -->
+    <script type="module">
+        import { marked } from "https://cdn.jsdelivr.net/npm/marked/lib/marked.esm.js";
+        window.marked = marked;
+    </script>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: system-ui, sans-serif;
+            background: #f3f4f6;
+        }
+
+        #container {
+            max-width: 900px;
+            margin: auto;
+            background: white;
+            padding: 25px 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        #back {
+            display: inline-block;
+            margin-bottom: 15px;
+            padding: 6px 12px;
+            background: #e2e8f0;
+            color: #111;
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+
+        iframe {
+            width: 100%;
+            height: 85vh;
+            border: none;
+            border-radius: 10px;
+        }
+
+        img {
+            max-width: 100%;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="container">
+        <a id="back" href="#" onclick="window.close(); return false;">← Zpět</a>
+        <div id="content">Načítám…</div>
+    </div>
+
+    <script>
+        async function loadViewer() {
+            const params = new URLSearchParams(window.location.search);
+            const file = params.get("file");
+
+            if (!file) {
+                document.getElementById("content").innerHTML = "<p><b>❌ Chyba:</b> Soubor nebyl zadán.</p>";
+                return;
+            }
+
+            console.log("📄 Viewer – načítám:", file);
+
+            // PDF
+            if (file.endsWith(".pdf")) {
+                document.getElementById("content").innerHTML = `<iframe src="${file}"></iframe>`;
+                return;
+            }
+
+            // Obrázky
+            if (/\.(png|jpg|jpeg|gif|webp|svg)$/i.test(file)) {
+                document.getElementById("content").innerHTML = `<img src="${file}" alt="Obrázek">`;
+                return;
+            }
+
+            // Markdown
+            if (file.endsWith(".md")) {
+                try {
+                    const res = await fetch(file);
+                    if (!res.ok) throw new Error("HTTP " + res.status);
+
+                    const text = await res.text();
+                    const html = window.marked.parse(text);
+
+                    document.getElementById("content").innerHTML = html;
+
+                } catch (err) {
+                    console.error("❌ Nelze načíst markdown:", err);
+                    document.getElementById("content").innerHTML =
+                        `<p>❌ Nelze načíst markdown: ${file}</p>`;
+                }
+                return;
+            }
+
+            document.getElementById("content").innerHTML =
+                `<p>❓ Neznámý typ souboru: ${file}</p>`;
+        }
+
+        loadViewer();
+    </script>
+
+</body>
+
+</html>

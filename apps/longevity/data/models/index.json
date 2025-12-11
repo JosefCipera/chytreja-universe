@@ -1,0 +1,8 @@
+{
+    "longevity": {
+        "label": "Dlouhověkost",
+        "modelFile": "./data/models/longevity.json",
+        "assistantFile": "./data/models/assistant-longevity.json",
+        "access": "demo"
+    }
+}

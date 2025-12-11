@@ -1,0 +1,103 @@
+/* ============================================
+   O NÁS – sekce + box + text
+============================================ */
+.onas-box {
+    margin-bottom: 6rem;
+    padding-bottom: 4rem;
+    background: rgba(15, 23, 42, 0.55);
+    border: 1px solid rgba(96, 165, 250, 0.12);
+    border-radius: 18px;
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.35);
+    position: relative;
+}
+
+/* Gradient pod sekcí */
+.onas-box::after {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 60px;
+    margin-top: 3rem;
+    background: linear-gradient(to bottom,
+            rgba(15, 23, 42, 0.6),
+            rgba(15, 23, 42, 0));
+}
+
+/* Odstavce – text typografie řeší typography.css */
+#onas p {
+    max-width: 800px;
+    margin: 0.8rem auto;
+    text-align: center;
+}
+
+/* ============================================
+   ČASOVÁ OSA
+============================================ */
+
+.history-timeline {
+    margin: 3rem auto 0;
+    padding: 2rem 0;
+    max-width: 700px;
+    position: relative;
+}
+
+/* Svislá čára */
+.history-timeline::before {
+    content: "";
+    position: absolute;
+    left: 50px;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: rgba(96, 165, 250, 0.35);
+}
+
+/* Položky */
+.timeline-item {
+    position: relative;
+    padding-left: 95px;
+    margin-bottom: 2.5rem;
+}
+
+/* Bod */
+.timeline-dot {
+    width: 12px;
+    height: 12px;
+    background: #3b82f6;
+    border: 3px solid #60a5fa;
+    border-radius: 50%;
+    position: absolute;
+    left: 43px;
+    top: 4px;
+    box-shadow: 0 0 10px rgba(96, 165, 250, 0.6);
+}
+
+/* Titulek roku */
+.timeline-content h4 {
+    margin-bottom: 0.4rem;
+    text-align: left;
+}
+
+/* Text roku */
+.timeline-content p {
+    line-height: 1.55;
+    text-align: left;
+}
+
+.onas-box {
+    margin-bottom: 2.5rem;
+    /* bylo 6rem */
+    padding-bottom: 2.5rem;
+    /* bylo 4rem */
+}
+
+.onas-box::after {
+    height: 20px;
+    /* bylo 60px */
+    margin-top: 1.5rem;
+    /* bylo 3rem */
+}
+
+#kontakt {
+    margin-top: -3rem !important;
+}

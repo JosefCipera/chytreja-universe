@@ -1,0 +1,104 @@
+/* ===========================
+   COOKIE BANNER – FIX & DESIGN
+   =========================== */
+
+#cookie-banner {
+    position: fixed;
+    bottom: 26px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 9999;
+}
+
+#cookie-banner.hidden {
+    display: none;
+}
+
+.cookie-box {
+    background: #1e293b;
+    color: #e2e8f0;
+    padding: 22px 26px;
+    border-radius: 14px;
+    width: 90%;
+    max-width: 420px;
+    box-shadow: 0 0 18px rgba(0, 0, 0, 0.45);
+    border: 1px solid rgba(148, 163, 184, 0.22);
+    animation: cookieFadeIn 0.35s ease-out;
+    backdrop-filter: blur(8px);
+}
+
+.cookie-box h3 {
+    margin: 0;
+    font-size: 1.25rem;
+    color: #60a5fa;
+    margin-bottom: 0.6rem;
+}
+
+.cookie-box p {
+    margin: 0;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: #cbd5e1;
+}
+
+.cookie-options {
+    margin: 15px 0;
+}
+
+.cookie-options label {
+    display: block;
+    margin-bottom: 6px;
+    cursor: pointer;
+    color: #e2e8f0;
+}
+
+.cookie-options input {
+    margin-right: 6px;
+}
+
+.cookie-actions {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    margin-top: 12px;
+}
+
+.cookie-actions button {
+    flex: 1;
+    border: none;
+    padding: 10px 14px;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+#cookie-accept-all {
+    background: #38bdf8;
+    color: #0f172a;
+}
+
+#cookie-accept-all:hover {
+    background: #0ea5e9;
+}
+
+#cookie-accept-essential {
+    background: #334155;
+    color: #e2e8f0;
+}
+
+#cookie-accept-essential:hover {
+    background: #475569;
+}
+
+@keyframes cookieFadeIn {
+    from {
+        transform: translate(-50%, 20px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translate(-50%, 0);
+        opacity: 1;
+    }
+}

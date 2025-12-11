@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="cs">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Zakladatelé – Chytré já</title>
+
+    <!-- Globální styly -->
+    <link rel="stylesheet" href="../assets/css/style.css" />
+    <link rel="stylesheet" href="../assets/css/typography.css" />
+
+    <!-- Founders stránka -->
+    <link rel="stylesheet" href="../assets/css/founders.css" />
+
+    <!-- Chat widget -->
+    <link rel="stylesheet" href="../assets/css/cj-widget.css" />
+</head>
+
+<body>
+
+    <!-- =========================================
+         HERO
+    ========================================= -->
+    <section class="founders-hero">
+
+        <div class="badge-limited pulse">🎄 Vánoční limitovaná edice: 20 míst</div>
+
+        <div id="founders-countdown" class="countdown-box">
+            Zbývá ještě <span id="countdown-number">20</span> / 20 míst 🎄
+        </div>
+
+        <div class="small-note">Celkový počet Zakladatelů Chytrého já: 200</div>
+
+        <h1>Staňte se Zakladatelem Chytrého já</h1>
+
+        <p class="hero-subtitle">
+            Doživotní přístup ke všem funkcím a modulům.
+            Jediná limitovaná edice, která se už nebude opakovat.
+        </p>
+
+        <a href="#cta" class="btn-primary hero-btn">Získat Zakladatelský statut</a>
+
+    </section>
+
+    <!-- =========================================
+         VALUE
+    ========================================= -->
+    <section class="value-section">
+        <div class="value-grid max-w-1100">
+
+            <div class="value-item fade-in">
+                <h3>Lifetime licence</h3>
+                <p>Jednorázová investice. Vše navždy odemčeno.</p>
+            </div>
+
+            <div class="value-item fade-in">
+                <h3>Plný ekosystém</h3>
+                <p>Současné i budoucí moduly bez doplatků.</p>
+            </div>
+
+            <div class="value-item fade-in">
+                <h3>Limit 200 členů</h3>
+                <p>Exkluzivní status Zakladatele Chytrého já.</p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- =========================================
+         PRICE
+    ========================================= -->
+    <section class="price-section">
+        <div class="price-box fade-in">
+
+            <div class="price-note-top">
+                <span class="strike">16 490 Kč</span> → Vánoční cena
+            </div>
+
+            <div class="price-main">9 990 Kč</div>
+
+            <p class="price-note">Jednorázová investice • Lifetime licence • Všechny moduly</p>
+
+            <a href="#cta" class="btn-primary">Získat Zakladatelský statut</a>
+
+        </div>
+    </section>
+
+    <!-- =========================================
+         BENEFITS
+    ========================================= -->
+    <section class="benefits-section">
+
+        <h2>Co získáte navíc</h2>
+
+        <div class="benefits-grid max-w-1100">
+
+            <div class="benefit-card fade-in">Prémiové modely GPT-4.1 a o1-mini</div>
+            <div class="benefit-card fade-in">Osobní firemní AI avatar</div>
+            <div class="benefit-card fade-in">Plná verze Universe Hub</div>
+            <div class="benefit-card fade-in">Zakladatelská insignie #001–#200</div>
+            <div class="benefit-card fade-in">Prioritní odpovědi a podpora</div>
+            <div class="benefit-card fade-in">Všechny bety a interní funkce</div>
+
+        </div>
+
+    </section>
+
+    <!-- =========================================
+         ROADMAP
+    ========================================= -->
+    <section class="roadmap-section">
+
+        <h2>Roadmapa 2025</h2>
+
+        <div class="roadmap-grid max-w-1100 fade-in">
+            <div class="roadmap-item"><strong>Q1</strong><br />Universe Map</div>
+            <div class="roadmap-item"><strong>Q2</strong><br />Procesy & workflow</div>
+            <div class="roadmap-item"><strong>Q3</strong><br />Diagnostika firmy</div>
+            <div class="roadmap-item"><strong>Q4</strong><br />Automatizace & predikce</div>
+        </div>
+
+    </section>
+
+    <!-- =========================================
+         COMMIT
+    ========================================= -->
+    <section class="commit-section fade-in">
+
+        <div class="commit-inner">
+
+            <h2>Závazek Zakladatelům</h2>
+
+            <p>
+                Zakladatelé jsou první lidé, kteří určují směr Chytrého já.
+                Lifetime licence, prioritní přístup a možnost ovlivňovat vývoj jsou garantovány navždy.
+            </p>
+
+            <div class="commit-sign">
+                Josef Čipera<br /><span>Zakladatel Chytrého já</span>
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- =========================================
+         FINAL CTA
+    ========================================= -->
+    <section id="cta" class="cta-section fade-in">
+
+        <h2>Připojte se k Zakladatelům</h2>
+
+        <p class="final-sub">Lifetime licence • Limit 200 členů</p>
+
+        <a href="#" class="btn-primary hero-btn">Získat Zakladatelský statut</a>
+
+        <p class="after-chat">Máte otázku? Zeptejte se Chytrého já vpravo dole.</p>
+
+    </section>
+
+    <!-- =========================================
+         JS — SIMULACE ODPČTU
+    ========================================= -->
+    <script>
+        let spots = 20;
+        function simulateCountdown() {
+            if (spots > 7) {
+                spots--;
+                document.getElementById("countdown-number").textContent = spots;
+            }
+        }
+        setInterval(simulateCountdown, 120000);
+    </script>
+
+    <!-- =========================================
+         CJ WIDGET (KOMPATIBILNÍ S cj-widget.js)
+    ========================================= -->
+    <!-- ===== CHYTRÉ JÁ WIDGET ===== -->
+
+    <div id="cj-widget-btn">
+        <div class="cj-icon">➤</div>
+    </div>
+
+    <div id="cj-widget-panel">
+        <div class="cj-header">
+            <!-- <img src="../assets/images/brain-blue.png" class="cj-header-icon" alt=""> -->
+            <span class="cj-title">➤ Chytré já</span>
+            <button id="cj-close">✖</button>
+        </div>
+
+        <div id="cj-messages" class="cj-messages"></div>
+
+        <div class="cj-input-row">
+            <input id="cj-input" type="text" placeholder="Zeptej se Chytrého já…" />
+            <button id="cj-send" class="cj-send">➤</button>
+        </div>
+    </div>
+
+    <script type="module" src="../assets/js/cj-widget.js" defer></script>
+
+</body>
+
+</html>

@@ -1,0 +1,369 @@
+/* =========================================
+   GLOBAL BASE
+========================================= */
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Inter", sans-serif;
+  background: linear-gradient(180deg, #0b1220, #101c35);
+  color: #dfe7f3;
+  overflow-x: hidden;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+img,
+svg {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Utility classes */
+.hidden {
+  display: none !important;
+}
+
+.text-center {
+  text-align: center !important;
+}
+
+.max-w-1100 {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.fade-in {
+  animation: fadeIn 0.8s ease;
+}
+
+/* =========================================
+   NAVIGATION
+========================================= */
+
+.main-nav {
+  width: 100%;
+  background: rgba(15, 23, 42, 0.75);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  position: sticky;
+  top: 0;
+  z-index: 999;
+}
+
+.nav-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0.8rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav-logo {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #a8c7ff;
+}
+
+.nav-links {
+  display: flex;
+  gap: 1.8rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #dbeafe;
+  font-weight: 500;
+  transition: .25s;
+}
+
+.nav-links a:hover {
+  color: #93c5fd;
+}
+
+.login-btn {
+  padding: 0.5rem 1rem;
+  background: rgba(100, 150, 255, .15);
+  border-radius: 10px;
+  border: 1px solid rgba(120, 170, 255, .28);
+  color: #dbeafe;
+  text-decoration: none;
+  transition: .25s;
+}
+
+.login-btn:hover {
+  background: rgba(100, 150, 255, .28);
+}
+
+/* Hamburger mobile */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  gap: 4px;
+}
+
+.hamburger .bar {
+  width: 22px;
+  height: 3px;
+  background: #dbeafe;
+  border-radius: 4px;
+  transition: .25s;
+}
+
+@media (max-width: 900px) {
+  .nav-links {
+    position: fixed;
+    top: 72px;
+    right: -100%;
+    flex-direction: column;
+    width: 220px;
+    background: rgba(15, 23, 42, 0.92);
+    padding: 1.5rem;
+    height: calc(100% - 72px);
+    transition: .35s;
+  }
+
+  .nav-links.open {
+    right: 0;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+}
+
+/* =========================================
+   HERO SECTION
+========================================= */
+
+header {
+  text-align: center;
+  padding: 6rem 1rem 4rem;
+}
+
+header h1 {
+  font-size: 3.2rem;
+  margin-bottom: 0.8rem;
+  color: #cfe4ff;
+  text-shadow: 0 0 10px rgba(120, 150, 255, .25);
+}
+
+header p {
+  max-width: 650px;
+  margin: 0 auto 2rem;
+  opacity: .9;
+  font-size: 1.2rem;
+  line-height: 1.6;
+}
+
+header .btn-primary {
+  background: linear-gradient(90deg, #3b82f6, #2563eb);
+  color: #ffffff;
+  border: 2px solid #3b82f6;
+  padding: 0.85rem 1.8rem;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 1.1rem;
+  transition: 0.25s ease;
+}
+
+header .btn-primary:hover {
+  box-shadow: 0 0 18px rgba(96, 165, 250, 0.45);
+  transform: translateY(-2px);
+}
+
+header .btn-primary,
+header .btn-primary:hover,
+header a.btn-primary {
+  text-decoration: none !important;
+}
+
+/* =========================================
+   GALAXY PARALLAX (UNIVERSE PREVIEW)
+========================================= */
+
+.galaxy-wrap {
+  padding: 0;
+  margin: 0;
+  position: relative;
+  height: 380px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.parallax-container {
+  perspective: 800px;
+}
+
+.parallax-item {
+  transform: translateZ(0);
+  will-change: transform;
+}
+
+.galaxy-object {
+  width: 340px;
+  height: auto;
+  filter: drop-shadow(0 0 18px rgba(120, 160, 255, .25));
+}
+
+/* =========================================
+   ANIMATIONS
+========================================= */
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-8px);
+  }
+
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.main-nav .nav-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* MENU – automatické centrování */
+.main-nav .nav-links {
+  margin-left: auto;
+  margin-right: 2rem;
+}
+
+/* ===========================================================
+   UNIVERSE PREVIEW – FINAL BALANCED VERSION
+   =========================================================== */
+
+#universe-preview {
+  width: 92% !important;
+  /* zmenšeno z 100%, ať to není "televize" */
+  max-width: 1200px !important;
+  /* užší než předtím */
+  height: 750px !important;
+  /* zvýšeno */
+
+  margin: 0 auto !important;
+  margin-top: 2rem !important;
+  margin-bottom: 3rem !important;
+
+  position: relative !important;
+  overflow: hidden !important;
+  border-radius: 32px !important;
+
+  /* Vesmirný glow portál kolem celého boxu */
+  box-shadow:
+    0 0 70px rgba(80, 140, 255, 0.35),
+    0 0 140px rgba(80, 140, 255, 0.25),
+    0 0 260px rgba(80, 140, 255, 0.12) !important;
+
+  background: radial-gradient(circle at center,
+      rgba(70, 120, 255, 0.12),
+      rgba(10, 15, 30, 1)) !important;
+}
+
+/* Samotné SVG */
+#universe-preview object,
+#universe-preview img,
+#universe-preview svg {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: contain !important;
+  /* změna: aby se planety vešly i s texty */
+  object-position: center !important;
+  display: block !important;
+}
+
+/* ============================================
+   HLAVNÍ MENU – JEMNÁ BÍLÁ (NENÍ AGRESIVNÍ)
+   ============================================ */
+
+/* Kontejner */
+.main-nav {
+  background: #0d1117;
+  /* stejné jako mediotéka */
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Logo vlevo */
+.nav-logo {
+  color: #e2e8f0 !important;
+  /* jemně bílá */
+  font-weight: 600;
+  font-size: 1.3rem;
+}
+
+/* Odkazy v menu */
+.main-nav .nav-links a {
+  color: #e2e8f0 !important;
+  /* jemná bílá */
+  text-decoration: none;
+  font-weight: 500;
+  transition: 0.2s ease;
+}
+
+/* Hover – jemná modrá */
+.main-nav .nav-links a:hover {
+  color: #93c5fd !important;
+}
+
+/* Aktivní položka (pokud nějaká bude) */
+.main-nav .nav-links a.active {
+  color: #a8c7ff !important;
+}
+
+/* Přihlásit tlačítko */
+.login-btn {
+  color: #e2e8f0 !important;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  padding: 8px 18px;
+  border-radius: 6px;
+  transition: 0.2s ease;
+}
+
+.login-btn:hover {
+  border-color: #93c5fd;
+  color: #93c5fd !important;
+}
+
+/* Hamburger – čárky */
+.hamburger .bar {
+  background: #e2e8f0 !important;
+}
+
+/* Po otevření menu */
+.hamburger.active .bar {
+  background: #93c5fd !important;
+}
+
+/* Mobilní verze odkazy */
+.nav-links.open a {
+  color: #e2e8f0 !important;
+}

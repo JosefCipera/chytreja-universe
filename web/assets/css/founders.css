@@ -1,0 +1,383 @@
+/* ========================================
+   HERO – glow + spacing
+======================================== */
+
+.founders-hero {
+  padding: 6rem 1rem 11rem;
+  text-align: center;
+  background: radial-gradient(circle at center,
+      rgba(80, 140, 255, 0.28),
+      #0a0f1c 70%);
+}
+
+.hero-subtitle {
+  font-size: 1.2rem;
+  opacity: .9;
+  max-width: 650px;
+  margin: 1rem auto 2.2rem;
+}
+
+.badge-limited {
+  background: #dc2626;
+  padding: 0.45rem 1.1rem;
+  border-radius: 12px;
+  color: #fff;
+  font-size: 0.95rem;
+  display: inline-block;
+}
+
+.pulse {
+  animation: pulseBadge 3s infinite ease-in-out;
+}
+
+@keyframes pulseBadge {
+
+  0%,
+  100% {
+    opacity: .75;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+.countdown-box {
+  margin-top: 1rem;
+  color: #fca5a5;
+  font-size: 1.15rem;
+  font-weight: 600;
+  text-shadow: 0 0 10px rgba(255, 120, 120, .35);
+}
+
+/* CTA BUTTON */
+.hero-btn {
+  margin-top: 2rem !important;
+  margin-bottom: 2.4rem !important;
+}
+
+/* ========================================
+   GLOBAL SPACING
+======================================== */
+
+.value-section,
+.benefits-section,
+.roadmap-section,
+.commit-section,
+.cta-section {
+  padding: 8rem 1rem 5rem;
+}
+
+/* ========================================
+   VALUE CARDS
+======================================== */
+
+.value-grid {
+  display: grid;
+  gap: 2.6rem;
+}
+
+@media (min-width: 900px) {
+  .value-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.value-item {
+  background: rgba(15, 23, 42, 0.55);
+  padding: 2.2rem;
+  border-radius: 18px;
+  border: 1px solid rgba(96, 165, 250, 0.25);
+  box-shadow: 0 0 40px rgba(80, 140, 255, 0.12);
+}
+
+/* ========================================
+   PRICE
+======================================== */
+
+.price-box {
+  max-width: 450px;
+  margin: 0 auto;
+  background: rgba(15, 23, 42, .65);
+  padding: 3rem 2rem;
+  border-radius: 20px;
+  border: 1px solid rgba(147, 197, 253, 0.3);
+  box-shadow: 0 0 45px rgba(80, 140, 255, .18);
+}
+
+.strike {
+  text-decoration: line-through;
+  text-decoration-thickness: 2px;
+  color: #ef4444;
+}
+
+.price-main {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 1.4rem;
+}
+
+/* ========================================
+   BENEFITS
+======================================== */
+
+.benefits-section h2 {
+  margin-bottom: 4rem;
+}
+
+.benefits-grid {
+  display: grid;
+  gap: 2.2rem;
+}
+
+@media (min-width: 900px) {
+  .benefits-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.benefit-card {
+  padding: 1.6rem;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, .05);
+  border: 1px solid rgba(96, 165, 250, .22);
+}
+
+/* ========================================
+   ROADMAP
+======================================== */
+
+.roadmap-section h2 {
+  margin-bottom: 4rem;
+}
+
+.roadmap-grid {
+  display: grid;
+  gap: 2rem;
+}
+
+@media (min-width: 900px) {
+  .roadmap-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.roadmap-item {
+  background: #0f172a;
+  padding: 1.8rem 1rem;
+  border-radius: 14px;
+  border: 1px solid rgba(96, 165, 250, .25);
+}
+
+/* ========================================
+   COMMIT
+======================================== */
+
+.commit-inner {
+  max-width: 700px;
+  margin: 0 auto;
+  background: rgba(30, 41, 59, .45);
+  padding: 3rem 2rem;
+  border-radius: 20px;
+  border: 1px solid rgba(147, 197, 253, .25);
+  box-shadow: 0 0 35px rgba(80, 140, 255, .18);
+}
+
+/* ========================================
+   FINAL CTA
+======================================== */
+
+.cta-section {
+  text-align: center;
+  padding: 8rem 1rem 9rem;
+}
+
+.cta-section .btn-primary {
+  margin: 2.2rem auto;
+}
+
+.final-sub {
+  color: #cbd5e1;
+  opacity: .9;
+  margin-bottom: 1rem;
+}
+
+.after-chat {
+  margin-top: 2rem;
+  color: #94a3b8;
+}
+
+/* ========================================
+   TLAČÍTKA – přepis všeho
+======================================== */
+
+.btn-primary {
+  display: inline-block;
+  padding: 0.9rem 2rem;
+  border-radius: 12px;
+  background: linear-gradient(90deg, #3b82f6, #2563eb);
+  color: #ffffff !important;
+  font-weight: 600;
+  font-size: 1.1rem;
+  text-decoration: none !important;
+  border: 1px solid rgba(59, 130, 246, .35);
+  box-shadow: 0 0 18px rgba(96, 165, 250, .3);
+  transition: 0.25s ease;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 26px rgba(96, 165, 250, .45);
+}
+
+/* Globální přebarvení odkazů */
+a {
+  color: #60a5fa !important;
+  text-decoration: none !important;
+}
+
+/* ========================================
+   CHAT BUTTON
+======================================== */
+
+.ai-chat-floating {
+  position: fixed;
+  bottom: 22px;
+  right: 22px;
+  background: #1e3a8a;
+  width: 56px;
+  height: 56px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  box-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
+  color: #fff;
+  font-size: 24px;
+  cursor: pointer;
+  transition: .25s;
+}
+
+.ai-chat-floating:hover {
+  transform: scale(1.08);
+}
+
+#cj-widget-panel {
+  position: fixed;
+  bottom: 100px;
+  right: 24px;
+  width: 340px;
+  height: 440px;
+  background: rgba(10, 15, 28, 0.96);
+  border: 1px solid rgba(148, 163, 184, 0.3);
+  border-radius: 16px;
+  box-shadow: 0 0 28px rgba(80, 120, 255, 0.35);
+  backdrop-filter: blur(6px);
+
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(12px);
+  transition: all .25s ease;
+
+  z-index: 9999999 !important;
+}
+
+#cj-widget-panel.open {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+#cj-widget-btn {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 60px;
+  height: 60px;
+  background: #2563eb;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 0 18px rgba(96, 165, 250, 0.45);
+  cursor: pointer;
+  transition: .25s ease;
+
+  z-index: 999999 !important;
+}
+
+#cj-widget-btn.hide {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ============================
+   CJ – Nadpis panelu
+============================ */
+
+.cj-header .cj-title {
+  font-size: 1.25rem;
+  /* větší text */
+  font-weight: 600;
+  color: #a8c7ff;
+  /* bledě modrá */
+  text-shadow: 0 0 10px rgba(120, 160, 255, 0.35);
+}
+
+/* ============================
+   CJ – Červený křížek ✖
+============================ */
+
+.cj-close {
+  background: none;
+  border: none;
+  color: #ff4b4b;
+  /* červená */
+  font-size: 1.25rem;
+  /* malinko větší */
+  cursor: pointer;
+  padding: 4px;
+  transition: 0.2s ease;
+}
+
+.cj-close:hover {
+  transform: scale(1.15);
+  color: #ff6666;
+  /* světlejší */
+}
+
+.founders-cta-section,
+.founders-cta-box,
+.founders-cta-box h3,
+.founders-cta-box p,
+.founders-cta-link {
+  text-align: center !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+.founders-cta-btn {
+  display: inline-block;
+  padding: 12px 28px;
+  background: #1e293b;
+  border: 1px solid #334155;
+  border-radius: 10px;
+  color: #e2e8f0;
+  font-size: 1rem;
+  text-decoration: none;
+  transition: 0.2s;
+  margin-top: 18px;
+}
+
+.founders-cta-btn:hover {
+  background: #334155;
+  border-color: #475569;
+  color: #ffffff;
+}
+
+.founders-cta-section {
+  margin-top: 80px !important;
+  /* odsazení nad banner */
+  margin-bottom: 80px !important;
+  /* odsazení pod banner */
+}

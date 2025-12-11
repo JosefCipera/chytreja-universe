@@ -1,0 +1,195 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+     class="galaxy-svg"
+     viewBox="-50 -50 1300 900"
+     role="img"
+     aria-label="Galaxie Chytrého já">
+
+    <defs>
+
+        <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur stdDeviation="6" result="blur"/>
+            <feMerge>
+                <feMergeNode in="blur"/>
+                <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+        </filter>
+
+        <radialGradient id="coreGrad" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#93c5fd" stop-opacity="1"/>
+            <stop offset="55%" stop-color="#60a5fa" stop-opacity="0.9"/>
+            <stop offset="100%" stop-color="#2563eb" stop-opacity="0.2"/>
+        </radialGradient>
+
+        <radialGradient id="starGrad" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#ffffff" stop-opacity="1"/>
+            <stop offset="70%" stop-color="#a5b4fc" stop-opacity="0.8"/>
+            <stop offset="100%" stop-color="#6366f1" stop-opacity="0.2"/>
+        </radialGradient>
+
+        <style>
+            .galaxy-svg {
+                width: 100%;
+                max-width: 1200px;
+                height: auto;
+                display: block;
+                margin: 0 auto;
+                border-radius: 12px;
+                background: radial-gradient(1200px 800px at 50% 50%, #0b1220 0%, #0b1220 40%, #0a1020 100%);
+                overflow: hidden;
+            }
+
+            @keyframes rotate {
+                from { transform: rotate(0deg); }
+                to   { transform: rotate(360deg); }
+            }
+
+            @keyframes pulse {
+                0%,100% { transform: scale(1); opacity: .95; }
+                50%     { transform: scale(1.06); opacity: 1; }
+            }
+
+            .core-pulse {
+                animation: pulse 4s ease-in-out infinite;
+                transform-origin: 600px 400px;
+            }
+
+            .galaxy-rotate {
+                animation: rotate 320s linear infinite;
+                transform-origin: 600px 400px;
+            }
+
+            #longevity .orbit-local { animation: rotate 25s linear infinite; transform-origin: 0 0; }
+            #strategy  .orbit-local { animation: rotate 35s linear infinite; transform-origin: 0 0; }
+            #toc       .orbit-local { animation: rotate 45s linear infinite; transform-origin: 0 0; }
+
+            .orbit-path {
+                stroke: rgba(96,165,250,.35);
+                stroke-width: 1.5;
+                fill: none;
+            }
+
+            .star-label {
+                font: 700 18px Inter, sans-serif;
+                fill: #e2e8f0;
+                text-anchor: middle;
+            }
+
+            .planet-label {
+                font: 600 14px Inter, sans-serif;
+                fill: #cbd5e1;
+                text-anchor: middle;
+            }
+
+            .tag {
+                font: 600 12px Inter, sans-serif;
+                fill: #9fb6e3;
+                text-anchor: middle;
+            }
+        </style>
+
+    </defs>
+
+    <!-- CENTRUM -->
+    <g id="core">
+        <circle cx="600" cy="400" r="120" fill="url(#coreGrad)" filter="url(#glow)" opacity="0.9"/>
+        <circle class="core-pulse" cx="600" cy="400" r="32" fill="#60a5fa" filter="url(#glow)"/>
+        <text x="600" y="455" class="star-label" style="font-size:20px; fill:#a8c7ff;">Chytré já</text>
+        <text x="600" y="478" class="tag">Sagittarius A*</text>
+    </g>
+
+    <!-- GALAXIE -->
+    <g class="galaxy-rotate">
+
+        <!-- Dlouhověkost -->
+        <g id="longevity" transform="translate(320,200)">
+            <circle cx="0" cy="0" r="24" fill="url(#starGrad)" filter="url(#glow)"/>
+            <text x="0" y="-36" class="star-label">Dlouhověkost</text>
+
+            <g class="orbit-local">
+                <circle class="orbit-path" cx="0" cy="0" r="90"/>
+
+                <g transform="rotate(0)">
+                    <circle cx="0" cy="-90" r="11" fill="#22c55e" filter="url(#glow)"/>
+                    <text x="0" y="-110" class="planet-label">Zdraví</text>
+                </g>
+
+                <g transform="rotate(120)">
+                    <circle cx="0" cy="-90" r="11" fill="#f59e0b" filter="url(#glow)"/>
+                    <text x="0" y="-110" class="planet-label">Tělo</text>
+                </g>
+
+                <g transform="rotate(210)">
+                    <circle cx="0" cy="-90" r="11" fill="#a855f7" filter="url(#glow)"/>
+                    <text x="0" y="-110" class="planet-label">Mysl</text>
+                </g>
+
+                <g transform="rotate(300)">
+                    <circle cx="0" cy="-90" r="11" fill="#ef4444" filter="url(#glow)"/>
+                    <text x="0" y="-110" class="planet-label">Výživa</text>
+                </g>
+            </g>
+        </g>
+
+        <!-- Strategie -->
+        <g id="strategy" transform="translate(880,200)">
+            <circle cx="0" cy="0" r="24" fill="url(#starGrad)" filter="url(#glow)"/>
+            <text x="0" y="-36" class="star-label">Strategie</text>
+
+            <g class="orbit-local">
+                <circle class="orbit-path" cx="0" cy="0" r="110"/>
+
+                <g transform="rotate(45)">
+                    <circle cx="0" cy="-110" r="10" fill="#38bdf8" filter="url(#glow)"/>
+                    <text x="0" y="-130" class="planet-label">Byznys model</text>
+                </g>
+
+                <g transform="rotate(165)">
+                    <circle cx="0" cy="-110" r="10" fill="#60a5fa" filter="url(#glow)"/>
+                    <text x="0" y="-130" class="planet-label">Modrý oceán</text>
+                </g>
+
+                <g transform="rotate(285)">
+                    <circle cx="0" cy="-110" r="10" fill="#818cf8" filter="url(#glow)"/>
+                    <text x="0" y="-130" class="planet-label">Byznys plán</text>
+                </g>
+            </g>
+        </g>
+
+        <!-- TOC -->
+        <g id="toc" transform="translate(850,560)">
+            <circle cx="0" cy="0" r="24" fill="url(#starGrad)" filter="url(#glow)"/>
+            <text x="0" y="-36" class="star-label">TOC</text>
+
+            <g class="orbit-local">
+                <circle class="orbit-path" cx="0" cy="0" r="120"/>
+
+                <g transform="rotate(0)">
+                    <circle cx="0" cy="-120" r="10" fill="#34d399" filter="url(#glow)"/>
+                    <text x="0" y="-140" class="planet-label">Výroba</text>
+                </g>
+
+                <g transform="rotate(90)">
+                    <circle cx="0" cy="-120" r="10" fill="#fbbf24" filter="url(#glow)"/>
+                    <text x="0" y="-140" class="planet-label">Projekty</text>
+                </g>
+
+                <g transform="rotate(210)">
+                    <circle cx="0" cy="-120" r="10" fill="#f87171" filter="url(#glow)"/>
+                    <text x="0" y="-140" class="planet-label">Průtokové účetnictví</text>
+                </g>
+
+                <g transform="rotate(150)">
+                    <circle cx="0" cy="-120" r="10" fill="#fb7185" filter="url(#glow)"/>
+                    <text x="0" y="-140" class="planet-label">Marketing</text>
+                </g>
+
+            </g>
+        </g>
+
+    </g>
+
+    <text x="600" y="820" class="tag" style="fill:#8fb0ff; font-size:13px;">
+        Galaxie Chytrého já – tři světy řízení života a firmy
+    </text>
+
+</svg>

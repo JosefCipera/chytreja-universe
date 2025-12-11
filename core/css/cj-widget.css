@@ -1,0 +1,420 @@
+/* ============================================================
+   🧠 Chytré já – Floating Chat Widget (Final Polished Build)
+   ============================================================ */
+
+/* Bublina – otevření widgetu */
+#cj-widget-btn {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    width: 58px;
+    height: 58px;
+    background: #2563eb;
+    color: #ffffff;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0 4px 18px rgba(37, 99, 235, 0.45);
+    transition: 0.25s ease;
+    z-index: 9998;
+}
+
+#cj-widget-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 26px rgba(96, 165, 250, 0.55);
+}
+
+/* Skrytí bubliny při otevřeném widgetu */
+#cj-widget-btn.hide {
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* Ikona uvnitř bubliny */
+.cj-icon {
+    font-size: 1.6rem;
+}
+
+
+/* ============================================================
+   WIDGET PANEL
+   ============================================================ */
+
+#cj-widget-panel {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    width: 380px;
+    height: 540px;
+    /* 🔵 větší, podle tvého přání */
+    background: #0f172a;
+    border-radius: 16px;
+    box-shadow: 0 0 28px rgba(0, 0, 0, 0.55);
+    display: none;
+    /* výchozí skryté */
+    flex-direction: column;
+    overflow: hidden;
+    z-index: 9999;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: 0.28s ease;
+}
+
+/* Panel otevřen */
+#cj-widget-panel.open {
+    display: flex;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+
+/* ============================================================
+   HEADER – ikonka + název vlevo, křížek vpravo
+   ============================================================ */
+
+.cj-header {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    background: #1e293b;
+    padding: 10px 14px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.cj-title {
+    margin-left: 8px;
+    font-size: 1.08rem;
+    font-weight: 600;
+    color: #a5f3fc;
+    /* světle tyrkysová */
+}
+
+/* Křížek vpravo */
+.cj-close {
+    margin-left: auto;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2rem;
+    color: #ef4444;
+    /* červený */
+    transition: 0.2s;
+}
+
+.cj-close:hover {
+    transform: scale(1.18);
+}
+
+
+/* ============================================================
+   CHAT OKNO – bez šedých boxů, čisté zprávy
+   ============================================================ */
+
+.cj-messages {
+    flex: 1;
+    padding: 14px;
+    overflow-y: auto;
+}
+
+/* AI zprávy */
+.cj-msg.ai {
+    margin-bottom: 12px;
+    color: #a5f3fc;
+    /* tyrkysová */
+    line-height: 1.45;
+}
+
+/* Uživatelské zprávy */
+.cj-msg.user {
+    margin-bottom: 12px;
+    text-align: right;
+    color: #93c5fd;
+    /* světle modrá */
+    line-height: 1.45;
+}
+
+/* Přemýšlení */
+.ai-thinking {
+    opacity: 0.5;
+}
+
+
+/* ============================================================
+   INPUT BAR – posunutý úplně dolů
+   ============================================================ */
+
+.cj-input-row {
+    display: flex;
+    padding: 10px;
+    background: #0f172a;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    margin-top: auto;
+    /* 🔥 přitiskne input box úplně dolů */
+}
+
+#cj-input {
+    flex: 1;
+    padding: 8px 10px;
+    background: #1e293b;
+    border: none;
+    outline: none;
+    border-radius: 8px;
+    color: #e2e8f0;
+    font-size: 0.95rem;
+}
+
+/* Modré tlačítko – jemné, profesionální */
+#cj-send {
+    background: #3b82f6;
+    border: none;
+    color: #fff;
+    margin-left: 8px;
+    padding: 8px 14px;
+    font-size: 1.05rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+#cj-send:hover {
+    background: #2563eb;
+}
+
+/* ===============================
+   BOX – zvětšení výšky a šířky
+=============================== */
+
+#cj-widget-panel {
+    width: 380px;
+    /* širší */
+    height: 540px;
+    /* vyšší – jako screenshot */
+}
+
+/* ===============================
+   HEADER – jemná modrá, měkčí
+=============================== */
+
+.cj-header {
+    background: #1e293b;
+    padding: 12px 16px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.cj-title {
+    color: #bfdbfe;
+    /* světle modrá – přesně z obrázku */
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-left: 8px;
+}
+
+/* ===============================
+   CLOSE BUTTON – pastelová červená
+=============================== */
+
+.cj-close {
+    margin-left: auto;
+    background: none;
+    border: none;
+    font-size: 1.15rem;
+    color: #f87171;
+    /* pastel soft red */
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.cj-close:hover {
+    color: #fca5a5;
+    /* světlejší červená */
+    transform: scale(1.05);
+}
+
+/* ===============================
+   BOTTOM INPUT – menší padding
+=============================== */
+
+.cj-input-row {
+    padding: 8px 10px;
+}
+
+.cj-close {
+    margin-left: auto;
+    font-size: 1.25rem;
+    color: #fca5a5;
+    /* jemná červená – screenshotově správně */
+    cursor: pointer;
+}
+
+/* ===== Widget Bubble ===== */
+#cj-widget-btn {
+    width: 48px;
+    height: 48px;
+    background: #1e40af;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#cj-widget-btn.hide {
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* ===== Panel ===== */
+#cj-widget-panel {
+    position: fixed;
+    bottom: 28px;
+    right: 28px;
+    width: 340px;
+    height: 520px;
+    /* prodlouženo */
+    background: #0f172a;
+    border-radius: 18px;
+    box-shadow: 0 0 30px rgba(0, 0, 0, .5);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    transform: scale(0.95);
+    opacity: 0;
+    pointer-events: none;
+    transition: .25s;
+    z-index: 9999;
+}
+
+#cj-widget-panel.open {
+    transform: scale(1);
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* ===== HEADER ===== */
+.cj-header {
+    background: #1e3a8a;
+    /* modrá lišta */
+    color: #dbeafe;
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.cj-header-icon {
+    width: 22px;
+    margin-right: 8px;
+}
+
+.cj-title {
+    font-size: 1.15rem;
+    /* větší nadpis */
+    font-weight: 600;
+    color: #dbeafe;
+}
+
+#cj-close {
+    margin-left: auto;
+    background: none;
+    border: none;
+    font-size: 1.4rem;
+    color: #fda4a4;
+    /* jemná červená */
+    cursor: pointer;
+    transition: .2s;
+}
+
+#cj-close:hover {
+    color: #f87171;
+}
+
+/* ===== Messages ===== */
+.cj-messages {
+    flex: 1;
+    padding: 16px;
+    overflow-y: auto;
+}
+
+.cj-msg {
+    padding: 10px 14px;
+    margin-bottom: 10px;
+    max-width: 85%;
+    border-radius: 12px;
+    line-height: 1.5;
+    font-size: 0.95rem;
+}
+
+.cj-msg.user {
+    background: #1e293b;
+    color: #93c5fd;
+    align-self: flex-end;
+}
+
+.cj-msg.ai {
+    background: #1e3a8a;
+    color: #bfdbfe;
+    align-self: flex-start;
+}
+
+/* ===== Input Row ===== */
+.cj-input-row {
+    padding: 10px;
+    display: flex;
+    gap: 8px;
+    background: #0f172a;
+    border-top: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+#cj-input {
+    flex: 1;
+    background: #1e293b;
+    border: none;
+    padding: 10px;
+    border-radius: 10px;
+    color: #dbeafe;
+}
+
+#cj-send {
+    background: #2563eb;
+    /* modrá */
+    color: white;
+    border: none;
+    padding: 0 14px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 1.1rem;
+}
+
+#cj-send:hover {
+    background: #1d4ed8;
+}
+
+#cj-widget-btn .cj-icon i {
+    font-size: 20px;
+    color: #dbeafe;
+}
+
+.cj-header span {
+    font-size: 1.25rem;
+    /* větší text */
+    font-weight: 600;
+}
+
+.cj-header span i {
+    font-size: 1.35rem;
+    /* větší ikonka */
+    margin-right: 6px;
+    color: #93c5fd;
+}
+
+#cj-widget-btn .cj-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    line-height: 1;
+    font-size: 22px;
+    /* --- uprav, podle toho jak velkou chceš šipku --- */
+}

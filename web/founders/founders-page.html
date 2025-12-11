@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="cs">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zakladatelé Chytrého já | Doživotní Přístup</title>
+    <style>
+        /* --- CSS Styly (Zachování vesmírného vzhledu) --- */
+        :root {
+            --color-dark-blue: #0A192F;
+            --color-light-blue: #64FFDA;
+            --color-white: #E6F1FF;
+            --color-gray: #8892B0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--color-dark-blue);
+            color: var(--color-white);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        header {
+            padding-bottom: 30px;
+            border-bottom: 1px solid #112240;
+        }
+
+        header h1 {
+            font-size: 3em;
+            color: var(--color-light-blue);
+            margin-bottom: 5px;
+        }
+
+        header p.lead {
+            font-size: 1.2em;
+            color: var(--color-gray);
+        }
+
+        .badge-warning {
+            display: inline-block;
+            background-color: #E74C3C;
+            color: var(--color-white);
+            padding: 8px 15px;
+            border-radius: 5px;
+            font-weight: bold;
+            margin-top: 20px;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .cta-box {
+            background-color: #112240;
+            padding: 30px;
+            border-radius: 8px;
+            margin-top: 40px;
+            border: 3px solid var(--color-light-blue);
+        }
+
+        .cta-box .price {
+            font-size: 3.5em;
+            color: var(--color-white);
+            font-weight: 700;
+        }
+
+        .cta-box .price small {
+            font-size: 0.4em;
+            color: #E74C3C;
+            text-decoration: line-through;
+            display: block;
+        }
+
+        .cta-box .info {
+            font-size: 1.2em;
+            color: var(--color-gray);
+            margin-bottom: 25px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 15px 40px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.2em;
+            background-color: var(--color-light-blue);
+            color: var(--color-dark-blue);
+            transition: background-color 0.3s;
+        }
+
+        .btn:hover {
+            background-color: var(--color-white);
+        }
+
+        .benefits-section {
+            padding: 50px 0;
+            text-align: left;
+        }
+
+        .benefits-section h2 {
+            text-align: center;
+            color: var(--color-light-blue);
+            margin-bottom: 40px;
+            font-size: 2em;
+        }
+
+        /* Nový styl pro sekci Bonusy */
+        .bonus-box {
+            background-color: #0d1e34;
+            padding: 25px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            border-left: 5px solid var(--color-light-blue);
+        }
+
+        .bonus-box h3 {
+            color: var(--color-light-blue);
+            margin-top: 0;
+        }
+
+        .bonus-box p {
+            color: var(--color-white);
+        }
+
+        .bonus-total {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #E74C3C;
+            /* Červená pro peníze */
+            text-align: center;
+            margin-top: 30px;
+        }
+
+
+        .benefit-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+            background-color: #0d1e34;
+            padding: 20px;
+            border-radius: 6px;
+        }
+
+        .benefit-icon {
+            font-size: 2em;
+            color: var(--color-light-blue);
+            margin-right: 20px;
+        }
+
+        .benefit-text h3 {
+            color: var(--color-white);
+            margin-top: 0;
+            margin-bottom: 5px;
+        }
+
+        .benefit-text p {
+            color: var(--color-gray);
+            margin: 0;
+        }
+
+        .comparison-section {
+            padding: 50px 0;
+            background-color: #0e1b30;
+            border-radius: 8px;
+        }
+
+        .comparison-section h2 {
+            color: var(--color-light-blue);
+            margin-bottom: 30px;
+            font-size: 1.8em;
+        }
+
+        .comparison-table {
+            width: 90%;
+            margin: 0 auto;
+            border-collapse: collapse;
+            text-align: left;
+        }
+
+        .comparison-table th,
+        .comparison-table td {
+            padding: 15px;
+            border-bottom: 1px solid #112240;
+        }
+
+        .comparison-table th {
+            color: var(--color-light-blue);
+        }
+
+        .comparison-table td:last-child {
+            font-weight: bold;
+        }
+
+        .saving {
+            font-size: 1.5em;
+            color: var(--color-light-blue);
+            margin-top: 20px;
+        }
+
+        .founder-story {
+            padding: 40px;
+            text-align: center;
+            background-color: #112240;
+            margin-top: 40px;
+            border-radius: 8px;
+        }
+
+        .founder-story h3 {
+            color: var(--color-light-blue);
+        }
+
+        .founder-story p {
+            font-style: italic;
+            color: var(--color-gray);
+        }
+
+        .cta-bottom {
+            margin-top: 50px;
+            padding: 30px 0;
+            border-top: 1px solid #112240;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <header>
+            <p class="badge-warning">❗ Omezená nabídka | Zbývá pouze **[DOPLNIT POČET]** míst pro Zakladatele ❗</p>
+            <h1>👑 Staňte se Zakladatelem Chytrého já</h1>
+            <p class="lead">Získáte doživotní (Lifetime) přístup ke všem PRO funkcím a balíček bonusů v hodnotě **6 500
+                Kč** navíc. Už nikdy neřešte měsíční platby.</p>
+        </header>
+
+        <div class="cta-box">
+            <p class="price"><small>Původní hodnota balíčku: 16 490 Kč</small>9 990 Kč</p>
+            <p class="info">Jednorázová investice | Zahrnuje Lifetime přístup a bonusy v hodnotě 6 500 Kč ZDARMA.</p>
+            <a href="#payment-link" class="btn">Zajistit si Lifetime status teď!</a>
+        </div>
+
+        <div class="benefits-section">
+            <h2>Okamžitá hodnota: Bonusy exkluzivní pro Zakladatele</h2>
+
+            <div class="bonus-box">
+                <h3>1. 📞 Osobní Strategická Konzultace (Hodnota 4 000 Kč)</h3>
+                <p>Hodinový online hovor se zakladatelem, kde Vám osobně pomůžeme implementovat Chytré já do Vašeho
+                    byznysu/života, abyste dosáhli maximálního výkonu hned od startu. </p>
+            </div>
+
+            <div class="bonus-box">
+                <h3>2. 💎 Exkluzivní Modul "Vizionář" (Hodnota 2 500 Kč)</h3>
+                <p>Speciální pokročilá AI sada nástrojů nebo šablon pro ultra-dlouhodobé plánování, která nebude nikdy
+                    součástí standardního PRO tarifu. Určeno pouze pro komunitu Zakladatelů.</p>
+            </div>
+
+            <div class="bonus-box">
+                <h3>3. 🤝 Doživotní Status Vlivu</h3>
+                <p>Garance, že Váš hlas má nejvyšší váhu. Přístup do soukromé skupiny a pozvánky na diskuze o roadmapě
+                    produktu. Vždy budete vědět, co se chystá jako první. (Tato výhoda je k nezaplacení.)</p>
+            </div>
+
+            <p class="bonus-total">Tato exkluzivní hodnota v bonusech činí: **6 500 Kč** (a ty jsou ZDARMA k Vašemu
+                Lifetime přístupu).</p>
+        </div>
+
+
+        <div class="comparison-section">
+            <h2>Matematika úspory: Kdy se Vám investice vrátí?</h2>
+
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Položka</th>
+                        <th>Standardní PRO (Měsíčně)</th>
+                        <th>Zakladatelé (Lifetime)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Měsíční platba</td>
+                        <td>490 Kč</td>
+                        <td>0 Kč</td>
+                    </tr>
+                    <tr>
+                        <td>**Bod zlomu (Návratnost investice)**</td>
+                        <td>Platíte neustále</td>
+                        <td>**1 rok a 8 měsíců**</td>
+                    </tr>
+                    <tr>
+                        <td>**Celková cena po 3 letech**</td>
+                        <td>17 640 Kč</td>
+                        <td>**9 990 Kč (Úspora 7 650 Kč!)**</td>
+                    </tr>
+                    <tr>
+                        <td>**Celková cena po 5 letech**</td>
+                        <td>29 400 Kč</td>
+                        <td>**9 990 Kč (Úspora 19 410 Kč!)**</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p class="saving">**Vše, co používáte po 20. měsíci, je pro Vás ZDARMA. A to bez placení měsíčního poplatku
+                NAVŽDY.**</p>
+        </div>
+
+        <div class="founder-story">
+            <h3>Náš Osobní Závazek K Vám</h3>
+            <p>„Jako Zakladatel Chytrého já vím, že důvěra těch prvních je neocenitelná. Slibuji Vám, že komunita
+                **Zakladatelů** bude mít vždy naši nejvyšší prioritu – co do podpory, tak i vlivu na směřování produktu.
+                Jste našimi partnery, ne jen zákazníky.”</p>
+            <p>— [Vaše Jméno], Zakladatel Chytrého já</p>
+        </div>
+
+        <div class="cta-bottom">
+            <p class="lead">Nenechte si ujít jedinou šanci získat Chytré já s doživotním přístupem a skutečným vlivem.
+            </p>
+            <a href="#payment-link" class="btn">Chci být jeden z Zakladatelů!</a>
+        </div>
+
+    </div>
+</body>
+
+</html>

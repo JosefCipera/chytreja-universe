@@ -1,0 +1,295 @@
+body {
+  margin: 0;
+  font-family: "Inter", sans-serif;
+  background: linear-gradient(180deg, #0b1220, #101c35);
+  color: #dfe7f3;
+}
+
+.pricing-nav {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem 1.5rem;
+  background: rgba(15, 23, 42, 0.75);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(100, 150, 255, .2);
+}
+
+.logo {
+  color: #a8c7ff;
+  font-weight: 700;
+  text-decoration: none;
+  font-size: 1.1rem;
+}
+
+.founders-btn {
+  padding: .5rem 1rem;
+  color: #d0e2ff;
+  text-decoration: none;
+  border: 1px solid rgba(100, 150, 255, .25);
+  border-radius: 8px;
+  transition: .25s ease;
+}
+
+.founders-btn:hover {
+  background: rgba(100, 150, 255, .25);
+}
+
+/* HEADER */
+.pricing-header {
+  text-align: center;
+  padding: 5rem 1rem 3rem;
+}
+
+.pricing-header h1 {
+  font-size: 3rem;
+  color: #cfe4ff;
+  margin-bottom: .5rem;
+  text-shadow: 0 0 14px rgba(120, 160, 255, .2);
+}
+
+.pricing-header p {
+  opacity: .85;
+  font-size: 1.2rem;
+}
+
+/* GRID */
+.pricing-grid {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2rem;
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+}
+
+.pricing-card {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  padding: 2.4rem;
+  box-shadow: 0 2px 18px rgba(0, 0, 0, 0.3);
+  transition: .3s ease;
+}
+
+.pricing-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 22px rgba(100, 150, 255, .4);
+}
+
+.pricing-card.highlight {
+  border-color: rgba(120, 180, 255, 0.45);
+  box-shadow: 0 0 18px rgba(120, 180, 255, .25);
+}
+
+.pricing-card h3 {
+  font-size: 1.4rem;
+  color: #cfe4ff;
+  margin-bottom: .5rem;
+}
+
+.price {
+  font-size: 2rem;
+  color: #81b9ff;
+  margin: 1rem 0 1.4rem;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1.6rem;
+}
+
+li {
+  padding: .35rem 0;
+  opacity: .85;
+  line-height: 1.6;
+}
+
+.btn {
+  width: 100%;
+  padding: .8rem;
+  border-radius: 10px;
+  border: 1px solid rgba(160, 180, 255, .3);
+  background: rgba(255, 255, 255, 0.05);
+  color: #dfe7f3;
+  cursor: pointer;
+  transition: .25s ease;
+}
+
+.btn:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.btn.primary {
+  background: linear-gradient(90deg, #3b82f6, #2563eb);
+  border: none;
+  color: white;
+}
+
+.btn.primary:hover {
+  transform: scale(1.05);
+}
+
+/* FOUNDERS FOOTER CTA */
+.founders-preview {
+  text-align: center;
+  margin-top: 4rem;
+  padding: 2rem;
+}
+
+.founders-preview h2 {
+  font-size: 1.9rem;
+  font-weight: 600;
+}
+
+.founders-preview span {
+  color: #82b6ff;
+}
+
+.founders-preview p {
+  max-width: 500px;
+  margin: .8rem auto 2rem;
+  opacity: .9;
+}
+
+.founders-cta {
+  display: inline-block;
+  padding: .9rem 1.8rem;
+  background: linear-gradient(90deg, #4ea0ff, #2563eb);
+  color: white;
+  font-weight: 600;
+  border-radius: 10px;
+  text-decoration: none;
+  box-shadow: 0 0 18px rgba(80, 140, 255, 0.35);
+  transition: .3s;
+}
+
+.founders-cta:hover {
+  transform: scale(1.06);
+}
+
+.pricing-footer {
+  text-align: center;
+  padding: 2rem;
+  opacity: .6;
+  font-size: .9rem;
+}
+
+.ok {
+  color: #60a5fa;
+  font-weight: 700;
+  margin-right: 8px;
+}
+
+.no {
+  color: #f87171;
+  font-weight: 700;
+  margin-right: 8px;
+}
+
+/* ======== FIX: pricing – zarovnání odrážek + oddělovací čára ======== */
+
+.pricing-card ul {
+  text-align: left;
+  /* zarovnání textů vlevo */
+  padding-left: 0;
+  /* už tam máš, ale jistota */
+}
+
+/* Oddělovací čára před prvním li */
+.pricing-card ul::before {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.08);
+  margin: 1rem 0 1.2rem;
+}
+
+.pro-card {
+  position: relative;
+  border: 1px solid rgba(96, 165, 250, 0.35);
+  box-shadow: 0 0 22px rgba(96, 165, 250, 0.25);
+  transform: scale(1.03);
+}
+
+.badge-top {
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+
+  background: linear-gradient(90deg, #3b82f6, #2563eb);
+  color: #ffffff;
+
+  padding: 8px 22px;
+  border-radius: 14px;
+
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+
+  box-shadow: 0 0 16px rgba(59, 130, 246, 0.45);
+  border: 1px solid rgba(147, 197, 253, 0.35);
+
+  white-space: nowrap;
+  z-index: 20;
+}
+
+.badge-top .icon-star {
+  font-size: 1.1rem;
+}
+
+/* === Oddělení celé sekce Ceník === */
+#cenik {
+  background: linear-gradient(180deg,
+      rgba(15, 23, 42, 0.6),
+      rgba(10, 15, 28, 0.8));
+  padding-top: 5rem !important;
+  padding-bottom: 5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* === Vycentrování podnadpisu === */
+#cenik .proc-intro {
+  text-align: center !important;
+  max-width: 700px;
+  margin: 0 auto 2.2rem !important;
+  opacity: 0.9;
+  line-height: 1.55;
+  font-size: 1.15rem;
+}
+
+/* === PRO – zvýrazněná karta === */
+.pro-card {
+  position: relative;
+  border: 1px solid rgba(96, 165, 250, 0.35);
+  box-shadow: 0 0 22px rgba(96, 165, 250, 0.25);
+  transform: scale(1.03);
+}
+
+/* Štítek NEJOBLÍBENĚJŠÍ */
+.badge-top {
+  position: absolute;
+  top: -14px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #3b82f6;
+  color: white;
+  padding: 4px 14px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  box-shadow: 0 0 12px rgba(59, 130, 246, 0.5);
+}
+
+/* Hover – jen u PRO */
+.pro-card:hover {
+  transform: scale(1.06);
+  box-shadow: 0 12px 36px rgba(96, 165, 250, 0.45);
+  border-color: rgba(147, 197, 253, 0.55);
+}
