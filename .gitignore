@@ -27,7 +27,7 @@ service-worker.*
 *.webmanifest
 manifest.json
 
-# === LOCAL DEV / TEST ===
+# === LOCAL DEV / TEMP FILES ===
 *.bak
 *.tmp
 *.old
@@ -36,17 +36,20 @@ manifest.json
 *.map
 *.lock
 
-# === OUTPUTS / GENERATED ===
-/public/assets/docs/test.pdf
-/public/assets/docs/test.md
-/public/assets/sounds/*.mp3
-/public/assets/models/*.json
-/public/assets/temp/
-/public/assets/cache/
-/public/assets/js/env.js
+# === SENSITIVE FILES (NEVER COMMIT) ===
+core/js/env.js
+web/assets/js/env.js
+apps/*/env.js
+
+# === GENERATED / MEDIA / LARGE FILES ===
+# (Public no longer used – removed old /public paths)
+**/temp/
+**/cache/
+**/sounds/
+**/models/
+**/generated/**
 
 # === OS SYSTEM FILES ===
 ehthumbs.db
 Desktop.ini
 Icon?
-
