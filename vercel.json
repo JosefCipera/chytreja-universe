@@ -1,16 +1,4 @@
 {
-    "rewrites": [
-        {
-            "source": "/obchodni-podminky",
-            "destination": "/public/legal/obchodni-podminky.html"
-        },
-        {
-            "source": "/ochrana-osobnich-udaju",
-            "destination": "/public/legal/ochrana-osobnich-udaju.html"
-        },
-        {
-            "source": "/cookies",
-            "destination": "/public/legal/cookies.html"
-        }
-    ]
+    "version": 2,
+    "rootDirectory": "web"
 }
