@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="cs">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vesmír Desktop 🌌</title>
+
+    <!-- 📦 Vis.js -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vis-network@9.1.9/dist/vis-network.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/vis-network@9.1.9/dist/vis-network.min.js"></script>
+
+    <!-- Ikony -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <!-- 🎨 Styly -->
+    <link rel="stylesheet" href="./css/universe-core.css">
+    <link rel="stylesheet" href="./css/universe-header.css">
+</head>
+
+<body>
+
+    <!-- 🧭 Horní lišta -->
+    <header id="appHeader" class="app-header">
+        <h1 id="appTitle">🌌 Chytré já</h1>
+
+        <div class="header-controls">
+            <label for="modelSelector">Model:</label>
+            <select id="modelSelector"></select>
+
+            <label for="roleSelect">Režim:</label>
+            <select id="roleSelect">
+                <option value="demo">Demo</option>
+                <option value="free">Free</option>
+                <option value="pro">Pro</option>
+                <option value="user">User</option>
+            </select>
+        </div>
+    </header>
+
+    <!-- 🌌 Plátno -->
+    <div id="network"></div>
+
+    <!-- 📌 Panel -->
+    <aside id="sidePanel">
+        <div class="panel-header">
+            <h2 id="nodeTitle"></h2>
+            <button id="closePanel">✖</button>
+        </div>
+
+        <div class="panel-content">
+            <p id="nodeDef"></p>
+
+            <hr>
+            <h3>📘 Dokumenty</h3>
+            <ul id="nodeDocs"></ul>
+
+            <hr>
+            <h3>🎬 Média</h3>
+            <ul id="nodeMedia"></ul>
+
+            <hr>
+            <h3>🧩 Úlohy</h3>
+            <ul id="nodeTasks"></ul>
+        </div>
+    </aside>
+
+    <!-- 🔥 Skripty -->
+    <script type="module" src="./js/universe-viewers.js"></script>
+    <script type="module" src="./js/universe-access.js"></script>
+    <script type="module" src="./js/universe-panel.js"></script>
+    <script type="module" src="./js/universe-core.js"></script>
+    <script type="module" src="./js/universe-init.js"></script>
+</body>
+
+</html>

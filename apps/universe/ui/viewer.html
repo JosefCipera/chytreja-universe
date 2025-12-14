@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="cs">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Viewer</title>
+
+    <!-- Markdown parser -->
+    <script type="module">
+        import { marked } from "https://cdn.jsdelivr.net/npm/marked@12.0.2/lib/marked.esm.js";
+        window.marked = marked;
+    </script>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 40px;
+            background: #0f172a;
+            font-family: system-ui, sans-serif;
+            color: #e2e8f0;
+            line-height: 1.6;
+        }
+
+        #topbar {
+            position: fixed;
+            top: 12px;
+            right: 12px;
+            display: flex;
+            gap: 12px;
+            z-index: 50;
+        }
+
+        .btn {
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 8px 14px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            border: 1px solid #334155;
+        }
+
+        .btn:hover {
+            background: #334155;
+        }
+
+        #wrapper {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        #content {
+            margin-top: 50px;
+        }
+
+        img {
+            max-width: 100%;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+
+        iframe {
+            width: 100%;
+            height: 90vh;
+            border: none;
+            border-radius: 12px;
+            background: #0f172a;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4 {
+            color: #f1f5f9;
+            margin-top: 30px;
+            margin-bottom: 10px;
+        }
+
+        ul {
+            margin-left: 20px;
+        }
+
+        code {
+            background: #1e293b;
+            padding: 2px 6px;
+            border-radius: 6px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="topbar">
+        <div class="btn" id="btnBack">← Zpět</div>
+        <div class="btn" id="btnPrint">🖨️ Tisk</div>
+        <div class="btn" id="btnDownload">⬇️ Stáhnout</div>
+    </div>
+
+    <div id="wrapper">
+        <div id="content">Načítám…</div>
+    </div>
+
+    <script>
+        async function loadViewer() {
+            const params = new URLSearchParams(window.location.search);
+            let file = params.get("file");
+
+            if (!file) {
+                document.getElementById("content").innerHTML =
+                    "<p><b>❌ Chyba:</b> Soubor nebyl zadán.</p>";
+                return;
+            }
+
+            // normalizace cesty
+            if (!file.startsWith("/")) file = "/" + file;
+
+            const content = document.getElementById("content");
+
+            // --- PDF ------------------------------------------------------
+            if (file.endsWith(".pdf")) {
+                content.innerHTML = `<iframe src="${file}"></iframe>`;
+                return;
+            }
+
+            // --- OBRÁZKY ---------------------------------------------------
+            if (/\.(png|jpg|jpeg|gif|webp|svg)$/i.test(file)) {
+                content.innerHTML = `<img src="${file}" alt="Obrázek">`;
+                return;
+            }
+
+            // --- MARKDOWN -------------------------------------------------
+            if (file.endsWith(".md")) {
+                try {
+                    const res = await fetch(file);
+                    if (!res.ok) throw new Error("HTTP " + res.status);
+
+                    const md = await res.text();
+                    content.innerHTML = window.marked.parse(md);
+
+                } catch (err) {
+                    content.innerHTML =
+                        `<p style="color:#f88">❌ Nelze načíst markdown: ${file}</p>`;
+                }
+                return;
+            }
+
+            // --- OSTATNÍ --------------------------------------------------
+            content.innerHTML =
+                `<p>❓ Neznámý typ souboru: ${file}</p>`;
+        }
+
+        document.getElementById("btnBack").onclick = () => window.close();
+        document.getElementById("btnPrint").onclick = () => window.print();
+        document.getElementById("btnDownload").onclick = () => {
+            const params = new URLSearchParams(window.location.search);
+            let file = params.get("file");
+            const a = document.createElement("a");
+            a.href = file;
+            a.download = file.split("/").pop();
+            a.click();
+        };
+
+        loadViewer();
+    </script>
+
+</body>
+
+</html>
