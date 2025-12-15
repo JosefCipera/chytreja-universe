@@ -9,7 +9,7 @@
     <!-- Font Awesome 6 Free -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
-    <!-- Hlavní styl -->
+    <!-- Hlavní CSS – opravené cesty -->
     <link rel="stylesheet" href="../core/css/style.css">
     <link rel="stylesheet" href="../core/css/typography.css">
     <link rel="stylesheet" href="../core/css/onas.css">
@@ -20,6 +20,7 @@
     <link rel="stylesheet" href="../core/css/cookies.css">
     <link rel="stylesheet" href="../core/css/cj-widget.css">
     <link rel="stylesheet" href="../core/css/landing.css">
+
     <!-- Knihovny -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.6.2"></script>
@@ -27,13 +28,17 @@
     <!-- ENV -->
     <script type="module" src="../core/js/env.js"></script>
 
-    <link rel="manifest" href="manifest.webmanifest">
+    <!-- Manifest – opravená cesta -->
+    <link rel="manifest" href="./manifest.webmanifest">
     <meta name="theme-color" content="#101c35">
 
+    <!-- Service Worker – opravená cesta -->
     <script>
-        navigator.serviceWorker.register("service-worker.js");
+        if ("serviceWorker" in navigator) {
+            navigator.serviceWorker.register("./service-worker.js")
+                .catch(err => console.error("SW chyba:", err));
+        }
     </script>
-
 </head>
 
 <body>
@@ -44,12 +49,13 @@
             <div class="nav-logo">🌌 Chytré já</div>
             <ul class="nav-links" id="navLinks">
                 <li><a href="medioteka.html">Mediotéka</a></li>
-                <li><a href="/public/founders/founders.html">Zakladatelé</a></li>
+                <li><a href="../core/founders/founders.html">Zakladatelé</a></li>
                 <li><a href="#faq-chat">Zeptejte se</a></li>
                 <li><a href="#cenik">Ceník</a></li>
                 <li><a href="#onas">O nás</a></li>
                 <li><a href="#kontakt">Kontakt</a></li>
             </ul>
+
             <a href="app.html" class="login-btn">Přihlásit</a>
 
             <div class="hamburger" id="hamburger">
@@ -70,6 +76,7 @@
                 a fungovat chytřeji doma i v práci.
             </p>
 
+            <!-- Opravený odkaz do Universe -->
             <a href="../public/universe/universe.html" class="btn-primary hero-btn">
                 Vstoupit do vesmíru
             </a>
@@ -111,9 +118,7 @@
             <div class="proc-card">
                 <i class="fa-solid fa-shield-halved"></i>
                 <h3>Důvěra jako hodnota</h3>
-                <p>Důvěra vzniká tam, kde je směr jasný. Chytré já nepřekáží — jen pomáhá vidět priority a rozhodovat se
-                    s lehkostí.
-                </p>
+                <p>Důvěra vzniká tam, kde je směr jasný. Chytré já nepřekáží — jen pomáhá vidět priority.</p>
             </div>
         </div>
 
@@ -122,7 +127,7 @@
         </p>
     </section>
 
-    <!-- ===== PLÁNY A CENY ===== -->
+    <!-- ===== CENÍK ===== -->
     <section id="cenik" class="alt-bg">
         <h2>💎 Plány a ceny</h2>
 
@@ -130,19 +135,16 @@
             Každý tarif otevírá jinou část vašeho digitálního vesmíru.
             Vyberte si, jak hluboko až chcete jít.
         </p>
-        <div class="pricing-grid">
 
+        <div class="pricing-grid">
             <div class="pricing-card">
                 <h3>🚀 Start</h3>
                 <div class="price">Zdarma</div>
                 <p>Základní přístup do Universe, hlasové příkazy a ukázkové moduly.</p>
                 <ul>
                     <li><span class="ok">✔</span> Základní Universe</li>
-                    <li><span class="ok">✔</span> Základní AI chat (rychlý režim)</li>
-                    <li><span class="ok">✔</span> Ukázkové uzly a vizualizace</li>
-                    <li><span class="ok">✔</span> Hlasové příkazy</li>
-                    <li><span class="no">✖</span> Žádné pokročilé moduly</li>
-                    <li><span class="no">✖</span> Omezený počet dotazů</li>
+                    <li><span class="ok">✔</span> Základní AI chat</li>
+                    <li><span class="ok">✔</span> Ukázkové uzly</li>
                 </ul>
                 <button class="btn">Začít</button>
             </div>
@@ -151,15 +153,12 @@
                 <div class="badge-top">NEJOBLÍBENĚJŠÍ</div>
                 <h3>✨ Pro</h3>
                 <div class="price">490 Kč / měsíc</div>
-                <p>Plná síla Chytrého já: všechny moduly, plný Universe, vizualizace, plánování a AI modely.</p>
+                <p>Plná síla Chytrého já: všechny moduly, vizualizace, plánování a AI modely.</p>
                 <ul>
                     <li><span class="ok">✔</span> Vše ze Startu</li>
                     <li><span class="ok">✔</span> Plný Universe</li>
-                    <li><span class="ok">✔</span> Plánování projektů a práce</li>
-                    <li><span class="ok">✔</span> Automatizace a integrace</li>
-                    <li><span class="ok">✔</span> Dashboardy a vizualizace</li>
-                    <li><span class="ok">✔</span> AI modely (rychlý i přesný režim)</li>
-                    <li><span class="ok">✔</span> Priority support</li>
+                    <li><span class="ok">✔</span> Dashboardy</li>
+                    <li><span class="ok">✔</span> Integrace</li>
                 </ul>
                 <button class="btn primary">Aktivovat</button>
             </div>
@@ -167,90 +166,24 @@
             <div class="pricing-card">
                 <h3>🏢 Enterprise</h3>
                 <div class="price">Na dotaz</div>
-                <p>Integrace na míru, firemní API, týmové licence a SLA podpora.</p>
-                <ul>
-                    <li><span class="ok">✔</span> Vše ze Startu</li>
-                    <li><span class="ok">✔</span> Plný Universe</li>
-                    <li><span class="ok">✔</span> Plánování projektů a práce</li>
-                    <li><span class="ok">✔</span> Automatizace a integrace</li>
-                    <li><span class="ok">✔</span> Dashboardy a vizualizace</li>
-                    <li><span class="ok">✔</span> AI modely (rychlý i přesný režim)</li>
-                    <li><span class="ok">✔</span> Priority support</li>
-                </ul>
+                <p>Integrace, firemní API, týmové licence.</p>
                 <button class="btn">Kontaktovat</button>
             </div>
         </div>
-
     </section>
+
     <!-- ===== FOUNDERS CTA ===== -->
     <section id="founders-cta" class="founders-cta-section">
         <div class="founders-cta-box">
             <h3>🌌 Odemkněte celý vesmír jako Zakladatelé</h3>
             <p>
-                Získáte doživotní přístup ke všem současným i budoucím modulům,
-                uzlům Vesmíru, AI nástrojům a exkluzivním funkcím.
+                Doživotní přístup ke všem modulům a funkcím.
             </p>
 
-            <a href="/public/founders/founders.html" class="founders-cta-btn">
+            <a href="../core/founders/founders.html" class="founders-cta-btn">
                 Zjistit více
             </a>
-
         </div>
-    </section>
-
-    <!-- ===== O NÁS ===== -->
-    <section id="onas" class="about-section onas-box">
-
-        <h2>🌠 O nás</h2>
-
-        <div class="onas-text">
-            <p>
-                Začínali jsme v průmyslu s plánováním výroby tam, kde na to běžné systémy nestačily.
-            </p>
-
-            <p>
-                Dnes vytváříme Chytré já – prostor pro průtokové řízení (TOC) s využitím moderních
-                technologií včetně AI. Pomáháme tak lidem i firmám vidět celý svůj vesmír jasně, jednoduše a chytře.
-            </p>
-        </div>
-
-        <!-- ČASOVÁ OSA -->
-        <div class="history-timeline">
-
-            <div class="timeline-item">
-                <div class="timeline-dot"></div>
-                <div class="timeline-content">
-                    <h4>2018 — Začátky v průmyslu</h4>
-                    <p>První algoritmy pro plánování výroby tam, kde selhávaly běžné ERP systémy.</p>
-                </div>
-            </div>
-
-            <div class="timeline-item">
-                <div class="timeline-dot"></div>
-                <div class="timeline-content">
-                    <h4>2020 — Tvorba vlastních modelů</h4>
-                    <p>Vzniká modelování toků, úzkých míst a predikce výsledků pro reálné firmy.</p>
-                </div>
-            </div>
-
-            <div class="timeline-item">
-                <div class="timeline-dot"></div>
-                <div class="timeline-content">
-                    <h4>2023 — Zrození Chytrého Já</h4>
-                    <p>Začínáme spojovat umělou inteligenci s firemní logikou a procesy.</p>
-                </div>
-            </div>
-
-            <div class="timeline-item">
-                <div class="timeline-dot"></div>
-                <div class="timeline-content">
-                    <h4>2025 — Digitální vesmír</h4>
-                    <p>Chytré Já se mění ve vizuální ekosystém. Universe, AI, modely a moduly.</p>
-                </div>
-            </div>
-
-        </div>
-
     </section>
 
     <!-- ===== KONTAKT ===== -->
@@ -309,20 +242,6 @@
         </div>
     </section>
 
-    <section id="founders-cta" class="founders-cta-section">
-        <div class="founders-cta-box">
-            <h3>🌌 Odemkněte celý vesmír jako Zakladatelé</h3>
-            <p>
-                Získáte doživotní přístup ke všem současným i budoucím modulům,
-                uzlům Vesmíru, AI nástrojům a exkluzivním funkcím.
-            </p>
-
-            <a href="/public/founders/founders.html" class="founders-cta-btn">
-                Zjistit více
-            </a>
-        </div>
-    </section>
-
     <!-- ===== FOOTER ===== -->
     <footer class="site-footer">
         <div
@@ -336,33 +255,19 @@
             </div>
 
             <div class="footer-links">
-                <a href="#kontakt" class="hover:text-white transition-colors duration-200">
-                    Kontakt
-                </a>
-
-                <a href="/web/legal/obchodni-podminky.html" class="hover:text-white transition-colors duration-200">
-                    Obchodní podmínky
-                </a>
-
-                <a href="/web/legal/ochrana-osobnich-udaju.html"
-                    class="hover:text-white transition-colors duration-200">
-                    Ochrana osobních údajů (GDPR)
-                </a>
-
-                <a href="/web/legal/cookies.html" class="hover:text-white transition-colors duration-200">
-                    Cookies
-                </a>
+                <a href="#kontakt">Kontakt</a>
+                <a href="./legal/obchodni-podminky.html">Obchodní podmínky</a>
+                <a href="./legal/ochrana-osobnich-udaju.html">GDPR</a>
+                <a href="./legal/cookies.html">Cookies</a>
             </div>
 
-            <div class="footer-copy text-gray-500 text-sm md:text-right">
-                © 2025 <span class="text-white font-semibold">Chytré já</span>.
-                Všechna práva vyhrazena.
+            <div class="footer-copy">
+                © 2025 Chytré já. Všechna práva vyhrazena.
             </div>
-
         </div>
     </footer>
 
-    <!-- ===== HAMBURGER SCRIPT ===== -->
+    <!-- Hamburger -->
     <script>
         const hamburger = document.getElementById("hamburger");
         const navLinks = document.getElementById("navLinks");
@@ -373,32 +278,7 @@
         });
     </script>
 
-    <script src="https://unpkg.com/lucide@latest"></script>
-
-    <!-- COOKIES -->
-    <div id="cookie-banner" class="cookie-banner hidden">
-        <div class="cookie-box">
-            <h3>🍪 Cookies</h3>
-            <p>
-                Aby web <strong>Chytré já</strong> fungoval správně a byl pro vás co nejlepší,
-                používáme nezbytné cookies a volitelné cookies pro statistiky a marketing.
-                Můžete si vybrat, co povolit.
-            </p>
-
-            <div class="cookie-options">
-                <label><input type="checkbox" id="c-stat"> Statistické</label>
-                <label><input type="checkbox" id="c-marketing"> Marketingové</label>
-            </div>
-
-            <div class="cookie-actions">
-                <button id="cookie-accept-all">Povolit vše</button>
-                <button id="cookie-accept-essential">Pouze nezbytné</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- ===== CHYTRÉ JÁ CHAT WIDGET ===== 
-    <div class="cj-widget"> -->
+    <!-- CJ WIDGET -->
     <div id="cj-widget-btn">
         <div class="cj-icon">➤</div>
     </div>
@@ -416,9 +296,8 @@
             <button id="cj-send">➤</button>
         </div>
     </div>
-    <!-- </div> -->
 
-    <script type="module" src="/core/js/cj-widget.js"></script>
+    <script type="module" src="../core/js/cj-widget.js"></script>
 
 </body>
 
